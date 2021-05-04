@@ -53,7 +53,7 @@ class PackageRepository implements CoreDataInterface
             foreach (language() as $lang) {
                 $translation = $package->translation->where('language_id', $lang->id)->first();
                 if ($translation) {
-                    $translation->update(['value' => $request->titlef[$lang->code]]);
+                    $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
                     $package->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                         'language_id' => $lang->id]);

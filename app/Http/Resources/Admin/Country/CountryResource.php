@@ -10,7 +10,7 @@ class CountryResource extends JsonResource
     {
        return [
             'id' => $this->id,
-            'title' => $this->title->value,
+            'title' => $this->title ? $this->title->value : "",
             'order' => $this->order,
             'status' => $this->status,
             'image' => image_get($this->image,'country'),

@@ -30,7 +30,7 @@ class EditRequest extends FormRequest
                     ->ignore($this->id, 'category_id')
                     ->where('category_type',Type::class)
                     ->where('key','title')
-                    ->where('language_id',Language_code($lang->code)->id)
+                    ->where('language_id',$lang->id)
             ];
         }
         return $rules;

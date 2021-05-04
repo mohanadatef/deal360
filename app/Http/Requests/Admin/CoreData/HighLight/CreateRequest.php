@@ -34,7 +34,7 @@ class CreateRequest extends FormRequest
                 Rule::unique('translations','value')
                 ->where('category_type',HighLight::class)
                 ->where('key','title')
-                ->where('language_id',Language_code($lang->code)->id)
+                ->where('language_id',$lang->id)
             ];
         }
         return $rules;

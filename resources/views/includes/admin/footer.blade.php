@@ -4,5 +4,19 @@
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 3.1.0-rc
     </div>
+    <div class="pull-right" style="margin-right: 24px">
+
+        <form method="post" action="{{route('setLang')}}">
+            @csrf
+            <div class="form-group">
+                <select name='lang' onchange="this.form.submit();">
+                    @foreach(Language_active() as $lang)
+                        <option value='{{$lang->code}}'
+                                @if( Language_Locale() == $lang->code )selected @endif >{{$lang->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </form>
+    </div>
 </footer>
 @yield('footer')

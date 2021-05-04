@@ -36,13 +36,17 @@ class CategoryRepository implements CoreDataInterface
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $category->image()->create(['image' => $imageName]);
             !$image->image ? false : $this->image_upload($request->image, 'category', $imageName);
-            if (count($category->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            if (!file_exists(public_path('images/category/' . $imageName))) {
-                throw new \Exception('errors');
-            }
-            return new CategoryResource($category);
+            return '<tr id="'.$category->id.'"><td id="title-'.$category->id.'" data-order="${res.order}">'.$category->title->value.'</td>
+                            <td><img src="'.image_get($category->image,'category').'" id="image-'.$category->id.'" style="width:100px;height: 100px"></td>
+                            <td><input onfocus="Change_Status('.$category->id.')" type="checkbox" name="status" id="status-'.$category->id.'"
+                                checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                                <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                                onclick="ShowItem('.$category->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                                <button id="openModael'.$category->id.'" type="button" class="d-none" data-toggle="modal"
+                                data-target="#modal-edit"></button>
+                                <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                                onclick="SelectItem('.$category->id.')" data-toggle="modal"
+                                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -59,26 +63,19 @@ class CategoryRepository implements CoreDataInterface
             foreach (language() as $lang) {
                 $translation = $category->translation->where('language_id', $lang->id)->first();
                 if ($translation) {
-                    $translation->update(['value' => $request->titlef[$lang->code]]);
+                    $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
                     $category->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                         'language_id' => $lang->id]);
                 }
-            }
-            $category = $this->Get_Data($id);
-            if ($category->translation->count() != count(language())) {
-                throw new \Exception('errors');
             }
             if (isset($request->image)) {
                 $imageName = time() . $request->image->getClientOriginalname();
                 $category->image()->forceDelete();
                 $image = $category->image()->create(['image' => $imageName]);
                 !$image->image ? false : $this->image_upload($request->image, 'category', $imageName);
-                $category = $this->Get_Data($id);
-                if (file_exists(public_path('images/category/' . $category->image->image)) == false) {
-                    throw new \Exception('errors');
-                }
             }
+            $category = $this->Get_Data($id);
             return new CategoryResource($category);
         });
 

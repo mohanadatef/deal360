@@ -1,3 +1,4 @@
+@include('includes.admin.mean_model')
 <!-- DataTables  & Plugins -->
 <script src="{{asset('public/AdminLTE/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('public/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>

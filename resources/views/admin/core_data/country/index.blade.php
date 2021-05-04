@@ -54,9 +54,9 @@
                                         @forelse($datas as $data)
                                             <tr id="data-{{$data->id}}">
                                                 <td id="title-{{$data->id}}"
-                                                    data-order="{{$data->order}}">{{$data->title->value}}</td>
+                                                    data-order="{{$data->order}}">{{$data->title ? $data->title->value : ""}}</td>
                                                 <td>
-                                                    <img src="{{ image_get($data->image,model) }}"
+                                                    <img src="{{ image_get($data->image,'country') }}"
                                                          id="image-{{$data->id}}" style="width:100px;height: 100px">
                                                 </td>
                                                 <td>
@@ -198,29 +198,6 @@
                         <button type="submit" class="btn btn-outline-light">Update</button>
                     </div>
                 </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <div class="modal fade" id="modal-delete">
-        <div class="modal-dialog">
-            <div class="modal-content bg-warning">
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Country</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you Need To Delete This , you will delete all city and area use this</p>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-                    <button type="submit" id="delete" onclick="DeleteItem()" class="btn btn-outline-dark">
-                        Delete
-                    </button>
-                </div>
             </div>
             <!-- /.modal-content -->
         </div>

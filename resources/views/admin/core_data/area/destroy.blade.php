@@ -1,6 +1,6 @@
 @extends('includes.admin.master_admin')
 @section('title')
-    Area Delete Index
+    {{trans('lang.Area')}}{{trans('lang.Delete' )}}{{trans('lang.Index')}}
 @endsection
 @section('head_style')
     @include('includes.admin.head_DataTables')
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Area</h1>
+                        <h1>{{trans('lang.Area')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active">Area</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('lang.Area')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Area, you Deleted At Before
+                                    {{trans('lang.Area')}} , {{trans('lang.Delete_Index_Message')}}
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -40,27 +40,27 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>Controller</th>
+                                        <th>{{trans('lang.Title')}} </th>
+                                        <th>{{trans('lang.Country')}} </th>
+                                        <th>{{trans('lang.City')}} </th>
+                                        <th>{{trans('lang.Controller')}} </th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @forelse($datas as$index => $data)
+                                    @forelse($datas as $data)
                                         <tr id="data-{{$data->id}}">
-                                            <td id="title-{{$data->id}}">{{$data->title->value}}</td>
+                                            <td id="title-{{$data->id}}">{{$data->title ? $data->title->value : ""}}</td>
                                             <td id="country-{{$data->id}}">{{$data->country->title->value}}</td>
                                             <td id="city-{{$data->id}}">{{$data->city->title->value}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="SelectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
-                                                    <i class="fa fa-edit"></i> Restore
+                                                    <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="SelectItem({{$data->id}})" data-toggle="modal"
-                                                        data-target="#modal-remove"><i></i> Delete
+                                                        data-target="#modal-remove"><i></i>{{trans('lang.Delete')}}
                                                 </button>
                                             </td>
                                         </tr>
@@ -69,10 +69,10 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>Controller</th>
+                                        <th>{{trans('lang.Title')}} </th>
+                                        <th>{{trans('lang.Country')}} </th>
+                                        <th>{{trans('lang.City')}} </th>
+                                        <th>{{trans('lang.Controller')}} </th>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -88,51 +88,6 @@
             <!-- /.container-fluid -->
         </section>
         <!-- /.content -->
-    </div>
-    <div class="modal fade" id="modal-restore">
-        <div class="modal-dialog">
-            <div class="modal-content bg-warning">
-                <div class="modal-header">
-                    <h4 class="modal-title">Restore Area</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Area you Need To Restore This</p>
-                    <!-- /.card-body -->
-
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-outline-light" onclick="RestoreItem()">Restore</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <div class="modal fade" id="modal-remove">
-        <div class="modal-dialog">
-            <div class="modal-content bg-warning">
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you Need To Delete This Area</p>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-                    <button type="submit" id="remove" onclick="RemoveItem()" class="btn btn-outline-dark">Delete
-                    </button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
     </div>
 @endsection
 @section('script_style')

@@ -19,6 +19,13 @@ if (!function_exists('Language')) {
     }
 }
 
+if (!function_exists('Language_active')) {
+    function Language_active()
+    {
+        return Language::status('1')->Order('asc')->get();
+    }
+}
+
 if (!function_exists('permission_show')) {
     function permission_show($title)
     {
@@ -49,20 +56,6 @@ if (!function_exists('Language_id')) {
     function Language_id()
     {
         return Language::where('code', App::getLocale())->select('id')->first();
-    }
-}
-
-if (!function_exists('Language_code')) {
-    function Language_code($code)
-    {
-        return Language::where('code', $code)->select('id')->first();
-    }
-}
-
-if (!function_exists('Language_code_by_id')) {
-    function Language_code_by_id($id)
-    {
-        return Language::find($id)->code;
     }
 }
 

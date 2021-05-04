@@ -53,7 +53,7 @@ class CityRepository implements CityInterface
             foreach (language() as $lang) {
                 $translation = $city->translation->where('language_id', $lang->id)->first();
                 if ($translation) {
-                    $translation->update(['value' => $request->titlef[$lang->code]]);
+                    $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
                     $city->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                         'language_id' => $lang->id]);

@@ -209,30 +209,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <div class="modal fade" id="modal-delete">
-        <div class="modal-dialog">
-            <div class="modal-content bg-warning">
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you Need To Delete This , you will delete all data use this language form all website and
-                        mobile</p>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-                    <button type="submit" id="delete" onclick="DeleteItem()" class="btn btn-outline-dark">
-                        Delete
-                    </button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
 @endsection
 @section('script_style')
     @include('includes.admin.script_DataTables')
@@ -254,9 +230,8 @@
         }
         //show item
         function ShowData(res) {
-            for (let i in res.translation) {
-                $(`#edit #title-${res.translation[i].language.code}`).val(res.translation[i].value);
-            }
+            $(`#edit #title`).val(res.title);
+            $(`#edit #code`).val(res.code);
             $('#edit #order').val(res.order);
         }
         //edit data

@@ -22,7 +22,6 @@ class CityController extends Controller
     {
         $datas = $this->cityRepository->Get_All_Data();
         $country = $this->countryRepository->List_Data();
-        dd($datas->toarray());
         return view(check_view('admin.core_data.city.index'), compact('datas','country'));
     }
 

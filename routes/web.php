@@ -33,6 +33,8 @@ Route::get('/clear-cache', function () {
 Route::prefix('/language')->group(function () {
     Route::get('/list', [LanguageController::class, 'list_all'])
         ->name('language.list');
+    Route::post('/setLang', [LanguageController::class, 'language'])
+    ->name('setLang');
 });
 Route::prefix('/status')->group(function () {
     Route::get('/list', [StatusController::class, 'list_all'])

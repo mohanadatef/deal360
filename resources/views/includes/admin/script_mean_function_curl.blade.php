@@ -17,7 +17,7 @@
     });
     //global variable
     var id,url,model = window.location.href.split('admin/').pop().split('/')[0];
-    //crate item
+    //create item
     $(document).ready(function () {
         $("#create").on("submit", function (event) {
             event.preventDefault();
@@ -30,10 +30,10 @@
                 contentType: false,
                 processData: false,
                 success: function (res) {
+                    $('#body').append(res);
                     $('#modal-create').modal('toggle');
                     $('#create').trigger("reset");
                     toastr.success('Create Done');
-                    CreateItem(res);
                 }, error: function (res) {
                     for (let err in res.responseJSON.errors) {
                         toastr.error(res.responseJSON.errors[err])
@@ -45,7 +45,6 @@
     //get id for item
     function SelectItem(data) {
         id = data;
-
     }
     //show item in model edit
     function ShowItem(data) {
@@ -80,8 +79,8 @@
                 contentType: false,
                 processData: false,
                 success: function (res) {
-                    $('#modal-edit').modal('toggle');
                     UpdateItem(res);
+                    $('#modal-edit').modal('toggle');
                     toastr.info('Edit Done');
                 }, error: function (res) {
                     for (let err in res.responseJSON.errors) {
@@ -102,7 +101,9 @@
             success: function () {
                 $(`#status-${data}:checkbox:checked`).length == 1 ? toastr.info('Active Done') : toastr.warning('Un active Done');
             }, error: function (res) {
-                console.log(res);
+                for (let err in res.responseJSON.errors) {
+                    toastr.error(res.responseJSON.errors[err]);
+                }
             }
         });
     }
@@ -115,12 +116,13 @@
             type: "delete",
             url: url,
             success: function () {
-                var dataDelete = document.getElementById('data-' + id);
-                dataDelete.remove();
+                document.getElementById('data-' + id).remove();
                 $('#modal-delete').modal('toggle');
                 toastr.warning('Delete Done');
-            }, error: function (res) {
-                toastr.error(res)
+            },error: function (res) {
+                for (let err in res.responseJSON.errors) {
+                    toastr.error(res.responseJSON.errors[err]);
+                }
             }
         });
     }
@@ -133,11 +135,13 @@
             type: "get",
             url: url,
             success: function () {
-                var dataDelete = document.getElementById('data-' + id).remove();
+                document.getElementById('data-' + id).remove();
                 $('#modal-remove').modal('toggle');
                 toastr.warning('Delete Done');
             }, error: function (res) {
-                toastr.error(res);
+                for (let err in res.responseJSON.errors) {
+                    toastr.error(res.responseJSON.errors[err]);
+                }
             }
         });
     }
@@ -150,13 +154,15 @@
             type: "get",
             url: url,
             success: function () {
-                var dataDelete = document.getElementById('data-' + id).remove();
+                document.getElementById('data-' + id).remove();
                 $('#modal-restore').modal('toggle');
                 toastr.warning('Restore Done');
             }, error: function (res) {
-                toastr.error(res)
+                for (let err in res.responseJSON.errors) {
+                    toastr.error(res.responseJSON.errors[err]);
+                }
             }
         });
     }
 </script>
-@yield('index')
+@yield('curl')

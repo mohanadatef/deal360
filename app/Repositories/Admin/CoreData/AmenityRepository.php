@@ -22,7 +22,7 @@ class AmenityRepository implements CoreDataInterface
 
     public function Get_All_Data()
     {
-        return $this->amenity->with('title','image')->order('asc')->get();
+        return $this->amenity->with('title', 'image')->order('asc')->get();
     }
 
     public function Create_Data($request)
@@ -31,24 +31,29 @@ class AmenityRepository implements CoreDataInterface
             $amenity = $this->amenity->create($request->all());
             foreach (language() as $lang) {
                 $amenity->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                    'language_id'=>$lang->id]);
+                    'language_id' => $lang->id]);
             }
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $amenity->image()->create(['image' => $imageName]);
             !$image->image ? false : $this->image_upload($request->image, 'amenity', $imageName);
-            if (count($amenity->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            if (!file_exists(public_path('images/amenity/' . $imageName))) {
-                throw new \Exception('errors');
-            }
-            return  new AmenityResource($amenity);
+            return '<tr id="' . $amenity->id . '"><td id="title-' . $amenity->id . '"
+            data-order="' . $amenity->order . '">' . $amenity->title->value . '</td>
+            <td><img src="'.image_get($amenity->image,'amenity').'" id="image-' . $amenity->id . '" style="width:100px;height: 100px">
+            </td> <td><input onfocus="Change_Status(' . $amenity->id . ')" type="checkbox" name="status"
+            id="status-' . $amenity->id . '" checked data-bootstrap-switch data-off-color="danger"
+            data-on-color="success"></td><td><button type="button"
+            class="btn btn-outline-primary btn-block btn-sm" onclick="ShowItem(' . $amenity->id . ')">
+            <i class="fa fa-edit"></i> ' . trans('lang.Edit') . '</button>
+            <button id="openModael' . $amenity->id . '" type="button" class="d-none" data-toggle="modal"
+            data-target="#modal-edit"></button><button type="button" class="btn btn-outline-danger btn-block btn-sm"
+            onclick="SelectItem(' . $amenity->id . ')" data-toggle="modal"
+            data-target="#modal-delete"><i></i> ' . trans('lang.Delete') . '</button></td></tr>';
         });
     }
 
     public function Get_Data($id)
     {
-        return $this->amenity->with('translation.language','image')->findorFail($id);
+        return $this->amenity->with('translation.language', 'image')->findorFail($id);
     }
 
     public function Update_Data($request, $id)
@@ -59,26 +64,19 @@ class AmenityRepository implements CoreDataInterface
             foreach (language() as $lang) {
                 $translation = $amenity->translation->where('language_id', $lang->id)->first();
                 if ($translation) {
-                    $translation->update(['value' => $request->titlef[$lang->code]]);
+                    $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
                     $amenity->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                         'language_id' => $lang->id]);
                 }
-            }
-            $amenity = $this->Get_Data($id);
-            if (count($amenity->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
             }
             if (isset($request->image)) {
                 $imageName = time() . $request->image->getClientOriginalname();
                 $amenity->image()->forceDelete();
                 $image = $amenity->image()->create(['image' => $imageName]);
                 !$image->image ? false : $this->image_upload($request->image, 'amenity', $imageName);
-                $amenity = $this->Get_Data($id);
-                if (file_exists(public_path('images/amenity/' . $amenity->image->image)) == false) {
-                    throw new \Exception('errors');
-                }
             }
+            $amenity = $this->Get_Data($id);
             return new AmenityResource($amenity);
         });
     }
@@ -90,17 +88,17 @@ class AmenityRepository implements CoreDataInterface
 
     public function Delete_Data($id)
     {
-      $this->Get_Data($id)->delete();
+        $this->Get_Data($id)->delete();
     }
 
     public function Get_All_Data_Delete()
     {
-        return $this->amenity->onlyTrashed()->with('translation','image')->order('asc')->get();
+        return $this->amenity->onlyTrashed()->with('translation', 'image')->order('asc')->get();
     }
 
     public function Back_Data_Delete($id)
     {
-       $this->amenity->withTrashed()->find($id)->restore();
+        $this->amenity->withTrashed()->find($id)->restore();
     }
 
     public function Remove_Data($id)

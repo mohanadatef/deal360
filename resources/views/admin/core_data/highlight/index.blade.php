@@ -53,7 +53,7 @@
                                         @forelse($datas as $data)
                                             <tr id="data-{{$data->id}}">
                                                 <td id="title-{{$data->id}}"
-                                                    data-order="{{$data->order}}">{{$data->title->value}}</td>
+                                                    data-order="{{$data->order}}">{{$data->title ? $data->title->value : ""}}</td>
                                                 <td>
                                                     <input onfocus="Change_Status({{$data->id}})" type="checkbox"
                                                            name="status" @if($data->status) checked
@@ -181,28 +181,6 @@
                         <button type="submit" class="btn btn-outline-light">Update</button>
                     </div>
                 </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <div class="modal fade" id="modal-delete">
-        <div class="modal-dialog">
-            <div class="modal-content bg-warning">
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you Need To Delete This High Light</p>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-                    <button type="submit" id="delete" onclick="DeleteItem()" class="btn btn-outline-dark">Delete
-                    </button>
-                </div>
             </div>
             <!-- /.modal-content -->
         </div>

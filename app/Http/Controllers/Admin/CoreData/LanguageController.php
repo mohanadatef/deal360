@@ -70,4 +70,9 @@ class LanguageController extends Controller
     {
         return $this->languageRepository->List_Data();
     }
+
+    public function show($id)
+    {
+        return $this->languageRepository->Get_Data($id);
+    }
 }

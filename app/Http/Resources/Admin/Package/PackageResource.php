@@ -10,7 +10,7 @@ class PackageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title->value,
+            'title' => $this->title ? $this->title->value : "",
             'count_listing' => $this->count_listing,
             'type_date' => $this->type_date,
             'count_date' => $this->count_date,

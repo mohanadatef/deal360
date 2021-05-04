@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\CoreData\AreaController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
 
-/*Route::group(['middleware' => 'admin', 'auth', 'language', 'permission:dashboard-show'], function () {*/
+Route::group(['middleware' => /*'admin', 'auth',*/ 'language' /*, 'permission:dashboard-show'*/], function () {
 /* error dashboard list */
 Route::get('/', [HomeController::class, 'index'])
     /*->middleware('permission:dashboard-show')*/
@@ -73,6 +73,8 @@ Route::prefix('/language')->name('language.')->group(function () {
         /*->middleware('permission:language-remove')*/ ->name('remove');
     Route::post('/{id}', [LanguageController::class, 'update'])
         /*->middleware('permission:language-edit')*/ ->name('update');
+    Route::get('/{id}', [LanguageController::class, 'show'])
+        /*->middleware('permission:language-show')*/ ->name('show');
 });
 /* });*/
 /* status route list */
@@ -246,4 +248,4 @@ Route::prefix('/area')->name('area.')->group(function () {
         /*->middleware('permission:area-show')*/ ->name('show');
 });
 /* });*/
-/*});*/
+});
