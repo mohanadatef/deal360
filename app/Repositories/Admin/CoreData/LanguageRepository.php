@@ -34,10 +34,18 @@ class LanguageRepository implements CoreDataInterface
                 $imageName = time() . $request->image->getClientOriginalname();
                 $image = $language->image()->create(['image' => $imageName]);
                 !$image->image ? false : $this->image_upload($request->image, 'language', $imageName);
-                if (!file_exists(public_path('images/language/' . $imageName))) {
-                    throw new \Exception('errors');
-                }
-            return new LanguageResource($language);
+            return '<tr id="'.$language->id.'"><td id="title-'.$language->id.'">'.$language->title->value.'</td>
+                <td id="code-'.$language->id.'" data-order="${res.order}">'.$language->code.'</td>
+                <td><img src="'.image_get($language->image,'language').'" id="image-'.$language->id.'" style="width:100px;height: 100px"></td>
+                <td><input onfocus="Change_Status('.$language->id.')" type="checkbox" name="status" id="status-'.$language->id.'"
+                checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                onclick="ShowItem('.$language->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                 <button id="openModael'.$language->id.'" type="button" class="d-none" data-toggle="modal"
+                data-target="#modal-edit"></button>
+                    <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                    onclick="SelectItem('.$language->id.')" data-toggle="modal"
+                    data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -56,11 +64,8 @@ class LanguageRepository implements CoreDataInterface
                 $language->image()->forceDelete();
                 $image = $language->image()->create(['image' => $imageName]);
                 !$image->image ? false : $this->image_upload($request->image, 'language', $imageName);
-                if (file_exists(public_path('images/language/' . $language->image->image)) == false) {
-                    throw new \Exception('errors');
-                }
             }
-            return new LanguageResource($this->Get_Data($id));
+            return new LanguageResource($language);
         });
 
     }

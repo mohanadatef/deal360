@@ -115,7 +115,7 @@
         <div class="modal-dialog">
             <div class="modal-content bg-success">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{trans('lang.Create')}} {{trans('lang.New')}} {{trans('lang.Amenity')}}</h4>
+                    <h4 class="modal-title">{{trans('lang.Create')}}  {{trans('lang.Amenity')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -131,13 +131,13 @@
                                     <input type="text" name="title[{{$lang->code}}]" class="form-control"
                                            id="title[{{$lang->code}}]"
                                            value="{{Request::old('title['.$lang->code.']')}}"
-                                           placeholder="Enter title {{$lang->code}}">
+                                           placeholder="{{trans('lang.Enter_Title')}} {{$lang->code}}">
                                 </div>
                             @endforeach
                             <div class="form-group{{ $errors->has('order') ? ' is-invalid' : "" }}">
                                 <label for="order">{{trans('lang.Order')}}</label>
                                 <input type="text" name="order" class="form-control" id="order"
-                                       value="{{Request::old('order')}}" placeholder="Enter Order">
+                                       value="{{Request::old('order')}}" placeholder="{{trans('lang.Enter_Order')}}">
                             </div>
                             <div class="form-group{{ $errors->has('image') ? ' has-error' : "" }}">
                                 <label>{{trans('lang.Image')}}</label>
@@ -177,13 +177,13 @@
                                     <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
                                     <input type="text" name="title[{{$lang->code}}]" class="form-control"
                                            id="title-{{$lang->code}}"
-                                           value="" placeholder="Enter title {{$lang->code}}">
+                                           value="" placeholder="{{trans('lang.Enter_Title')}} {{$lang->code}}">
                                 </div>
                             @endforeach
                             <div class="form-group{{ $errors->has('order') ? ' is-invalid' : "" }}">
                                 <label for="order">{{trans('lang.Order')}}</label>
                                 <input type="text" name="order" class="form-control" id="order"
-                                       value="" placeholder="Enter Order">
+                                       value="" placeholder="{{trans('lang.Enter_Order')}}">
                             </div>
                             <div class="form-group{{ $errors->has('image') ? ' has-error' : "" }}">
                                 <label>{{trans('lang.Image')}}</label>

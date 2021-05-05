@@ -33,10 +33,16 @@ class HighLightRepository implements CoreDataInterface
                 $highlight->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            if (count($highlight->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            return new HighLightResource($highlight);
+            return '<tr id="'.$highlight->id.'"><td id="title-'.$highlight->id.'" data-order="'.$highlight->order.'">'.$highlight->title.'</td>
+                <td><input onfocus="Change_Status('.$highlight->id.')" type="checkbox" name="status" id="status-'.$highlight->id.'"
+                    checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                    <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                    onclick="ShowItem('.$highlight->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                    <button id="openModael'.$highlight->id.'" type="button" class="d-none" data-toggle="modal"
+                    data-target="#modal-edit"></button>
+                    <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                    onclick="SelectItem('.$highlight->id.')" data-toggle="modal"
+                    data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -60,9 +66,6 @@ class HighLightRepository implements CoreDataInterface
                 }
             }
             $highlight = $this->Get_Data($id);
-            if ($highlight->translation->count() != count(language())) {
-                throw new \Exception('errors');
-            }
             return new HighLightResource($highlight);
         });
     }

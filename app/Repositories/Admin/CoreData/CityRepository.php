@@ -33,10 +33,17 @@ class CityRepository implements CityInterface
                 $city->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            if (count($city->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            return new CityResource($city);
+            return '<tr id="'.$city->id.'"><td id="title-'.$city->id.'" data-order="'.$city->order.'">'.$city->title.'</td>
+                <td id="country-'.$city->id.'">'.$city->country->title->value.'</td>
+                   <td><input onfocus="Change_Status('.$city->id.')" type="checkbox" name="status" id="status-'.$city->id.'"
+                    checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                    <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                    onclick="ShowItem('.$city->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                    <button id="openModael'.$city->id.'" type="button" class="d-none" data-toggle="modal"
+                    data-target="#modal-edit"></button>
+                    <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                    onclick="SelectItem('.$city->id.')" data-toggle="modal"
+                    data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -60,9 +67,6 @@ class CityRepository implements CityInterface
                 }
             }
             $city = $this->Get_Data($id);
-            if ($city->translation->count() != count(language())) {
-                throw new \Exception('errors');
-            }
             return new CityResource($city);
         });
     }

@@ -1,6 +1,6 @@
 @extends('includes.admin.master_admin')
 @section('title')
-    City Index
+{{trans('lang.City')}} {{trans('lang.Index')}}
 @endsection
 @section('head_style')
     @include('includes.admin.head_DataTables')
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>City</h1>
+                        <h1>{{trans('lang.City')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active">City</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('lang.City')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                                     <h3 class="card-title">
                                         <button type="button" class="btn btn-success" data-toggle="modal"
                                                 data-target="#modal-create">
-                                            Create
+                                            {{trans('lang.Create')}}
                                         </button>
                                     </h3>
                                 </div>
@@ -44,10 +44,10 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Title</th>
-                                            <th>Country</th>
-                                            <th>Status</th>
-                                            <th>Controller</th>
+                                             <th>{{trans('lang.Title')}}</th>
+                                            <th>{{trans('lang.Country')}}</th>
+                                             <th>{{trans('lang.Status')}}</th>
+                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody id="body">
@@ -67,7 +67,7 @@
                                                     <button type="button"
                                                             class="btn btn-outline-primary btn-block btn-sm"
                                                             onclick="ShowItem({{$data->id}})">
-                                                        <i class="fa fa-edit"></i> Edit
+                                                        <i class="fa fa-edit"></i> {{trans('lang.Edit')}}
                                                     </button>
                                                     <button id="openModael{{$data->id}}" type="button" class="d-none"
                                                             data-toggle="modal"
@@ -76,7 +76,7 @@
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
                                                             onclick="SelectItem({{$data->id}})" data-toggle="modal"
-                                                            data-target="#modal-delete"><i></i> Delete
+                                                            data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
                                                 </td>
                                             </tr>
@@ -85,10 +85,10 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>Title</th>
-                                            <th>Country</th>
-                                            <th>Status</th>
-                                            <th>Controller</th>
+                                             <th>{{trans('lang.Title')}}</th>
+                                            <th>{{trans('lang.Country')}}</th>
+                                             <th>{{trans('lang.Status')}}</th>
+                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </tfoot>
                                     </table>
@@ -110,7 +110,7 @@
         <div class="modal-dialog">
             <div class="modal-content bg-success">
                 <div class="modal-header">
-                    <h4 class="modal-title">Create New City</h4>
+                    <h4 class="modal-title">{{trans('lang.Create')}} {{trans('lang.City')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -122,20 +122,20 @@
                             @foreach(language() as $lang)
                                 <div
                                     class="form-group{{ $errors->has('title['.$lang->code.']') ? ' is-invalid' : "" }}">
-                                    <label for="title">Title {{$lang->code}}</label>
+                                    <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
                                     <input type="text" name="title[{{$lang->code}}]" class="form-control"
                                            id="title[{{$lang->code}}]"
                                            value="{{Request::old('title['.$lang->code.']')}}"
-                                           placeholder="Enter title {{$lang->code}}">
+                                           placeholder="{{trans('lang.Enter_Title')}} {{$lang->code}}">
                                 </div>
                             @endforeach
                             <div class="form-group{{ $errors->has('order') ? ' is-invalid' : "" }}">
-                                <label for="order">Order</label>
+                                <label for="order">{{trans('lang.Order')}}</label>
                                 <input type="text" name="order" class="form-control" id="order"
-                                       value="{{Request::old('order')}}" placeholder="Enter Order">
+                                       value="{{Request::old('order')}}" placeholder="{{trans('lang.Enter_Order')}}">
                             </div>
                             <div class="form-group{{ $errors->has('country_id') ? ' is-invalid' : "" }}">
-                                <label>Country</label>
+                                <label>{{trans('lang.Country')}}</label>
                                 <select class="form-control select2" id="country" name="country_id"
                                         style="width: 100%;">
                                 @foreach($country as $my)
@@ -149,8 +149,8 @@
 
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-light">Create</button>
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">{{trans('lang.Close')}}</button>
+                        <button type="submit" class="btn btn-outline-light">{{trans('lang.Create')}}</button>
                     </div>
                 </form>
             </div>
@@ -162,7 +162,7 @@
         <div class="modal-dialog">
             <div class="modal-content bg-info">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit City</h4>
+                    <h4 class="modal-title">{{trans('lang.Edit')}} {{trans('lang.City')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -174,19 +174,19 @@
                             @foreach(language() as $lang)
                                 <div
                                     class="form-group{{ $errors->has('title['.$lang->code.']') ? ' is-invalid' : "" }}">
-                                    <label for="title">Title {{$lang->code}}</label>
+                                    <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
                                     <input type="text" name="title[{{$lang->code}}]" class="form-control"
                                            id="title-{{$lang->code}}"
-                                           value="" placeholder="Enter title {{$lang->code}}">
+                                           value="" placeholder="{{trans('lang.Enter_Title')}} {{$lang->code}}">
                                 </div>
                             @endforeach
                             <div class="form-group{{ $errors->has('order') ? ' is-invalid' : "" }}">
-                                <label for="order">Order</label>
+                                <label for="order">{{trans('lang.Order')}}</label>
                                 <input type="text" name="order" class="form-control" id="order"
-                                       value="" placeholder="Enter Order">
+                                       value="" placeholder="{{trans('lang.Enter_Order')}}">
                             </div>
                             <div class="form-group{{ $errors->has('country_id') ? ' is-invalid' : "" }}">
-                                <label>Country</label>
+                                <label>{{trans('lang.Country')}}</label>
                                 <select class="form-control select2" id="country-id" name="country_id"
                                         style="width: 100%;">
                                     @foreach($country as $my)
@@ -200,8 +200,8 @@
 
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-outline-light">Update</button>
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">{{trans('lang.Close')}}</button>
+                        <button type="submit" class="btn btn-outline-light">{{trans('lang.Update')}}</button>
                     </div>
                 </form>
             </div>
@@ -213,20 +213,6 @@
 @section('script_style')
     @include('includes.admin.script_DataTables')
     <script>
-        //crate data
-        function CreateItem(res) {
-            $('#body').append(`<tr id="${res.id}"><td id="title-${res.id}" data-order="${res.order}">${res.title}</td>
-                            <td id="country-${res.id}">${res.country.title}</td>
-                               <td><input onfocus="Change_Status(${res.id})" type="checkbox" name="status" id="status-${res.id}"
-                                checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
-                                <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
-                                onclick="ShowItem(${res.id})"><i class="fa fa-edit"></i> Edit</button>
-                                <button id="openModael${res.id}" type="button" class="d-none" data-toggle="modal"
-                                data-target="#modal-edit"></button>
-                                <button type="button" class="btn btn-outline-danger btn-block btn-sm"
-                                onclick="SelectItem(${res.id})" data-toggle="modal"
-                                data-target="#modal-delete"><i></i> Delete</button></td></tr>`);
-        }
         //show item
         function ShowData(res) {
             for (let i in res.translation) {

@@ -36,13 +36,17 @@ class CountryRepository implements CoreDataInterface
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $country->image()->create(['image' => $imageName]);
             !$image->image ? false : $this->image_upload($request->image, 'country', $imageName);
-            if (count($country->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            if (!file_exists(public_path('images/country/' . $imageName))) {
-                throw new \Exception('errors');
-            }
-            return new CountryResource($country);
+            return '<tr id="'.$country->id.'"><td id="title-'.$country->id.'" data-order="'.$country->order.'">'.$country->title->value.'</td>
+                <td><img src="'.image_get($country->image,'country').'" id="image-'.$country->id.'" style="width:100px;height: 100px"></td>
+                <td><input onfocus="Change_Status('.$country->id.')" type="checkbox" name="status" id="status-'.$country->id.'"
+                    checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                    <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                    onclick="ShowItem('.$country->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                    <button id="openModael'.$country->id.'" type="button" class="d-none" data-toggle="modal"
+                    data-target="#modal-edit"></button>
+                    <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                    onclick="SelectItem('.$country->id.')" data-toggle="modal"
+                    data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -65,20 +69,13 @@ class CountryRepository implements CoreDataInterface
                         'language_id' => $lang->id]);
                 }
             }
-            $country = $this->Get_Data($id);
-            if ($country->translation->count() != count(language())) {
-                throw new \Exception('errors');
-            }
             if (isset($request->image)) {
                 $imageName = time() . $request->image->getClientOriginalname();
                 $country->image()->forceDelete();
                 $image = $country->image()->create(['image' => $imageName]);
                 !$image->image ? false : $this->image_upload($request->image, 'country', $imageName);
-                $country = $this->Get_Data($id);
-                if (file_exists(public_path('images/country/' . $country->image->image)) == false) {
-                    throw new \Exception('errors');
-                }
             }
+            $country = $this->Get_Data($id);
             return new CountryResource($country);
         });
     }

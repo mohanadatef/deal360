@@ -33,10 +33,16 @@ class StatusRepository implements CoreDataInterface
                 $status->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            if (count($status->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            return new StatusResource($status);
+            return '<tr id="'.$status->id.'"><td id="title-'.$status->id.'" data-order="'.$status->order.'">'.$status->title.'</td>
+                <td><input onfocus="Change_Status('.$status->id.')" type="checkbox" name="status" id="status-'.$status->id.'"
+                checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                onclick="ShowItem('.$status->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                <button id="openModael'.$status->id.'" type="button" class="d-none" data-toggle="modal"
+                data-target="#modal-edit"></button>
+                <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                onclick="SelectItem('.$status->id.')" data-toggle="modal"
+                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -60,9 +66,6 @@ class StatusRepository implements CoreDataInterface
                 }
             }
             $status = $this->Get_Data($id);
-            if ($status->translation->count() != count(language())) {
-                throw new \Exception('errors');
-            }
             return new StatusResource($status);
         });
     }

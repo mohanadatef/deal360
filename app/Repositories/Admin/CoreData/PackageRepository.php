@@ -33,10 +33,19 @@ class PackageRepository implements CoreDataInterface
                 $package->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            if (count($package->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            return new PackageResource($package);
+            return '<tr id="'.$package->id.'"><td id="title-'.$package->id.'" data-order="'.$package->order.'">'.$package->title->value.'</td>
+                <td id="count-listing-'.$package->id.'">'.$package->count_listing.'</td>
+                <td id="type-date-'.$package->id.'">'.trans('lang.'.$package->type_date).'</td>
+                <td id="count-date-'.$package->id.'">'.$package->count_date.'</td>
+                <td><input onfocus="Change_Status('.$package->id.')" type="checkbox" name="status" id="status-'.$package->id.'"
+                checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                onclick="ShowItem('.$package->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                <button id="openModael'.$package->id.'" type="button" class="d-none" data-toggle="modal"
+                data-target="#modal-edit"></button>
+                <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                onclick="SelectItem('.$package->id.')" data-toggle="modal"
+                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -60,9 +69,6 @@ class PackageRepository implements CoreDataInterface
                 }
             }
             $package = $this->Get_Data($id);
-            if ($package->translation->count() != count(language())) {
-                throw new \Exception('errors');
-            }
             return new PackageResource($package);
         });
     }

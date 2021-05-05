@@ -1,6 +1,6 @@
 @extends('includes.admin.master_admin')
 @section('title')
-    Type Delete Index
+    {{trans('lang.Type')}} {{trans('lang.Delete')}} {{trans('lang.Index')}}
 @endsection
 @section('head_style')
     @include('includes.admin.head_DataTables')
@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Type</h1>
+                        <h1>{{trans('lang.Type')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active">Type</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
+                            <li class="breadcrumb-item active">{{trans('lang.Type')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Type you Deleted At Before
+                                    {{trans('lang.Type')}} , {{trans('lang.Delete_Index_Message')}}
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -40,9 +40,9 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Image</th>
-                                        <th>Controller</th>
+                                         <th>{{trans('lang.Title')}}</th>
+                                        <th>{{trans('lang.Image')}}</th>
+                                         <th>{{trans('lang.Controller')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -56,11 +56,11 @@
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="SelectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
-                                                    <i class="fa fa-edit"></i> Restore
+                                                    <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="SelectItem({{$data->id}})" data-toggle="modal"
-                                                        data-target="#modal-remove"><i></i> Delete
+                                                        data-target="#modal-remove"><i></i> {{trans('lang.Delete')}}
                                                 </button>
                                             </td>
                                         </tr>
@@ -69,9 +69,9 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Image</th>
-                                        <th>Controller</th>
+                                         <th>{{trans('lang.Title')}}</th>
+                                        <th>{{trans('lang.Image')}}</th>
+                                         <th>{{trans('lang.Controller')}}</th>
                                     </tr>
                                     </tfoot>
                                 </table>

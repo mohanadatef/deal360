@@ -40,4 +40,9 @@ return [
     'Remove_Message'=>'Are you Need To Delete This Forever',
     'Delete_Index_Message'=>'Data you Deleted At Before',
     'New'=>'New',
+    'Enter_Title'=>'Enter Title',
+    'Enter_Code'=>'Enter Code',
+    'Enter_Order'=>'Enter Order',
+    'Enter_Listing'=>'Enter Listing',
+    'Enter_Count_Date'=>'Enter Count',
 ];

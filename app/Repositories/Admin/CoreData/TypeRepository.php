@@ -36,13 +36,17 @@ class TypeRepository implements CoreDataInterface
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $type->image()->create(['image' => $imageName]);
             !$image->image ? false : $this->image_upload($request->image, 'type', $imageName);
-            if (count($type->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
-            if (!file_exists(public_path('images/type/' . $imageName))) {
-                throw new \Exception('errors');
-            }
-            return new TypeResource($type);
+            return '<tr id="'.$type->id.'"><td id="title-'.$type->id.'" data-order="'.$type->order.'">'.$type->title->value.'</td>
+                <td><img src="'.image_get($type->image,'type').'" id="image-'.$type->id.'" style="width:100px;height: 100px"></td>
+                <td><input onfocus="Change_Status('.$type->id.')" type="checkbox" name="status" id="status-'.$type->id.'"
+                checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                onclick="ShowItem('.$type->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                <button id="openModael'.$type->id.'" type="button" class="d-none" data-toggle="modal"
+                data-target="#modal-edit"></button>
+                <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                onclick="SelectItem('.$type->id.')" data-toggle="modal"
+                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -65,20 +69,13 @@ class TypeRepository implements CoreDataInterface
                         'language_id' => $lang->id]);
                 }
             }
-            $type = $this->Get_Data($id);
-            if (count($type->translation->toarray()) != count(language())) {
-                throw new \Exception('errors');
-            }
             if (isset($request->image)) {
                 $imageName = time() . $request->image->getClientOriginalname();
                 $type->image()->forceDelete();
                 $image = $type->image()->create(['image' => $imageName]);
                 !$image->image ? false : $this->image_upload($request->image, 'type', $imageName);
-                $type = $this->Get_Data($id);
-                if (file_exists(public_path('images/type/' . $type->image->image)) == false) {
-                    throw new \Exception('errors');
-                }
             }
+            $type = $this->Get_Data($id);
             return new TypeResource($type);
         });
     }
