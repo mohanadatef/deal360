@@ -57,7 +57,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                   Language
+                                   {{trans('lang.Language')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -65,13 +65,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('language.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('language.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -80,7 +80,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Status
+                                    {{trans('lang.Status')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -88,13 +88,13 @@
                                 <li class="nav-item">
                                    <a href="{{route('status.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('status.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -103,7 +103,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Type
+                                    {{trans('lang.Type')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -111,13 +111,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('type.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('type.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -126,7 +126,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Category
+                                    {{trans('lang.Category')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -134,13 +134,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('category.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('category.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -149,7 +149,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Country
+                                    {{trans('lang.Country')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -157,13 +157,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('country.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('country.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -172,7 +172,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    City
+                                    {{trans('lang.City')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -180,13 +180,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('city.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('city.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -195,7 +195,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Area
+                                     {{trans('lang.Area')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -203,13 +203,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('area.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('area.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -218,7 +218,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Amenity
+                                     {{trans('lang.Amenity')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -226,13 +226,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('amenity.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('amenity.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -241,7 +241,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Package
+                                    {{trans('lang.Package')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -249,13 +249,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('package.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('package.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
@@ -264,7 +264,7 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    HighLight
+                                    {{trans('lang.HighLight')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -272,13 +272,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('highlight.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Index</p>
+                                        <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('highlight.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Delete Index</p>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
