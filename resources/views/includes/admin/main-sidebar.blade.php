@@ -42,7 +42,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
                         <p>
-                            Core Data
+                             {{trans('lang.Core_Data')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>

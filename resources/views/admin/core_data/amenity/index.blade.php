@@ -115,7 +115,7 @@
         <div class="modal-dialog">
             <div class="modal-content bg-success">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{trans('lang.Create')}}  {{trans('lang.Amenity')}}</h4>
+                    <h4 class="modal-title">{{trans('lang.Create')}}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -162,7 +162,7 @@
         <div class="modal-dialog">
             <div class="modal-content bg-info">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{trans('lang.Edit')}} {{trans('lang.Amenity')}}</h4>
+                    <h4 class="modal-title">{{trans('lang.Edit')}} </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

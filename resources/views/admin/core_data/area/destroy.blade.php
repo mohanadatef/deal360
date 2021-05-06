@@ -32,7 +32,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{trans('lang.Area')}} , {{trans('lang.Delete_Index_Message')}}
+                                {{trans('lang.Delete_Index_Message')}}
                                 </h3>
                             </div>
                             <!-- /.card-header -->

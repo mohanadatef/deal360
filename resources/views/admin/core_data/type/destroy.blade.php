@@ -1,6 +1,6 @@
 @extends('includes.admin.master_admin')
 @section('title')
-    {{trans('lang.Type')}} {{trans('lang.Delete')}} {{trans('lang.Index')}}
+     {{trans('lang.Delete')}} {{trans('lang.Index')}}
 @endsection
 @section('head_style')
     @include('includes.admin.dataTables.head_DataTables')
@@ -32,7 +32,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    {{trans('lang.Type')}} , {{trans('lang.Delete_Index_Message')}}
+                                   {{trans('lang.Delete_Index_Message')}}
                                 </h3>
                             </div>
                             <!-- /.card-header -->

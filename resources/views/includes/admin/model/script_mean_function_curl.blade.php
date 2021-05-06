@@ -33,7 +33,7 @@
                     $('#body').append(res);
                     $('#modal-create').modal('toggle');
                     $('#create').trigger("reset");
-                    toastr.success('Create Done');
+                    toastr.success({{trans('lang.Create_Done')}});
                 }, error: function (res) {
                     for (let err in res.responseJSON.errors) {
                         toastr.error(res.responseJSON.errors[err])
@@ -81,7 +81,7 @@
                 success: function (res) {
                     updateItem(res);
                     $('#modal-edit').modal('toggle');
-                    toastr.info('Edit Done');
+                    toastr.info({{trans('lang.Edit_Done')}});
                 }, error: function (res) {
                     for (let err in res.responseJSON.errors) {
                         toastr.error(res.responseJSON.errors[err]);
@@ -99,7 +99,7 @@
             type: "GET",
             url: url,
             success: function () {
-                $(`#status-${data}:checkbox:checked`).length == 1 ? toastr.info('Active Done') : toastr.warning('Un active Done');
+                $(`#status-${data}:checkbox:checked`).length == 1 ? toastr.info({{trans('lang.Active_Done')}}) : toastr.warning({{trans('lang.Un_Active_Done')}});
             }, error: function (res) {
                 for (let err in res.responseJSON.errors) {
                     toastr.error(res.responseJSON.errors[err]);
@@ -118,7 +118,7 @@
             success: function () {
                 document.getElementById('data-' + id).remove();
                 $('#modal-delete').modal('toggle');
-                toastr.warning('Delete Done');
+                toastr.warning({{trans('lang.Delete_Done')}});
             },error: function (res) {
                 for (let err in res.responseJSON.errors) {
                     toastr.error(res.responseJSON.errors[err]);
@@ -137,7 +137,7 @@
             success: function () {
                 document.getElementById('data-' + id).remove();
                 $('#modal-remove').modal('toggle');
-                toastr.warning('Delete Done');
+                toastr.warning({{trans('lang.Delete_Done')}});
             }, error: function (res) {
                 for (let err in res.responseJSON.errors) {
                     toastr.error(res.responseJSON.errors[err]);
@@ -156,7 +156,7 @@
             success: function () {
                 document.getElementById('data-' + id).remove();
                 $('#modal-restore').modal('toggle');
-                toastr.warning('Restore Done');
+                toastr.warning({{trans('lang.Restore_Done')}});
             }, error: function (res) {
                 for (let err in res.responseJSON.errors) {
                     toastr.error(res.responseJSON.errors[err]);
