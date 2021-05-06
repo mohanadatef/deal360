@@ -31,7 +31,7 @@ class ForgotPasswordController extends Controller
 
     public function check(Request $request)
     {
-        $request->language_id ? change_locale_language($request->language_id) : true;
+        $request->language_id ? changeLocaleLanguage($request->language_id) : true;
         $user = $this->userRepository->Check_User($request->email);
         if ($user['status_data'] == 0) {
             return $request->language_id ? response(['status' => $user['status_data'], 'data' => $user['user'], 'message' => $user['message']], $user['status']) : redirect()->back()->with('message_fales', $user['message']);
@@ -45,7 +45,7 @@ class ForgotPasswordController extends Controller
 
     public function validate_code(Request $request)
     {
-        $request->language_id ? change_locale_language($request->language_id) : true;
+        $request->language_id ? changeLocaleLanguage($request->language_id) : true;
         $user = $this->userRepository->Check_User($request->email);
         if ($user['status_data'] == 0) {
             return $request->language_id ? response(['status' => $user['status_data'], 'data' => $user['user'], 'message' => $user['message']], $user['status']) : redirect()->back()->with('message_fales', $user['message']);
@@ -67,7 +67,7 @@ class ForgotPasswordController extends Controller
 
     public function change_password(PasswordRequest $request)
     {
-        change_locale_language($request->language_id);
+        changeLocaleLanguage($request->language_id);
         $user = $this->userRepository->Check_User($request->email);
         if ($user['status_data'] == 0) {
             return response(['status' => $user['status_data'], 'data' => $user['user'], 'message' => $user['message']], $user['status']);

@@ -18,8 +18,8 @@ class CallUsController extends Controller
 
     public function store(CreateRequest $request)
     {
-        change_locale_language($request->language_id);
-        $this->call_usRepository->Create_Data($request);
+        changeLocaleLanguage($request->language_id);
+        $this->call_usRepository->storeData($request);
         return response(['status' => 1,'data'=>array(),'message'=>trans('lang.Message_Store')], 200);
     }
 
@@ -35,7 +35,7 @@ class CallUsController extends Controller
         return view('admin.setting.call_us.read',compact('datas'));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
         $this->call_usRepository->Update_Status_One_Data($id);
         return redirect()->back()->with('message', trans('lang.Message_Status'));
@@ -43,13 +43,13 @@ class CallUsController extends Controller
 
     public function change_many_status(StatusEditRequest $request)
     {
-        $this->call_usRepository->Update_Status_Datas($request);
+        $this->call_usRepository->updateStatusDatas($request);
         return redirect()->back()->with('message', trans('lang.Message_Status'));
     }
 
     public function delete($id)
     {
-        $this->call_usRepository->Delete_Data($id);
+        $this->call_usRepository->deleteData($id);
         return redirect()->back()->with('message', trans('lang.Message_Delete'));
     }
 }

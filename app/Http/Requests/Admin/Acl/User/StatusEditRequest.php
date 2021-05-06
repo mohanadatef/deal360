@@ -24,11 +24,11 @@ class StatusEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'change_status' => 'required|exists:users,id',
+            'changeStatus' => 'required|exists:users,id',
         ];
     }
     public function messages()
     {
-        return Language_Locale() == 'ar' ? ['change_status.required' => 'برجاء الاختيار',]: [];
+        return languageLocale() == 'ar' ? ['changeStatus.required' => 'برجاء الاختيار',]: [];
     }
 }

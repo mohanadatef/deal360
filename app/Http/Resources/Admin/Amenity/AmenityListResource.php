@@ -11,7 +11,7 @@ class AmenityListResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title ? $this->title->value : "",
-            'image' => image_get($this->image,'amenity'),
+            'image' => getImag($this->image,'amenity'),
         ];
     }
 }

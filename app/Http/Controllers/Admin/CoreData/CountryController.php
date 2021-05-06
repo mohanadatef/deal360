@@ -18,53 +18,53 @@ class CountryController extends Controller
 
     public function index()
     {
-        $datas = $this->countryRepository->Get_All_Data();
-        return view(check_view('admin.core_data.country.index'), compact('datas'));
+        $datas = $this->countryRepository->getAllData();
+        return view(checkView('admin.core_data.country.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json($this->countryRepository->Create_Data($request));
+        return response()->json($this->countryRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->countryRepository->Update_Data($request, $id));
+        return response()->json($this->countryRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->countryRepository->Update_Status_Data($id);
+        $this->countryRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->countryRepository->Delete_Data($id);
+        $this->countryRepository->deleteData($id);
     }
 
     public function remove($id)
     {;
-        $this->countryRepository->Remove_Data($id);
+        $this->countryRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->countryRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.country.destroy'), compact('datas'));
+        $datas = $this->countryRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.country.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->countryRepository->Back_Data_Delete($id);
+        $this->countryRepository->restoreData($id);
     }
 
-    public function list_all()
+    public function listIndex()
     {
-        return $this->countryRepository->List_Data();
+        return $this->countryRepository->listData();
     }
 
     public function show($id)
     {
-        return $this->countryRepository->Get_Data($id);
+        return $this->countryRepository->showData($id);
     }
 }

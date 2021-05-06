@@ -38,7 +38,7 @@ class CreateRequest extends FormRequest
 
     public function messages()
     {
-        return Language_Locale() == 'ar' ? [
+        return languageLocale() == 'ar' ? [
             'image.mimes' => 'برجاء ادخال الصوره jpg,jpeg,png,gif',
             'image.max' => 'برجاء ادخال الصوره اقل من 2048',
             'title.*.required' => 'برجاء ادخال الاسم',

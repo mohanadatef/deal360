@@ -18,53 +18,53 @@ class TypeController extends Controller
 
     public function index()
     {
-        $datas = $this->typeRepository->Get_All_Data();
-        return view(check_view('admin.core_data.type.index'), compact('datas'));
+        $datas = $this->typeRepository->getAllData();
+        return view(checkView('admin.core_data.type.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json($this->typeRepository->Create_Data($request));
+        return response()->json($this->typeRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->typeRepository->Update_Data($request, $id));
+        return response()->json($this->typeRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->typeRepository->Update_Status_Data($id);
+        $this->typeRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->typeRepository->Delete_Data($id);
+        $this->typeRepository->deleteData($id);
     }
 
     public function remove($id)
     {;
-        $this->typeRepository->Remove_Data($id);
+        $this->typeRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->typeRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.type.destroy'), compact('datas'));
+        $datas = $this->typeRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.type.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->typeRepository->Back_Data_Delete($id);
+        $this->typeRepository->restoreData($id);
     }
 
-    public function list_all()
+    public function listIndex()
     {
-        return $this->typeRepository->List_Data();
+        return $this->typeRepository->listData();
     }
 
     public function show($id)
     {
-        return $this->typeRepository->Get_Data($id);
+        return $this->typeRepository->showData($id);
     }
 }

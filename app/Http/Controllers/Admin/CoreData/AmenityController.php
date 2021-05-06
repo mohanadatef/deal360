@@ -19,53 +19,53 @@ class AmenityController extends Controller
 
     public function index()
     {
-        $datas = $this->amenityRepository->Get_All_Data();
-        return view(check_view('admin.core_data.amenity.index'), compact('datas'));
+        $datas = $this->amenityRepository->getAllData();
+        return view(checkView('admin.core_data.amenity.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json($this->amenityRepository->Create_Data($request));
+        return response()->json($this->amenityRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->amenityRepository->Update_Data($request, $id));
+        return response()->json($this->amenityRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->amenityRepository->Update_Status_Data($id);
+        $this->amenityRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->amenityRepository->Delete_Data($id);
+        $this->amenityRepository->deleteData($id);
     }
 
     public function remove($id)
-    {;
-        $this->amenityRepository->Remove_Data($id);
+    {
+        $this->amenityRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->amenityRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.amenity.destroy'), compact('datas'));
+        $datas = $this->amenityRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.amenity.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->amenityRepository->Back_Data_Delete($id);
+        $this->amenityRepository->restoreData($id);
     }
 
-    public function list_all()
+    public function listIndex()
     {
-        return $this->amenityRepository->List_Data();
+        return $this->amenityRepository->listData();
     }
 
     public function show($id)
     {
-        return $this->amenityRepository->Get_Data($id);
+        return $this->amenityRepository->showData($id);
     }
 }

@@ -1,9 +1,9 @@
 @extends('includes.admin.master_admin')
 @section('title')
-    {{trans('lang.Area')}} {{trans('lang.Index')}}
+{{trans('lang.Index')}}
 @endsection
 @section('head_style')
-    @include('includes.admin.head_DataTables')
+    @include('includes.admin.dataTables.head_DataTables')
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -56,10 +56,10 @@
                                             <tr id="data-{{$data->id}}">
                                                 <td id="title-{{$data->id}}"
                                                     data-order="{{$data->order}}">{{$data->title ? $data->title->value : ""}}</td>
-                                                <td id="country-{{$data->id}}">{{$data->country->title->value}}</td>
-                                                <td id="city-{{$data->id}}">{{$data->city->title->value}}</td>
+                                                <td id="country-{{$data->id}}">{{$data->country->title ? $data->country->title->value : ""}}</td>
+                                                <td id="city-{{$data->id}}">{{$data->city->title ? $data->city->title->value : ""}}</td>
                                                 <td>
-                                                    <input onfocus="Change_Status({{$data->id}})" type="checkbox"
+                                                    <input onfocus="changeStatus({{$data->id}})" type="checkbox"
                                                            name="status" @if($data->status) checked
                                                            @endif id="status-{{$data->id}}"
                                                            data-bootstrap-switch data-off-color="danger"
@@ -68,7 +68,7 @@
                                                 <td>
                                                     <button type="button"
                                                             class="btn btn-outline-primary btn-block btn-sm"
-                                                            onclick="ShowItem({{$data->id}})">
+                                                            onclick="showItem({{$data->id}})">
                                                         <i class="fa fa-edit"></i> {{trans('lang.Edit')}}
                                                     </button>
                                                     <button id="openModael{{$data->id}}" type="button" class="d-none"
@@ -77,7 +77,7 @@
                                                     </button>
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
-                                                            onclick="SelectItem({{$data->id}})" data-toggle="modal"
+                                                            onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                             data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
                                                 </td>
@@ -122,14 +122,14 @@
                     @csrf
                     <div class="modal-body">
                         <div class="card-body">
-                            @foreach(language() as $lang)
+                            @foreach($language as $lang)
                                 <div
                                     class="form-group{{ $errors->has('title['.$lang->code.']') ? ' is-invalid' : "" }}">
                                     <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
                                     <input type="text" name="title[{{$lang->code}}]" class="form-control"
                                            id="title[{{$lang->code}}]"
                                            value="{{Request::old('title['.$lang->code.']')}}"
-                                           placeholder="{{trans('lang.Enter_Title')}} {{$lang->code}}">
+                                           placeholder="{{trans('lang.Enter_Title')}} {{$lang->title}}">
                                 </div>
                             @endforeach
                             <div class="form-group{{ $errors->has('order') ? ' is-invalid' : "" }}">
@@ -143,7 +143,7 @@
                                         style="width: 100%;">
                                     @foreach($country as $my)
                                         <option value="{{$my->id}}"
-                                                id="option-country-{{$my->id}}">{{$my->title->value}}</option>
+                                                id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -180,7 +180,7 @@
                     @csrf
                     <div class="modal-body">
                         <div class="card-body">
-                            @foreach(language() as $lang)
+                            @foreach($language as $lang)
                                 <div
                                     class="form-group{{ $errors->has('title['.$lang->code.']') ? ' is-invalid' : "" }}">
                                     <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
@@ -200,7 +200,7 @@
                                         style="width: 100%;">
                                     @foreach($country as $my)
                                         <option value="{{$my->id}}"
-                                                id="option-country-{{$my->id}}">{{$my->title->value}}</option>
+                                                id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -226,10 +226,10 @@
     </div>
 @endsection
 @section('script_style')
-    @include('includes.admin.script_DataTables')
+    @include('includes.admin.dataTables.script_DataTables')
     <script>
         //show item
-        function ShowData(res) {
+        function showData(res) {
             $('#edit #country').val(res.country.title);
             var city = res.city_id;
             var country = res.country_id;
@@ -241,7 +241,7 @@
             $('#edit #order').val(res.order);
         }
         //edit data
-        function UpdateItem(res) {
+        function updateItem(res) {
             document.getElementById('title-' + res.id).innerHTML = res.title;
             document.getElementById('country-' + res.id).innerHTML = res.country.title;
             document.getElementById('city-' + res.id).innerHTML = res.city.title;

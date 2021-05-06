@@ -11,7 +11,7 @@ class CountryListResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title ? $this->title->value : "",
-            'image' => image_get($this->image,'country'),
+            'image' => getImag($this->image,'country'),
         ];
     }
 }

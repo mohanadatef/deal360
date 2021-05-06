@@ -13,7 +13,7 @@ class AmenityResource extends JsonResource
             'title' => $this->title ? $this->title->value : "",
             'order' => $this->order,
             'status' => $this->status,
-            'image' => image_get($this->image,'amenity'),
+            'image' => getImag($this->image,'amenity'),
         ];
     }
 }

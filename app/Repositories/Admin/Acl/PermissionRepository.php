@@ -17,12 +17,12 @@ class PermissionRepository implements PermissionInterface
         $this->permission = $permission;
     }
 
-    public function Get_All_Data()
+    public function getAllData()
     {
         return $this->permission->all();
     }
 
-    public function Create_Data(CreateRequest $request)
+    public function storeData(CreateRequest $request)
     {
         $this->permission->create($request->all());
     }
@@ -32,12 +32,12 @@ class PermissionRepository implements PermissionInterface
         return $this->permission->findorFail($id);
     }
 
-    public function Update_Data(EditRequest $request, $id)
+    public function updateData(EditRequest $request, $id)
     {
         $this->Get_One_Data($id)->update($request->all());
     }
 
-    public function Get_List_Data()
+    public function Get_listData()
     {
         return $this->permission->select('display_title', 'id')->get();
     }

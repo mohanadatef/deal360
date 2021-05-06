@@ -32,7 +32,7 @@ class PasswordRequest extends FormRequest
     }
     public function messages()
     {
-        return ( $this->language_id ? check_locale_language($this->language_id) : Language_Locale() ) == 'ar' ? [
+        return ( $this->language_id ? checkLocaleLanguage($this->language_id) : languageLocale() ) == 'ar' ? [
                 'password.required' => 'برجاء ادخال كلمه السر',
                 'password.string' => 'برجاء ادخال كلمه السر حروف',
                 'password.confirmed' => 'برجاء ادخال تاكيد كلمه السر',

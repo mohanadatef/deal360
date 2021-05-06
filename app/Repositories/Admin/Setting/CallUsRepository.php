@@ -29,7 +29,7 @@ class CallUsRepository implements CallUsInterface
         return $this->call_us->status(1)->get();
     }
 
-    public function Create_Data(CreateRequest $request)
+    public function storeData(CreateRequest $request)
     {
         $data['status']=0;
         $this->call_us->create(array_merge($request->all(),$data));
@@ -42,20 +42,20 @@ class CallUsRepository implements CallUsInterface
 
     public function Update_Status_One_Data($id)
     {
-        $this->change_status($this->Get_One_Data($id));
+        $this->changeStatus($this->Get_One_Data($id));
     }
 
     public function Get_Many_Data(Request $request)
     {
-        return $this->call_us->wherein('id', $request->change_status)->get();
+        return $this->call_us->wherein('id', $request->changeStatus)->get();
     }
 
-    public function Update_Status_Datas(StatusEditRequest $request)
+    public function updateStatusDatas(StatusEditRequest $request)
     {
-        $this->change_status($this->Get_Many_Data($request));
+        $this->changeStatus($this->Get_Many_Data($request));
     }
 
-    public function Delete_Data($id)
+    public function deleteData($id)
     {
         $this->call_us->findorFail($id)->delete();
     }

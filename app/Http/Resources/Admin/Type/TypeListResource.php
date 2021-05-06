@@ -11,7 +11,7 @@ class TypeListResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title ? $this->title->value : "",
-            'image' => image_get($this->image,'type'),
+            'image' => getImag($this->image,'type'),
         ];
     }
 }

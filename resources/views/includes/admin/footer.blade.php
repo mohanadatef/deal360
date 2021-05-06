@@ -10,9 +10,9 @@
             @csrf
             <div class="form-group">
                 <select name='lang' onchange="this.form.submit();">
-                    @foreach(Language_active() as $lang)
+                    @foreach($languageActive as $lang)
                         <option value='{{$lang->code}}'
-                                @if( Language_Locale() == $lang->code )selected @endif >{{$lang->title}}</option>
+                                @if( languageLocale() == $lang->code )selected @endif >{{$lang->title}}</option>
                     @endforeach
                 </select>
             </div>

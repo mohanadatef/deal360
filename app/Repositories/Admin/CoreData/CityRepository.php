@@ -13,92 +13,92 @@ class CityRepository implements CityInterface
 {
     use Service;
 
-    protected $city;
+    protected $data;
 
-    public function __construct(City $city)
+    public function __construct(City $City)
     {
-        $this->city = $city;
+        $this->data = $City;
     }
 
-    public function Get_All_Data()
+    public function getAllData()
     {
-        return $this->city->with('title','country.title')->order('asc')->get();
+        return $this->data->with('title','country.title')->order('asc')->get();
     }
 
-    public function Create_Data($request)
+    public function storeData($request)
     {
         return DB::transaction(function () use ($request) {
-            $city = $this->city->create($request->all());
+            $data = $this->data->create($request->all());
             foreach (language() as $lang) {
-                $city->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            return '<tr id="'.$city->id.'"><td id="title-'.$city->id.'" data-order="'.$city->order.'">'.$city->title.'</td>
-                <td id="country-'.$city->id.'">'.$city->country->title->value.'</td>
-                   <td><input onfocus="Change_Status('.$city->id.')" type="checkbox" name="status" id="status-'.$city->id.'"
+            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" data-order="'.$data->order.'">'.$data->title.'</td>
+                <td id="country-'.$data->id.'">'.$data->country->title->value.'</td>
+                   <td><input onfocus="changeStatus('.$data->id.')" type="checkbox" name="status" id="status-'.$data->id.'"
                     checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
                     <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
-                    onclick="ShowItem('.$city->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
-                    <button id="openModael'.$city->id.'" type="button" class="d-none" data-toggle="modal"
+                    onclick="showItem('.$data->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                    <button id="openModael'.$data->id.'" type="button" class="d-none" data-toggle="modal"
                     data-target="#modal-edit"></button>
                     <button type="button" class="btn btn-outline-danger btn-block btn-sm"
-                    onclick="SelectItem('.$city->id.')" data-toggle="modal"
+                    onclick="selectItem('.$data->id.')" data-toggle="modal"
                     data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
-    public function Get_Data($id)
+    public function showData($id)
     {
-        return $this->city->with('translation.language','country.title')->findorFail($id);
+        return $this->data->with('translation.language','country.title')->findorFail($id);
     }
 
-    public function Update_Data($request, $id)
+    public function updateData($request, $id)
     {
         return  DB::transaction(function () use ($request, $id) {
-            $city = $this->Get_Data($id);
-            $city->update($request->all());
+            $data = $this->showData($id);
+            $data->update($request->all());
             foreach (language() as $lang) {
-                $translation = $city->translation->where('language_id', $lang->id)->first();
+                $translation = $data->translation->where('language_id', $lang->id)->first();
                 if ($translation) {
                     $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
-                    $city->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                         'language_id' => $lang->id]);
                 }
             }
-            $city = $this->Get_Data($id);
-            return new CityResource($city);
+            $data = $this->showData($id);
+            return new CityResource($data);
         });
     }
 
-    public function Update_Status_Data($id)
+    public function updateStatusData($id)
     {
-        $this->change_status($this->Get_Data($id));
+        $this->changeStatus($this->showData($id));
     }
 
-    public function Delete_Data($id)
+    public function deleteData($id)
     {
-        $this->Get_Data($id)->delete();
+        $this->showData($id)->delete();
     }
 
-    public function Get_All_Data_Delete()
+    public function getAllDataDelete()
     {
-        return $this->city->onlyTrashed()->with('translation')->order('asc')->get();
+        return $this->data->onlyTrashed()->with('translation')->order('asc')->get();
     }
 
-    public function Back_Data_Delete($id)
+    public function restoreData($id)
     {
-        $this->city->withTrashed()->find($id)->restore();
+        $this->data->withTrashed()->find($id)->restore();
     }
 
-    public function Remove_Data($id)
+    public function removeData($id)
     {
-        $this->city->withTrashed()->find($id)->forceDelete();
+        $this->data->withTrashed()->find($id)->forceDelete();
     }
 
-    public function List_Data($county)
+    public function listData($county)
     {
-        return CityListResource::collection($this->city->status('1')->where('country_id',$county)
+        return CityListResource::collection($this->data->status('1')->where('country_id',$county)
             ->order('asc')->with('title','country.title')->get());
     }
 }

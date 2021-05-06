@@ -11,9 +11,9 @@ interface CallUsInterface{
 
     public function Get_All_Unread_Data();
     public function Get_All_Read_Data();
-    public function Create_Data(CreateRequest $request);
+    public function storeData(CreateRequest $request);
     public function Update_Status_One_Data($id);
     public function Get_Many_Data(Request $request);
-    public function Update_Status_Datas(StatusEditRequest $request);
-    public function Delete_Data($id);
+    public function updateStatusDatas(StatusEditRequest $request);
+    public function deleteData($id);
 }

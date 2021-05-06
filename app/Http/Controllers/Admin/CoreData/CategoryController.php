@@ -20,53 +20,53 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $datas = $this->categoryRepository->Get_All_Data();
-        return view(check_view('admin.core_data.category.index'), compact('datas'));
+        $datas = $this->categoryRepository->getAllData();
+        return view(checkView('admin.core_data.category.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json( $this->categoryRepository->Create_Data($request));
+        return response()->json( $this->categoryRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->categoryRepository->Update_Data($request, $id));
+        return response()->json($this->categoryRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->categoryRepository->Update_Status_Data($id);
+        $this->categoryRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->categoryRepository->Delete_Data($id);
+        $this->categoryRepository->deleteData($id);
     }
 
     public function remove($id)
     {;
-        $this->categoryRepository->Remove_Data($id);
+        $this->categoryRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->categoryRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.category.destroy'), compact('datas'));
+        $datas = $this->categoryRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.category.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->categoryRepository->Back_Data_Delete($id);
+        $this->categoryRepository->restoreData($id);
     }
 
-    public function list_all()
+    public function listIndex()
     {
-        return $this->categoryRepository->List_Data();
+        return $this->categoryRepository->listData();
     }
 
     public function show($id)
     {
-        return $this->categoryRepository->Get_Data($id);
+        return $this->categoryRepository->showData($id);
     }
 }

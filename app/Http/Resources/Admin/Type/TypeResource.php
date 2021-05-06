@@ -13,7 +13,7 @@ class TypeResource extends JsonResource
             'title' => $this->title ? $this->title->value : "",
             'order' => $this->order,
             'status' => $this->status,
-            'image' => image_get($this->image,'type'),
+            'image' => getImag($this->image,'type'),
         ];
     }
 }

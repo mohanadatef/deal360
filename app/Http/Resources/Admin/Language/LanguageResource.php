@@ -14,7 +14,7 @@ class LanguageResource extends JsonResource
             'code' => $this->code,
             'order' => $this->order,
             'status' => $this->status,
-            'image' => image_get($this->image,'language'),
+            'image' => getImag($this->image,'language'),
         ];
     }
 }

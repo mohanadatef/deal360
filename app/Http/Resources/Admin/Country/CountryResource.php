@@ -13,7 +13,7 @@ class CountryResource extends JsonResource
             'title' => $this->title ? $this->title->value : "",
             'order' => $this->order,
             'status' => $this->status,
-            'image' => image_get($this->image,'country'),
+            'image' => getImag($this->image,'country'),
         ];
     }
 }

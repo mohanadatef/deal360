@@ -37,7 +37,7 @@ class EditRequest extends FormRequest
     }
     public function messages()
     {
-        return Language_Locale() == 'ar' ? [
+        return languageLocale() == 'ar' ? [
                 'title.*.required' => 'برجاء ادخال الاسم',
                 'title.*.unique_translation' => 'لا يمكن ادخال الاسم متكرر',
                 'facebook.required' => 'برجاء ادخال فيس بوك',

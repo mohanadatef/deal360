@@ -5,14 +5,14 @@ namespace App\Interfaces\Admin\CoreData;
 interface CityInterface
 {
 
-    public function Get_All_Data();
-    public function Create_Data($request);
-    public function Get_Data($id);
-    public function Update_Data($request, $id);
-    public function Update_Status_Data($id);
-    public function Delete_Data($id);
-    public function Get_All_Data_Delete();
-    public function Back_Data_Delete($id);
-    public function Remove_Data($id);
-    public function List_Data($country);
+    public function getAllData();
+    public function storeData($request);
+    public function showData($id);
+    public function updateData($request, $id);
+    public function updateStatusData($id);
+    public function deleteData($id);
+    public function getAllDataDelete();
+    public function restoreData($id);
+    public function removeData($id);
+    public function listData($country);
 }

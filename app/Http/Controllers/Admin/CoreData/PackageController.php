@@ -18,53 +18,53 @@ class PackageController extends Controller
 
     public function index()
     {
-        $datas = $this->packageRepository->Get_All_Data();
-        return view(check_view('admin.core_data.package.index'), compact('datas'));
+        $datas = $this->packageRepository->getAllData();
+        return view(checkView('admin.core_data.package.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json($this->packageRepository->Create_Data($request));
+        return response()->json($this->packageRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->packageRepository->Update_Data($request, $id));
+        return response()->json($this->packageRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->packageRepository->Update_Status_Data($id);
+        $this->packageRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->packageRepository->Delete_Data($id);
+        $this->packageRepository->deleteData($id);
     }
 
     public function remove($id)
     {
-        $this->packageRepository->Remove_Data($id);
+        $this->packageRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->packageRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.package.destroy'), compact('datas'));
+        $datas = $this->packageRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.package.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->packageRepository->Back_Data_Delete($id);
+        $this->packageRepository->restoreData($id);
     }
 
-    public function list_all()
+    public function listIndex()
     {
-        return $this->packageRepository->List_Data();
+        return $this->packageRepository->listData();
     }
 
     public function show($id)
     {
-        return $this->packageRepository->Get_Data($id);
+        return $this->packageRepository->showData($id);
     }
 }

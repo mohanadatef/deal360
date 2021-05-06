@@ -30,13 +30,13 @@ class EditRequest extends FormRequest
             'email' => 'required|email|max:255|string|unique:users,email,' . $this->id . ',id',
             'date_birth' => 'required|date',
             'image' => 'image|mimes:jpg,jpeg,png|max:2048',
-            'role_id' => permission_show('role-edit') ? 'required|exists:roles,id' : "",
+            'role_id' => permissionShow('role-edit') ? 'required|exists:roles,id' : "",
         ];
     }
 
     public function messages()
     {
-        return Language_Locale() == 'ar' ? [
+        return languageLocale() == 'ar' ? [
             'image.mimes' => 'برجاء ادخال الصوره jpg,jpeg,png,gif',
             'image.max' => 'برجاء ادخال الصوره اقل من 2048',
             'title.*.required' => 'برجاء ادخال الاسم',

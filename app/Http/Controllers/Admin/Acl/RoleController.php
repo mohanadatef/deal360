@@ -21,26 +21,26 @@ class RoleController extends Controller
 
     public function index()
     {
-        $datas = $this->roleRepository->Get_All_Data();
+        $datas = $this->roleRepository->getAllData();
         return view('admin.acl.role.index',compact('datas'));
     }
 
     public function create()
     {
-        $permission = $this->permissionRepository->Get_List_Data();
+        $permission = $this->permissionRepository->Get_listData();
         return view('admin.acl.role.create',compact('permission'));
     }
 
     public function store(CreateRequest $request)
     {
-        $this->roleRepository->Create_Data($request);
+        $this->roleRepository->storeData($request);
 
         return redirect('role.index')->with('message', trans('lang.Message_Store'));
     }
 
     public function edit($id)
     {
-        $permission = $this->permissionRepository->Get_List_Data();
+        $permission = $this->permissionRepository->Get_listData();
         $data = $this->roleRepository->Get_One_Data($id);
         $permission_role = $this->roleRepository->Get_Permission_For_Role($data['id']);
         return view('admin.acl.role.edit',compact('data','permission','permission_role'));
@@ -48,7 +48,7 @@ class RoleController extends Controller
 
     public function update(EditRequest $request, $id)
     {
-        $this->roleRepository->Update_Data($request, $id);
+        $this->roleRepository->updateData($request, $id);
         return redirect('role.index')->with('message', trans('lang.Message_Edit'));
     }
 }

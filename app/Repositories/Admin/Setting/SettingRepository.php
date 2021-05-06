@@ -17,12 +17,12 @@ class SettingRepository implements SettingInterface
         $this->setting = $setting;
     }
 
-    public function Get_All_Data()
+    public function getAllData()
     {
         return $this->setting->all();
     }
 
-    public function Create_Data(CreateRequest $request)
+    public function storeData(CreateRequest $request)
     {
         $logoName = $request->logo->getClientOriginalname() . '-' . time() . '-logo.' . Request()->logo->getClientOriginalExtension();
         Request()->logo->move(public_path('images/setting'), $logoName);
@@ -35,7 +35,7 @@ class SettingRepository implements SettingInterface
         return $this->setting->find($id);
     }
 
-    public function Update_Data(EditRequest $request, $id)
+    public function updateData(EditRequest $request, $id)
     {
         if ($request->logo != null) {
             $logoName = $request->logo->getClientOriginalname() . '-' . time() . '-logo.' . Request()->logo->getClientOriginalExtension();

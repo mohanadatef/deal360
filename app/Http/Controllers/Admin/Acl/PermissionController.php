@@ -18,7 +18,7 @@ class PermissionController extends Controller
 
     public function index()
     {
-        $datas = $this->permissionRepository->Get_All_Data();
+        $datas = $this->permissionRepository->getAllData();
         return view('admin.acl.permission.index',compact('datas'));
     }
 
@@ -29,7 +29,7 @@ class PermissionController extends Controller
 
     public function store(CreateRequest $request)
     {
-        $this->permissionRepository->Create_Data($request);
+        $this->permissionRepository->storeData($request);
 
         return redirect('permission.index')->with('message', trans('lang.Message_Store'));
     }
@@ -42,7 +42,7 @@ class PermissionController extends Controller
 
     public function update(EditRequest $request, $id)
     {
-        $this->permissionRepository->Update_Data($request, $id);
+        $this->permissionRepository->updateData($request, $id);
         return redirect('permission.index')->with('message', trans('lang.Message_Edit'));
     }
 }

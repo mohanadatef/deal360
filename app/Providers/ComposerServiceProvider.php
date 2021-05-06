@@ -19,9 +19,11 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $setting=Setting::first();
-        view()->composer(['*'], function ($view) use ($setting){
-            $view->with('setting', $setting);
+        $language = language();
+        $languageActive = languageActive();
+        view()->composer(['*'], function ($view) use ($language,$languageActive){
+            $view->with('language', $language);
+            $view->with('languageActive', $languageActive);
         });
     }
 }

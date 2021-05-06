@@ -15,88 +15,88 @@ class LanguageRepository implements CoreDataInterface
 {
     use Service;
 
-    protected $language;
+    protected $data;
 
-    public function __construct(Language $language)
+    public function __construct(Language $Language)
     {
-        $this->language = $language;
+        $this->data = $Language;
     }
 
-    public function Get_All_Data()
+    public function getAllData()
     {
-        return $this->language->with('image')->order('asc')->get();
+        return $this->data->with('image')->order('asc')->get();
     }
 
-    public function Create_Data($request)
+    public function storeData($request)
     {
         return DB::transaction(function () use ($request) {
-            $language = $this->language->create($request->all());
+            $data = $this->data->create($request->all());
                 $imageName = time() . $request->image->getClientOriginalname();
-                $image = $language->image()->create(['image' => $imageName]);
-                !$image->image ? false : $this->image_upload($request->image, 'language', $imageName);
-            return '<tr id="'.$language->id.'"><td id="title-'.$language->id.'">'.$language->title->value.'</td>
-                <td id="code-'.$language->id.'" data-order="${res.order}">'.$language->code.'</td>
-                <td><img src="'.image_get($language->image,'language').'" id="image-'.$language->id.'" style="width:100px;height: 100px"></td>
-                <td><input onfocus="Change_Status('.$language->id.')" type="checkbox" name="status" id="status-'.$language->id.'"
+                $image = $data->image()->create(['image' => $imageName]);
+                !$image->image ? false : $this->uploadImage($request->image, 'language', $imageName);
+            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'">'.$data->title->value.'</td>
+                <td id="code-'.$data->id.'" data-order="${res.order}">'.$data->code.'</td>
+                <td><img src="'.getImag($data->image,'language').'" id="image-'.$data->id.'" style="width:100px;height: 100px"></td>
+                <td><input onfocus="changeStatus('.$data->id.')" type="checkbox" name="status" id="status-'.$data->id.'"
                 checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
                 <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
-                onclick="ShowItem('.$language->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
-                 <button id="openModael'.$language->id.'" type="button" class="d-none" data-toggle="modal"
+                onclick="showItem('.$data->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                 <button id="openModael'.$data->id.'" type="button" class="d-none" data-toggle="modal"
                 data-target="#modal-edit"></button>
                     <button type="button" class="btn btn-outline-danger btn-block btn-sm"
-                    onclick="SelectItem('.$language->id.')" data-toggle="modal"
+                    onclick="selectItem('.$data->id.')" data-toggle="modal"
                     data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
-    public function Get_Data($id)
+    public function showData($id)
     {
-        return $this->language->with('image')->findorFail($id);
+        return $this->data->with('image')->findorFail($id);
     }
 
-    public function Update_Data($request, $id)
+    public function updateData($request, $id)
     {
         return DB::transaction(function () use ($request, $id) {
-            $language = $this->Get_Data($id);
-            $language->update($request->all());
+            $data = $this->showData($id);
+            $data->update($request->all());
             if (isset($request->image)) {
                 $imageName = time() . $request->image->getClientOriginalname();
-                $language->image()->forceDelete();
-                $image = $language->image()->create(['image' => $imageName]);
-                !$image->image ? false : $this->image_upload($request->image, 'language', $imageName);
+                $data->image()->forceDelete();
+                $image = $data->image()->create(['image' => $imageName]);
+                !$image->image ? false : $this->uploadImage($request->image, 'language', $imageName);
             }
-            return new LanguageResource($language);
+            return new LanguageResource($data);
         });
 
     }
 
-    public function Update_Status_Data($id)
+    public function updateStatusData($id)
     {
-        $this->change_status($this->Get_Data($id));
+        $this->changeStatus($this->showData($id));
     }
 
-    public function Delete_Data($id)
+    public function deleteData($id)
     {
-        $this->Get_Data($id)->delete();
+        $this->showData($id)->delete();
     }
 
-    public function Get_All_Data_Delete()
+    public function getAllDataDelete()
     {
-        return $this->language->onlyTrashed()->with('image')->order('asc')->get();
+        return $this->data->onlyTrashed()->with('image')->order('asc')->get();
     }
 
-    public function Back_Data_Delete($id)
+    public function restoreData($id)
     {
-        $this->language->withTrashed()->find($id)->restore();
+        $this->data->withTrashed()->find($id)->restore();
     }
 
-    public function Remove_Data($id)
+    public function removeData($id)
     {
-        $this->language->withTrashed()->find($id)->forceDelete();
+        $this->data->withTrashed()->find($id)->forceDelete();
     }
 
-    public function List_Data()
+    public function listData()
     {
-      return LanguageListResource::collection($this->language->status('1')->with('image')->order('asc')->get());
+      return LanguageListResource::collection($this->data->status('1')->with('image')->order('asc')->get());
     }
 }

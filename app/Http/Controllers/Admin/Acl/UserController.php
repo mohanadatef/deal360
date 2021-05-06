@@ -24,32 +24,32 @@ class UserController extends Controller
 
     public function index()
     {
-        $datas = $this->userRepository->Get_All_Data();
+        $datas = $this->userRepository->getAllData();
         return view('admin.acl.user.index',compact('datas'));
     }
 
     public function create()
     {
-        $role = $this->roleRepository->Get_List_Data();
+        $role = $this->roleRepository->Get_listData();
         return view('admin.acl.user.create',compact('role'));
     }
 
     public function store(CreateRequest $request)
     {
-        $this->userRepository->Create_Data($request);
+        $this->userRepository->storeData($request);
         return Auth::user() ? redirect('/admin/user/index')->with('message', trans('lang.Message_Store')) : redirect('login')->with('message', trans('lang.Message_Store'));
     }
 
     public function edit($id)
     {
-        $role = $this->roleRepository->Get_List_Data();
+        $role = $this->roleRepository->Get_listData();
         $data = $this->userRepository->Get_One_Data($id);
         return view('admin.acl.user.edit',compact('data','role'));
     }
 
     public function update(EditRequest $request, $id)
     {
-        $this->userRepository->Update_Data($request, $id);
+        $this->userRepository->updateData($request, $id);
         if(auth::user()->role_id == 4)
         {
             return redirect('admin')->with('message', trans('lang.Message_Edit'));
@@ -74,7 +74,7 @@ class UserController extends Controller
         return redirect('/admin')->with('message',trans('passwords.reset'));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
         $this->userRepository->Update_Status_One_Data($id);
        return redirect()->back()->with('message', trans('lang.Message_Status'));
@@ -82,7 +82,7 @@ class UserController extends Controller
 
     public function change_many_status(StatusEditRequest $request)
     {
-        $this->userRepository->Update_Status_Data($request);
+        $this->userRepository->updateStatusData($request);
        return redirect()->back()->with('message', trans('lang.Message_Status'));
     }
 

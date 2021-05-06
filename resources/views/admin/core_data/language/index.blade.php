@@ -3,7 +3,7 @@
     {{trans('lang.Language')}} {{trans('lang.Index')}}
 @endsection
 @section('head_style')
-    @include('includes.admin.head_DataTables')
+    @include('includes.admin.dataTables.head_DataTables')
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -59,11 +59,11 @@
                                                     data-order="{{$data->order}}">{{$data->code}}</td>
                                                 <td>
                                                     <img
-                                                        src="{{ image_get($data->image,'language') }}"
+                                                        src="{{ getImag($data->image,'language') }}"
                                                         id="image-{{$data->id}}" style="width:100px;height: 100px">
                                                 </td>
                                                 <td>
-                                                    <input onfocus="Change_Status({{$data->id}})"
+                                                    <input onfocus="changeStatus({{$data->id}})"
                                                            type="checkbox"
                                                            name="status" @if($data->status) checked
                                                            @endif id="status-{{$data->id}}"
@@ -73,7 +73,7 @@
                                                 <td>
                                                     <button type="button"
                                                             class="btn btn-outline-primary btn-block btn-sm"
-                                                            onclick="ShowItem({{$data->id}})">
+                                                            onclick="showItem({{$data->id}})">
                                                         <i class="fa fa-edit"></i> {{trans('lang.Edit')}}
                                                     </button>
                                                     <button id="openModael{{$data->id}}" type="button" class="d-none"
@@ -82,7 +82,7 @@
                                                     </button>
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
-                                                            onclick="SelectItem({{$data->id}})" data-toggle="modal"
+                                                            onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                             data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
                                                 </td>
@@ -211,16 +211,16 @@
     </div>
 @endsection
 @section('script_style')
-    @include('includes.admin.script_DataTables')
+    @include('includes.admin.dataTables.script_DataTables')
     <script>
         //show item
-        function ShowData(res) {
+        function showData(res) {
             $(`#edit #title`).val(res.title);
             $(`#edit #code`).val(res.code);
             $('#edit #order').val(res.order);
         }
         //edit data
-        function UpdateItem(res) {
+        function updateItem(res) {
             document.getElementById('title-' + res.id).innerHTML = res.title;
             document.getElementById('code-' + res.id).innerHTML = res.code;
             $(`#code-${res.id}`).attr('data-order', res.order);

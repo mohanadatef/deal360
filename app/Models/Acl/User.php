@@ -43,7 +43,7 @@ class User extends Authenticatable
     public function translation($key)
     {
         return $this->morphOne(Translation::class, 'translation')
-            ->where('language_id',Language_id())
+            ->where('language_id',languageId())
             ->where('key',$key)
             ->select('value as'.$key);
     }

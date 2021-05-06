@@ -18,53 +18,53 @@ class HighLightController extends Controller
 
     public function index()
     {
-        $datas = $this->highlightRepository->Get_All_Data();
-        return view(check_view('admin.core_data.highlight.index'), compact('datas'));
+        $datas = $this->highlightRepository->getAllData();
+        return view(checkView('admin.core_data.highlight.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json($this->highlightRepository->Create_Data($request));
+        return response()->json($this->highlightRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->highlightRepository->Update_Data($request, $id));
+        return response()->json($this->highlightRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->highlightRepository->Update_Status_Data($id);
+        $this->highlightRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->highlightRepository->Delete_Data($id);
+        $this->highlightRepository->deleteData($id);
     }
 
     public function remove($id)
     {
-        $this->highlightRepository->Remove_Data($id);
+        $this->highlightRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->highlightRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.highlight.destroy'), compact('datas'));
+        $datas = $this->highlightRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.highlight.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->highlightRepository->Back_Data_Delete($id);
+        $this->highlightRepository->restoreData($id);
     }
 
-    public function list_all()
+    public function listIndex()
     {
-        return $this->highlightRepository->List_Data();
+        return $this->highlightRepository->listData();
     }
 
     public function show($id)
     {
-        return $this->highlightRepository->Get_Data($id);
+        return $this->highlightRepository->showData($id);
     }
 }

@@ -15,6 +15,6 @@ class PermissionMiddelware
      */
     public function handle($request, Closure $next,$permission)
     {
-       return permission_show($permission) ? $next($request) : redirect('error/403');
+       return permissionShow($permission) ? $next($request) : redirect('error/403');
     }
 }

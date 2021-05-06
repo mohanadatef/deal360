@@ -24,18 +24,18 @@ class UserRepository implements UserInterface
         $this->user = $user;
     }
 
-    public function Get_All_Data()
+    public function getAllData()
     {
         return $this->user->order('asc')->all();
     }
 
-    public function Create_Data(CreateRequest $request)
+    public function storeData(CreateRequest $request)
     {
         $data['status'] = 1;
         Auth::user() ? $data['status_login'] = 0 : $data['status_login'] = 1;
         $data['password'] = Hash::make($request->password);
         if ($request->image) {
-            $data['image']= $this->image_upload($request->image,'user');
+            $data['image']= $this->uploadImage($request->image,'user');
         }
         return $this->user->create(array_merge($request->all(), $data));
     }
@@ -46,10 +46,10 @@ class UserRepository implements UserInterface
         return $this->user->findorFail($id);
     }
 
-    public function Update_Data(EditRequest $request, $id)
+    public function updateData(EditRequest $request, $id)
     {
         if ($request->image != null) {
-            $data['image']= $this->image_upload($request->image,'user');
+            $data['image']= $this->uploadImage($request->image,'user');
             return $this->Get_One_Data($id)->update(array_merge($request->all(), $data));
         } else return $this->Get_One_Data($id)->update($request->all());
     }
@@ -70,16 +70,16 @@ class UserRepository implements UserInterface
 
     public function Update_Status_One_Data($id)
     {
-        $this->change_status($this->Get_One_Data($id));
+        $this->changeStatus($this->Get_One_Data($id));
     }
 
     public function Get_Many_Data(Request $request)
     {
-        return $this->user->wherein('id', $request->change_status)->get();
+        return $this->user->wherein('id', $request->changeStatus)->get();
     }
 
-    public function Update_Status_Data(StatusEditRequest $request)
+    public function updateStatusData(StatusEditRequest $request)
     {
-        $this->change_status($this->Get_Many_Data($request));
+        $this->changeStatus($this->Get_Many_Data($request));
     }
 }

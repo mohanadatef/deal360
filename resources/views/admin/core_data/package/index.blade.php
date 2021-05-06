@@ -3,7 +3,7 @@
     {{trans('lang.Package')}} {{trans('lang.Index')}}
 @endsection
 @section('head_style')
-    @include('includes.admin.head_DataTables')
+    @include('includes.admin.dataTables.head_DataTables')
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -61,7 +61,7 @@
                                                 <td id="type-date-{{$data->id}}">{{trans('lang.'.$data->type_date)}}</td>
                                                 <td id="count-date-{{$data->id}}">{{$data->count_date}}</td>
                                                 <td>
-                                                    <input onfocus="Change_Status({{$data->id}})" type="checkbox"
+                                                    <input onfocus="changeStatus({{$data->id}})" type="checkbox"
                                                            name="status" @if($data->status) checked
                                                            @endif id="status-{{$data->id}}"
                                                            data-bootstrap-switch data-off-color="danger"
@@ -70,7 +70,7 @@
                                                 <td>
                                                     <button type="button"
                                                             class="btn btn-outline-primary btn-block btn-sm"
-                                                            onclick="ShowItem({{$data->id}})">
+                                                            onclick="showItem({{$data->id}})">
                                                         <i class="fa fa-edit"></i> {{trans('lang.Edit')}}
                                                     </button>
                                                     <button id="openModael{{$data->id}}" type="button" class="d-none"
@@ -125,7 +125,7 @@
                     @csrf
                     <div class="modal-body">
                         <div class="card-body">
-                            @foreach(language() as $lang)
+                            @foreach($language as $lang)
                                 <div
                                     class="form-group{{ $errors->has('title['.$lang->code.']') ? ' is-invalid' : "" }}">
                                     <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
@@ -187,7 +187,7 @@
                     @csrf
                     <div class="modal-body">
                         <div class="card-body">
-                            @foreach(language() as $lang)
+                            @foreach($language as $lang)
                                 <div
                                     class="form-group{{ $errors->has('title['.$lang->code.']') ? ' is-invalid' : "" }}">
                                     <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
@@ -236,10 +236,10 @@
     </div>
 @endsection
 @section('script_style')
-    @include('includes.admin.script_DataTables')
+    @include('includes.admin.dataTables.script_DataTables')
     <script>
         //show item
-        function ShowData(res) {
+        function showData(res) {
             for (let i in res.translation) {
                 $(`#edit #title-${res.translation[i].language.code}`).val(res.translation[i].value);
             }
@@ -249,7 +249,7 @@
             $(`#edit #type_date`).val(res.type_date);
         }
         //edit data
-        function UpdateItem(res) {
+        function updateItem(res) {
             document.getElementById('title-' + res.id).innerHTML = res.title;
             document.getElementById('count_listing-' + res.id).innerHTML = res.count_listing;
             document.getElementById('type_date-' + res.id).innerHTML = res.type_date;

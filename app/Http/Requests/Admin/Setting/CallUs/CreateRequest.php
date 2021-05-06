@@ -36,7 +36,7 @@ class CreateRequest extends FormRequest
     }
     public function messages()
     {
-        return check_locale_language($this->language_id) == 'ar' ? [
+        return checkLocaleLanguage($this->language_id) == 'ar' ? [
             'detail.required' => 'برجاء ادخال الوصف',
             'detail.string' => 'برجاء ادخال الوصف حروف',
             'detail.max' => 'برجاء ادخال الوصف حروف اقل من 255',

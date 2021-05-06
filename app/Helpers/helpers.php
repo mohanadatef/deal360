@@ -5,29 +5,29 @@ use Illuminate\Support\Facades\Auth;
 use \Illuminate\Support\Facades\App;
 use \App\Models\CoreData\Language;
 
-if (!function_exists('Language_Locale')) {
-    function Language_Locale()
+if (!function_exists('languageLocale')) {
+    function languageLocale()
     {
         return App::getLocale();
     }
 }
 
-if (!function_exists('Language')) {
-    function Language()
+if (!function_exists('language')) {
+    function language()
     {
         return Language::Order('asc')->get();
     }
 }
 
-if (!function_exists('Language_active')) {
-    function Language_active()
+if (!function_exists('languageActive')) {
+    function languageActive()
     {
         return Language::status('1')->Order('asc')->get();
     }
 }
 
-if (!function_exists('permission_show')) {
-    function permission_show($title)
+if (!function_exists('permissionShow')) {
+    function permissionShow($title)
     {
         $permission = DB::table('permissions')
             ->join('permission_roles', 'permission_roles.permission_id', '=', 'permissions.id')
@@ -38,36 +38,36 @@ if (!function_exists('permission_show')) {
     }
 }
 
-if (!function_exists('change_locale_language')) {
-    function change_locale_language($id)
+if (!function_exists('changeLocaleLanguage')) {
+    function changeLocaleLanguage($id)
     {
-        $id ? App::setLocale(check_locale_language($id)) : false;
+        $id ? App::setLocale(checkLocaleLanguage($id)) : false;
     }
 }
 
-if (!function_exists('check_locale_language')) {
-    function check_locale_language($id)
+if (!function_exists('checkLocaleLanguage')) {
+    function checkLocaleLanguage($id)
     {
-        return $id ? Language::find($id) ? Language::find($id)->code : Language_Locale() : Language_Locale();
+        return $id ? Language::find($id) ? Language::find($id)->code : languageLocale() : languageLocale();
     }
 }
 
-if (!function_exists('Language_id')) {
-    function Language_id()
+if (!function_exists('language_id')) {
+    function languageId()
     {
-        return Language::where('code', App::getLocale())->select('id')->first();
+        return Language::where('code', App::getLocale())->first()->id;
     }
 }
 
-if (!function_exists('check_view')) {
-    function check_view($view)
+if (!function_exists('checkView')) {
+    function checkView($view)
     {
         return view()->exists($view) ? $view : 'errors.404';
     }
 }
 
-if (!function_exists('image_get')) {
-    function image_get($image, $file_name)
+if (!function_exists('getImag')) {
+    function getImag($image, $file_name)
     {
         $images = isset($image) ? public_path('images/' . $file_name . '/' . $image->image) : public_path('images/test.png');
         if (file_exists($images) == false) {

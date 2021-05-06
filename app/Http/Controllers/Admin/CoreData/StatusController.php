@@ -18,53 +18,53 @@ class StatusController extends Controller
 
     public function index()
     {
-        $datas = $this->statusRepository->Get_All_Data();
-        return view(check_view('admin.core_data.status.index'), compact('datas'));
+        $datas = $this->statusRepository->getAllData();
+        return view(checkView('admin.core_data.status.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json($this->statusRepository->Create_Data($request));
+        return response()->json($this->statusRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->statusRepository->Update_Data($request, $id));
+        return response()->json($this->statusRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->statusRepository->Update_Status_Data($id);
+        $this->statusRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->statusRepository->Delete_Data($id);
+        $this->statusRepository->deleteData($id);
     }
 
     public function remove($id)
     {
-        $this->statusRepository->Remove_Data($id);
+        $this->statusRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->statusRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.status.destroy'), compact('datas'));
+        $datas = $this->statusRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.status.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->statusRepository->Back_Data_Delete($id);
+        $this->statusRepository->restoreData($id);
     }
 
-    public function list_all()
+    public function listIndex()
     {
-        return $this->statusRepository->List_Data();
+        return $this->statusRepository->listData();
     }
 
     public function show($id)
     {
-        return $this->statusRepository->Get_Data($id);
+        return $this->statusRepository->showData($id);
     }
 }

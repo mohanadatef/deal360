@@ -4,22 +4,22 @@ namespace App\Traits;
 
 trait Service
 {
-    public function change_status($datas)
+    public function changeStatus($data)
     {
-        if ($datas->status == 1) {
-            $datas->status = '0';
-        } elseif ($datas->status == 0) {
-            $datas->status = '1';
+        if ($data->status) {
+            $data->status = 0;
+        } else{
+            $data->status = 1;
         }
-        $datas->update();
+        $data->update();
     }
 
-    public function image_upload($image, $file_name, $imageName)
+    public function uploadImage($image, $file_name, $imageName)
     {
         $image->move(public_path('images/' . $file_name), $imageName);
     }
 
-    public function image_get($image,$file_name)
+    public function getImag($image,$file_name)
     {
         return $image ? asset('public/images/'.$file_name.'/' . $image->image ) : asset('public/images/test.png');
     }

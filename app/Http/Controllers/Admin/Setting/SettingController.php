@@ -20,7 +20,7 @@ class SettingController extends Controller
 
     public function index()
     {
-        $datas = $this->settingRepository->Get_All_Data();
+        $datas = $this->settingRepository->getAllData();
         return view('admin.setting.setting.index',compact('datas'));
     }
 
@@ -31,7 +31,7 @@ class SettingController extends Controller
 
     public function store(CreateRequest $request)
     {
-        $this->settingRepository->Create_Data($request);
+        $this->settingRepository->storeData($request);
         return redirect('/admin/setting/index')->with('message', trans('lang.Message_Store'));
     }
 
@@ -43,19 +43,19 @@ class SettingController extends Controller
 
     public function update(EditRequest $request, $id)
     {
-        $this->settingRepository->Update_Data($request, $id);
+        $this->settingRepository->updateData($request, $id);
         return redirect('/admin/setting/index')->with('message', trans('lang.Message_Edit'));
     }
 
     public function show_api(Request $request)
     {
-        change_locale_language($request->language_id);
-        return response(['status' => 1, 'data' => ['setting'=> new SettingResource($this->settingRepository->Get_All_Data()->first())], 'message' => trans('lang.Index')], 206);
+        changeLocaleLanguage($request->language_id);
+        return response(['status' => 1, 'data' => ['setting'=> new SettingResource($this->settingRepository->getAllData()->first())], 'message' => trans('lang.Index')], 206);
     }
 
     public function show()
     {
-        $data = $this->settingRepository->Get_All_Data()->first();
+        $data = $this->settingRepository->getAllData()->first();
         return view('frontend.setting',compact('data'));
     }
 }

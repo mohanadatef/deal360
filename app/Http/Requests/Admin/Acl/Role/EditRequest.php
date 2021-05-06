@@ -31,7 +31,7 @@ class EditRequest extends FormRequest
     }
     public function messages()
     {
-        if (Language_Locale() == 'ar') {
+        if (languageLocale() == 'ar') {
             return [
                 'permission.required' => 'برجاء اختيار الاذونات',
                 'title.*.required' => 'برجاء ادخال الاسم',

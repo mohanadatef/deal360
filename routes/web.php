@@ -31,44 +31,44 @@ Route::get('/clear-cache', function () {
     return redirect('admin');
 });
 Route::prefix('/language')->group(function () {
-    Route::get('/list', [LanguageController::class, 'list_all'])
+    Route::get('/list', [LanguageController::class, 'listIndex'])
         ->name('language.list');
     Route::post('/setLang', [LanguageController::class, 'language'])
     ->name('setLang');
 });
 Route::prefix('/status')->group(function () {
-    Route::get('/list', [StatusController::class, 'list_all'])
+    Route::get('/list', [StatusController::class, 'listIndex'])
         ->name('status.list');
 });
 Route::prefix('/type')->group(function () {
-    Route::get('/list', [TypeController::class, 'list_all'])
+    Route::get('/list', [TypeController::class, 'listIndex'])
         ->name('type.list');
 });
 Route::prefix('/category')->group(function () {
-    Route::get('/list', [CategoryController::class, 'list_all'])
+    Route::get('/list', [CategoryController::class, 'listIndex'])
         ->name('category.list');
 });
 Route::prefix('/country')->group(function () {
-    Route::get('/list', [CountryController::class, 'list_all'])
+    Route::get('/list', [CountryController::class, 'listIndex'])
         ->name('country.list');
 });
 Route::prefix('/city')->group(function () {
-    Route::get('/list/{country}', [CityController::class, 'list_all'])
+    Route::get('/list/{country}', [CityController::class, 'listIndex'])
         ->name('city.list');
 });
 Route::prefix('/area')->group(function () {
-    Route::get('/list/{country}/{city}', [AreaController::class, 'list_all'])
+    Route::get('/list/{country}/{city}', [AreaController::class, 'listIndex'])
         ->name('area.list');
 });
 Route::prefix('/amenity')->group(function () {
-    Route::get('/list', [AmenityController::class, 'list_all'])
+    Route::get('/list', [AmenityController::class, 'listIndex'])
         ->name('amenity.list');
 });
 Route::prefix('/package')->group(function () {
-    Route::get('/list', [PackageController::class, 'list_all'])
+    Route::get('/list', [PackageController::class, 'listIndex'])
         ->name('package.list');
 });
 Route::prefix('/highlight')->group(function () {
-    Route::get('/list', [HighLightController::class, 'list_all'])
+    Route::get('/list', [HighLightController::class, 'listIndex'])
         ->name('highlight.list');
 });

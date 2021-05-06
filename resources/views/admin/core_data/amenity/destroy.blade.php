@@ -1,9 +1,9 @@
 @extends('includes.admin.master_admin')
 @section('title')
-{{trans('lang.Amenity')}}{{trans('lang.Delete' )}}{{trans('lang.Index')}}
+    {{trans('lang.Delete' )}}{{trans('lang.Index')}}
 @endsection
 @section('head_style')
-    @include('includes.admin.head_DataTables')
+    @include('includes.admin.dataTables.head_DataTables')
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -48,16 +48,16 @@
                                     @forelse($datas as $data)
                                         <tr id="data-{{$data->id}}">
                                             <td id="title-{{$data->id}}">{{$data->title ? $data->title->value : ""}}</td>
-                                            <td><img src="{{ image_get($data->image,'amenity') }}"
+                                            <td><img src="{{ getImag($data->image,'amenity') }}"
                                                      style="width:100px;height: 100px"></td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
-                                                        onclick="SelectItem({{$data->id}})" data-toggle="modal"
+                                                        onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
-                                                        onclick="SelectItem({{$data->id}})" data-toggle="modal"
+                                                        onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-remove"><i></i> {{trans('lang.Delete')}}
                                                 </button>
                                             </td>
@@ -88,5 +88,5 @@
     </div>
 @endsection
 @section('script_style')
-    @include('includes.admin.script_DataTables')
+    @include('includes.admin.dataTables.script_DataTables')
 @endsection

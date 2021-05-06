@@ -29,7 +29,7 @@ class Amenity extends Model
     {
         return $this->morphone(Translation::class, 'category')
             ->where('key' ,'title')
-            ->where('language_id' ,Language_id()->id)->withTrashed();
+            ->where('language_id' ,languageId())->withTrashed();
     }
 
     public function image()

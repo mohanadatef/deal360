@@ -12,7 +12,7 @@ class LanguageListResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'code' => $this->code,
-            'image' => image_get($this->image,'language'),
+            'image' => getImag($this->image,'language'),
             ];
     }
 }

@@ -20,54 +20,54 @@ class CityController extends Controller
 
     public function index()
     {
-        $datas = $this->cityRepository->Get_All_Data();
-        $country = $this->countryRepository->List_Data();
-        return view(check_view('admin.core_data.city.index'), compact('datas','country'));
+        $datas = $this->cityRepository->getAllData();
+        $country = $this->countryRepository->listData();
+        return view(checkView('admin.core_data.city.index'), compact('datas','country'));
     }
 
     public function store(CreateRequest $request)
     {
-        return response()->json($this->cityRepository->Create_Data($request));
+        return response()->json($this->cityRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        return response()->json($this->cityRepository->Update_Data($request, $id));
+        return response()->json($this->cityRepository->updateData($request, $id));
     }
 
-    public function change_status($id)
+    public function changeStatus($id)
     {
-        $this->cityRepository->Update_Status_Data($id);
+        $this->cityRepository->updateStatusData($id);
     }
 
     public function destroy($id)
     {
-        $this->cityRepository->Delete_Data($id);
+        $this->cityRepository->deleteData($id);
     }
 
     public function remove($id)
     {;
-        $this->cityRepository->Remove_Data($id);
+        $this->cityRepository->removeData($id);
     }
 
-    public function destroy_index()
+    public function destroyIndex()
     {
-        $datas = $this->cityRepository->Get_All_Data_Delete();
-        return view(check_view('admin.core_data.city.destroy'), compact('datas'));
+        $datas = $this->cityRepository->getAllDataDelete();
+        return view(checkView('admin.core_data.city.destroy'), compact('datas'));
     }
 
     public function restore($id)
     {
-        $this->cityRepository->Back_Data_Delete($id);
+        $this->cityRepository->restoreData($id);
     }
 
-    public function list_all($country)
+    public function listIndex($country)
     {
-        return $this->cityRepository->List_Data($country);
+        return $this->cityRepository->listData($country);
     }
 
     public function show($id)
     {
-        return $this->cityRepository->Get_Data($id);
+        return $this->cityRepository->showData($id);
     }
 }

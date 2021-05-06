@@ -23,12 +23,12 @@ class RoleRepository implements RoleInterface
         $this->permission_role = $permission_role;
     }
 
-    public function Get_All_Data()
+    public function getAllData()
     {
         return $this->role->order('asc')->all();
     }
 
-    public function Create_Data(CreateRequest $request)
+    public function storeData(CreateRequest $request)
     {
         $this->role->create($request->all());
     }
@@ -38,14 +38,14 @@ class RoleRepository implements RoleInterface
         return $this->role->findorFail($id);
     }
 
-    public function Update_Data(EditRequest $request, $id)
+    public function updateData(EditRequest $request, $id)
     {
         $role = $this->Get_One_Data($id);
         $role->permission()->sync((array)$request->permission);
         $role->update($request->all());
     }
 
-    public function Get_List_Data()
+    public function Get_listData()
     {
         return $this->role->select('title', 'id')->status(1)->get();
     }
