@@ -18,7 +18,7 @@ class HighLightController extends Controller
 
     public function index()
     {
-        $datas = $this->highlightRepository->getAllData();
+        $datas = $this->highlightRepository->getData();
         return view(checkView('admin.core_data.highlight.index'), compact('datas'));
     }
 
@@ -49,7 +49,7 @@ class HighLightController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->highlightRepository->getAllDataDelete();
+        $datas = $this->highlightRepository->getDataDelete();
         return view(checkView('admin.core_data.highlight.destroy'), compact('datas'));
     }
 

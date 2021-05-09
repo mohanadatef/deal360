@@ -18,7 +18,7 @@ class TypeController extends Controller
 
     public function index()
     {
-        $datas = $this->typeRepository->getAllData();
+        $datas = $this->typeRepository->getData();
         return view(checkView('admin.core_data.type.index'), compact('datas'));
     }
 
@@ -49,7 +49,7 @@ class TypeController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->typeRepository->getAllDataDelete();
+        $datas = $this->typeRepository->getDataDelete();
         return view(checkView('admin.core_data.type.destroy'), compact('datas'));
     }
 

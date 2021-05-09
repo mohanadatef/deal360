@@ -50,4 +50,6 @@ return [
     'Restore_Done'=>'Restore Done',
     'An_Active_Done'=>'An Active Done',
     'Active_Done'=>'Active Done',
+    'Meta'=>'Meta',
+    'Setting'=>'Setting',
 ];

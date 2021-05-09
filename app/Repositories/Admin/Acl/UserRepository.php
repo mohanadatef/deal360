@@ -24,7 +24,7 @@ class UserRepository implements UserInterface
         $this->user = $user;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->user->order('asc')->all();
     }

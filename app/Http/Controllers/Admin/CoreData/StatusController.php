@@ -18,7 +18,7 @@ class StatusController extends Controller
 
     public function index()
     {
-        $datas = $this->statusRepository->getAllData();
+        $datas = $this->statusRepository->getData();
         return view(checkView('admin.core_data.status.index'), compact('datas'));
     }
 
@@ -49,7 +49,7 @@ class StatusController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->statusRepository->getAllDataDelete();
+        $datas = $this->statusRepository->getDataDelete();
         return view(checkView('admin.core_data.status.destroy'), compact('datas'));
     }
 

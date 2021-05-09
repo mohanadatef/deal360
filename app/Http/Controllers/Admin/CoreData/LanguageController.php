@@ -19,7 +19,7 @@ class LanguageController extends Controller
 
     public function index()
     {
-        $datas = $this->languageRepository->getAllData();
+        $datas = $this->languageRepository->getData();
         return view(checkView('admin.core_data.language.index'), compact('datas'));
     }
 
@@ -56,7 +56,7 @@ class LanguageController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->languageRepository->getAllDataDelete();
+        $datas = $this->languageRepository->getDataDelete();
         return view(checkView('admin.core_data.language.destroy'), compact('datas'));
     }
 

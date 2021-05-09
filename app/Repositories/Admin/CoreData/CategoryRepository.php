@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\Category\CategoryListResource;
-use App\Http\Resources\Admin\Category\CategoryResource;
-use App\Interfaces\Admin\CoreData\CoreDataInterface;
+use App\Http\Resources\Admin\CoreData\Category\CategoryListResource;
+use App\Http\Resources\Admin\CoreData\Category\CategoryResource;
+use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Category;
 use App\Traits\Service;
 use Illuminate\Support\Facades\DB;
 
-class CategoryRepository implements CoreDataInterface
+class CategoryRepository implements MeanInterface
 {
     use Service;
 
@@ -20,7 +20,7 @@ class CategoryRepository implements CoreDataInterface
         $this->data = $Category;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->data->with('title','image')->order('asc')->get();
     }
@@ -91,7 +91,7 @@ class CategoryRepository implements CoreDataInterface
       $this->showData($id)->delete();
     }
 
-    public function getAllDataDelete()
+    public function getDataDelete()
     {
         return $this->data->onlyTrashed()->with('translation','image')->order('asc')->get();
     }

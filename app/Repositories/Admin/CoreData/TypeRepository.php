@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\Type\TypeListResource;
-use App\Http\Resources\Admin\Type\TypeResource;
-use App\Interfaces\Admin\CoreData\CoreDataInterface;
+use App\Http\Resources\Admin\CoreData\Type\TypeListResource;
+use App\Http\Resources\Admin\CoreData\Type\TypeResource;
+use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Type;
 use App\Traits\Service;
 use Illuminate\Support\Facades\DB;
 
-class TypeRepository implements CoreDataInterface
+class TypeRepository implements MeanInterface
 {
     use Service;
 
@@ -20,7 +20,7 @@ class TypeRepository implements CoreDataInterface
         $this->data = $Type;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->data->with('title','image')->order('asc')->get();
     }
@@ -90,7 +90,7 @@ class TypeRepository implements CoreDataInterface
       $this->showData($id)->delete();
     }
 
-    public function getAllDataDelete()
+    public function getDataDelete()
     {
         return $this->data->onlyTrashed()->with('translation','image')->order('asc')->get();
     }

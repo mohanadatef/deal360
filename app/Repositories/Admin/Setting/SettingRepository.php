@@ -17,7 +17,7 @@ class SettingRepository implements SettingInterface
         $this->setting = $setting;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->setting->all();
     }

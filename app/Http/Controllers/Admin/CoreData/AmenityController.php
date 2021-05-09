@@ -19,7 +19,7 @@ class AmenityController extends Controller
 
     public function index()
     {
-        $datas = $this->amenityRepository->getAllData();
+        $datas = $this->amenityRepository->getData();
         return view(checkView('admin.core_data.amenity.index'), compact('datas'));
     }
 
@@ -50,7 +50,7 @@ class AmenityController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->amenityRepository->getAllDataDelete();
+        $datas = $this->amenityRepository->getDataDelete();
         return view(checkView('admin.core_data.amenity.destroy'), compact('datas'));
     }
 

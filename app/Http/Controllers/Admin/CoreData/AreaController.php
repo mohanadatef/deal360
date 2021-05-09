@@ -20,7 +20,7 @@ class AreaController extends Controller
 
     public function index()
     {
-        $datas = $this->areaRepository->getAllData();
+        $datas = $this->areaRepository->getData();
         $country = $this->countryRepository->listData();
         return view(checkView('admin.core_data.area.index'), compact('datas','country'));
     }
@@ -52,7 +52,7 @@ class AreaController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->areaRepository->getAllDataDelete();
+        $datas = $this->areaRepository->getDataDelete();
         return view(checkView('admin.core_data.area.destroy'), compact('datas'));
     }
 

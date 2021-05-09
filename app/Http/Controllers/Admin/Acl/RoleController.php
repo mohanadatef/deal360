@@ -21,7 +21,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        $datas = $this->roleRepository->getAllData();
+        $datas = $this->roleRepository->getData();
         return view('admin.acl.role.index',compact('datas'));
     }
 

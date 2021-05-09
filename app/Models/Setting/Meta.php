@@ -18,12 +18,16 @@ class Meta extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function translation($key)
+    public function translation()
     {
-        return $this->morphOne(Translation::class, 'translation')
-            ->where('language_id',languageId())
-            ->where('key',$key)
-            ->select('value as'.$key);
+        return $this->morphMany(Translation::class, 'category')->withTrashed();
+    }
+
+    public function title()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'title')
+            ->where('language_id' ,languageId())->withTrashed();
     }
 
     public function scopeStatus($query,$status)
@@ -34,5 +38,20 @@ class Meta extends Model
     public function scopeOrder($query,$order)
     {
         return $query->orderby('order',$order);
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($meta) {
+            $meta->translation()->delete();
+        });
+
+        static::restoring(function($meta) {
+            $meta->translation()->withTrashed()->restore();
+        });
+
+        static::forceDeleted(function($meta) {
+            $meta->translation()->forceDelete();
+        });
     }
 }

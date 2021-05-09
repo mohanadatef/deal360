@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\Country\CountryListResource;
-use App\Http\Resources\Admin\Country\CountryResource;
-use App\Interfaces\Admin\CoreData\CoreDataInterface;
+use App\Http\Resources\Admin\CoreData\Country\CountryListResource;
+use App\Http\Resources\Admin\CoreData\Country\CountryResource;
+use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Country;
 use App\Traits\Service;
 use Illuminate\Support\Facades\DB;
 
-class CountryRepository implements CoreDataInterface
+class CountryRepository implements MeanInterface
 {
     use Service;
 
@@ -20,7 +20,7 @@ class CountryRepository implements CoreDataInterface
         $this->data = $Country;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->data->with('title','image')->order('asc')->get();
     }
@@ -90,7 +90,7 @@ class CountryRepository implements CoreDataInterface
      $this->showData($id)->delete();
     }
 
-    public function getAllDataDelete()
+    public function getDataDelete()
     {
         return $this->data->onlyTrashed()->with('translation','image')->order('asc')->get();
     }

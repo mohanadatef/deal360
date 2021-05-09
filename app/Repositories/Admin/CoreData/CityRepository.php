@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\City\CityListResource;
-use App\Http\Resources\Admin\City\CityResource;
+use App\Http\Resources\Admin\CoreData\City\CityListResource;
+use App\Http\Resources\Admin\CoreData\City\CityResource;
 use App\Interfaces\Admin\CoreData\CityInterface;
 use App\Models\CoreData\City;
 use App\Traits\Service;
@@ -20,7 +20,7 @@ class CityRepository implements CityInterface
         $this->data = $City;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->data->with('title','country.title')->order('asc')->get();
     }
@@ -81,7 +81,7 @@ class CityRepository implements CityInterface
         $this->showData($id)->delete();
     }
 
-    public function getAllDataDelete()
+    public function getDataDelete()
     {
         return $this->data->onlyTrashed()->with('translation')->order('asc')->get();
     }

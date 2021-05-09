@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\HighLight\HighLightListResource;
-use App\Http\Resources\Admin\HighLight\HighLightResource;
-use App\Interfaces\Admin\CoreData\CoreDataInterface;
+use App\Http\Resources\Admin\CoreData\HighLight\HighLightListResource;
+use App\Http\Resources\Admin\CoreData\HighLight\HighLightResource;
+use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\HighLight;
 use App\Traits\Service;
 use Illuminate\Support\Facades\DB;
 
-class HighLightRepository implements CoreDataInterface
+class HighLightRepository implements MeanInterface
 {
     use Service;
 
@@ -20,7 +20,7 @@ class HighLightRepository implements CoreDataInterface
         $this->data = $HighLight;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->data->with('title')->order('asc')->get();
     }
@@ -80,7 +80,7 @@ class HighLightRepository implements CoreDataInterface
       $this->showData($id)->delete();
     }
 
-    public function getAllDataDelete()
+    public function getDataDelete()
     {
         return $this->data->onlyTrashed()->with('translation')->order('asc')->get();
     }

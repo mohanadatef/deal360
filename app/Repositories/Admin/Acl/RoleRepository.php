@@ -23,7 +23,7 @@ class RoleRepository implements RoleInterface
         $this->permission_role = $permission_role;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->role->order('asc')->all();
     }

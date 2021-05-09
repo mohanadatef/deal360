@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $datas = $this->userRepository->getAllData();
+        $datas = $this->userRepository->getData();
         return view('admin.acl.user.index',compact('datas'));
     }
 

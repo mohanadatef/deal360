@@ -52,4 +52,19 @@ class HighLight extends Model
     {
         return $this->hasmany(Property::Class)->withTrashed();
     }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($highlight) {
+            $highlight->translation()->delete();
+        });
+
+        static::restoring(function($highlight) {
+            $highlight->translation()->withTrashed()->restore();
+        });
+
+        static::forceDeleted(function($highlight) {
+            $highlight->translation()->forceDelete();
+        });
+    }
 }

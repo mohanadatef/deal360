@@ -20,7 +20,7 @@ class SettingController extends Controller
 
     public function index()
     {
-        $datas = $this->settingRepository->getAllData();
+        $datas = $this->settingRepository->getData();
         return view('admin.setting.setting.index',compact('datas'));
     }
 
@@ -50,12 +50,12 @@ class SettingController extends Controller
     public function show_api(Request $request)
     {
         changeLocaleLanguage($request->language_id);
-        return response(['status' => 1, 'data' => ['setting'=> new SettingResource($this->settingRepository->getAllData()->first())], 'message' => trans('lang.Index')], 206);
+        return response(['status' => 1, 'data' => ['setting'=> new SettingResource($this->settingRepository->getData()->first())], 'message' => trans('lang.Index')], 206);
     }
 
     public function show()
     {
-        $data = $this->settingRepository->getAllData()->first();
+        $data = $this->settingRepository->getData()->first();
         return view('frontend.setting',compact('data'));
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\Area\AreaListResource;
-use App\Http\Resources\Admin\Area\AreaResource;
+use App\Http\Resources\Admin\CoreData\Area\AreaListResource;
+use App\Http\Resources\Admin\CoreData\Area\AreaResource;
 use App\Interfaces\Admin\CoreData\AreaInterface;
 use App\Models\CoreData\Area;
 use App\Traits\Service;
@@ -20,7 +20,7 @@ class AreaRepository implements AreaInterface
         $this->data = $Area;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->data->with('title', 'country.title', 'city.title')->order('asc')->get();
     }
@@ -81,7 +81,7 @@ class AreaRepository implements AreaInterface
         $this->showData($id)->delete();
     }
 
-    public function getAllDataDelete()
+    public function getDataDelete()
     {
         return $this->data->onlyTrashed()->with('translation')->order('asc')->get();
     }

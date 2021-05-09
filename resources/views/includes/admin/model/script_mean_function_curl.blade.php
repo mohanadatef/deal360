@@ -92,7 +92,7 @@
     });
     //change status for item
     function changeStatus(data) {
-        url = "{{url('admin/model/changeStatus/id')}}";
+        url = "{{url('admin/model/change_status/id')}}";
         url = url.replace('id', data);
         url = url.replace('model', model);
         $.ajax({

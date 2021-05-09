@@ -18,7 +18,7 @@ class PackageController extends Controller
 
     public function index()
     {
-        $datas = $this->packageRepository->getAllData();
+        $datas = $this->packageRepository->getData();
         return view(checkView('admin.core_data.package.index'), compact('datas'));
     }
 
@@ -49,7 +49,7 @@ class PackageController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->packageRepository->getAllDataDelete();
+        $datas = $this->packageRepository->getDataDelete();
         return view(checkView('admin.core_data.package.destroy'), compact('datas'));
     }
 

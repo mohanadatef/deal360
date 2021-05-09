@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CoreData\AreaController;
 use App\Http\Controllers\Admin\CoreData\AmenityController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
+use App\Http\Controllers\Admin\Setting\MetaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,4 +72,8 @@ Route::prefix('/package')->group(function () {
 Route::prefix('/highlight')->group(function () {
     Route::get('/list', [HighLightController::class, 'listIndex'])
         ->name('highlight.list');
+});
+Route::prefix('/meta')->group(function () {
+    Route::get('/list', [MetaController::class, 'listIndex'])
+        ->name('meta.list');
 });

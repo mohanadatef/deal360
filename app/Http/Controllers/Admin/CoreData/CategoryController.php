@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $datas = $this->categoryRepository->getAllData();
+        $datas = $this->categoryRepository->getData();
         return view(checkView('admin.core_data.category.index'), compact('datas'));
     }
 
@@ -51,7 +51,7 @@ class CategoryController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->categoryRepository->getAllDataDelete();
+        $datas = $this->categoryRepository->getDataDelete();
         return view(checkView('admin.core_data.category.destroy'), compact('datas'));
     }
 

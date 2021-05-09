@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 
 interface UserInterface{
-    public function getAllData();
+    public function getData();
     public function storeData(CreateRequest $request);
     public function Get_One_Data($id);
     public function Resat_Password($id);

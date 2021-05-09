@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CoreData\CityController;
 use App\Http\Controllers\Admin\CoreData\AreaController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
+use App\Http\Controllers\Admin\Setting\MetaController;
 
 Route::group(['middleware' => /*'admin', 'auth',*/ 'language' /*, 'permission:dashboard-show'*/], function () {
 /* error dashboard list */
@@ -29,7 +30,7 @@ Route::middleware('permission:acl-list')->group(function () {
     Route::middleware('permission:user-list')->group(function () {
         Route::resource('user', UserController::class)->parameters(['user' => 'id']);
         Route::prefix('/user')->group(function () {
-            Route::get('/changeStatus/{id}', [UserController::class, 'changeStatus'])
+            Route::get('/change_status/{id}', [UserController::class, 'changeStatus'])
                 ->middleware('permission:user-status')->name('user.status');
             Route::get('/change_many_status', [UserController::class, 'change_many_status'])
                 ->middleware('permission:user-many-status')->name('language.many_status');
@@ -39,7 +40,7 @@ Route::middleware('permission:acl-list')->group(function () {
     Route::middleware('permission:role-list')->group(function () {
         Route::resource('role', RoleController::class)->parameters(['role' => 'id']);
         Route::prefix('/role')->group(function () {
-            Route::get('/changeStatus/{id}', [RoleController::class, 'changeStatus'])
+            Route::get('/change_status/{id}', [RoleController::class, 'changeStatus'])
                 ->middleware('permission:role-status')->name('role.status');
             Route::get('/change_many_status', [RoleController::class, 'change_many_status'])
                 ->middleware('permission:role-many-status')->name('language.many_status');
@@ -49,7 +50,7 @@ Route::middleware('permission:acl-list')->group(function () {
     Route::middleware('permission:permission-list')->group(function () {
         Route::resource('permission', PermissionController::class)->parameters(['permission' => 'id']);
         Route::prefix('/permission')->group(function () {
-            Route::get('/changeStatus/{id}', [PermissionController::class, 'changeStatus'])
+            Route::get('/change_status/{id}', [PermissionController::class, 'changeStatus'])
                 ->middleware('permission:permission-status')->name('permission.status');
             Route::get('/change_many_status', [PermissionController::class, 'change_many_status'])
                 ->middleware('permission:permission-many-status')->name('language.many_status');
@@ -63,7 +64,7 @@ Route::middleware('permission:acl-list')->group(function () {
 Route::apiresource('language', LanguageController::class,
     ['except' => ['show', 'update']])->parameters(['language' => 'id']);
 Route::prefix('/language')->name('language.')->group(function () {
-    Route::get('/changeStatus/{id}', [LanguageController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [LanguageController::class, 'changeStatus'])
         /*->middleware('permission:language-status')*/ ->name('status');
     Route::get('/delete', [LanguageController::class, 'destroyIndex'])
         /*->middleware('permission:language-delete')*/ ->name('delete_index');
@@ -82,7 +83,7 @@ Route::prefix('/language')->name('language.')->group(function () {
 Route::apiresource('status', StatusController::class,
     ['except' => ['show','update']])->parameters(['status' => 'id']);
 Route::prefix('/status')->name('status.')->group(function () {
-    Route::get('/changeStatus/{id}', [StatusController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [StatusController::class, 'changeStatus'])
         /*->middleware('permission:status-status')*/ ->name('status');
     Route::get('/delete', [StatusController::class, 'destroyIndex'])
         /*->middleware('permission:status-delete')*/ ->name('delete_index');
@@ -101,7 +102,7 @@ Route::prefix('/status')->name('status.')->group(function () {
 Route::apiresource('type', TypeController::class,
     ['except' => ['show','update']])->parameters(['type' => 'id']);
 Route::prefix('/type')->name('type.')->group(function () {
-    Route::get('/changeStatus/{id}', [TypeController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [TypeController::class, 'changeStatus'])
         /*->middleware('permission:type-status')*/ ->name('status');
     Route::get('/delete', [TypeController::class, 'destroyIndex'])
         /*->middleware('permission:type-delete')*/ ->name('delete_index');
@@ -120,7 +121,7 @@ Route::prefix('/type')->name('type.')->group(function () {
 Route::apiresource('category', CategoryController::class,
     ['except' => ['show','update']])->parameters(['category' => 'id']);
 Route::prefix('/category')->name('category.')->group(function () {
-    Route::get('/changeStatus/{id}', [CategoryController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [CategoryController::class, 'changeStatus'])
         /*->middleware('permission:category-status')*/ ->name('status');
     Route::get('/delete', [CategoryController::class, 'destroyIndex'])
         /*->middleware('permission:category-delete')*/ ->name('delete_index');
@@ -139,7 +140,7 @@ Route::prefix('/category')->name('category.')->group(function () {
 Route::apiresource('country', CountryController::class,
     ['except' => ['show','update']])->parameters(['country' => 'id']);
 Route::prefix('/country')->name('country.')->group(function () {
-    Route::get('/changeStatus/{id}', [CountryController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [CountryController::class, 'changeStatus'])
         /*->middleware('permission:country-status')*/ ->name('status');
     Route::get('/delete', [CountryController::class, 'destroyIndex'])
         /*->middleware('permission:country-delete')*/ ->name('delete_index');
@@ -158,7 +159,7 @@ Route::prefix('/country')->name('country.')->group(function () {
 Route::apiresource('amenity', AmenityController::class,
     ['except' => ['show','update']])->parameters(['amenity' => 'id']);
 Route::prefix('/amenity')->name('amenity.')->group(function () {
-    Route::get('/changeStatus/{id}', [AmenityController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [AmenityController::class, 'changeStatus'])
         /*->middleware('permission:amenity-status')*/ ->name('status');
     Route::get('/delete', [AmenityController::class, 'destroyIndex'])
         /*->middleware('permission:amenity-delete')*/ ->name('delete_index');
@@ -177,7 +178,7 @@ Route::prefix('/amenity')->name('amenity.')->group(function () {
 Route::apiresource('city', CityController::class,
     ['except' => ['show','update']])->parameters(['city' => 'id']);
 Route::prefix('/city')->name('city.')->group(function () {
-    Route::get('/changeStatus/{id}', [CityController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [CityController::class, 'changeStatus'])
         /*->middleware('permission:city-status')*/ ->name('status');
     Route::get('/delete', [CityController::class, 'destroyIndex'])
         /*->middleware('permission:city-delete')*/ ->name('delete_index');
@@ -196,7 +197,7 @@ Route::prefix('/city')->name('city.')->group(function () {
 Route::apiresource('package', PackageController::class,
     ['except' => ['show','update']])->parameters(['package' => 'id']);
 Route::prefix('/package')->name('package.')->group(function () {
-    Route::get('/changeStatus/{id}', [PackageController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [PackageController::class, 'changeStatus'])
         /*->middleware('permission:package-status')*/ ->name('status');
     Route::get('/delete', [PackageController::class, 'destroyIndex'])
         /*->middleware('permission:package-delete')*/ ->name('delete_index');
@@ -215,7 +216,7 @@ Route::prefix('/package')->name('package.')->group(function () {
 Route::apiresource('highlight', HighLightController::class,
     ['except' => ['show','update']])->parameters(['highlight' => 'id']);
 Route::prefix('/highlight')->name('highlight.')->group(function () {
-    Route::get('/changeStatus/{id}', [HighLightController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [HighLightController::class, 'changeStatus'])
         /*->middleware('permission:highlight-status')*/ ->name('status');
     Route::get('/delete', [HighLightController::class, 'destroyIndex'])
         /*->middleware('permission:highlight-delete')*/ ->name('delete_index');
@@ -234,7 +235,7 @@ Route::prefix('/highlight')->name('highlight.')->group(function () {
 Route::apiresource('area', AreaController::class,
     ['except' => ['show','update']])->parameters(['area' => 'id']);
 Route::prefix('/area')->name('area.')->group(function () {
-    Route::get('/changeStatus/{id}', [AreaController::class, 'changeStatus'])
+    Route::get('/change_status/{id}', [AreaController::class, 'changeStatus'])
         /*->middleware('permission:area-status')*/ ->name('status');
     Route::get('/delete', [AreaController::class, 'destroyIndex'])
         /*->middleware('permission:area-delete')*/ ->name('delete_index');
@@ -248,4 +249,23 @@ Route::prefix('/area')->name('area.')->group(function () {
         /*->middleware('permission:area-show')*/ ->name('show');
 });
 /* });*/
+    /* meta route list */
+    /*Route::middleware('permission:meta-list')->group(function () {*/
+    Route::apiresource('meta', MetaController::class,
+        ['except' => ['show','update']])->parameters(['meta' => 'id']);
+    Route::prefix('/meta')->name('meta.')->group(function () {
+        Route::get('/change_status/{id}', [MetaController::class, 'changeStatus'])
+            /*->middleware('permission:meta-status')*/ ->name('status');
+        Route::get('/delete', [MetaController::class, 'destroyIndex'])
+            /*->middleware('permission:meta-delete')*/ ->name('delete_index');
+        Route::get('/restore/{id}', [MetaController::class, 'restore'])
+            /*->middleware('permission:meta-restore')*/ ->name('restore');
+        Route::get('/remove/{id}', [MetaController::class, 'remove'])
+            /*->middleware('permission:meta-remove')*/ ->name('remove');
+        Route::post('/{id}', [MetaController::class, 'update'])
+            /*->middleware('permission:meta-edit')*/ ->name('update');
+        Route::get('/{id}', [MetaController::class, 'show'])
+            /*->middleware('permission:meta-show')*/ ->name('show');
+    });
+    /* });*/
 });

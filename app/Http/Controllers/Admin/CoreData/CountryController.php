@@ -18,7 +18,7 @@ class CountryController extends Controller
 
     public function index()
     {
-        $datas = $this->countryRepository->getAllData();
+        $datas = $this->countryRepository->getData();
         return view(checkView('admin.core_data.country.index'), compact('datas'));
     }
 
@@ -49,7 +49,7 @@ class CountryController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->countryRepository->getAllDataDelete();
+        $datas = $this->countryRepository->getDataDelete();
         return view(checkView('admin.core_data.country.destroy'), compact('datas'));
     }
 

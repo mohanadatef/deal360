@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\Package\PackageListResource;
-use App\Http\Resources\Admin\Package\PackageResource;
-use App\Interfaces\Admin\CoreData\CoreDataInterface;
+use App\Http\Resources\Admin\CoreData\Package\PackageListResource;
+use App\Http\Resources\Admin\CoreData\Package\PackageResource;
+use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Package;
 use App\Traits\Service;
 use Illuminate\Support\Facades\DB;
 
-class PackageRepository implements CoreDataInterface
+class PackageRepository implements MeanInterface
 {
     use Service;
 
@@ -20,7 +20,7 @@ class PackageRepository implements CoreDataInterface
         $this->data = $Package;
     }
 
-    public function getAllData()
+    public function getData()
     {
         return $this->data->with('title')->order('asc')->get();
     }
@@ -83,7 +83,7 @@ class PackageRepository implements CoreDataInterface
       $this->showData($id)->delete();
     }
 
-    public function getAllDataDelete()
+    public function getDataDelete()
     {
         return $this->data->onlyTrashed()->with('translation')->order('asc')->get();
     }

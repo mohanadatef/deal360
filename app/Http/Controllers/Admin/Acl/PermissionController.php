@@ -18,7 +18,7 @@ class PermissionController extends Controller
 
     public function index()
     {
-        $datas = $this->permissionRepository->getAllData();
+        $datas = $this->permissionRepository->getData();
         return view('admin.acl.permission.index',compact('datas'));
     }
 

@@ -20,7 +20,7 @@ class CityController extends Controller
 
     public function index()
     {
-        $datas = $this->cityRepository->getAllData();
+        $datas = $this->cityRepository->getData();
         $country = $this->countryRepository->listData();
         return view(checkView('admin.core_data.city.index'), compact('datas','country'));
     }
@@ -52,7 +52,7 @@ class CityController extends Controller
 
     public function destroyIndex()
     {
-        $datas = $this->cityRepository->getAllDataDelete();
+        $datas = $this->cityRepository->getDataDelete();
         return view(checkView('admin.core_data.city.destroy'), compact('datas'));
     }
 
