@@ -18,16 +18,38 @@ class Permission extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function translation($key)
+    public function translation()
     {
-        return $this->morphOne(Translation::class, 'translation')
-            ->where('language_id',languageId())
-            ->where('key',$key)
-            ->select('value as'.$key);
+        return $this->morphMany(Translation::class, 'category')->withTrashed();
+    }
+
+    public function title()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'title')
+            ->where('language_id' ,languageId())->withTrashed();
     }
 
     public function role()
     {
-        return $this->belongsToMany(Role::class, 'rolepermissions');
+        return $this->belongsToMany(Role::class, 'role_permissions');
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($permission) {
+            $permission->translation()->delete();
+            $permission->role()->delete();
+        });
+
+        static::restoring(function($permission) {
+            $permission->translation()->withTrashed()->restore();
+            $permission->role()->withTrashed()->restore();
+        });
+
+        static::forceDeleted(function($permission) {
+            $permission->translation()->forceDelete();
+            $permission->role()->forceDelete();
+        });
     }
 }

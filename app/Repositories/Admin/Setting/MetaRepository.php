@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\Setting;
 
-use App\Http\Resources\Admin\Setting\Meta\MetaListResource;
-use App\Http\Resources\Admin\Setting\Meta\MetaResource;
+use App\Http\Resources\Admin\Setting\Meta\PermissionListResource;
+use App\Http\Resources\Admin\Setting\Meta\PermissionResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\Setting\Meta;
 use App\Traits\Service;
@@ -66,7 +66,7 @@ class MetaRepository implements MeanInterface
                 }
             }
             $data = $this->showData($id);
-            return new MetaResource($data);
+            return new PermissionResource($data);
         });
     }
 
@@ -97,6 +97,6 @@ class MetaRepository implements MeanInterface
 
     public function listData()
     {
-        return MetaListResource::collection($this->data->status('1')->order('asc')->with('title')->get());
+        return PermissionListResource::collection($this->data->status('1')->order('asc')->with('title')->get());
     }
 }

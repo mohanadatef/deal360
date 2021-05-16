@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CoreData\AmenityController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
 use App\Http\Controllers\Admin\Setting\MetaController;
+use App\Http\Controllers\Admin\Acl\PermissionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,49 +32,67 @@ Route::get('/clear-cache', function () {
     Artisan::call('view:clear');
     return redirect('admin');
 });
+//core data
+//language
 Route::prefix('/language')->group(function () {
     Route::get('/list', [LanguageController::class, 'listIndex'])
         ->name('language.list');
     Route::post('/setLang', [LanguageController::class, 'language'])
     ->name('setLang');
 });
+//status
 Route::prefix('/status')->group(function () {
     Route::get('/list', [StatusController::class, 'listIndex'])
         ->name('status.list');
 });
+//type
 Route::prefix('/type')->group(function () {
     Route::get('/list', [TypeController::class, 'listIndex'])
         ->name('type.list');
 });
+//category
 Route::prefix('/category')->group(function () {
     Route::get('/list', [CategoryController::class, 'listIndex'])
         ->name('category.list');
 });
+//country
 Route::prefix('/country')->group(function () {
     Route::get('/list', [CountryController::class, 'listIndex'])
         ->name('country.list');
 });
+//city
 Route::prefix('/city')->group(function () {
     Route::get('/list/{country}', [CityController::class, 'listIndex'])
         ->name('city.list');
 });
+//area
 Route::prefix('/area')->group(function () {
     Route::get('/list/{country}/{city}', [AreaController::class, 'listIndex'])
         ->name('area.list');
 });
+//amenity
 Route::prefix('/amenity')->group(function () {
     Route::get('/list', [AmenityController::class, 'listIndex'])
         ->name('amenity.list');
 });
+//package
 Route::prefix('/package')->group(function () {
     Route::get('/list', [PackageController::class, 'listIndex'])
         ->name('package.list');
 });
+//high light
 Route::prefix('/highlight')->group(function () {
     Route::get('/list', [HighLightController::class, 'listIndex'])
         ->name('highlight.list');
 });
+//meta
 Route::prefix('/meta')->group(function () {
     Route::get('/list', [MetaController::class, 'listIndex'])
         ->name('meta.list');
+});
+//acl
+//permission
+Route::prefix('/permission')->group(function () {
+    Route::get('/list', [PermissionController::class, 'listIndex'])
+        ->name('permission.list');
 });

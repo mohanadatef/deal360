@@ -40098,10 +40098,10 @@ var maxp = new r.Struct({
  * Returned encoding names can be used in iconv-lite to decode text.
  */
 function getEncoding(platformID, encodingID) {
-  var languageID = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var language_id = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-  if (platformID === 1 && MAC_LANGUAGE_ENCODINGS[languageID]) {
-    return MAC_LANGUAGE_ENCODINGS[languageID];
+  if (platformID === 1 && MAC_LANGUAGE_ENCODINGS[language_id]) {
+    return MAC_LANGUAGE_ENCODINGS[language_id];
   }
 
   return ENCODINGS[platformID][encodingID];
@@ -40255,11 +40255,11 @@ var LANGUAGES = [
 var NameRecord = new r.Struct({
   platformID: r.uint16,
   encodingID: r.uint16,
-  languageID: r.uint16,
+  language_id: r.uint16,
   nameID: r.uint16,
   length: r.uint16,
   string: new r.Pointer(r.uint16, new r.String('length', function (t) {
-    return getEncoding(t.platformID, t.encodingID, t.languageID);
+    return getEncoding(t.platformID, t.encodingID, t.language_id);
   }), { type: 'parent', relativeTo: 'parent.stringOffset', allowNull: false })
 });
 
@@ -40304,14 +40304,14 @@ NameTable.process = function (stream) {
     var record = _ref;
 
     // find out what language this is for
-    var language = LANGUAGES[record.platformID][record.languageID];
+    var language = LANGUAGES[record.platformID][record.language_id];
 
-    if (language == null && this.langTags != null && record.languageID >= 0x8000) {
-      language = this.langTags[record.languageID - 0x8000].tag;
+    if (language == null && this.langTags != null && record.language_id >= 0x8000) {
+      language = this.langTags[record.language_id - 0x8000].tag;
     }
 
     if (language == null) {
-      language = record.platformID + '-' + record.languageID;
+      language = record.platformID + '-' + record.language_id;
     }
 
     // if the nameID is >= 256, it is a font feature record (AAT)
@@ -40345,7 +40345,7 @@ NameTable.preEncode = function () {
     records.push({
       platformID: 3,
       encodingID: 1,
-      languageID: 0x409,
+      language_id: 0x409,
       nameID: NAMES.indexOf(key),
       length: Buffer.byteLength(val.en, 'utf16le'),
       string: val.en
@@ -40355,7 +40355,7 @@ NameTable.preEncode = function () {
       records.push({
         platformID: 1,
         encodingID: 0,
-        languageID: 0,
+        language_id: 0,
         nameID: NAMES.indexOf(key),
         length: val.en.length,
         string: val.en

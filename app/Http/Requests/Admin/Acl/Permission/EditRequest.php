@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Acl\Permission;
 
+use App\Models\Acl\Permission;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EditRequest extends FormRequest
 {
@@ -23,24 +25,19 @@ class EditRequest extends FormRequest
      */
     public function rules()
     {
-            return [
-                'title'=>'required|unique:permissions,title,'.$this->id.',id',
-                'display_title.*'=>'required|unique_translation:permissions,display_title,'.$this->id,
-            ];
-
-    }
-    public function messages()
-    {
-        if (languageLocale() == 'ar') {
-            return [
-                'title.required' => 'برجاء ادخال الاسم',
-                'title.unique' => 'لا يمكن ادخال الاسم متكرر',
-                'display_title.*.required' => 'برجاء ادخال الاسم',
-                'display_title.*.unique_translation' => 'لا يمكن ادخال الاسم متكرر',
+        $rules = [
+            'name' => 'required|string|unique:permissions,name,'.$this->id.',id',
+        ];
+        foreach(language() as $lang)
+        {
+            $rules['title.'.$lang->code] = ['required','string',
+                Rule::unique('translations','value')
+                    ->ignore($this->id, 'category_id')
+                    ->where('category_type',Permission::class)
+                    ->where('key','title')
+                    ->where('language_id',$lang->id)
             ];
         }
-        else{
-            return [];
-        }
+        return $rules;
     }
 }

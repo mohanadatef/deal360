@@ -19,30 +19,47 @@ class PermissionController extends Controller
     public function index()
     {
         $datas = $this->permissionRepository->getData();
-        return view('admin.acl.permission.index',compact('datas'));
-    }
-
-    public function create()
-    {
-        return view('admin.acl.permission.create');
+        return view(checkView('admin.acl.permission.index'), compact('datas'));
     }
 
     public function store(CreateRequest $request)
     {
-        $this->permissionRepository->storeData($request);
-
-        return redirect('permission.index')->with('message', trans('lang.Message_Store'));
-    }
-
-    public function edit($id)
-    {
-        $data = $this->permissionRepository->Get_One_Data($id);
-        return view('admin.acl.permission.edit',compact('data'));
+        return response()->json($this->permissionRepository->storeData($request));
     }
 
     public function update(EditRequest $request, $id)
     {
-        $this->permissionRepository->updateData($request, $id);
-        return redirect('permission.index')->with('message', trans('lang.Message_Edit'));
+        return response()->json($this->permissionRepository->updateData($request, $id));
+    }
+
+    public function destroy($id)
+    {
+        $this->permissionRepository->deleteData($id);
+    }
+
+    public function remove($id)
+    {;
+        $this->permissionRepository->removeData($id);
+    }
+
+    public function destroyIndex()
+    {
+        $datas = $this->permissionRepository->getDataDelete();
+        return view(checkView('admin.acl.permission.destroy'), compact('datas'));
+    }
+
+    public function restore($id)
+    {
+        $this->permissionRepository->restoreData($id);
+    }
+
+    public function listIndex()
+    {
+        return $this->permissionRepository->listData();
+    }
+
+    public function show($id)
+    {
+        return $this->permissionRepository->showData($id);
     }
 }

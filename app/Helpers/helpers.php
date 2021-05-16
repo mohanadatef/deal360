@@ -27,12 +27,12 @@ if (!function_exists('languageActive')) {
 }
 
 if (!function_exists('permissionShow')) {
-    function permissionShow($title)
+    function permissionShow($name)
     {
         $permission = DB::table('permissions')
             ->join('permission_roles', 'permission_roles.permission_id', '=', 'permissions.id')
             ->where('permission_roles.role_id', Auth::user()->role_id)
-            ->where('permissions.title', $title)
+            ->where('permissions.name', $name)
             ->count();
         return $permission ? true : false;
     }

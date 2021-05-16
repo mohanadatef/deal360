@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\Acl\UserController;
-use App\Http\Controllers\Admin\Acl\RoleController;
 use App\Http\Controllers\Admin\Acl\PermissionController;
 use App\Http\Controllers\Admin\CoreData\LanguageController;
 use App\Http\Controllers\Admin\CoreData\StatusController;
@@ -24,39 +22,6 @@ Route::get('/', [HomeController::class, 'index'])
     ->name('admin.dashboard');
 /* error route list */
 Route::get('/error/403', [HomeController::class, 'error_403'])->name('error.403');
-/* Acl route list */
-Route::middleware('permission:acl-list')->group(function () {
-    /* user route list */
-    Route::middleware('permission:user-list')->group(function () {
-        Route::resource('user', UserController::class)->parameters(['user' => 'id']);
-        Route::prefix('/user')->group(function () {
-            Route::get('/change_status/{id}', [UserController::class, 'changeStatus'])
-                ->middleware('permission:user-status')->name('user.status');
-            Route::get('/change_many_status', [UserController::class, 'change_many_status'])
-                ->middleware('permission:user-many-status')->name('language.many_status');
-        });
-    });
-    /* role route list */
-    Route::middleware('permission:role-list')->group(function () {
-        Route::resource('role', RoleController::class)->parameters(['role' => 'id']);
-        Route::prefix('/role')->group(function () {
-            Route::get('/change_status/{id}', [RoleController::class, 'changeStatus'])
-                ->middleware('permission:role-status')->name('role.status');
-            Route::get('/change_many_status', [RoleController::class, 'change_many_status'])
-                ->middleware('permission:role-many-status')->name('language.many_status');
-        });
-    });
-    /* permission route list */
-    Route::middleware('permission:permission-list')->group(function () {
-        Route::resource('permission', PermissionController::class)->parameters(['permission' => 'id']);
-        Route::prefix('/permission')->group(function () {
-            Route::get('/change_status/{id}', [PermissionController::class, 'changeStatus'])
-                ->middleware('permission:permission-status')->name('permission.status');
-            Route::get('/change_many_status', [PermissionController::class, 'change_many_status'])
-                ->middleware('permission:permission-many-status')->name('language.many_status');
-        });
-    });
-});
 /* Core Data route list */
 /*Route::middleware('permission:core-data-list')->group(function () {*/
 /* language route list */
@@ -267,5 +232,25 @@ Route::prefix('/area')->name('area.')->group(function () {
         Route::get('/{id}', [MetaController::class, 'show'])
             /*->middleware('permission:meta-show')*/ ->name('show');
     });
+    /* });*/
+    /* Acl route list */
+    /*Route::middleware('permission:acl-list')->group(function () {*/
+    /* permission route list */
+    /*Route::middleware('permission:permission-list')->group(function () {*/
+    Route::apiresource('permission', PermissionController::class,
+        ['except' => ['show', 'update']])->parameters(['permission' => 'id']);
+    Route::prefix('/permission')->name('permission.')->group(function () {
+        Route::get('/delete', [PermissionController::class, 'destroyIndex'])
+            /*->middleware('permission:permission-delete')*/ ->name('delete_index');
+        Route::get('/restore/{id}', [PermissionController::class, 'restore'])
+            /*->middleware('permission:permission-restore')*/ ->name('restore');
+        Route::get('/remove/{id}', [PermissionController::class, 'remove'])
+            /*->middleware('permission:permission-remove')*/ ->name('remove');
+        Route::post('/{id}', [PermissionController::class, 'update'])
+            /*->middleware('permission:permission-edit')*/ ->name('update');
+        Route::get('/{id}', [PermissionController::class, 'show'])
+            /*->middleware('permission:permission-show')*/ ->name('show');
+    });
+    /* });*/
     /* });*/
 });
