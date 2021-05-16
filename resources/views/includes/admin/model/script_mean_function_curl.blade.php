@@ -99,7 +99,7 @@
             type: "GET",
             url: url,
             success: function () {
-                $(`#status-${data}:checkbox:checked`).length == 1 ? toastr.info('{{trans('lang.Active_Done')}}') : toastr.warning('{{trans('lang.Un_Active_Done')}}');
+                $(`#status-${data}:checkbox:checked`).length == 1 ? toastr.info('{{trans('lang.Active_Done')}}') : toastr.warning('{{trans('lang.An_Active_Done')}}');
             }, error: function (res) {
                 for (let err in res.responseJSON.errors) {
                     toastr.error(res.responseJSON.errors[err]);
