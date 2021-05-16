@@ -32,7 +32,7 @@ class LanguageRepository implements MeanInterface
                 $imageName = time() . $request->image->getClientOriginalname();
                 $image = $data->image()->create(['image' => $imageName]);
                 !$image->image ? false : $this->uploadImage($request->image, 'language', $imageName);
-            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'">'.$data->title->value.'</td>
+            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'">'.$data->title.'</td>
                 <td id="code-'.$data->id.'" data-order="${res.order}">'.$data->code.'</td>
                 <td><img src="'.getImag($data->image,'language').'" id="image-'.$data->id.'" style="width:100px;height: 100px"></td>
                 <td><input onfocus="changeStatus('.$data->id.')" type="checkbox" name="status" id="status-'.$data->id.'"

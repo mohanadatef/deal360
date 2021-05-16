@@ -12,7 +12,7 @@
 <script src="{{asset('public/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('public/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
-<script>
+<script type="text/javascript">
     $(function () {
         $("#example1").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,

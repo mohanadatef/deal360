@@ -1,6 +1,5 @@
 <?php
-
-return [
+$rules = [
 
     /*
     |--------------------------------------------------------------------------
@@ -97,7 +96,7 @@ return [
     'password' => 'الكلمه السر مش صحيحه.',
     'present' => ':attribute field must be present.',
     'regex' => ':attribute format is invalid.',
-    'required' => ':attribute يجب ادخال.',
+    'required' => ' يجب ادخال :attribute',
     'required_if' => ':attribute field is required when :other is :value.',
     'required_unless' => ':attribute field is required unless :other is in :values.',
     'required_with' => ':attribute field is required when :values is present.',
@@ -149,6 +148,14 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'order' => 'الترتيب',
+        'title' => 'الاسم',
+        'image' => 'صوره',
+    ],
 
 ];
+foreach (language() as $lang) {
+    $rules['attributes']['title.' . $lang->code] = 'الاسم ' . $lang->title;
+}
+return $rules;

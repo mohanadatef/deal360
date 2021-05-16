@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Category\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Category\EditRequest;
-use App\Http\Resources\Admin\Category\CategoryListResource;
-use App\Http\Resources\Admin\Category\CategoryResource;
 use App\Repositories\Admin\CoreData\CategoryRepository;
 
 class CategoryController extends Controller

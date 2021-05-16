@@ -1,6 +1,6 @@
 <?php
 
-return [
+$rules= [
 
     /*
     |--------------------------------------------------------------------------
@@ -152,3 +152,7 @@ return [
     'attributes' => [],
 
 ];
+foreach (language() as $lang) {
+    $rules['attributes']['title.' . $lang->code] = 'title ' . $lang->title;
+}
+return $rules;

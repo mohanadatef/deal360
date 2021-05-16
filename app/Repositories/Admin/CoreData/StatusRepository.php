@@ -33,7 +33,7 @@ class StatusRepository implements MeanInterface
                 $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" data-order="'.$data->order.'">'.$data->title.'</td>
+            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" data-order="'.$data->order.'">'.$data->title->value.'</td>
                 <td><input onfocus="changeStatus('.$data->id.')" type="checkbox" name="data" id="data-'.$data->id.'"
                 checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
                 <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
