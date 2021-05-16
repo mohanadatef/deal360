@@ -16,12 +16,10 @@ use App\Http\Controllers\Admin\CoreData\HighLightController;
 use App\Http\Controllers\Admin\Setting\MetaController;
 
 Route::group(['middleware' => /*'admin', 'auth',*/ 'language' /*, 'permission:dashboard-show'*/], function () {
-/* error dashboard list */
+/*dashboard list*/
 Route::get('/', [HomeController::class, 'index'])
     /*->middleware('permission:dashboard-show')*/
     ->name('admin.dashboard');
-/* error route list */
-Route::get('/error/403', [HomeController::class, 'error_403'])->name('error.403');
 /* Core Data route list */
 /*Route::middleware('permission:core-data-list')->group(function () {*/
 /* language route list */
