@@ -9,15 +9,15 @@
             .find("input,textarea,select").val('').end()
             .find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
     });
-    //header ajax
+    /*header ajax*/
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    //global variable
+    /*global variable*/
     var id,url,model = window.location.href.split('admin/').pop().split('/')[0];
-    //create item
+    /*create item*/
     $(document).ready(function () {
         $("#create").on("submit", function (event) {
             event.preventDefault();
@@ -42,11 +42,11 @@
             });
         });
     });
-    //get id for item
+    /*get id for item*/
     function selectItem(data) {
         id = data;
     }
-    //show item in model edit
+    /*show item in model edit*/
     function showItem(data) {
         id = data;
         url = "{{url('admin/model/id')}}";
@@ -65,7 +65,7 @@
             }
         });
     }
-    //edit data
+    /*edit data*/
     $(document).ready(function () {
         $("#edit").on("submit", function (event) {
             event.preventDefault();
@@ -90,7 +90,7 @@
             });
         });
     });
-    //change status for item
+    /*change status for item*/
     function changeStatus(data) {
         url = "{{url('admin/model/change_status/id')}}";
         url = url.replace('id', data);
@@ -107,7 +107,7 @@
             }
         });
     }
-    //delete item
+    /*delete item*/
     function deleteItem() {
         url = "{{url('admin/model/id')}}";
         url = url.replace('id', id);
@@ -126,7 +126,7 @@
             }
         });
     }
-    //remove item
+    /*remove item*/
     function removeItem() {
         url = "{{url('admin/model/remove/id')}}";
         url = url.replace('id', id);
@@ -145,7 +145,7 @@
             }
         });
     }
-    //restore item to index
+    /*restore item to index*/
     function restoreItem() {
         url = "{{url('admin/model/restore/id')}}";
         url = url.replace('id', id);

@@ -79,7 +79,7 @@
                                                     </button>
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
-                                                            onclick="deleteData({{$data->id}})" data-toggle="modal"
+                                                            onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                             data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
                                                 </td>

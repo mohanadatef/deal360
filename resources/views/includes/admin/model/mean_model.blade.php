@@ -1,4 +1,4 @@
-//delete
+<!--delete-->
 <div class="modal fade" id="modal-delete">
     <div class="modal-dialog">
         <div class="modal-content bg-warning">
@@ -22,7 +22,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-//restore
+<!--restore-->
 <div class="modal fade" id="modal-restore">
     <div class="modal-dialog">
         <div class="modal-content bg-warning">
@@ -45,7 +45,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-//remove
+<!--remove-->
 <div class="modal fade" id="modal-remove">
     <div class="modal-dialog">
         <div class="modal-content bg-warning">

@@ -18,12 +18,16 @@ class Role extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function translation($key)
+    public function translation()
     {
-        return $this->morphOne(Translation::class, 'translation')
-            ->where('language_id',languageId())
-            ->where('key',$key)
-            ->select('value as'.$key);
+        return $this->morphMany(Translation::class, 'category')->withTrashed();
+    }
+
+    public function title()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'title')
+            ->where('language_id' ,languageId())->withTrashed();
     }
 
     public function scopeStatus($query,$status)
@@ -43,6 +47,24 @@ class Role extends Model
 
     public function permission()
     {
-        return $this->belongsToMany(Permission::Class, 'rolepermissions');
+        return $this->belongsToMany(Permission::Class, 'role_permissions');
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($role) {
+            $role->translation()->delete();
+            $role->permission()->delete();
+        });
+
+        static::restoring(function($role) {
+            $role->translation()->withTrashed()->restore();
+            $role->permission()->withTrashed()->restore();
+        });
+
+        static::forceDeleted(function($role) {
+            $role->translation()->forceDelete();
+            $role->permission()->forceDelete();
+        });
     }
 }

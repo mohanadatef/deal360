@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin\Acl\Role;
 
+use App\Models\Acl\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateRequest extends FormRequest
 {
@@ -23,23 +25,21 @@ class CreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title.*'=>'required|unique_translation:roles',
+        $rules = [
+            'type_access' => 'required|string',
+            'code' => 'required|string|unique:roles',
+            'order' => 'required|numeric|unique:roles',
             'permission' => 'required|exists:permissions,id',
         ];
-    }
-
-    public function messages()
-    {
-        if (languageLocale() == 'ar') {
-            return [
-                'permission.required' => 'برجاء اختيار الاذونات',
-                'title.*.required' => 'برجاء ادخال الاسم',
-                'title.*.unique_translation' => 'لا يمكن ادخال الاسم متكرر',
+        foreach(language() as $lang)
+        {
+            $rules['title.'.$lang->code] = ['required','string',
+                Rule::unique('translations','value')
+                    ->where('category_type',Role::class)
+                    ->where('key','title')
+                    ->where('language_id',$lang->id)
             ];
         }
-        else{
-            return [];
-        }
+        return $rules;
     }
 }

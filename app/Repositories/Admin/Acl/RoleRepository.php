@@ -2,61 +2,106 @@
 
 namespace App\Repositories\Admin\Acl;
 
-
-use App\Http\Requests\Admin\Acl\Role\CreateRequest;
-use App\Http\Requests\Admin\Acl\Role\EditRequest;
-use App\Interfaces\Admin\Acl\RoleInterface;
-use App\Models\ACL\RolePermission;
+use App\Http\Resources\Admin\Acl\Role\RoleListResource;
+use App\Http\Resources\Admin\Acl\Role\RoleResource;
+use App\Interfaces\Admin\MeanInterface;
 use App\Models\Acl\Role;
 use App\Traits\Service;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class RoleRepository implements RoleInterface
+class RoleRepository implements MeanInterface
 {
     use Service;
-    protected $role;
-    protected $permission_role;
 
-    public function __construct(Role $role, RolePermission $permission_role)
+    protected $data;
+
+    public function __construct(Role $Role)
     {
-        $this->role = $role;
-        $this->permission_role = $permission_role;
+        $this->data = $Role;
     }
 
     public function getData()
     {
-        return $this->role->order('asc')->all();
+        return $this->data->with('title')->get();
     }
 
-    public function storeData(CreateRequest $request)
+    public function storeData($request)
     {
-        $this->role->create($request->all());
+        return DB::transaction(function () use ($request) {
+            $data = $this->data->create($request->all());
+            $data->permission()->sync((array)$request->permission);
+            foreach (language() as $lang) {
+                $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                    'language_id'=>$lang->id]);
+            }
+            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" >'.$data->title->value.'</td>
+                <td id="code-'.$data->id.'" >'.$data->code.'</td>
+                <td id="type_access-'.$data->id.'" >'.$data->type_access.'</td>
+                <td><input onfocus="changeStatus(' . $data->id . ')" type="checkbox" name="status"
+            id="status-' . $data->id . '" checked data-bootstrap-switch data-off-color="danger"
+            data-on-color="success"></td>
+                <td><button data="button" class="btn btn-outline-primary btn-block btn-sm"
+                onclick="showItem('.$data->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
+                <button id="openModael'.$data->id.'" data="button" class="d-none" data-toggle="modal"
+                data-target="#modal-edit"></button>
+                <button data="button" class="btn btn-outline-danger btn-block btn-sm"
+                onclick="selectItem('.$data->id.')" data-toggle="modal"
+                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
+        });
     }
 
-    public function Get_One_Data($id)
+    public function showData($id)
     {
-        return $this->role->findorFail($id);
+        return $this->data->with('translation.language')->findorFail($id);
     }
 
-    public function updateData(EditRequest $request, $id)
+    public function updateData($request, $id)
     {
-        $role = $this->Get_One_Data($id);
-        $role->permission()->sync((array)$request->permission);
-        $role->update($request->all());
+        return DB::transaction(function () use ($request, $id) {
+            $data = $this->showData($id);
+            $data->permission()->sync((array)$request->permission);
+            $data->update($request->all());
+            foreach (language() as $lang) {
+                $translation = $data->translation->where('language_id', $lang->id)->first();
+                if ($translation) {
+                    $translation->update(['value' => $request->title[$lang->code]]);
+                } else {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                        'language_id' => $lang->id]);
+                }
+            }
+            $data = $this->showData($id);
+            return new RoleResource($data);
+        });
     }
 
-    public function Get_listData()
+    public function updateStatusData($id)
     {
-        return $this->role->select('title', 'id')->status(1)->get();
+        $this->changeStatus($this->showData($id));
     }
 
-    public function Get_Permission_For_Role($id)
+    public function deleteData($id)
     {
-        return $this->permission_role->where('role_id', $id)->get();
+        $this->showData($id)->delete();
     }
 
-    public function Get_List_Register()
+    public function getDataDelete()
     {
-        return  $this->role->select('title', 'id')->status(1)->get();
+        return $this->data->onlyTrashed()->with('translation')->get();
+    }
+
+    public function restoreData($id)
+    {
+        $this->data->withTrashed()->find($id)->restore();
+    }
+
+    public function removeData($id)
+    {
+        $this->data->withTrashed()->find($id)->forceDelete();
+    }
+
+    public function listData()
+    {
+        return RoleListResource::collection($this->data->with('title')->status('1')->order('asc')->get());
     }
 }

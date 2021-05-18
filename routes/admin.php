@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Acl\PermissionController;
+use App\Http\Controllers\Admin\Acl\RoleController;
 use App\Http\Controllers\Admin\CoreData\LanguageController;
 use App\Http\Controllers\Admin\CoreData\StatusController;
 use App\Http\Controllers\Admin\CoreData\TypeController;
@@ -248,6 +249,25 @@ Route::prefix('/area')->name('area.')->group(function () {
             /*->middleware('permission:permission-edit')*/ ->name('update');
         Route::get('/{id}', [PermissionController::class, 'show'])
             /*->middleware('permission:permission-show')*/ ->name('show');
+    });
+    /* });*/
+    /* role route list */
+    /*Route::middleware('permission:role-list')->group(function () {*/
+    Route::resource('role', RoleController::class,
+        ['except' => ['show', 'update']])->parameters(['role' => 'id']);
+    Route::prefix('/role')->name('role.')->group(function () {
+        Route::get('/change_status/{id}', [RoleController::class, 'changeStatus'])
+            /*->middleware('permission:role-status')*/ ->name('status');
+        Route::get('/delete', [RoleController::class, 'destroyIndex'])
+            /*->middleware('permission:role-delete')*/ ->name('delete_index');
+        Route::get('/restore/{id}', [RoleController::class, 'restore'])
+            /*->middleware('permission:role-restore')*/ ->name('restore');
+        Route::get('/remove/{id}', [RoleController::class, 'remove'])
+            /*->middleware('permission:role-remove')*/ ->name('remove');
+        Route::post('/{id}', [RoleController::class, 'update'])
+            /*->middleware('permission:role-edit')*/ ->name('update');
+        Route::get('/{id}', [RoleController::class, 'show'])
+            /*->middleware('permission:role-show')*/ ->name('show');
     });
     /* });*/
     /* });*/

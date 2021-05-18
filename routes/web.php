@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
 use App\Http\Controllers\Admin\Setting\MetaController;
 use App\Http\Controllers\Admin\Acl\PermissionController;
+use App\Http\Controllers\Admin\Acl\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,4 +89,9 @@ Route::prefix('/meta')->group(function () {
 Route::prefix('/permission')->group(function () {
     Route::get('/list', [PermissionController::class, 'listIndex'])
         ->name('permission.list');
+});
+//role
+Route::prefix('/role')->group(function () {
+    Route::get('/list', [RoleController::class, 'listIndex'])
+        ->name('role.list');
 });
