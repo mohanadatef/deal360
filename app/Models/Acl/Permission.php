@@ -35,21 +35,26 @@ class Permission extends Model
         return $this->belongsToMany(Role::class, 'role_permissions');
     }
 
+    public function role_permission()
+    {
+        return $this->hasMany(RolePermission::Class);
+    }
+
     public static function boot() {
         parent::boot();
         static::deleting(function($permission) {
             $permission->translation()->delete();
-            $permission->role()->delete();
+            $permission->role_permission()->delete();
         });
 
         static::restoring(function($permission) {
             $permission->translation()->withTrashed()->restore();
-            $permission->role()->withTrashed()->restore();
+            $permission->role_permission()->withTrashed()->restore();
         });
 
         static::forceDeleted(function($permission) {
             $permission->translation()->forceDelete();
-            $permission->role()->forceDelete();
+            $permission->role_permission()->forceDelete();
         });
     }
 }

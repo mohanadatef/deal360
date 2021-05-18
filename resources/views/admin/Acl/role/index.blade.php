@@ -33,10 +33,8 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                        <button type="button" class="btn btn-success" data-toggle="modal"
-                                                data-target="#modal-create">
-                                            {{trans('lang.Create')}}
-                                        </button>
+                                        <a href="{{  route('role.create') }}"
+                                           class="btn btn-success"> {{trans('lang.Create')}}</a>
                                     </h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -66,15 +64,8 @@
                                                            data-on-color="success">
                                                 </td>
                                                 <td>
-                                                    <button type="button"
-                                                            class="btn btn-outline-primary btn-block btn-sm"
-                                                            onclick="showItem({{$data->id}})">
-                                                        <i class="fa fa-edit"></i> {{trans('lang.Edit')}}
-                                                    </button>
-                                                    <button id="openModael{{$data->id}}" type="button" class="d-none"
-                                                            data-toggle="modal"
-                                                            data-target="#modal-edit">
-                                                    </button>
+                                                    <a href="{{  route('role.edit',$data->id) }}"
+                                                       class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>{{trans('lang.Edit')}}</a>
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
                                                             onclick="selectItem({{$data->id}})" data-toggle="modal"

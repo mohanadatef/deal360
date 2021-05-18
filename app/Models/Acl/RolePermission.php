@@ -16,5 +16,18 @@ class RolePermission extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($role_permission) {
+            $role_permission->delete();
+        });
 
+        static::restoring(function($role_permission) {
+            $role_permission->withTrashed()->restore();
+        });
+
+        static::forceDeleted(function($role_permission) {
+            $role_permission->forceDelete();
+        });
+    }
 }

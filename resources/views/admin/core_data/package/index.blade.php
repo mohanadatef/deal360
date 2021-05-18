@@ -150,9 +150,9 @@
                                 <select class="form-control" id="type_date" name="type_date"
                                         style="width: 100%;">
                                     <option selected>{{trans('lang.Select')}}</option>
-                                    <option value="d">{{trans('lang.Day')}}</option>
-                                    <option value="m">{{trans('lang.Month')}}</option>
-                                    <option value="y">{{trans('lang.Year')}}</option>
+                                    <option value="d">{{trans('lang.day')}}</option>
+                                    <option value="m">{{trans('lang.month')}}</option>
+                                    <option value="y">{{trans('lang.year')}}</option>
                                 </select>
                             </div>
                             <div class="form-group{{ $errors->has('count_date') ? ' is-invalid' : "" }}">
@@ -210,9 +210,9 @@
                                 <label>{{trans('lang.Type')}}</label>
                                 <select class="form-control" id="type_date" name="type_date"
                                         style="width: 100%;">
-                                    <option  value="d">{{trans('lang.Day')}}</option>
-                                    <option  value="m">{{trans('lang.Month')}}</option>
-                                    <option  value="y">{{trans('lang.Year')}}</option>
+                                    <option  value="d">{{trans('lang.day')}}</option>
+                                    <option  value="m">{{trans('lang.month')}}</option>
+                                    <option  value="y">{{trans('lang.year')}}</option>
                                 </select>
                             </div>
                             <div class="form-group{{ $errors->has('count_date') ? ' is-invalid' : "" }}">

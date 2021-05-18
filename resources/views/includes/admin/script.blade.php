@@ -47,9 +47,7 @@
         $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
 </script>
-<!-- Javascript Requirements -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 <!-- Laravel Javascript Validation -->
 <script type="text/javascript" src="{{ asset('public/vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 @yield('script')

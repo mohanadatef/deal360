@@ -91,6 +91,6 @@ class PermissionRepository implements PermissionInterface
 
     public function listData()
     {
-        return PermissionListResource::collection($this->data->with('title')->get());
+        return PermissionListResource::collection($this->getData());
     }
 }

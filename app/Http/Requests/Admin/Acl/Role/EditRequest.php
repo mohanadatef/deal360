@@ -29,7 +29,7 @@ class EditRequest extends FormRequest
             'type_access' => 'required|string',
             'code' => 'required|string|unique:roles,code,'.$this->id.',id',
             'order' => 'required|numeric|unique:roles,order,'.$this->id.',id',
-            'permission' => 'required|exists:permissions,id',
+            'permission' => 'required|exists:permissions,id|array',
         ];
         foreach(language() as $lang)
         {

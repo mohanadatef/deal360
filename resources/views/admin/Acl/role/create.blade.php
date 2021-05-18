@@ -35,7 +35,7 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                Create
+                                {{trans('lang.Create')}}
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -68,13 +68,13 @@
                                             <select class="form-control" id="type_access" name="type_access"
                                                     style="width: 100%;">
                                                 <option selected>{{trans('lang.Select')}}</option>
-                                                <option value="d">{{trans('lang.All')}}</option>
-                                                <option value="m">{{trans('lang.Deal360')}}</option>
-                                                <option value="y">{{trans('lang.Crm')}}</option>
+                                                <option value="all">{{trans('lang.all')}}</option>
+                                                <option value="deal360">{{trans('lang.deal360')}}</option>
+                                                <option value="crm">{{trans('lang.crm')}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group{{ $errors->has('permission') ? ' has-error' : "" }}">
-                                            <label>Permission</label>
+                                            <label>{{trans('lang.Permission')}}</label>
                                             <select class="duallistbox" multiple="multiple" name="permission[]">
                                                 @foreach($permission as $pe)
                                                 <option  value="{{$pe->id}}">{{$pe->title->value}}</option>
@@ -86,7 +86,7 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">{{trans('lang.Create')}}</button>
                                 </div>
                             </form>
                         </div>
