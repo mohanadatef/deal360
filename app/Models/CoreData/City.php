@@ -63,11 +63,6 @@ class City extends Model
         return $this->hasmany(Property::Class);
     }
 
-    public function user()
-    {
-        return $this->hasMany(User::Class);
-    }
-
     public static function boot() {
         parent::boot();
         static::deleting(function($city) {

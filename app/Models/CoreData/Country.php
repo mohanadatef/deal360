@@ -2,6 +2,7 @@
 
 namespace App\Models\CoreData;
 
+use App\Models\Acl\Agency;
 use App\Models\Acl\SaveSearch;
 use App\Models\Acl\User;
 use App\Models\Image;
@@ -68,7 +69,10 @@ class Country extends Model
     {
         return $this->hasMany(User::Class);
     }
-
+    public function agency()
+    {
+        return $this->hasMany(Agency::Class);
+    }
     public function property()
     {
         return $this->hasmany(Property::Class);

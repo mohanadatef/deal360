@@ -2,6 +2,7 @@
 
 namespace App\Models\Acl;
 
+use App\Models\CoreData\Country;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,5 +35,10 @@ class Agency extends Model
     public function agent()
     {
         return $this->belongsTo(Agent::class, 'agencyagents');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::Class, 'countries');
     }
 }
