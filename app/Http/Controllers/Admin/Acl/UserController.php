@@ -5,11 +5,8 @@ namespace App\Http\Controllers\Admin\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Acl\User\CreateRequest;
 use App\Http\Requests\Admin\Acl\User\EditRequest;
-use App\Http\Requests\Admin\Acl\User\StatusEditRequest;
-use App\Http\Requests\Admin\Acl\User\PasswordRequest;
 use App\Repositories\Admin\Acl\RoleRepository;
 use App\Repositories\Admin\Acl\UserRepository;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -25,70 +22,62 @@ class UserController extends Controller
     public function index()
     {
         $datas = $this->userRepository->getData();
-        return view('admin.acl.user.index',compact('datas'));
+        return view(checkView('admin.acl.user.index'),compact('datas'));
     }
 
     public function create()
     {
-        $role = $this->roleRepository->Get_listData();
-        return view('admin.acl.user.create',compact('role'));
+        $role = $this->roleRepository->listData();
+        return view(checkView('admin.acl.user.create'),compact('role'));
     }
 
     public function store(CreateRequest $request)
     {
         $this->userRepository->storeData($request);
-        return Auth::user() ? redirect('/admin/user/index')->with('message', trans('lang.Message_Store')) : redirect('login')->with('message', trans('lang.Message_Store'));
+        return redirect(route('user.index'))->with(trans('Done'));
     }
 
     public function edit($id)
     {
-        $role = $this->roleRepository->Get_listData();
-        $data = $this->userRepository->Get_One_Data($id);
-        return view('admin.acl.user.edit',compact('data','role'));
+        $role = $this->roleRepository->listData();
+        $data = $this->userRepository->showData($id);
+        return view(checkView('admin.acl.user.edit'),compact('data','role'));
     }
 
     public function update(EditRequest $request, $id)
     {
         $this->userRepository->updateData($request, $id);
-        if(auth::user()->role_id == 4)
-        {
-            return redirect('admin')->with('message', trans('lang.Message_Edit'));
-        }
-        return redirect('/admin/user/index')->with('message', trans('lang.Message_Edit'));
-    }
-
-    public function resat_password($id)
-    {
-        $this->userRepository->Resat_Password($id);
-        return redirect()->back()->with('message', trans('lang.Message_Edit'));
-    }
-
-    public function password()
-    {
-        return view('admin.acl.user.password');
-    }
-
-    public function change_password(PasswordRequest $request, $id)
-    {
-        $this->userRepository->Update_Password_Data($request, $id);
-        return redirect('/admin')->with('message',trans('passwords.reset'));
+        return redirect(route('user.index'))->with(trans('Done'));
     }
 
     public function changeStatus($id)
     {
-        $this->userRepository->Update_Status_One_Data($id);
-       return redirect()->back()->with('message', trans('lang.Message_Status'));
+        $this->userRepository->updateStatusData($id);
     }
 
-    public function change_many_status(StatusEditRequest $request)
+    public function destroy($id)
     {
-        $this->userRepository->updateStatusData($request);
-       return redirect()->back()->with('message', trans('lang.Message_Status'));
+        $this->userRepository->deleteData($id);
     }
 
-    public function register()
+    public function remove($id)
+    {;
+        $this->userRepository->removeData($id);
+    }
+
+    public function destroyIndex()
     {
-        $role = $this->roleRepository->Get_List_Register();
-        return view('auth.register',compact('role'));
+        $datas = $this->userRepository->getDataDelete();
+        return view(checkView('admin.acl.user.destroy'), compact('datas'));
+    }
+
+    public function restore($id)
+    {
+        $this->userRepository->restoreData($id);
+    }
+
+    public function listIndex()
+    {
+        return $this->userRepository->listData();
     }
 }

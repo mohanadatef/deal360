@@ -34,12 +34,6 @@ class CreateForeignKeys extends Migration
             $table->foreign('country_id')->references('id')->on('countries')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
-            $table->foreign('city_id')->references('id')->on('cities')
-                ->onDelete('cascade')
-                ->onUpdate('restrict');
-            $table->foreign('area_id')->references('id')->on('areas')
-                ->onDelete('cascade')
-                ->onUpdate('restrict');
         });
         Schema::table('agents', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
@@ -48,6 +42,9 @@ class CreateForeignKeys extends Migration
         });
         Schema::table('agencies', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+            $table->foreign('country_id')->references('id')->on('countries')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
@@ -178,14 +175,13 @@ class CreateForeignKeys extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign('users_role_id_foreign');
             $table->dropForeign('users_country_id_foreign');
-            $table->dropForeign('users_city_id_foreign');
-            $table->dropForeign('users_area_id_foreign');
         });
         Schema::table('agents', function (Blueprint $table) {
             $table->dropForeign('agents_user_id_foreign');
         });
         Schema::table('agencies', function (Blueprint $table) {
             $table->dropForeign('agencies_user_id_foreign');
+            $table->dropForeign('agencies_country_id_foreign');
         });
         Schema::table('agency_agents', function (Blueprint $table) {
             $table->dropForeign('agency_agents_agent_id_foreign');

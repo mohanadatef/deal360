@@ -85,9 +85,4 @@ class RoleController extends Controller
     {
         return $this->roleRepository->listData();
     }
-
-    /*public function show($id)
-    {
-        return $this->roleRepository->showData($id);
-    }*/
 }
