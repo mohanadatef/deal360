@@ -2,84 +2,81 @@
 
 namespace App\Repositories\Admin\Acl;
 
-
-use App\Http\Requests\Admin\Acl\User\CreateRequest;
-use App\Http\Requests\Admin\Acl\User\EditRequest;
-use App\Http\Requests\Admin\Acl\User\PasswordRequest;
-use App\Http\Requests\Admin\Acl\User\StatusEditRequest;
+use App\Http\Resources\Admin\Acl\User\UserResource;
 use App\Interfaces\Admin\Acl\UserInterface;
 use App\Models\Acl\User;
 use App\Traits\Service;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserInterface
 {
     use Service;
-    protected $user;
 
-    public function __construct(User $user)
+    protected $data;
+
+    public function __construct(User $User)
     {
-        $this->user = $user;
+        $this->data = $User;
     }
 
     public function getData()
     {
-        return $this->user->order('asc')->all();
+        return $this->data->with('role', 'country')->order('asc')->get();
     }
 
-    public function storeData(CreateRequest $request)
+    public function storeData($request)
     {
-        $data['status'] = 1;
-        Auth::user() ? $data['status_login'] = 0 : $data['status_login'] = 1;
-        $data['password'] = Hash::make($request->password);
-        if ($request->image) {
-            $data['image']= $this->uploadImage($request->image,'user');
-        }
-        return $this->user->create(array_merge($request->all(), $data));
+        return DB::transaction(function () use ($request) {
+            $data = $this->data->create($request->all());
+            return '<tr id="' . $data->id . '"><td id="fullname-' . $data->id . '" data-order="' . $data->order . '">' . $data->fullname . '</td>
+                <td id="username-' . $data->id . '" >' . $data->username . '</td><td id="email-' . $data->id . '" >' . $data->email . '</td>
+                <td id="role-' . $data->id . '" >' . $data->role->title->value . '</td>
+                <td id="country-' . $data->id . '" >' . $data->country->title->value . '</td>
+            <td><input onfocus="changeStatus(' . $data->id . ')" type="checkbox" name="status"
+            id="status-' . $data->id . '" checked data-bootstrap-switch data-off-color="danger"
+            data-on-color="success"></td><td><a href="' . route('user.edit', $data->id) . '"
+              class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>' . trans('lang.Edit') . '</a>
+                <button data="button" class="btn btn-outline-danger btn-block btn-sm"
+                onclick="selectItem(' . $data->id . ')" data-toggle="modal"
+                data-target="#modal-delete"><i></i> ' . trans('lang.Delete') . '</button></td></tr>';
+        });
     }
 
-
-    public function Get_One_Data($id)
+    public function showData($id)
     {
-        return $this->user->findorFail($id);
+        return $this->data->with('role', 'country')->findorFail($id);
     }
 
-    public function updateData(EditRequest $request, $id)
+    public function updateData($request, $id)
     {
-        if ($request->image != null) {
-            $data['image']= $this->uploadImage($request->image,'user');
-            return $this->Get_One_Data($id)->update(array_merge($request->all(), $data));
-        } else return $this->Get_One_Data($id)->update($request->all());
+        return DB::transaction(function () use ($request, $id) {
+            $data = $this->showData($id)->update($request->all());
+            return new UserResource($data);
+        });
     }
 
-    public function Resat_Password($id)
+    public function updateStatusData($id)
     {
-        $user = $this->Get_One_Data($id);
-        $user->password = Hash::make('123456');
-        $user->update();
+        $this->changeStatus($this->showData($id));
     }
 
-    public function Update_Password_Data(PasswordRequest $request, $id)
+    public function deleteData($id)
     {
-        $user = $this->Get_One_Data($id);
-        $user->password = Hash::make($request->password);
-        $user->update();
+        $this->showData($id)->delete();
     }
 
-    public function Update_Status_One_Data($id)
+    public function getDataDelete()
     {
-        $this->changeStatus($this->Get_One_Data($id));
+        return $this->data->onlyTrashed()->with('role', 'country')->order('asc')->get();
     }
 
-    public function Get_Many_Data(Request $request)
+    public function restoreData($id)
     {
-        return $this->user->wherein('id', $request->changeStatus)->get();
+        $this->data->withTrashed()->find($id)->restore();
     }
 
-    public function updateStatusData(StatusEditRequest $request)
+    public function removeData($id)
     {
-        $this->changeStatus($this->Get_Many_Data($request));
+        $this->data->withTrashed()->find($id)->forceDelete();
     }
 }

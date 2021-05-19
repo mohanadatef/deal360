@@ -24,7 +24,6 @@ class CreateAgenciesTable extends Migration
             $table->text('whatsapp')->unique()->index()->nullable();
             $table->text('mobile')->unique()->index()->nullable();
             $table->text('phone')->unique()->index()->nullable();
-            $table->integer('count_view')->default('0');
             $table->integer('country_id')->unsigned()->index();
             $table->timestamps();
             $table->softDeletes();

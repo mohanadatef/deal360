@@ -48,6 +48,11 @@ class CreateForeignKeys extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
+        Schema::table('currencies', function (Blueprint $table) {
+            $table->foreign('country_id')->references('id')->on('countries')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+        });
         Schema::table('agency_agents', function (Blueprint $table) {
             $table->foreign('agency_id')->references('id')->on('agencies')
                 ->onDelete('cascade')
@@ -182,6 +187,9 @@ class CreateForeignKeys extends Migration
         Schema::table('agencies', function (Blueprint $table) {
             $table->dropForeign('agencies_user_id_foreign');
             $table->dropForeign('agencies_country_id_foreign');
+        });
+        Schema::table('currencies', function (Blueprint $table) {
+            $table->dropForeign('currencies_country_id_foreign');
         });
         Schema::table('agency_agents', function (Blueprint $table) {
             $table->dropForeign('agency_agents_agent_id_foreign');

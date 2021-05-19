@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreateAgentsTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,13 @@ class CreateAgentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('agents', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->text('whatsapp')->unique()->index()->nullable();
-            $table->text('mobile')->unique()->index()->nullable();
+            $table->morphs('category');
+            $table->text('ip_address');
+            $table->text('user_id')->default('0')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,7 +34,7 @@ class CreateAgentsTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::dropIfExists('agents');
+        Schema::dropIfExists('views');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -26,7 +26,7 @@ class CreateRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'fullname' => 'required|string|unique:users',
             'username' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
@@ -37,15 +37,5 @@ class CreateRequest extends FormRequest
             'country_id' => 'required|exists:countries,id',
             'password' => 'required|string|min:6|confirmed',
         ];
-        foreach(language() as $lang)
-        {
-            $rules['title.'.$lang->code] = ['required','string',
-                Rule::unique('translations','value')
-                    ->where('category_type',User::class)
-                    ->where('key','title')
-                    ->where('language_id',$lang->id)
-            ];
-        }
-        return $rules;
     }
 }

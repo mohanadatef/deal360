@@ -40,10 +40,8 @@ class RoleRepository implements MeanInterface
                 <td><input onfocus="changeStatus(' . $data->id . ')" type="checkbox" name="status"
             id="status-' . $data->id . '" checked data-bootstrap-switch data-off-color="danger"
             data-on-color="success"></td>
-                <td><button data="button" class="btn btn-outline-primary btn-block btn-sm"
-                onclick="showItem('.$data->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
-                <button id="openModael'.$data->id.'" data="button" class="d-none" data-toggle="modal"
-                data-target="#modal-edit"></button>
+                <td><a href="'.route('role.edit',$data->id) .'"
+              class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>'.trans('lang.Edit').'</a>
                 <button data="button" class="btn btn-outline-danger btn-block btn-sm"
                 onclick="selectItem('.$data->id.')" data-toggle="modal"
                 data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';

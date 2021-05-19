@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function image()
     {
-        return $this->morphOne(Image::class, 'image');
+        return $this->morphOne(Image::class, 'category')->withTrashed();
     }
 
     public function scopeStatus($query,$status)
@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::Class,'role_id');
+        return $this->belongsTo(Role::Class,'role_id')->withTrashed();
     }
 
     public function agency()
@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->belongsTo(Country::Class, 'countries');
+        return $this->belongsTo(Country::Class, 'countries')->withTrashed();
     }
 
     public function favourite()

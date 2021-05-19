@@ -39,7 +39,12 @@ class Property extends Model
 
     public function image()
     {
-        return $this->morphmany(Image::class, 'image');
+        return $this->morphOne(Image::class, 'category')->withTrashed();
+    }
+    
+    public function images()
+    {
+        return $this->morphToMany(Image::class, 'category')->withTrashed();
     }
 
     public function scopeOrder($query,$order)
