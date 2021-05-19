@@ -266,8 +266,6 @@ Route::prefix('/area')->name('area.')->group(function () {
             /*->middleware('permission:role-remove')*/ ->name('remove');
         Route::post('/{id}', [RoleController::class, 'update'])
             /*->middleware('permission:role-edit')*/ ->name('update');
-        Route::get('/{id}', [RoleController::class, 'show'])
-            /*->middleware('permission:role-show')*/ ->name('show');
     });
     /* });*/
     /* });*/
