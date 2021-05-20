@@ -34,17 +34,6 @@ class RoleRepository implements MeanInterface
                 $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" >'.$data->title->value.'</td>
-                <td id="code-'.$data->id.'" >'.$data->code.'</td>
-                <td id="type_access-'.$data->id.'" >'.$data->type_access.'</td>
-                <td><input onfocus="changeStatus(' . $data->id . ')" type="checkbox" name="status"
-            id="status-' . $data->id . '" checked data-bootstrap-switch data-off-color="danger"
-            data-on-color="success"></td>
-                <td><a href="'.route('role.edit',$data->id) .'"
-              class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>'.trans('lang.Edit').'</a>
-                <button data="button" class="btn btn-outline-danger btn-block btn-sm"
-                onclick="selectItem('.$data->id.')" data-toggle="modal"
-                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
@@ -68,8 +57,6 @@ class RoleRepository implements MeanInterface
                         'language_id' => $lang->id]);
                 }
             }
-            $data = $this->showData($id);
-            return new RoleResource($data);
         });
     }
 
