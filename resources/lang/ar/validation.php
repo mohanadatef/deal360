@@ -150,8 +150,13 @@ $rules = [
 
     'attributes' => [
         'order' => 'الترتيب',
+        'email' => 'البريد الالكتروني',
         'title' => 'الاسم',
+        'fullname' => 'الاسم',
+        'username' => 'الاسم المستخدم',
         'image' => 'صوره',
+        'password' => 'كلمه السر',
+        'password_confirmation' => 'تاكيد كلمه السر',
     ],
 
 ];

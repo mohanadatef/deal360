@@ -7,6 +7,7 @@ use App\Models\CoreData\Package;
 use App\Models\Image;
 use App\Models\Property\Property;
 use App\Models\Property\Review;
+use App\Models\View;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -77,6 +78,11 @@ class User extends Authenticatable
         return $this->hasmany(Review::Class);
     }
 
+    public function view()
+    {
+        return $this->hasmany(View::Class);
+    }
+
     public function permission()
     {
         return $this->belongsToMany(Permission::Class, 'role_permissions');
@@ -95,5 +101,20 @@ class User extends Authenticatable
     public function package()
     {
         return $this->belongsToMany(Package::Class, 'user_packages');
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($user) {
+            $user->image()->delete();
+        });
+
+        static::restoring(function($user) {
+            $user->image()->withTrashed()->restore();
+        });
+
+        static::forceDeleted(function($user) {
+            $user->image()->forceDelete();
+        });
     }
 }

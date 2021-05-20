@@ -32,9 +32,10 @@ class EditRequest extends FormRequest
             'phone' => 'required|numeric|unique:users,phone,'.$this->id.',id',
             'gender' => 'required',
             'dob' => 'required',
-            'role_id' => 'required|exists:roles,id',
-            'country_id' => 'required|exists:countries,id',
+            'role' => 'required|exists:roles,id',
+            'country' => 'required|exists:countries,id',
             'password' => 'required|string|min:6|confirmed',
+            'image' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
         ];
     }
 }

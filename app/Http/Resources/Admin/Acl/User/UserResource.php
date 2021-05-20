@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'dob' => $this->dob,
             'role' => new RoleListResource($this->role),
             'country' => new CountryListResource($this->country),
+            'image' => getImag($this->image,'user'),
         ];
     }
 }

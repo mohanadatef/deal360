@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('status')->default('1');
             $table->integer('approve')->default('0');
             $table->integer('gender')->default('1')->nullable();
-            $table->date('dob')->nullable();
+            $table->date('dob')->default(\Carbon\Carbon::now())->nullable();
             $table->integer('role_id')->unsigned()->index();
             $table->integer('country_id')->unsigned()->index();
             $table->text('password');

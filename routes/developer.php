@@ -22,3 +22,23 @@ Route::get('/clear-cache', function () {
 });
 /* error route list */
 Route::get('/error/403', [HomeController::class, 'error_403'])->name('error.403');
+/* migrate fresh*/
+Route::get('/migrate_fresh', function () {
+    Artisan::call('migrate:fresh');
+    return redirect('admin');
+});
+/* migrate fresh seed */
+Route::get('/migrate_fresh_seed', function () {
+    Artisan::call('migrate:fresh --seed');
+    return redirect('admin');
+});
+/* seed list */
+Route::get('/seed', function () {
+    Artisan::call('db:seed');
+    return redirect('admin');
+});
+/* artisan list */
+Route::get('/{artisan}', function ($artisan) {
+    Artisan::call($artisan);
+    return redirect('admin');
+});

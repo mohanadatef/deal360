@@ -7,16 +7,20 @@ use App\Http\Requests\Admin\Acl\User\CreateRequest;
 use App\Http\Requests\Admin\Acl\User\EditRequest;
 use App\Repositories\Admin\Acl\RoleRepository;
 use App\Repositories\Admin\Acl\UserRepository;
+use App\Repositories\Admin\CoreData\CountryRepository;
 
 class UserController extends Controller
 {
     private $userRepository;
     private $roleRepository;
+    private $countryRepository;
 
-    public function __construct(UserRepository $UserRepository,RoleRepository $RoleRepository)
+    public function __construct(UserRepository $UserRepository,RoleRepository $RoleRepository,
+                                CountryRepository $CountryRepository)
     {
         $this->userRepository = $UserRepository;
         $this->roleRepository = $RoleRepository;
+        $this->countryRepository = $CountryRepository;
     }
 
     public function index()
@@ -28,7 +32,8 @@ class UserController extends Controller
     public function create()
     {
         $role = $this->roleRepository->listData();
-        return view(checkView('admin.acl.user.create'),compact('role'));
+        $country = $this->countryRepository->listData();
+        return view(checkView('admin.acl.user.create'),compact('role','country'));
     }
 
     public function store(CreateRequest $request)
