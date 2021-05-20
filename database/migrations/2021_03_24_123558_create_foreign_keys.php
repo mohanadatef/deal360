@@ -113,6 +113,19 @@ class CreateForeignKeys extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
+        Schema::table('property_floor_plans', function (Blueprint $table) {
+            $table->foreign('property_id')->references('id')->on('properties')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+        });
+        Schema::table('property_photographic_informations', function (Blueprint $table) {
+            $table->foreign('property_id')->references('id')->on('properties')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+        });
         Schema::table('user_package_properties', function (Blueprint $table) {
             $table->foreign('user_package_id')->references('id')->on('user_packages')
                 ->onDelete('cascade')
@@ -226,6 +239,13 @@ class CreateForeignKeys extends Migration
         Schema::table('property_amenities', function (Blueprint $table) {
             $table->dropForeign('property_amenities_amenity_id_foreign');
             $table->dropForeign('property_amenities_property_id_foreign');
+        });
+        Schema::table('property_floor_plans', function (Blueprint $table) {
+            $table->dropForeign('property_floor_plans_property_id_foreign');
+        });
+        Schema::table('property_photographic_informations', function (Blueprint $table) {
+            $table->dropForeign('property_photographic_informations_property_id_foreign');
+            $table->dropForeign('property_photographic_informations_user_id_foreign');
         });
         Schema::table('reviews', function (Blueprint $table) {
             $table->dropForeign('reviews_property_id_foreign');
