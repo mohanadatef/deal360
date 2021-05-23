@@ -29,6 +29,10 @@ class CreateUsersTable extends Migration
             $table->integer('role_id')->unsigned()->index();
             $table->integer('country_id')->unsigned()->index();
             $table->text('password');
+            $table->text('google_id')->nullable();
+            $table->text('facebook_id')->nullable();
+            $table->text('apple_id')->nullable();
+            $table->integer('wp_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->text('token');
             $table->timestamps();

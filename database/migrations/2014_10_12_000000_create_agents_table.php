@@ -21,6 +21,7 @@ class CreateAgentsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->text('whatsapp')->unique()->index()->nullable();
             $table->text('mobile')->unique()->index()->nullable();
+            $table->integer('wp_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

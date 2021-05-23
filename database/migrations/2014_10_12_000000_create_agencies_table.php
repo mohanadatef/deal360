@@ -25,6 +25,7 @@ class CreateAgenciesTable extends Migration
             $table->text('mobile')->unique()->index()->nullable();
             $table->text('phone')->unique()->index()->nullable();
             $table->integer('country_id')->unsigned()->index();
+            $table->integer('wp_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

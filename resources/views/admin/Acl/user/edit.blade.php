@@ -1,6 +1,6 @@
 @extends('includes.admin.master_admin')
 @section('title')
-    {{trans('lang.Create')}}
+    {{trans('lang.Update')}}
 @endsection
 @section('head_style')
     @include('includes.admin.dataTables.head_DataTables')
@@ -15,13 +15,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Role</h1>
+                        <h1>{{trans('lang.User')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a
                                     href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
-                            <li class="breadcrumb-item active">{{trans('lang.Role')}}</li>
+                            <li class="breadcrumb-item active">{{trans('lang.User')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -42,49 +42,78 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             @include('errors.error')
-                            <form action="{{route('role.update',$data->id)}}" method="post" id="edit">
+                            <form action="{{route('user.update',$data->id)}}" method="post" id="create">
                                 @csrf
                                 <div class="card-body">
-                                    @foreach($language as $lang)
-                                        <div
-                                            class="form-group{{ $errors->has('title['.$lang->code.']') ? ' is-invalid' : "" }}">
-                                            <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
-                                            <input type="text" name="title[{{$lang->code}}]" class="form-control"
-                                                   id="title[{{$lang->code}}]"
-                                                   <?php $title=$data->translation->where('language_id', $lang->id)->first() ?>
-                                                   @if($title)
-                                                   value="{{$title->value}}"
-                                                   @endif
-                                                   placeholder="{{trans('lang.Enter_Title')}} {{$lang->title}}">
+                                    <div class="form-group{{ $errors->has('fullname') ? ' is-invalid' : "" }}">
+                                        <label for="fullname">{{trans('lang.Full_Name')}}</label>
+                                        <input type="text" name="fullname" class="form-control" id="fullname"
+                                               value="{{$data->fullname}}"
+                                               placeholder="{{trans('lang.Enter_Full_Name')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('username') ? ' is-invalid' : "" }}">
+                                        <label for="username">{{trans('lang.User_Name')}}</label>
+                                        <input type="text" name="username" class="form-control" id="username"
+                                               value="{{$data->username}}" disabled
+                                               placeholder="{{trans('lang.Enter_User_Name')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('email') ? ' is-invalid' : "" }}">
+                                        <label for="email">{{trans('lang.Email')}}</label>
+                                        <input type="email" name="email" class="form-control" id="email"
+                                               value="{{$data->email}}"
+                                               placeholder="{{trans('lang.Enter_Email')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('phone') ? ' is-invalid' : "" }}">
+                                        <label for="phone">{{trans('lang.Phone')}}</label>
+                                        <input type="text" name="phone" class="form-control" id="phone"
+                                               value="{{$data->phone}}"
+                                               placeholder="{{trans('lang.Enter_Phone')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('dob') ? ' is-invalid' : "" }}">
+                                        <label>{{trans('lang.DOB')}} :</label>
+                                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                            <input type="text" name="dob" value="{{$data->dob}}"
+                                                   placeholder="{{trans('lang.Exampl').' '.\Carbon\Carbon::now()->format('d/m/y')}}"
+                                                   class="form-control datetimepicker-input"
+                                                   data-target="#reservationdate" data-toggle="datetimepicker"/>
+                                            <div class="input-group-append" data-target="#reservationdate"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
                                         </div>
-                                    @endforeach
-                                    <div class="form-group{{ $errors->has('order') ? ' is-invalid' : "" }}">
-                                        <label for="order">{{trans('lang.Order')}}</label>
-                                        <input type="text" name="order" class="form-control" id="order"
-                                               value="{{$data->order}}" placeholder="{{trans('lang.Enter_Order')}}">
                                     </div>
-                                    <div class="form-group{{ $errors->has('code') ? ' is-invalid' : "" }}">
-                                        <label for="code">{{trans('lang.Code')}}</label>
-                                        <input type="text" name="code" class="form-control" id="code"
-                                               value="{{$data->code}}" placeholder="{{trans('lang.Enter_Code')}}">
-                                    </div>
-                                    <div class="form-group{{ $errors->has('type_access') ? ' is-invalid' : "" }}">
-                                        <label>{{trans('lang.Type')}}</label>
-                                        <select class="form-control" id="type_access" name="type_access"
+                                    <div class="form-group{{ $errors->has('gender') ? ' is-invalid' : "" }}">
+                                        <label>{{trans('lang.Gender')}}</label>
+                                        <select class="form-control" id="gender" name="gender"
                                                 style="width: 100%;">
-                                            <option >{{trans('lang.Select')}}</option>
-                                            <option @if($data->type_access == 'all')  selected @endif value="all">{{trans('lang.all')}}</option>
-                                            <option @if($data->type_access == 'deal360')  selected @endif value="deal360">{{trans('lang.deal360')}}</option>
-                                            <option @if($data->type_access == 'crm')  selected @endif value="crm">{{trans('lang.crm')}}</option>
+                                            <option @if($data->gender == 0) selected @endif value="0">{{trans('lang.Male')}}</option>
+                                            <option @if($data->gender == 1) selected @endif value="1">{{trans('lang.Famel')}}</option>
                                         </select>
                                     </div>
-                                    <div class="form-group{{ $errors->has('permission') ? ' has-error' : "" }}">
-                                        <label>{{trans('lang.Permission')}}</label>
-                                        <select class="duallistbox" multiple="multiple" name="permission[]">
-                                            @foreach($permission as $key => $pe)
-                                                <option @foreach($role_permission as  $rp) @if($rp->permission_id ==$pe->id) selected   @endif @endforeach value="{{$pe->id}}">{{$pe->title->value}}</option>
+                                    <div class="form-group{{ $errors->has('country') ? ' is-invalid' : "" }}">
+                                        <label>{{trans('lang.Country')}}</label>
+                                        <select class="form-control select2" id="country" name="country"
+                                                style="width: 100%;">
+                                            @foreach($country as $my)
+                                                <option value="{{$my->id}}"
+                                                        id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('role') ? ' is-invalid' : "" }}">
+                                        <label>{{trans('lang.Role')}}</label>
+                                        <select class="form-control select2" id="role" name="role"
+                                                style="width: 100%;">
+                                            @foreach($role as $ro)
+                                                <option value="{{$ro->id}}"
+                                                        id="option-role-{{$ro->id}}">{{$ro->title ? $ro->title->value : ""}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('image') ? ' has-error' : "" }}">
+                                        <label>{{trans('lang.Image')}}</label>
+                                        <input type="file" value="" name="image"/>
+                                        <label for="image">jpg, png, gif</label>
                                     </div>
                                     <!-- /.form-group -->
                                     <!-- /.col -->
@@ -117,6 +146,11 @@
     <script>
         //Bootstrap Duallistbox
         $('.duallistbox').bootstrapDualListbox();
+        //Date range picker
+        $('#reservationdate').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
     </script>
-    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\Role\EditRequest','#edit') !!}
+
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\UpdateRequest','#create') !!}
 @endsection

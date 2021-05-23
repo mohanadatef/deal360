@@ -71,7 +71,8 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('password') ? ' is-invalid' : "" }}">
                                         <label for="password">{{trans('lang.Password_Confirmation')}}</label>
-                                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
+                                        <input type="password" name="password_confirmation" class="form-control"
+                                               id="password_confirmation"
                                                value="{{Request::old('password_confirmation')}}"
                                                placeholder="{{trans('lang.Enter_Password_Confirmation')}}">
                                     </div>
@@ -80,6 +81,27 @@
                                         <input type="text" name="phone" class="form-control" id="phone"
                                                value="{{Request::old('phone')}}"
                                                placeholder="{{trans('lang.Enter_Phone')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('dob') ? ' is-invalid' : "" }}">
+                                        <label>{{trans('lang.DOB')}} :</label>
+                                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                            <input type="text" name="dob" value="{{Request::old('dob')}}"
+                                                   placeholder="{{trans('lang.Exampl').' '.\Carbon\Carbon::now()->format('d/m/y')}}"
+                                                   class="form-control datetimepicker-input"
+                                                   data-target="#reservationdate" data-toggle="datetimepicker"/>
+                                            <div class="input-group-append" data-target="#reservationdate"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('gender') ? ' is-invalid' : "" }}">
+                                        <label>{{trans('lang.Gender')}}</label>
+                                        <select class="form-control" id="gender" name="gender"
+                                                style="width: 100%;">
+                                            <option value="0">{{trans('lang.Male')}}</option>
+                                            <option value="1">{{trans('lang.Famel')}}</option>
+                                        </select>
                                     </div>
                                     <div class="form-group{{ $errors->has('country') ? ' is-invalid' : "" }}">
                                         <label>{{trans('lang.Country')}}</label>
@@ -137,6 +159,11 @@
     <script>
         //Bootstrap Duallistbox
         $('.duallistbox').bootstrapDualListbox();
+        //Date range picker
+        $('#reservationdate').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
     </script>
+
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\CreateRequest','#create') !!}
 @endsection
