@@ -42,7 +42,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             @include('errors.error')
-                            <form action="{{route('user.update',$data->id)}}" method="post" id="create">
+                            <form action="{{route('user.update',$data->id)}}" method="post" id="edit">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group{{ $errors->has('fullname') ? ' is-invalid' : "" }}">
@@ -96,7 +96,7 @@
                                                 style="width: 100%;">
                                             @foreach($country as $my)
                                                 <option value="{{$my->id}}"
-                                                        id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
+                                                        @if($data->country_id == $my->id) selected @endif   id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -106,10 +106,12 @@
                                                 style="width: 100%;">
                                             @foreach($role as $ro)
                                                 <option value="{{$ro->id}}"
-                                                        id="option-role-{{$ro->id}}">{{$ro->title ? $ro->title->value : ""}}</option>
+                                                        @if($data->role_id == $ro->id) selected @endif      id="option-role-{{$ro->id}}">{{$ro->title ? $ro->title->value : ""}}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    <img src="{{ getImag($data->image,'user') }}"
+                                         id="image-{{$data->id}}" style="width:100px;height: 100px">
                                     <div class="form-group{{ $errors->has('image') ? ' has-error' : "" }}">
                                         <label>{{trans('lang.Image')}}</label>
                                         <input type="file" value="" name="image"/>
@@ -152,5 +154,5 @@
         });
     </script>
 
-    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\UpdateRequest','#create') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\UpdateRequest','#edit') !!}
 @endsection

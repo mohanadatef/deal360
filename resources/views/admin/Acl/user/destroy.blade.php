@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{trans('lang.Role')}}</h1>
+                        <h1>{{trans('lang.User')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
-                            <li class="breadcrumb-item active">{{trans('lang.Role')}}</li>
+                            <li class="breadcrumb-item active">{{trans('lang.User')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -40,19 +40,24 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>{{trans('lang.Title')}}</th>
-                                        <th>{{trans('lang.Code')}}</th>
-                                        <th>{{trans('lang.Type_access')}}</th>
+                                        <th>{{trans('lang.Full_Name')}}</th>
+                                        <th>{{trans('lang.User_Name')}}</th>
+                                        <th>{{trans('lang.Email')}}</th>
+                                        <th>{{trans('lang.Role')}}</th>
+                                        <th>{{trans('lang.Image')}}</th>
                                         <th>{{trans('lang.Controller')}} </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @forelse($datas as $data)
                                         <tr id="data-{{$data->id}}">
-                                            <td id="title-{{$data->id}}"
-                                                data-order="{{$data->order}}">{{$data->title ? $data->title->value : ""}}</td>
-                                            <td id="code-{{$data->id}}">{{$data->code}}</td>
-                                            <td id="type_access-{{$data->id}}">{{trans('lang.'.$data->type_access)}}</td>
+                                            <td id="full-name-{{$data->id}}"
+                                                data-order="{{$data->order}}">{{$data->fullname}}</td>
+                                            <td id="user-name-{{$data->id}}">{{$data->username}}</td>
+                                            <td id="email-{{$data->id}}">{{$data->email}}</td>
+                                            <td id="role-{{$data->id}}">{{$data->role->title ? $data->role->title->value : ""}}</td>
+                                            <td id="image-{{$data->id}}"><img src="{{ getImag($data->image,'user') }}"
+                                                                             id="image-{{$data->id}}" style="width:100px;height: 100px"></td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
@@ -70,9 +75,11 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>{{trans('lang.Title')}}</th>
-                                        <th>{{trans('lang.Code')}}</th>
-                                        <th>{{trans('lang.Type_access')}}</th>
+                                        <th>{{trans('lang.Full_Name')}}</th>
+                                        <th>{{trans('lang.User_Name')}}</th>
+                                        <th>{{trans('lang.Email')}}</th>
+                                        <th>{{trans('lang.Role')}}</th>
+                                        <th>{{trans('lang.Image')}}</th>
                                         <th>{{trans('lang.Controller')}} </th>
                                     </tr>
                                     </tfoot>

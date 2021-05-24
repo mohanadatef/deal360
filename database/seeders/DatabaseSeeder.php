@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Acl\PermissionTableSeeder;
 use Database\Seeders\CoreData\LanguageTableSeeder;
 use Illuminate\Database\Seeder;
 
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(LanguageTableSeeder::class);
+        $this->call(PermissionTableSeeder::class);
     }
 }

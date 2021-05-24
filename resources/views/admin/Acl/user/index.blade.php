@@ -12,12 +12,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{trans('lang.Role')}}</h1>
+                        <h1>{{trans('lang.User')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
-                            <li class="breadcrumb-item active">{{trans('lang.Role')}}</li>
+                            <li class="breadcrumb-item active">{{trans('lang.User')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
-                                        <a href="{{  route('role.create') }}"
+                                        <a href="{{  route('user.create') }}"
                                            class="btn btn-success"> {{trans('lang.Create')}}</a>
                                     </h3>
                                 </div>
@@ -42,9 +42,12 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                            <th>{{trans('lang.Title')}}</th>
-                                            <th>{{trans('lang.Code')}}</th>
-                                            <th>{{trans('lang.Type_access')}}</th>
+                                            <th>{{trans('lang.Full_Name')}}</th>
+                                            <th>{{trans('lang.User_Name')}}</th>
+                                            <th>{{trans('lang.Email')}}</th>
+                                            <th>{{trans('lang.Role')}}</th>
+                                            <th>{{trans('lang.Country')}}</th>
+                                            <th>{{trans('lang.Image')}}</th>
                                             <th>{{trans('lang.Status')}}</th>
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
@@ -52,10 +55,14 @@
                                         <tbody id="body">
                                         @forelse($datas as $data)
                                             <tr id="data-{{$data->id}}">
-                                                <td id="title-{{$data->id}}"
-                                                    data-order="{{$data->order}}">{{$data->title ? $data->title->value : ""}}</td>
-                                                <td id="code-{{$data->id}}">{{$data->code}}</td>
-                                                <td id="type_access-{{$data->id}}">{{trans('lang.'.$data->type_access)}}</td>
+                                                <td id="full-name-{{$data->id}}"
+                                                    data-order="{{$data->order}}">{{$data->fullname}}</td>
+                                                <td id="user-name-{{$data->id}}">{{$data->username}}</td>
+                                                <td id="email-{{$data->id}}">{{$data->email}}</td>
+                                                <td id="role-{{$data->id}}">{{$data->role->title ? $data->role->title->value : ""}}</td>
+                                                <td id="country-{{$data->id}}">{{$data->country->title ? $data->country->title->value : ""}}</td>
+                                                <td id="image-{{$data->id}}"><img src="{{ getImag($data->image,'user') }}"
+                                                                                  id="image-{{$data->id}}" style="width:100px;height: 100px"></td>
                                                 <td>
                                                     <input onfocus="changeStatus({{$data->id}})" type="checkbox"
                                                            name="status" @if($data->status) checked
@@ -64,7 +71,7 @@
                                                            data-on-color="success">
                                                 </td>
                                                 <td>
-                                                    <a href="{{  route('role.edit',$data->id) }}"
+                                                    <a href="{{  route('user.edit',$data->id) }}"
                                                        class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>{{trans('lang.Edit')}}</a>
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
@@ -78,9 +85,12 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>{{trans('lang.Title')}}</th>
-                                            <th>{{trans('lang.Code')}}</th>
-                                            <th>{{trans('lang.Type_access')}}</th>
+                                            <th>{{trans('lang.Full_Name')}}</th>
+                                            <th>{{trans('lang.User_Name')}}</th>
+                                            <th>{{trans('lang.Email')}}</th>
+                                            <th>{{trans('lang.Role')}}</th>
+                                            <th>{{trans('lang.Country')}}</th>
+                                            <th>{{trans('lang.Image')}}</th>
                                             <th>{{trans('lang.Status')}}</th>
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>

@@ -18,6 +18,7 @@ class CreatePackagesTable extends Migration {
             $table->integer('count_date')->default('1');
             $table->integer('status')->default('1');
             $table->integer('order')->unique();
+            $table->integer('wp_id')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});
