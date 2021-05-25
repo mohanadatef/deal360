@@ -5,6 +5,8 @@ namespace App\Models\Acl;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Role extends Model
 {
@@ -52,7 +54,7 @@ class Role extends Model
 
     public function role_permission()
     {
-        return $this->hasMany(RolePermission::Class);
+        return $this->hasManyThrough(Permission::Class,RolePermission::Class,'role_id','id');
     }
 
     public static function boot() {

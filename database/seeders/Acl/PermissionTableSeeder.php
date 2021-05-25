@@ -30,486 +30,538 @@ class PermissionTableSeeder extends Seeder
             //permission
             [
                 'name' => 'permission-list',
-                'title' => ['en' => 'permission list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'permission list', 'ar' => 'قائمه اذنات اذنات'],
             ],
             [
                 'name' => 'permission-index',
-                'title' => ['en' => 'permission index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'permission index', 'ar' => 'قائمه اذنات'],
             ],
             [
                 'name' => 'permission-create',
-                'title' => ['en' => 'permission create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'permission create', 'ar' => 'اضافه اذنات'],
             ],
             [
                 'name' => 'permission-edit',
-                'title' => ['en' => 'permission edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'permission edit', 'ar' => 'تعديل اذنات'],
             ],
             [
                 'name' => 'permission-delete',
-                'title' => ['en' => 'permission delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'permission delete', 'ar' => 'مسح اذنات'],
+            ],
+            [
+                'name' => 'permission-index-delete',
+                'title' => ['en' => 'permission index delete', 'ar' => 'قائمه مسح اذنات'],
             ],
             [
                 'name' => 'permission-restore',
-                'title' => ['en' => 'permission restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'permission restore', 'ar' => 'استرجاع اذنات'],
             ],
             [
                 'name' => 'permission-remove',
-                'title' => ['en' => 'permission remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'permission remove', 'ar' => 'حذف اذنات'],
             ],
             //dashboard
             [
                 'name' => 'dashboard-show',
-                'title' => ['en' => 'dashboard show', 'ar' => 'عرض '],
+                'title' => ['en' => 'dashboard show', 'ar' => 'عرض لوحه التحكم'],
             ],
             //acl
             [
                 'name' => 'acl-list',
-                'title' => ['en' => 'acl list', 'ar' => 'قائمه'],
+                'title' => ['en' => 'acl list', 'ar' => 'قائمه الامن'],
             ],
             //user
             [
                 'name' => 'user-list',
-                'title' => ['en' => 'user list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'user list', 'ar' => 'قائمه اذنات المستخدم'],
             ],
             [
                 'name' => 'user-index',
-                'title' => ['en' => 'user index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'user index', 'ar' => 'قائمه المستخدم'],
             ],
             [
                 'name' => 'user-create',
-                'title' => ['en' => 'user create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'user create', 'ar' => 'اضافه المستخدم'],
             ],
             [
                 'name' => 'user-edit',
-                'title' => ['en' => 'user edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'user edit', 'ar' => 'تعديل المستخدم'],
             ],
             [
                 'name' => 'user-status',
-                'title' => ['en' => 'user status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'user status', 'ar' => 'تغير حاله المستخدم'],
             ],
             [
                 'name' => 'user-delete',
-                'title' => ['en' => 'user delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'user delete', 'ar' => 'مسح المستخدم'],
+            ],
+            [
+                'name' => 'user-index-delete',
+                'title' => ['en' => 'user index delete', 'ar' => 'قائمه مسح المستخدم'],
             ],
             [
                 'name' => 'user-restore',
-                'title' => ['en' => 'user restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'user restore', 'ar' => 'استرجاع المستخدم'],
             ],
             [
                 'name' => 'user-remove',
-                'title' => ['en' => 'user remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'user remove', 'ar' => 'حذف المستخدم'],
             ],
             //role
             [
                 'name' => 'role-list',
-                'title' => ['en' => 'role list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'role list', 'ar' => 'قائمه اذنات صلحيات'],
             ],
             [
                 'name' => 'role-index',
-                'title' => ['en' => 'role index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'role index', 'ar' => 'قائمه صلحيات'],
             ],
             [
                 'name' => 'role-create',
-                'title' => ['en' => 'role create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'role create', 'ar' => 'اضافه صلحيات'],
             ],
             [
                 'name' => 'role-edit',
-                'title' => ['en' => 'role edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'role edit', 'ar' => 'تعديل صلحيات'],
             ],
             [
                 'name' => 'role-status',
-                'title' => ['en' => 'role status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'role status', 'ar' => 'تغير حاله صلحيات'],
             ],
             [
                 'name' => 'role-delete',
-                'title' => ['en' => 'role delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'role delete', 'ar' => 'مسح صلحيات'],
+            ],
+            [
+                'name' => 'role-index-delete',
+                'title' => ['en' => 'role index delete', 'ar' => 'قائمه مسح صلحيات'],
             ],
             [
                 'name' => 'role-restore',
-                'title' => ['en' => 'role restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'role restore', 'ar' => 'استرجاع صلحيات'],
             ],
             [
                 'name' => 'role-remove',
-                'title' => ['en' => 'role remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'role remove', 'ar' => 'حذف صلحيات'],
             ],
             //setting
             [
                 'name' => 'setting-list',
-                'title' => ['en' => 'setting list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'setting list', 'ar' => 'قائمه اذنات الاعدادات'],
             ],
             //meta
             [
                 'name' => 'meta-list',
-                'title' => ['en' => 'meta list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'meta list', 'ar' => 'قائمه اذنات كلمه تعريفيه'],
             ],
             [
                 'name' => 'meta-index',
-                'title' => ['en' => 'meta index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'meta index', 'ar' => 'قائمه كلمه تعريفيه'],
             ],
             [
                 'name' => 'meta-create',
-                'title' => ['en' => 'meta create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'meta create', 'ar' => 'اضافه كلمه تعريفيه'],
             ],
             [
                 'name' => 'meta-edit',
-                'title' => ['en' => 'meta edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'meta edit', 'ar' => 'تعديل كلمه تعريفيه'],
             ],
             [
                 'name' => 'meta-status',
-                'title' => ['en' => 'meta status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'meta status', 'ar' => 'تغير حاله كلمه تعريفيه'],
             ],
             [
                 'name' => 'meta-delete',
-                'title' => ['en' => 'meta delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'meta delete', 'ar' => 'مسح كلمه تعريفيه'],
+            ],
+            [
+                'name' => 'meta-index-delete',
+                'title' => ['en' => 'meta index delete', 'ar' => 'قائمه مسح كلمه تعريفيه'],
             ],
             [
                 'name' => 'meta-restore',
-                'title' => ['en' => 'meta restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'meta restore', 'ar' => 'استرجاع كلمه تعريفيه'],
             ],
             [
                 'name' => 'meta-remove',
-                'title' => ['en' => 'meta remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'meta remove', 'ar' => 'حذف كلمه تعريفيه'],
             ],
             //core data
             [
                 'name' => 'core-data-list',
-                'title' => ['en' => 'core data list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'core data list', 'ar' => 'قائمه اذنات بيانات الاساسيه'],
             ],
-            //area
+            //rejoin
             [
-                'name' => 'area-list',
-                'title' => ['en' => 'area list', 'ar' => 'قائمه اذنات'],
-            ],
-            [
-                'name' => 'area-index',
-                'title' => ['en' => 'area index', 'ar' => 'قائمه'],
+                'name' => 'rejoin-list',
+                'title' => ['en' => 'rejoin list', 'ar' => 'قائمه اذنات المنطقه'],
             ],
             [
-                'name' => 'area-create',
-                'title' => ['en' => 'area create', 'ar' => 'اضافه'],
+                'name' => 'rejoin-index',
+                'title' => ['en' => 'rejoin index', 'ar' => 'قائمه المنطقه'],
             ],
             [
-                'name' => 'area-edit',
-                'title' => ['en' => 'area edit', 'ar' => 'تعديل'],
+                'name' => 'rejoin-create',
+                'title' => ['en' => 'rejoin create', 'ar' => 'اضافه المنطقه'],
             ],
             [
-                'name' => 'area-status',
-                'title' => ['en' => 'area status', 'ar' => 'تغير حاله'],
+                'name' => 'rejoin-edit',
+                'title' => ['en' => 'rejoin edit', 'ar' => 'تعديل المنطقه'],
             ],
             [
-                'name' => 'area-delete',
-                'title' => ['en' => 'area delete', 'ar' => 'مسح'],
+                'name' => 'rejoin-status',
+                'title' => ['en' => 'rejoin status', 'ar' => 'تغير حاله المنطقه'],
             ],
             [
-                'name' => 'area-restore',
-                'title' => ['en' => 'area restore', 'ar' => 'استرجاع'],
+                'name' => 'rejoin-delete',
+                'title' => ['en' => 'rejoin delete', 'ar' => 'مسح المنطقه'],
             ],
             [
-                'name' => 'area-remove',
-                'title' => ['en' => 'area remove', 'ar' => 'حذف'],
+                'name' => 'rejoin-index-delete',
+                'title' => ['en' => 'rejoin index delete', 'ar' => 'قائمه مسح المنطقه'],
+            ],
+            [
+                'name' => 'rejoin-restore',
+                'title' => ['en' => 'rejoin restore', 'ar' => 'استرجاع المنطقه'],
+            ],
+            [
+                'name' => 'rejoin-remove',
+                'title' => ['en' => 'rejoin remove', 'ar' => 'حذف المنطقه'],
             ],
             //city
             [
                 'name' => 'city-list',
-                'title' => ['en' => 'city list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'city list', 'ar' => 'قائمه اذنات المدينه'],
             ],
             [
                 'name' => 'city-index',
-                'title' => ['en' => 'city index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'city index', 'ar' => 'قائمه المدينه'],
             ],
             [
                 'name' => 'city-create',
-                'title' => ['en' => 'city create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'city create', 'ar' => 'اضافه المدينه'],
             ],
             [
                 'name' => 'city-edit',
-                'title' => ['en' => 'city edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'city edit', 'ar' => 'تعديل المدينه'],
             ],
             [
                 'name' => 'city-status',
-                'title' => ['en' => 'city status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'city status', 'ar' => 'تغير حاله المدينه'],
             ],
             [
                 'name' => 'city-delete',
-                'title' => ['en' => 'city delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'city delete', 'ar' => 'مسح المدينه'],
+            ],
+            [
+                'name' => 'city-index-delete',
+                'title' => ['en' => 'city index delete', 'ar' => 'قائمه مسح المدينه'],
             ],
             [
                 'name' => 'city-restore',
-                'title' => ['en' => 'city restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'city restore', 'ar' => 'استرجاع المدينه'],
             ],
             [
                 'name' => 'city-remove',
-                'title' => ['en' => 'city remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'city remove', 'ar' => 'حذف المدينه'],
             ],
             //country
             [
                 'name' => 'country-list',
-                'title' => ['en' => 'country list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'country list', 'ar' => 'قائمه اذنات البلد'],
             ],
             [
                 'name' => 'country-index',
-                'title' => ['en' => 'country index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'country index', 'ar' => 'قائمه البلد'],
             ],
             [
                 'name' => 'country-create',
-                'title' => ['en' => 'country create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'country create', 'ar' => 'اضافه البلد'],
             ],
             [
                 'name' => 'country-edit',
-                'title' => ['en' => 'country edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'country edit', 'ar' => 'تعديل البلد'],
             ],
             [
                 'name' => 'country-status',
-                'title' => ['en' => 'country status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'country status', 'ar' => 'تغير حاله البلد'],
             ],
             [
                 'name' => 'country-delete',
-                'title' => ['en' => 'country delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'country delete', 'ar' => 'مسح البلد'],
+            ],
+            [
+                'name' => 'country-index-delete',
+                'title' => ['en' => 'country index delete', 'ar' => 'قائمه مسح البلد'],
             ],
             [
                 'name' => 'country-restore',
-                'title' => ['en' => 'country restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'country restore', 'ar' => 'استرجاع البلد'],
             ],
             [
                 'name' => 'country-remove',
-                'title' => ['en' => 'country remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'country remove', 'ar' => 'حذف البلد'],
             ],
             //language
             [
                 'name' => 'language-list',
-                'title' => ['en' => 'language list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'language list', 'ar' => 'قائمه اذنات اللغه'],
             ],
             [
                 'name' => 'language-index',
-                'title' => ['en' => 'language index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'language index', 'ar' => 'قائمه اللغه'],
             ],
             [
                 'name' => 'language-create',
-                'title' => ['en' => 'language create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'language create', 'ar' => 'اضافه اللغه'],
             ],
             [
                 'name' => 'language-edit',
-                'title' => ['en' => 'language edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'language edit', 'ar' => 'تعديل اللغه'],
             ],
             [
                 'name' => 'language-status',
-                'title' => ['en' => 'language status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'language status', 'ar' => 'تغير حاله اللغه'],
             ],
             [
                 'name' => 'language-delete',
-                'title' => ['en' => 'language delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'language delete', 'ar' => 'مسح اللغه'],
+            ],
+            [
+                'name' => 'language-index-delete',
+                'title' => ['en' => 'language index delete', 'ar' => 'قائمه مسح اللغه'],
             ],
             [
                 'name' => 'language-restore',
-                'title' => ['en' => 'language restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'language restore', 'ar' => 'استرجاع اللغه'],
             ],
             [
                 'name' => 'language-remove',
-                'title' => ['en' => 'language remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'language remove', 'ar' => 'حذف اللغه'],
             ],
             //amenity
             [
                 'name' => 'amenity-list',
-                'title' => ['en' => 'amenity list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'amenity list', 'ar' => 'قائمه اذنات مميزات'],
             ],
             [
                 'name' => 'amenity-index',
-                'title' => ['en' => 'amenity index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'amenity index', 'ar' => 'قائمه مميزات'],
             ],
             [
                 'name' => 'amenity-create',
-                'title' => ['en' => 'amenity create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'amenity create', 'ar' => 'اضافه مميزات'],
             ],
             [
                 'name' => 'amenity-edit',
-                'title' => ['en' => 'amenity edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'amenity edit', 'ar' => 'تعديل مميزات'],
             ],
             [
                 'name' => 'amenity-status',
-                'title' => ['en' => 'amenity status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'amenity status', 'ar' => 'تغير حاله مميزات'],
             ],
             [
                 'name' => 'amenity-delete',
-                'title' => ['en' => 'amenity delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'amenity delete', 'ar' => 'مسح مميزات'],
+            ],
+            [
+                'name' => 'amenity-index-delete',
+                'title' => ['en' => 'amenity index delete', 'ar' => 'قائمه مسح مميزات'],
             ],
             [
                 'name' => 'amenity-restore',
-                'title' => ['en' => 'amenity restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'amenity restore', 'ar' => 'استرجاع مميزات'],
             ],
             [
                 'name' => 'amenity-remove',
-                'title' => ['en' => 'amenity remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'amenity remove', 'ar' => 'حذف مميزات'],
             ],
             //category
             [
                 'name' => 'category-list',
-                'title' => ['en' => 'category list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'category list', 'ar' => 'قائمه اذنات تخصص'],
             ],
             [
                 'name' => 'category-index',
-                'title' => ['en' => 'category index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'category index', 'ar' => 'قائمه تخصص'],
             ],
             [
                 'name' => 'category-create',
-                'title' => ['en' => 'category create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'category create', 'ar' => 'اضافه تخصص'],
             ],
             [
                 'name' => 'category-edit',
-                'title' => ['en' => 'category edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'category edit', 'ar' => 'تعديل تخصص'],
             ],
             [
                 'name' => 'category-status',
-                'title' => ['en' => 'category status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'category status', 'ar' => 'تغير حاله تخصص'],
             ],
             [
                 'name' => 'category-delete',
-                'title' => ['en' => 'category delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'category delete', 'ar' => 'مسح تخصص'],
+            ],
+            [
+                'name' => 'category-index-delete',
+                'title' => ['en' => 'category index delete', 'ar' => 'قائمه مسح تخصص'],
             ],
             [
                 'name' => 'category-restore',
-                'title' => ['en' => 'category restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'category restore', 'ar' => 'استرجاع تخصص'],
             ],
             [
                 'name' => 'category-remove',
-                'title' => ['en' => 'category remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'category remove', 'ar' => 'حذف تخصص'],
             ],
             //package
             [
                 'name' => 'package-list',
-                'title' => ['en' => 'package list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'package list', 'ar' => 'قائمه اذنات باقه'],
             ],
             [
                 'name' => 'package-index',
-                'title' => ['en' => 'package index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'package index', 'ar' => 'قائمه باقه'],
             ],
             [
                 'name' => 'package-create',
-                'title' => ['en' => 'package create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'package create', 'ar' => 'اضافه باقه'],
             ],
             [
                 'name' => 'package-edit',
-                'title' => ['en' => 'package edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'package edit', 'ar' => 'تعديل باقه'],
             ],
             [
                 'name' => 'package-status',
-                'title' => ['en' => 'package status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'package status', 'ar' => 'تغير حاله باقه'],
             ],
             [
                 'name' => 'package-delete',
-                'title' => ['en' => 'package delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'package delete', 'ar' => 'مسح باقه'],
+            ],
+            [
+                'name' => 'package-index-delete',
+                'title' => ['en' => 'package index delete', 'ar' => 'قائمه مسح باقه'],
             ],
             [
                 'name' => 'package-restore',
-                'title' => ['en' => 'package restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'package restore', 'ar' => 'استرجاع باقه'],
             ],
             [
                 'name' => 'package-remove',
-                'title' => ['en' => 'package remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'package remove', 'ar' => 'حذف باقه'],
             ],
             //status
             [
                 'name' => 'status-list',
-                'title' => ['en' => 'status list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'status list', 'ar' => 'قائمه اذنات حاله'],
             ],
             [
                 'name' => 'status-index',
-                'title' => ['en' => 'status index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'status index', 'ar' => 'قائمه حاله'],
             ],
             [
                 'name' => 'status-create',
-                'title' => ['en' => 'status create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'status create', 'ar' => 'اضافه حاله'],
             ],
             [
                 'name' => 'status-edit',
-                'title' => ['en' => 'status edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'status edit', 'ar' => 'تعديل حاله'],
             ],
             [
                 'name' => 'status-status',
-                'title' => ['en' => 'status status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'status status', 'ar' => 'تغير حاله حاله'],
             ],
             [
                 'name' => 'status-delete',
-                'title' => ['en' => 'status delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'status delete', 'ar' => 'مسح حاله'],
+            ],
+            [
+                'name' => 'status-index-delete',
+                'title' => ['en' => 'status index delete', 'ar' => 'قائمه مسح حاله'],
             ],
             [
                 'name' => 'status-restore',
-                'title' => ['en' => 'status restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'status restore', 'ar' => 'استرجاع حاله'],
             ],
             [
                 'name' => 'status-remove',
-                'title' => ['en' => 'status remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'status remove', 'ar' => 'حذف حاله'],
             ],
             //type
             [
                 'name' => 'type-list',
-                'title' => ['en' => 'type list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'type list', 'ar' => 'قائمه اذنات نوع'],
             ],
             [
                 'name' => 'type-index',
-                'title' => ['en' => 'type index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'type index', 'ar' => 'قائمه نوع'],
             ],
             [
                 'name' => 'type-create',
-                'title' => ['en' => 'type create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'type create', 'ar' => 'اضافه نوع'],
             ],
             [
                 'name' => 'type-edit',
-                'title' => ['en' => 'type edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'type edit', 'ar' => 'تعديل نوع'],
             ],
             [
                 'name' => 'type-status',
-                'title' => ['en' => 'type status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'type status', 'ar' => 'تغير حاله نوع'],
             ],
             [
                 'name' => 'type-delete',
-                'title' => ['en' => 'type delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'type delete', 'ar' => 'مسح نوع'],
+            ],
+            [
+                'name' => 'type-index-delete',
+                'title' => ['en' => 'type index delete', 'ar' => 'قائمه مسح نوع'],
             ],
             [
                 'name' => 'type-restore',
-                'title' => ['en' => 'type restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'type restore', 'ar' => 'استرجاع نوع'],
             ],
             [
                 'name' => 'type-remove',
-                'title' => ['en' => 'type remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'type remove', 'ar' => 'حذف نوع'],
             ],
             //highlight
             [
                 'name' => 'highlight-list',
-                'title' => ['en' => 'highlight list', 'ar' => 'قائمه اذنات'],
+                'title' => ['en' => 'highlight list', 'ar' => 'قائمه اذنات عروض'],
             ],
             [
                 'name' => 'highlight-index',
-                'title' => ['en' => 'highlight index', 'ar' => 'قائمه'],
+                'title' => ['en' => 'highlight index', 'ar' => 'قائمه عروض'],
             ],
             [
                 'name' => 'highlight-create',
-                'title' => ['en' => 'highlight create', 'ar' => 'اضافه'],
+                'title' => ['en' => 'highlight create', 'ar' => 'اضافه عروض'],
             ],
             [
                 'name' => 'highlight-edit',
-                'title' => ['en' => 'highlight edit', 'ar' => 'تعديل'],
+                'title' => ['en' => 'highlight edit', 'ar' => 'تعديل عروض'],
             ],
             [
                 'name' => 'highlight-status',
-                'title' => ['en' => 'highlight status', 'ar' => 'تغير حاله'],
+                'title' => ['en' => 'highlight status', 'ar' => 'تغير حاله عروض'],
             ],
             [
                 'name' => 'highlight-delete',
-                'title' => ['en' => 'highlight delete', 'ar' => 'مسح'],
+                'title' => ['en' => 'highlight delete', 'ar' => 'مسح عروض'],
             ],
             [
                 'name' => 'highlight-restore',
-                'title' => ['en' => 'highlight restore', 'ar' => 'استرجاع'],
+                'title' => ['en' => 'highlight restore', 'ar' => 'استرجاع عروض'],
             ],
             [
                 'name' => 'highlight-remove',
-                'title' => ['en' => 'highlight remove', 'ar' => 'حذف'],
+                'title' => ['en' => 'highlight remove', 'ar' => 'حذف عروض'],
             ],
         ];
-        foreach ($permission as $key => $value) {
+        foreach ($permission as $value) {
             $data = Permission::create(['name' => $value['name']]);
             foreach (language() as $lang) {
-                $data->translation()->create(['key' => 'name', 'value' => $value['title'][$lang->code],
+                $data->translation()->create(['key' => 'title', 'value' => $value['title'][$lang->code],
                     'language_id' => $lang->id]);
             }
         }

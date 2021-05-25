@@ -38,6 +38,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 {{--<li class="nav-header">Core Data</li>--}}
+                @permission('acl-list')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
@@ -53,6 +54,7 @@
                                  <p>Level 2</p>
                              </a>
                          </li>--}}
+                        @permission('user-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -62,26 +64,34 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('user-index')
                                 <li class="nav-item">
                                     <a href="{{route('user.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('user-create')
                                 <li class="nav-item">
                                     <a href="{{route('user.create')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Create')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('user-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('user.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('role-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -91,26 +101,34 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('role-index')
                                 <li class="nav-item">
                                     <a href="{{route('role.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('role-create')
                                 <li class="nav-item">
                                     <a href="{{route('role.create')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Create')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('role-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('role.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('permission-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -120,60 +138,74 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('permission-index')
                                 <li class="nav-item">
                                     <a href="{{route('permission.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('permission-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('permission.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
                     </ul>
                 </li>
+                @endpermission
+                @permission('core-data-list')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>
                         <p>
-                             {{trans('lang.Core_Data')}}
+                            {{trans('lang.Core_Data')}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                       {{-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Level 2</p>
-                            </a>
-                        </li>--}}
+                        {{-- <li class="nav-item">
+                             <a href="#" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Level 2</p>
+                             </a>
+                         </li>--}}
+                        @permission('language-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                   {{trans('lang.Language')}}
+                                    {{trans('lang.Language')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('language-index')
                                 <li class="nav-item">
                                     <a href="{{route('language.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('language-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('language.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('status-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -183,20 +215,26 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('status-index')
                                 <li class="nav-item">
-                                   <a href="{{route('status.index')}}" class="nav-link">
+                                    <a href="{{route('status.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('status-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('status.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('type-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -206,20 +244,26 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('type-index')
                                 <li class="nav-item">
                                     <a href="{{route('type.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('type-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('type.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('category-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -229,20 +273,26 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('category-index')
                                 <li class="nav-item">
                                     <a href="{{route('category.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('category-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('category.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('country-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -252,20 +302,26 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @permission('country-index')
                                 <li class="nav-item">
                                     <a href="{{route('country.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('country-index-delete')
                                 <li class="nav-item">
                                     <a href="{{route('country.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
+                                @endpermission
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('language-index-delete')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -289,34 +345,38 @@
                                 </li>
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('language-index-delete')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                     {{trans('lang.Area')}}
+                                    {{trans('lang.Rejoin')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('area.index')}}" class="nav-link">
+                                    <a href="{{route('rejoin.index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('area.delete_index')}}" class="nav-link">
+                                    <a href="{{route('rejoin.delete_index')}}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
                                         <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('language-index-delete')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                     {{trans('lang.Amenity')}}
+                                    {{trans('lang.Amenity')}}
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -335,6 +395,8 @@
                                 </li>
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('language-index-delete')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -358,6 +420,8 @@
                                 </li>
                             </ul>
                         </li>
+                        @endpermission
+                        @permission('language-index-delete')
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -381,8 +445,10 @@
                                 </li>
                             </ul>
                         </li>
+                        @endpermission
                     </ul>
                 </li>
+                @endpermission
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-circle"></i>

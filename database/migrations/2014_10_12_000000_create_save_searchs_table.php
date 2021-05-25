@@ -21,7 +21,7 @@ class CreateSaveSearchsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('country_id')->unsigned()->index();
             $table->integer('city_id')->unsigned()->index();
-            $table->integer('area_id')->unsigned()->index();
+            $table->integer('rejoin_id')->unsigned()->index();
             $table->integer('type_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
             $table->integer('high_light_id')->unsigned()->index();

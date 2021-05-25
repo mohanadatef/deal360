@@ -12,12 +12,12 @@ use App\Http\Controllers\Admin\CoreData\CategoryController;
 use App\Http\Controllers\Admin\CoreData\CountryController;
 use App\Http\Controllers\Admin\CoreData\AmenityController;
 use App\Http\Controllers\Admin\CoreData\CityController;
-use App\Http\Controllers\Admin\CoreData\AreaController;
+use App\Http\Controllers\Admin\CoreData\RejoinController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
 use App\Http\Controllers\Admin\Setting\MetaController;
 
-Route::group(['middleware' => /*'admin', 'auth',*/ 'language' /*, 'permission:dashboard-show'*/], function () {
+Route::group(['middleware' => /*'admin',*/ 'auth', 'language' /*, 'permission:dashboard-show'*/], function () {
 /*dashboard list*/
 Route::get('/', [HomeController::class, 'index'])
     /*->middleware('permission:dashboard-show')*/
@@ -195,23 +195,23 @@ Route::prefix('/highlight')->name('highlight.')->group(function () {
         /*->middleware('permission:highlight-show')*/ ->name('show');
 });
 /* });*/
-/* area route list */
-/*Route::middleware('permission:area-list')->group(function () {*/
-Route::apiresource('area', AreaController::class,
-    ['except' => ['show','update']])->parameters(['area' => 'id']);
-Route::prefix('/area')->name('area.')->group(function () {
-    Route::get('/change_status/{id}', [AreaController::class, 'changeStatus'])
-        /*->middleware('permission:area-status')*/ ->name('status');
-    Route::get('/delete', [AreaController::class, 'destroyIndex'])
-        /*->middleware('permission:area-delete')*/ ->name('delete_index');
-    Route::get('/restore/{id}', [AreaController::class, 'restore'])
-        /*->middleware('permission:area-restore')*/ ->name('restore');
-    Route::get('/remove/{id}', [AreaController::class, 'remove'])
-        /*->middleware('permission:area-remove')*/ ->name('remove');
-    Route::post('/{id}', [AreaController::class, 'update'])
-        /*->middleware('permission:area-edit')*/ ->name('update');
-    Route::get('/{id}', [AreaController::class, 'show'])
-        /*->middleware('permission:area-show')*/ ->name('show');
+/* rejoin route list */
+/*Route::middleware('permission:rejoin-list')->group(function () {*/
+Route::apiresource('rejoin', RejoinController::class,
+    ['except' => ['show','update']])->parameters(['rejoin' => 'id']);
+Route::prefix('/rejoin')->name('rejoin.')->group(function () {
+    Route::get('/change_status/{id}', [RejoinController::class, 'changeStatus'])
+        /*->middleware('permission:rejoin-status')*/ ->name('status');
+    Route::get('/delete', [RejoinController::class, 'destroyIndex'])
+        /*->middleware('permission:rejoin-delete')*/ ->name('delete_index');
+    Route::get('/restore/{id}', [RejoinController::class, 'restore'])
+        /*->middleware('permission:rejoin-restore')*/ ->name('restore');
+    Route::get('/remove/{id}', [RejoinController::class, 'remove'])
+        /*->middleware('permission:rejoin-remove')*/ ->name('remove');
+    Route::post('/{id}', [RejoinController::class, 'update'])
+        /*->middleware('permission:rejoin-edit')*/ ->name('update');
+    Route::get('/{id}', [RejoinController::class, 'show'])
+        /*->middleware('permission:rejoin-show')*/ ->name('show');
 });
 /* });*/
     /* meta route list */

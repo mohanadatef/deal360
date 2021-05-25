@@ -17,7 +17,7 @@ return [
     'Core_Data'=>'Core Data',
     'Country'=>'Country',
     'City'=>'City',
-    'Area'=>'Area',
+    'Rejoin'=>'Rejoin',
     'Select'=>'Select',
     'Delete'=>'Delete',
     'Amenity'=>'Amenity',

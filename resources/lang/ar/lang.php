@@ -17,7 +17,7 @@ return [
     'Core_Data'=>'البيانات الاساسيه',
     'Country'=>'بلد',
     'City'=>'مدينه',
-    'Area'=>'منطقه',
+    'Rejoin'=>'منطقه',
     'Select'=>'اختيار',
     'Delete'=>'مسح',
     'Amenity'=>'مميزات',

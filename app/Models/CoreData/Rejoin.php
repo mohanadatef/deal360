@@ -3,17 +3,18 @@
 namespace App\Models\CoreData;
 
 use App\Models\Acl\SaveSearch;
+use App\Models\Acl\User;
 use App\Models\Property\Property;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class City extends Model
+class Rejoin extends Model
 {
     protected $fillable = [
-        'status','order','country_id'
+        'status','order','city_id','country_id'
     ];
-    protected $table = 'cities';
+    protected $table = 'rejoins';
     public $timestamps = true;
 
     use SoftDeletes;
@@ -37,9 +38,9 @@ class City extends Model
         return $this->belongsTo(Country::class, 'country_id')->withTrashed();
     }
 
-    public function rejoin()
+    public function city()
     {
-        return $this->hasMany(Rejoin::class);
+        return $this->belongsTo(City::class, 'city_id')->withTrashed();
     }
 
     public function scopeStatus($query,$status)
@@ -64,28 +65,16 @@ class City extends Model
 
     public static function boot() {
         parent::boot();
-        static::deleting(function($city) {
-            foreach ($city->rejoin as $rejoin)
-            {
-                $rejoin->delete();
-            }
-            $city->translation()->delete();
+        static::deleting(function($rejoin) {
+            $rejoin->translation()->delete();
         });
 
-        static::restoring(function($city) {
-            foreach ($city->rejoin as $rejoin)
-            {
-                $rejoin->withTrashed()->restore();
-            }
-            $city->translation()->withTrashed()->restore();
+        static::restoring(function($rejoin) {
+            $rejoin->translation()->withTrashed()->restore();
         });
 
-        static::forceDeleted(function($city) {
-            foreach ($city->rejoin as $rejoin)
-            {
-                $rejoin->forceDelete();
-            }
-            $city->translation()->forceDelete();
+        static::forceDeleted(function($rejoin) {
+            $rejoin->translation()->forceDelete();
         });
     }
 }

@@ -83,11 +83,6 @@ class User extends Authenticatable
         return $this->hasmany(View::Class);
     }
 
-    public function permission()
-    {
-        return $this->belongsToMany(Permission::Class, 'role_permissions');
-    }
-
     public function country()
     {
         return $this->belongsTo(Country::Class, 'countries')->withTrashed();

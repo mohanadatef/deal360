@@ -16,7 +16,7 @@ class CreatePropertiesTable extends Migration {
             $table->integer('user_id')->unsigned()->index();
             $table->integer('country_id')->unsigned()->index();
             $table->integer('city_id')->unsigned()->index();
-            $table->integer('area_id')->unsigned()->index();
+            $table->integer('rejoin_id')->unsigned()->index();
             $table->integer('status_id')->unsigned()->index();
             $table->integer('type_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
@@ -37,7 +37,7 @@ class CreatePropertiesTable extends Migration {
             $table->string('type_date',255)->default('year')->nullable();
             $table->integer('count_date')->default('1')->nullable();
             $table->integer('order')->unique();
-            $table->integer('wp_id')->nullable();
+            $table->integer('wp_property_id')->nullable();
             $table->timestamps();
 			$table->softDeletes();
 		});

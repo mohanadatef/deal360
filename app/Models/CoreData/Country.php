@@ -40,9 +40,9 @@ class Country extends Model
         return $this->morphOne(Image::class, 'category')->withTrashed();
     }
 
-    public function area()
+    public function rejoin()
     {
-        return $this->hasMany(Area::class);
+        return $this->hasMany(Rejoin::class);
     }
 
     public function city()
@@ -85,9 +85,9 @@ class Country extends Model
             {
                 $city->delete();
             }
-            foreach ($country->area as $area)
+            foreach ($country->rejoin as $rejoin)
             {
-                $area->delete();
+                $rejoin->delete();
             }
             $country->image()->delete();
             $country->translation()->delete();
@@ -98,9 +98,9 @@ class Country extends Model
             {
                 $city->withTrashed()->restore();
             }
-            foreach ($country->area as $area)
+            foreach ($country->rejoin as $rejoin)
             {
-                $area->withTrashed()->restore();
+                $rejoin->withTrashed()->restore();
             }
             $country->image()->withTrashed()->restore();
             $country->translation()->withTrashed()->restore();
@@ -111,9 +111,9 @@ class Country extends Model
             {
                 $city->withTrashed()->forceDelete();
             }
-            foreach ($country->area as $area)
+            foreach ($country->rejoin as $rejoin)
             {
-                $area->forceDelete();
+                $rejoin->forceDelete();
             }
             $country->image()->forceDelete();
             $country->translation()->forceDelete();

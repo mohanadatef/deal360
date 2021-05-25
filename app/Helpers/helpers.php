@@ -30,8 +30,8 @@ if (!function_exists('permissionShow')) {
     function permissionShow($name)
     {
         $permission = DB::table('permissions')
-            ->join('permission_roles', 'permission_roles.permission_id', '=', 'permissions.id')
-            ->where('permission_roles.role_id', Auth::user()->role_id)
+            ->join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
+            ->where('role_permissions.role_id', Auth::user()->role_id)
             ->where('permissions.name', $name)
             ->count();
         return $permission ? true : false;
@@ -69,11 +69,16 @@ if (!function_exists('checkView')) {
 if (!function_exists('getImag')) {
     function getImag($image, $file_name)
     {
+        if($image)
+        {
         $images = isset($image) ? public_path('images/' . $file_name . '/' . $image->image) : public_path('images/test.png');
         if (file_exists($images) == false) {
             return asset('public/images/test.png');
         } else {
             return asset('public/images/' . $file_name . '/' . $image->image);
+        }
+        }else {
+            return asset('public/images/test.png');
         }
     }
 }

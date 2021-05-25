@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\CoreData\TypeController;
 use App\Http\Controllers\Admin\CoreData\CategoryController;
 use App\Http\Controllers\Admin\CoreData\CountryController;
 use App\Http\Controllers\Admin\CoreData\CityController;
-use App\Http\Controllers\Admin\CoreData\AreaController;
+use App\Http\Controllers\Admin\CoreData\RejoinController;
 use App\Http\Controllers\Admin\CoreData\AmenityController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
@@ -60,8 +60,8 @@ Route::prefix('/city')->group(function () {
         ->name('city.list');
 });
 //area
-Route::prefix('/area')->group(function () {
-    Route::get('/list/{country}/{city}', [AreaController::class, 'listIndex'])
+Route::prefix('/rejoin')->group(function () {
+    Route::get('/list/{country}/{city}', [RejoinController::class, 'listIndex'])
         ->name('area.list');
 });
 //amenity

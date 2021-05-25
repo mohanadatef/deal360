@@ -18,12 +18,16 @@ class Agent extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function translation($key)
+    public function translation()
     {
-        return $this->morphOne(Translation::class, 'translation')
-            ->where('language_id',languageId())
-            ->where('key',$key)
-            ->select('value as'.$key);
+        return $this->morphMany(Translation::class, 'category')->withTrashed();
+    }
+
+    public function about_me()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'about_me')
+            ->where('language_id' ,languageId())->withTrashed();
     }
 
     public function user()

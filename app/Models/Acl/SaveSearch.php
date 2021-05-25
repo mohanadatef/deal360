@@ -2,7 +2,7 @@
 
 namespace App\Models\Acl;
 
-use App\Models\CoreData\Area;
+use App\Models\CoreData\Rejoin;
 use App\Models\CoreData\Category;
 use App\Models\CoreData\City;
 use App\Models\CoreData\Country;
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SaveSearch extends Model
 {
     protected $fillable = [
-        'user_id','country_id','city_id','area_id','type_id','category_id','title','language_id'
+        'user_id','country_id','city_id','rejoin_id','type_id','category_id','title','language_id'
     ];
     protected $table = 'save_searchs';
     public $timestamps = true;
@@ -38,9 +38,9 @@ class SaveSearch extends Model
         return $this->belongsTo(City::Class,'city_id');
     }
 
-    public function area()
+    public function rejoin()
     {
-        return $this->belongsTo(Area::Class,'area_id');
+        return $this->belongsTo(Rejoin::Class,'rejoin_id');
     }
 
     public function type()

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Setting\Setting;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class ComposerServiceProvider extends ServiceProvider

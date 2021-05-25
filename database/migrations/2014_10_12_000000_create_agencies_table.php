@@ -18,14 +18,7 @@ class CreateAgenciesTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->increments('id');
-            $table->string('fullname',255)->unique()->index();
-            $table->text('address')->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->text('whatsapp')->unique()->index()->nullable();
-            $table->text('mobile')->unique()->index()->nullable();
-            $table->text('phone')->unique()->index()->nullable();
-            $table->integer('country_id')->unsigned()->index();
-            $table->integer('wp_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

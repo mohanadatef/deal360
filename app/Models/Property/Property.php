@@ -4,7 +4,7 @@ namespace App\Models\Property;
 
 use App\Models\Acl\User;
 use App\Models\CoreData\Amenity;
-use App\Models\CoreData\Area;
+use App\Models\CoreData\Rejoin;
 use App\Models\CoreData\Category;
 use App\Models\CoreData\City;
 use App\Models\CoreData\Country;
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Property extends Model
 {
     protected $fillable = [
-        'status','order','user_id','country_id','city_id','area_id','status_id','type_id','category_id',
+        'status','order','user_id','country_id','city_id','rejoin_id','status_id','type_id','category_id',
         'price','size','room','bedroom','bathroom','bathroom','latitude','longitude','order','high_light_id'
     ];
     protected $table = 'types';
@@ -41,7 +41,7 @@ class Property extends Model
     {
         return $this->morphOne(Image::class, 'category')->withTrashed();
     }
-    
+
     public function images()
     {
         return $this->morphToMany(Image::class, 'category')->withTrashed();
@@ -77,9 +77,9 @@ class Property extends Model
         return $this->belongsTo(City::Class,'city_id');
     }
 
-    public function area()
+    public function rejoin()
     {
-        return $this->belongsTo(Area::Class,'area_id');
+        return $this->belongsTo(Rejoin::Class,'rejoin_id');
     }
 
     public function type()

@@ -32,9 +32,9 @@ class CreateUsersTable extends Migration
             $table->text('google_id')->nullable();
             $table->text('facebook_id')->nullable();
             $table->text('apple_id')->nullable();
-            $table->integer('wp_id')->nullable();
+            $table->integer('wp_user_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->text('token');
+            $table->text('token')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
