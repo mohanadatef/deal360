@@ -75,6 +75,7 @@
                                                     style="width: 100%;">
                                                 <option selected>{{trans('lang.Select')}}</option>
                                                 <option value="d">{{trans('lang.day')}}</option>
+                                                <option value="w">{{trans('lang.week')}}</option>
                                                 <option value="m">{{trans('lang.month')}}</option>
                                                 <option value="y">{{trans('lang.year')}}</option>
                                             </select>
@@ -112,6 +113,16 @@
                                                 <select class="duallistbox" multiple="multiple" name="role[]">
                                                     @foreach($role as $ro)
                                                         <option  value="{{$ro->id}}">{{$ro->title->value}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group{{ $errors->has('currency_id') ? ' is-invalid' : "" }}">
+                                                <label>{{trans('lang.Currency')}}</label>
+                                                <select class="form-control select2" id="currency" name="currency_id"
+                                                        style="width: 100%;">
+                                                    @foreach($currency as $cr)
+                                                        <option value="{{$cr->id}}"
+                                                                id="option-currency-{{$cr->id}}">{{$cr->title ? $cr->title->value : ""}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

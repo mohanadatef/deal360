@@ -96,6 +96,9 @@ class CreateForeignKeys extends Migration
             $table->foreign('category_id')->references('id')->on('categories')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
+            $table->foreign('currency_id')->references('id')->on('currencies')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
         });
         Schema::table('forgot_passwords', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
@@ -168,6 +171,9 @@ class CreateForeignKeys extends Migration
             $table->foreign('high_light_id')->references('id')->on('high_lights')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
+            $table->foreign('currency_id')->references('id')->on('currencies')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
             $table->foreign('city_id')->references('id')->on('cities')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
@@ -228,6 +234,7 @@ class CreateForeignKeys extends Migration
             $table->dropForeign('save_searchs_rejoin_id_foreign');
             $table->dropForeign('save_searchs_type_id_foreign');
             $table->dropForeign('save_searchs_category_id_foreign');
+            $table->dropForeign('save_searchs_currency_id_foreign');
         });
         Schema::table('forgot_passwords', function (Blueprint $table) {
             $table->dropForeign('forgot_passwords_user_id_foreign');
@@ -268,6 +275,7 @@ class CreateForeignKeys extends Migration
             $table->dropForeign('properties_type_id_foreign');
             $table->dropForeign('properties_category_id_foreign');
             $table->dropForeign('properties_status_id_foreign');
+            $table->dropForeign('properties_currency_id_foreign');
         });
     }
 }

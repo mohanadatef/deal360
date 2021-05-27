@@ -74,6 +74,7 @@
                                             <select class="form-control" id="type_date" name="type_date"
                                                     style="width: 100%;">
                                                 <option @if($data->type_date == "d") selected @endif value="d">{{trans('lang.day')}}</option>
+                                                <option @if($data->type_date == "w") selected @endif value="w">{{trans('lang.week')}}</option>
                                                 <option @if($data->type_date == "m") selected @endif value="m">{{trans('lang.month')}}</option>
                                                 <option @if($data->type_date == "y") selected @endif value="y">{{trans('lang.year')}}</option>
                                             </select>
@@ -109,7 +110,17 @@
                                                 <label>{{trans('lang.Role')}}</label>
                                                 <select class="duallistbox" multiple="multiple" name="role[]">
                                                     @foreach($role as $key => $ro)
-                                                        <option @foreach($package_role as  $pr) @if($pr->role_id ==$ro->id) selected   @endif @endforeach value="{{$ro->id}}">{{$ro->title->value}}</option>
+                                                        <option @foreach($package_role as  $pr) @if($pr->id ==$ro->id) selected   @endif @endforeach value="{{$ro->id}}">{{$ro->title->value}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group{{ $errors->has('currency_id') ? ' is-invalid' : "" }}">
+                                                <label>{{trans('lang.Currency')}}</label>
+                                                <select class="form-control select2" id="currency" name="currency_id"
+                                                        style="width: 100%;">
+                                                    @foreach($currency as $cr)
+                                                        <option value="{{$cr->id}}" @if($cr->id == $data->currency_id) selected   @endif
+                                                                id="option-currency-{{$cr->id}}">{{$cr->title ? $cr->title->value : ""}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

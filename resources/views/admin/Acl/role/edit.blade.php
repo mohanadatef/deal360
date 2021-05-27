@@ -82,7 +82,7 @@
                                         <label>{{trans('lang.Permission')}}</label>
                                         <select class="duallistbox" multiple="multiple" name="permission[]">
                                             @foreach($permission as $key => $pe)
-                                                <option @foreach($role_permission as  $rp) @if($rp->permission_id ==$pe->id) selected   @endif @endforeach value="{{$pe->id}}">{{$pe->title->value}}</option>
+                                                <option @foreach($data->role_permission as  $rp) @if($rp->id ==$pe->id) selected   @endif @endforeach value="{{$pe->id}}">{{$pe->title->value}}</option>
                                             @endforeach
                                         </select>
                                     </div>

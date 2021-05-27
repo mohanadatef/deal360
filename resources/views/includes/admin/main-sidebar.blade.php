@@ -379,6 +379,35 @@
                             </ul>
                         </li>
                         @endpermission
+                        @permission('currency-list')
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    {{trans('lang.Currency')}}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @permission('currency-index')
+                                <li class="nav-item">
+                                    <a href="{{route('currency.index')}}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{trans('lang.Index')}}</p>
+                                    </a>
+                                </li>
+                                @endpermission
+                                @permission('currency-index-delete')
+                                <li class="nav-item">
+                                    <a href="{{route('currency.delete_index')}}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
+                                    </a>
+                                </li>
+                                @endpermission
+                            </ul>
+                        </li>
+                        @endpermission
                         @permission('amenity-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">

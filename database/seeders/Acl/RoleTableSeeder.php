@@ -40,6 +40,30 @@ class RoleTableSeeder extends Seeder
                 'order' => '1',
                 'title' => ['en' => 'admin', 'ar' => 'ادمن'],
             ],
+            [
+                'code' => 'us',
+                'type_access' => 'deal360',
+                'order' => '2',
+                'title' => ['en' => 'user', 'ar' => 'مستخدم'],
+            ],
+            [
+                'code' => 'ay',
+                'type_access' => 'deal360',
+                'order' => '3',
+                'title' => ['en' => 'agency', 'ar' => 'شركه'],
+            ],
+            [
+                'code' => 'at',
+                'type_access' => 'deal360',
+                'order' => '4',
+                'title' => ['en' => 'agent', 'ar' => 'بائع'],
+            ],
+            [
+                'code' => 'de',
+                'type_access' => 'deal360',
+                'order' => '5',
+                'title' => ['en' => 'developer', 'ar' => 'مطور'],
+            ],
         ];
         foreach ($role as $value) {
             $data = Role::create(['code' => $value['code'],
