@@ -2,6 +2,8 @@
 
 namespace App\Models\Acl;
 
+use App\Models\CoreData\Package;
+use App\Models\CoreData\PackageRole;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,7 +56,17 @@ class Role extends Model
 
     public function role_permission()
     {
-        return $this->hasManyThrough(Permission::Class,RolePermission::Class,'role_id','id');
+        return $this->hasManyThrough(Permission::Class,RolePermission::Class,'role_id','id','id','permission_id');
+    }
+
+    public function package()
+    {
+        return $this->belongsToMany(Package::class, 'package_roles');
+    }
+
+    public function package_role()
+    {
+        return $this->hasMany(PackageRole::Class);
     }
 
     public static function boot() {
@@ -62,16 +74,19 @@ class Role extends Model
         static::deleting(function($role) {
             $role->translation()->delete();
             $role->role_permission()->delete();
+            $role->package_role()->delete();
         });
 
         static::restoring(function($role) {
             $role->translation()->withTrashed()->restore();
             $role->role_permission()->withTrashed()->restore();
+            $role->package_role()->withTrashed()->restore();
         });
 
         static::forceDeleted(function($role) {
             $role->translation()->forceDelete();
             $role->role_permission()->forceDelete();
+            $role->package_role()->forceDelete();
         });
     }
 }

@@ -52,6 +52,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/superadmin.php'));
 
+            Route::prefix('wordpress')
+                ->middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/wordpress.php'));
+
             Route::prefix('admin')
                 ->middleware('web')
                 ->namespace($this->namespace)

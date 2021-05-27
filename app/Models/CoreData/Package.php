@@ -2,6 +2,7 @@
 
 namespace App\Models\CoreData;
 
+use App\Models\Acl\Role;
 use App\Models\Acl\User;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
@@ -46,18 +47,36 @@ class Package extends Model
         return $this->belongsToMany(User::Class, 'user_packages')->withTrashed();
     }
 
+    public function role()
+    {
+        return $this->belongsToMany(Role::Class, 'package_roles');
+    }
+
+    public function package_role()
+    {
+        return $this->hasManyThrough(Role::Class,PackageRole::Class,'package_id','id','id','role_id');
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class, 'currency_id')->withTrashed();
+    }
+
     public static function boot() {
         parent::boot();
         static::deleting(function($package) {
             $package->translation()->delete();
+            $package->package_role()->delete();
         });
 
         static::restoring(function($package) {
             $package->translation()->withTrashed()->restore();
+            $package->package_role()->withTrashed()->restore();
         });
 
         static::forceDeleted(function($package) {
             $package->translation()->forceDelete();
+            $package->package_role()->forceDelete();
         });
     }
 }

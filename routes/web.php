@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CoreData\LanguageController;
 use App\Http\Controllers\Admin\CoreData\StatusController;
 use App\Http\Controllers\Admin\CoreData\TypeController;
+use App\Http\Controllers\Admin\CoreData\CurrencyController;
 use App\Http\Controllers\Admin\CoreData\CategoryController;
 use App\Http\Controllers\Admin\CoreData\CountryController;
 use App\Http\Controllers\Admin\CoreData\CityController;
@@ -73,6 +74,11 @@ Route::prefix('/amenity')->group(function () {
 Route::prefix('/package')->group(function () {
     Route::get('/list', [PackageController::class, 'listIndex'])
         ->name('package.list');
+});
+//currency
+Route::prefix('/currency')->group(function () {
+    Route::get('/list', [CurrencyController::class, 'listIndex'])
+        ->name('currency.list');
 });
 //high light
 Route::prefix('/highlight')->group(function () {

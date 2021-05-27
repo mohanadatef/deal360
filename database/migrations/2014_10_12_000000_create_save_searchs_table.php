@@ -25,6 +25,7 @@ class CreateSaveSearchsTable extends Migration
             $table->integer('type_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
             $table->integer('high_light_id')->unsigned()->index();
+            $table->integer('currency_id')->unsigned()->index();
             $table->string('title',255)->index();
             $table->timestamps();
             $table->softDeletes();

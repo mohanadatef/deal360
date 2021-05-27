@@ -1,39 +1,49 @@
 <?php
 
-namespace App\Repositories\Admin\Acl;
+namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\Acl\Role\RoleListResource;
-use App\Http\Resources\Admin\Acl\Role\RoleResource;
+use App\Http\Resources\Admin\CoreData\Currency\CurrencyListResource;
+use App\Http\Resources\Admin\CoreData\Currency\CurrencyResource;
 use App\Interfaces\Admin\MeanInterface;
-use App\Models\Acl\Role;
+use App\Models\CoreData\Currency;
 use App\Traits\Service;
 use Illuminate\Support\Facades\DB;
 
-class RoleRepository implements MeanInterface
+class CurrencyRepository implements MeanInterface
 {
     use Service;
 
     protected $data;
 
-    public function __construct(Role $Role)
+    public function __construct(Currency $Currency)
     {
-        $this->data = $Role;
+        $this->data = $Currency;
     }
 
     public function getData()
     {
-        return $this->data->with('title','role_permission')->whereKeyNot(1)->get();
+        return $this->data->with('title')->order('asc')->get();
     }
 
     public function storeData($request)
     {
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
-            $data->permission()->sync((array)$request->permission);
             foreach (language() as $lang) {
                 $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                    'language_id'=>$lang->id]);
+                    'language_id' => $lang->id]);
             }
+            return '<tr id="' . $data->id . '"><td id="title-' . $data->id . '" data-order="' . $data->order . '">' . $data->title . '</td>
+                    <td id="country-' . $data->id . '">' . $data->country->title->value . '</td>
+                    <td><input onfocus="changeStatus(' . $data->id . ')" type="checkbox" name="status" id="status-' . $data->id . '"
+                    checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
+                    <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
+                    onclick="showItem(' . $data->id . ')"><i class="fa fa-edit"></i> ' . trans('lang.Edit') . '</button>
+                    <button id="openModael' . $data->id . '" type="button" class="d-none" data-toggle="modal"
+                    data-target="#modal-edit"></button>
+                    <button type="button" class="btn btn-outline-danger btn-block btn-sm"
+                    onclick="selectItem(' . $data->id . ')" data-toggle="modal"
+                    data-target="#modal-delete"><i></i> ' . trans('lang.Delete') . '</button></td></tr>';
         });
     }
 
@@ -46,7 +56,6 @@ class RoleRepository implements MeanInterface
     {
         return DB::transaction(function () use ($request, $id) {
             $data = $this->showData($id);
-            $data->permission()->sync((array)$request->permission);
             $data->update($request->all());
             foreach (language() as $lang) {
                 $translation = $data->translation->where('language_id', $lang->id)->first();
@@ -57,6 +66,8 @@ class RoleRepository implements MeanInterface
                         'language_id' => $lang->id]);
                 }
             }
+            $data = $this->showData($id);
+            return new CurrencyResource($data);
         });
     }
 
@@ -72,7 +83,7 @@ class RoleRepository implements MeanInterface
 
     public function getDataDelete()
     {
-        return $this->data->onlyTrashed()->with('translation')->get();
+        return $this->data->onlyTrashed()->with('translation')->order('asc')->get();
     }
 
     public function restoreData($id)
@@ -87,6 +98,6 @@ class RoleRepository implements MeanInterface
 
     public function listData()
     {
-        return RoleListResource::collection($this->data->with('title')->whereKeyNot(1)->status('1')->order('asc')->get());
+        return CurrencyListResource::collection($this->data->status('1')->order('asc')->with('title')->get());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models\Acl;
 
+use App\Models\CoreData\Currency;
 use App\Models\CoreData\Rejoin;
 use App\Models\CoreData\Category;
 use App\Models\CoreData\City;
@@ -56,5 +57,10 @@ class SaveSearch extends Model
     public function language()
     {
         return $this->belongsTo(Language::Class,'language_id');
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::Class,'currency_id');
     }
 }

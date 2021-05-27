@@ -20,6 +20,7 @@ class CreatePropertiesTable extends Migration {
             $table->integer('status_id')->unsigned()->index();
             $table->integer('type_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
+            $table->integer('currency_id')->unsigned()->index();
             $table->integer('high_light_id')->unsigned()->index();
             $table->float('price')->default('0');
             $table->float('video_url')->nullable();

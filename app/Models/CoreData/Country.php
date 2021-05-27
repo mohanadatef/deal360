@@ -50,6 +50,11 @@ class Country extends Model
         return $this->hasMany(City::class)->withTrashed();
     }
 
+    public function currency()
+    {
+        return $this->hasMany(Currency::class)->withTrashed();
+    }
+
    public function scopeStatus($query,$status)
     {
         return $query->whereStatus($status);
@@ -89,6 +94,10 @@ class Country extends Model
             {
                 $rejoin->delete();
             }
+            foreach ($country->currency as $currency)
+            {
+                $currency->delete();
+            }
             $country->image()->delete();
             $country->translation()->delete();
         });
@@ -102,6 +111,10 @@ class Country extends Model
             {
                 $rejoin->withTrashed()->restore();
             }
+            foreach ($country->currency as $currency)
+            {
+                $currency->withTrashed()->restore();
+            }
             $country->image()->withTrashed()->restore();
             $country->translation()->withTrashed()->restore();
         });
@@ -114,6 +127,10 @@ class Country extends Model
             foreach ($country->rejoin as $rejoin)
             {
                 $rejoin->forceDelete();
+            }
+            foreach ($country->currency as $currency)
+            {
+                $currency->forceDelete();
             }
             $country->image()->forceDelete();
             $country->translation()->forceDelete();

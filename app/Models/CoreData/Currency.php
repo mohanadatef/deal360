@@ -8,12 +8,12 @@ use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class HighLight extends Model
+class Currency extends Model
 {
     protected $fillable = [
         'status','order'
     ];
-    protected $table = 'high_lights';
+    protected $table = 'currencies';
     public $timestamps = true;
 
     use SoftDeletes;
@@ -42,9 +42,19 @@ class HighLight extends Model
         return $query->orderby('order',$order);
     }
 
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id')->withTrashed();
+    }
+
     public function savesearch()
     {
         return $this->hasmany(SaveSearch::Class);
+    }
+
+    public function package()
+    {
+        return $this->hasmany(Package::Class);
     }
 
     public function property()
@@ -54,16 +64,16 @@ class HighLight extends Model
 
     public static function boot() {
         parent::boot();
-        static::deleting(function($highlight) {
-            $highlight->translation()->delete();
+        static::deleting(function($currency) {
+            $currency->translation()->delete();
         });
 
-        static::restoring(function($highlight) {
-            $highlight->translation()->withTrashed()->restore();
+        static::restoring(function($currency) {
+            $currency->translation()->withTrashed()->restore();
         });
 
-        static::forceDeleted(function($highlight) {
-            $highlight->translation()->forceDelete();
+        static::forceDeleted(function($currency) {
+            $currency->translation()->forceDelete();
         });
     }
 }

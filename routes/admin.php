@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CoreData\TypeController;
 use App\Http\Controllers\Admin\CoreData\CategoryController;
 use App\Http\Controllers\Admin\CoreData\CountryController;
 use App\Http\Controllers\Admin\CoreData\AmenityController;
+use App\Http\Controllers\Admin\CoreData\CurrencyController;
 use App\Http\Controllers\Admin\CoreData\CityController;
 use App\Http\Controllers\Admin\CoreData\RejoinController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
@@ -118,6 +119,17 @@ Route::group(['middleware' => /*'admin',*/ 'auth', 'language', 'permission:dashb
         Route::get('/remove/{id}', [HighLightController::class, 'remove'])->name('remove');
         Route::post('/{id}', [HighLightController::class, 'update'])->name('update');
         Route::get('/{id}', [HighLightController::class, 'show'])->name('show');
+    });
+    /* currency route list */
+    Route::apiresource('currency', CurrencyController::class,
+        ['except' => ['show', 'update']])->parameters(['currency' => 'id']);
+    Route::prefix('/currency')->name('currency.')->group(function () {
+        Route::get('/change_status/{id}', [CurrencyController::class, 'changeStatus'])->name('status');
+        Route::get('/delete', [CurrencyController::class, 'destroyIndex'])->name('delete_index');
+        Route::get('/restore/{id}', [CurrencyController::class, 'restore'])->name('restore');
+        Route::get('/remove/{id}', [CurrencyController::class, 'remove'])->name('remove');
+        Route::post('/{id}', [CurrencyController::class, 'update'])->name('update');
+        Route::get('/{id}', [CurrencyController::class, 'show'])->name('show');
     });
     /* rejoin route list */
     Route::apiresource('rejoin', RejoinController::class,

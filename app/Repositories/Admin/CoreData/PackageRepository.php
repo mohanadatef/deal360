@@ -22,36 +22,24 @@ class PackageRepository implements MeanInterface
 
     public function getData()
     {
-        return $this->data->with('title')->order('asc')->get();
+        return $this->data->with('title','package_role','currency')->order('asc')->get();
     }
 
     public function storeData($request)
     {
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
+            $data->role()->sync((array)$request->role);
             foreach (language() as $lang) {
                 $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
                     'language_id'=>$lang->id]);
             }
-            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" data-order="'.$data->order.'">'.$data->title->value.'</td>
-                <td id="count-listing-'.$data->id.'">'.$data->count_listing.'</td>
-                <td id="type-date-'.$data->id.'">'.trans('lang.'.$data->type_date).'</td>
-                <td id="count-date-'.$data->id.'">'.$data->count_date.'</td>
-                <td><input onfocus="changeStatus('.$data->id.')" type="checkbox" name="status" id="status-'.$data->id.'"
-                checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
-                <td><button type="button" class="btn btn-outline-primary btn-block btn-sm"
-                onclick="showItem('.$data->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
-                <button id="openModael'.$data->id.'" type="button" class="d-none" data-toggle="modal"
-                data-target="#modal-edit"></button>
-                <button type="button" class="btn btn-outline-danger btn-block btn-sm"
-                onclick="selectItem('.$data->id.')" data-toggle="modal"
-                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
         });
     }
 
     public function showData($id)
     {
-        return $this->data->with('translation.language')->findorFail($id);
+        return $this->data->with('translation.language','currency')->findorFail($id);
     }
 
     public function updateData($request, $id)
@@ -59,6 +47,7 @@ class PackageRepository implements MeanInterface
         return DB::transaction(function () use ($request, $id) {
             $data = $this->showData($id);
             $data->update($request->all());
+            $data->role()->sync((array)$request->role);
             foreach (language() as $lang) {
                 $translation = $data->translation->where('language_id', $lang->id)->first();
                 if ($translation) {
@@ -68,8 +57,6 @@ class PackageRepository implements MeanInterface
                         'language_id' => $lang->id]);
                 }
             }
-            $data = $this->showData($id);
-            return new PackageResource($data);
         });
     }
 

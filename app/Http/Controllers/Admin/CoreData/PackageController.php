@@ -7,20 +7,19 @@ use App\Http\Requests\Admin\CoreData\Package\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Package\EditRequest;
 use App\Repositories\Admin\Acl\RoleRepository;
 use App\Repositories\Admin\CoreData\PackageRepository;
-use App\Repositories\Admin\CoreData\PackageRoleRepository;
 
 class PackageController extends Controller
 {
     private $packageRepository;
     private $roleRepository;
-    private $packageRoleRepository;
+    private $currencyRepository;
 
     public function __construct(PackageRepository $PackageRepository,RoleRepository $RoleRepository,
-                                PackageRoleRepository $PackageRoleRepository)
+                                CurrencyRepository $CurrencyRepository)
     {
         $this->packageRepository = $PackageRepository;
         $this->roleRepository = $RoleRepository;
-        $this->packageRoleRepository = $PackageRoleRepository;
+        $this->currencyRepository = $CurrencyRepository;
         $this->middleware(['permission:package-list','permission:core-data-list'])->except('listIndex');
         $this->middleware('permission:package-index')->only('index');
         $this->middleware('permission:package-create')->only('create','store');
@@ -41,7 +40,8 @@ class PackageController extends Controller
     public function create()
     {
         $role = $this->roleRepository->listData();
-        return view(checkView('admin.core_data.package.create'),compact('role'));
+        $currency = $this->currencyRepository->listData();
+        return view(checkView('admin.core_data.package.create'),compact('role','currency'));
     }
 
     public function store(CreateRequest $request)
@@ -52,9 +52,9 @@ class PackageController extends Controller
     public function edit($id)
     {
         $role = $this->roleRepository->listData();
+        $currency = $this->currencyRepository->listData();
         $data = $this->roleRepository->showData($id);
-        $package_role = $this->packageRoleRepository->listData($id);
-        return view(checkView('admin.core_data.package.edit'),compact('data','role','package_role'));
+        return view(checkView('admin.core_data.package.edit'),compact('data','role','currency'));
     }
 
     public function update(EditRequest $request, $id)
