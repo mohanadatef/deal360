@@ -53,15 +53,19 @@
                                                 <img src="{{ getImag($data->image,'type') }}" style="width:100px;height: 100px">
                                             </td>
                                             <td>
+                                                @permission('type-restore')
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
+                                                @endpermission
+                                                @permission('type-remove')
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-remove"><i></i> {{trans('lang.Delete')}}
                                                 </button>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @empty

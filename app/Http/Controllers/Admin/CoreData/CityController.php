@@ -16,6 +16,15 @@ class CityController extends Controller
     {
         $this->cityRepository = $CityRepository;
         $this->countryRepository = $CountryRepository;
+        $this->middleware(['permission:city-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:city-index')->only('index');
+        $this->middleware('permission:city-create')->only('store');
+        $this->middleware('permission:city-edit')->only('show','update');
+        $this->middleware('permission:city-status')->only('changeStatus');
+        $this->middleware('permission:city-delete')->only('destroy');
+        $this->middleware('permission:city-index-delete')->only('destroyIndex');
+        $this->middleware('permission:city-restore')->only('restore');
+        $this->middleware('permission:city-remove')->only('remove');
     }
 
     public function index()

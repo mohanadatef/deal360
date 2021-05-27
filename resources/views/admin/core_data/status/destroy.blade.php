@@ -49,15 +49,19 @@
                                         <tr id="data-{{$data->id}}">
                                             <td id="title-{{$data->id}}">{{$data->title ? $data->title->value : ""}}</td>
                                             <td>
+                                                @permission('status-restore')
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
+                                                @endpermission
+                                                @permission('status-remove')
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-remove"><i></i> {{trans('lang.Delete')}}
                                                 </button>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @empty

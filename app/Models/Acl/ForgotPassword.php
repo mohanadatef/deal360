@@ -18,9 +18,9 @@ class ForgotPassword extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function scopeStatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 
     public function user()

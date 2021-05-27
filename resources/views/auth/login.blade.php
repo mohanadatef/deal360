@@ -51,17 +51,6 @@
                     <!-- /.col -->
                 </div>
             </form>
-
-            <div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
-
-            </div>
-            <!-- /.social-auth-links -->
-
-
-            <p class="mb-0">
-                <a href="{{route('register')}}" class="text-center">Register a new membership</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
     </div>

@@ -73,4 +73,8 @@ return [
     'Enter_Email'=>'برجاء ادخال البريد الالكتروني',
     'Enter_Password'=>'برجاء ادخال كلمه السر',
     'Enter_Password_Confirmation'=>'برجاء ادخال تاكيد كلمه السر',
+    'Gender'=>'نوع',
+    'Male'=>'ذكر',
+    'Famel'=>'انثى',
+    'DOB'=>'تاريخ الميلاد',
     ];

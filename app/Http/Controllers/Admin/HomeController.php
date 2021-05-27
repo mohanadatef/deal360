@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:dashboard-show')->only('index');
+    }
     public function index()
     {
         return view('admin.admin');

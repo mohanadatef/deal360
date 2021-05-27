@@ -14,6 +14,15 @@ class HighLightController extends Controller
     public function __construct(HighLightRepository $HighLightRepository)
     {
         $this->highlightRepository = $HighLightRepository;
+        $this->middleware(['permission:highlight-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:highlight-index')->only('index');
+        $this->middleware('permission:highlight-create')->only('store');
+        $this->middleware('permission:highlight-edit')->only('show','update');
+        $this->middleware('permission:highlight-status')->only('changeStatus');
+        $this->middleware('permission:highlight-delete')->only('destroy');
+        $this->middleware('permission:highlight-index-delete')->only('destroyIndex');
+        $this->middleware('permission:highlight-restore')->only('restore');
+        $this->middleware('permission:highlight-remove')->only('remove');
     }
 
     public function index()

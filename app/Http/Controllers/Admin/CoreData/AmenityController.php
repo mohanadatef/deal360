@@ -14,6 +14,15 @@ class AmenityController extends Controller
     public function __construct(AmenityRepository $AmenityRepository)
     {
         $this->amenityRepository = $AmenityRepository;
+        $this->middleware(['permission:amenity-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:amenity-index')->only('index');
+        $this->middleware('permission:amenity-create')->only('store');
+        $this->middleware('permission:amenity-edit')->only('show','update');
+        $this->middleware('permission:amenity-status')->only('changeStatus');
+        $this->middleware('permission:amenity-delete')->only('destroy');
+        $this->middleware('permission:amenity-index-delete')->only('destroyIndex');
+        $this->middleware('permission:amenity-restore')->only('restore');
+        $this->middleware('permission:amenity-remove')->only('remove');
     }
 
     public function index()

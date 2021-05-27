@@ -22,7 +22,7 @@ class RoleRepository implements MeanInterface
 
     public function getData()
     {
-        return $this->data->with('title')->get();
+        return $this->data->with('title')->whereKeyNot(1)->get();
     }
 
     public function storeData($request)
@@ -87,6 +87,6 @@ class RoleRepository implements MeanInterface
 
     public function listData()
     {
-        return RoleListResource::collection($this->data->with('title')->status('1')->order('asc')->get());
+        return RoleListResource::collection($this->data->with('title')->whereKeyNot(1)->status('1')->order('asc')->get());
     }
 }

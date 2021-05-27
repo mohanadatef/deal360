@@ -51,7 +51,7 @@
                                             <label for="title">{{trans('lang.Title')}} {{$lang->title}}</label>
                                             <input type="text" name="title[{{$lang->code}}]" class="form-control"
                                                    id="title[{{$lang->code}}]"
-                                                   <?php $title=$data->translation->where('language_id', $lang->id)->first() ?>
+                                                   @php($title=$data->translation->where('language_id', $lang->id)->first())
                                                    @if($title)
                                                    value="{{$title->value}}"
                                                    @endif

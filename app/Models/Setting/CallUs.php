@@ -17,8 +17,8 @@ class CallUs extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function scopestatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 }

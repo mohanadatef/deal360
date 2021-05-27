@@ -44,9 +44,6 @@ class CreateForeignKeys extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
-            $table->foreign('country_id')->references('id')->on('countries')
-                ->onDelete('cascade')
-                ->onUpdate('restrict');
         });
         Schema::table('currencies', function (Blueprint $table) {
             $table->foreign('country_id')->references('id')->on('countries')
@@ -58,6 +55,14 @@ class CreateForeignKeys extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
             $table->foreign('agent_id')->references('id')->on('agents')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+        });
+        Schema::table('package_roles', function (Blueprint $table) {
+            $table->foreign('package_id')->references('id')->on('packages')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+            $table->foreign('role_id')->references('id')->on('roles')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
@@ -199,7 +204,6 @@ class CreateForeignKeys extends Migration
         });
         Schema::table('agencies', function (Blueprint $table) {
             $table->dropForeign('agencies_user_id_foreign');
-            $table->dropForeign('agencies_country_id_foreign');
         });
         Schema::table('currencies', function (Blueprint $table) {
             $table->dropForeign('currencies_country_id_foreign');
@@ -207,6 +211,10 @@ class CreateForeignKeys extends Migration
         Schema::table('agency_agents', function (Blueprint $table) {
             $table->dropForeign('agency_agents_agent_id_foreign');
             $table->dropForeign('agency_agents_agency_id_foreign');
+        });
+        Schema::table('package_roles', function (Blueprint $table) {
+            $table->dropForeign('package_roles_package_id_foreign');
+            $table->dropForeign('package_roles_role_id_foreign');
         });
         Schema::table('role_permissions', function (Blueprint $table) {
             $table->dropForeign('role_permissions_role_id_foreign');

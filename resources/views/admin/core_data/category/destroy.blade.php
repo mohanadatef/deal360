@@ -54,15 +54,19 @@
                                                      style="width:100px;height: 100px">
                                             </td>
                                             <td>
+                                                @permission('category-restore')
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
+                                                @endpermission
+                                                @permission('category-remove')
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-remove"><i></i> {{trans('lang.Delete')}}
                                                 </button>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @empty

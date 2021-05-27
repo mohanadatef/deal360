@@ -26,9 +26,9 @@ class FQ extends Model
             ->select('value as'.$key);
     }
 
-    public function scopeStatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 
     public function scopeOrder($query,$order)

@@ -14,6 +14,15 @@ class TypeController extends Controller
     public function __construct(TypeRepository $TypeRepository)
     {
         $this->typeRepository = $TypeRepository;
+        $this->middleware(['permission:type-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:type-index')->only('index');
+        $this->middleware('permission:type-create')->only('store');
+        $this->middleware('permission:type-edit')->only('show','update');
+        $this->middleware('permission:type-status')->only('changeStatus');
+        $this->middleware('permission:type-delete')->only('destroy');
+        $this->middleware('permission:type-index-delete')->only('destroyIndex');
+        $this->middleware('permission:type-restore')->only('restore');
+        $this->middleware('permission:type-remove')->only('remove');
     }
 
     public function index()

@@ -33,9 +33,9 @@ class HighLight extends Model
             ->where('language_id' ,languageId())->withTrashed();
     }
 
-    public function scopeStatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 
     public function scopeOrder($query,$order)

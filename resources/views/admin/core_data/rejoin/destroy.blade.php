@@ -53,15 +53,19 @@
                                             <td id="country-{{$data->id}}">{{$data->country->title->value}}</td>
                                             <td id="city-{{$data->id}}">{{$data->city->title->value}}</td>
                                             <td>
+                                                @permission('rejoin-restore')
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
+                                                @endpermission
+                                                @permission('rejoin-remove')
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
-                                                        data-target="#modal-remove"><i></i>{{trans('lang.Delete')}}
+                                                        data-target="#modal-remove"><i></i> {{trans('lang.Delete')}}
                                                 </button>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @empty

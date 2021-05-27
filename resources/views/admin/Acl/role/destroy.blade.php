@@ -54,15 +54,19 @@
                                             <td id="code-{{$data->id}}">{{$data->code}}</td>
                                             <td id="type_access-{{$data->id}}">{{trans('lang.'.$data->type_access)}}</td>
                                             <td>
+                                                @permission('role-restore')
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
+                                                @endpermission
+                                                @permission('role-remove')
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-remove"><i></i>{{trans('lang.Delete')}}
                                                 </button>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @empty

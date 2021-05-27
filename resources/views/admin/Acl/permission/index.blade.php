@@ -33,10 +33,12 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
+                                        @permission('permission-create')
                                         <button type="button" class="btn btn-success" data-toggle="modal"
                                                 data-target="#modal-create">
                                             {{trans('lang.Create')}}
                                         </button>
+                                        @endpermission
                                     </h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -56,6 +58,7 @@
                                                     data-order="{{$data->order}}">{{$data->title ? $data->title->value : ""}}</td>
                                                 <td id="name-{{$data->id}}">{{$data->name}}</td>
                                                 <td>
+                                                    @permission('permission-edit')
                                                     <button type="button"
                                                             class="btn btn-outline-primary btn-block btn-sm"
                                                             onclick="showItem({{$data->id}})">
@@ -65,11 +68,14 @@
                                                             data-toggle="modal"
                                                             data-target="#modal-edit">
                                                     </button>
+                                                    @endpremission
+                                                    @permission('permission-delete')
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
                                                             onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                             data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
+                                                    @endpremission
                                                 </td>
                                             </tr>
                                         @empty
@@ -97,6 +103,7 @@
         </section>
         <!-- /.content -->
     </div>
+    @permission('permission-create')
     <div class="modal fade" id="modal-create">
         <div class="modal-dialog">
             <div class="modal-content bg-success">
@@ -139,6 +146,8 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    @endpermission
+    @permission('permission-edit')
     <div class="modal fade" id="modal-edit">
         <div class="modal-dialog">
             <div class="modal-content bg-info">
@@ -180,9 +189,11 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    @endpermission
 @endsection
 @section('script_style')
     @include('includes.admin.dataTables.script_DataTables')
+    @permission('permission-edit')
     <script>
         //show item
         function showData(res) {
@@ -197,4 +208,5 @@
             document.getElementById('name-' + res.id).innerHTML = res.name;
         }
         </script>
+    @endpermission
 @endsection

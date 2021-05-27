@@ -51,23 +51,26 @@
                                     <tbody>
                                     @forelse($datas as $data)
                                         <tr id="data-{{$data->id}}">
-                                            <td id="full-name-{{$data->id}}"
-                                                data-order="{{$data->order}}">{{$data->fullname}}</td>
+                                            <td id="full-name-{{$data->id}}">{{$data->fullname}}</td>
                                             <td id="user-name-{{$data->id}}">{{$data->username}}</td>
                                             <td id="email-{{$data->id}}">{{$data->email}}</td>
                                             <td id="role-{{$data->id}}">{{$data->role->title ? $data->role->title->value : ""}}</td>
                                             <td id="image-{{$data->id}}"><img src="{{ getImag($data->image,'user') }}"
                                                                              id="image-{{$data->id}}" style="width:100px;height: 100px"></td>
                                             <td>
+                                                @permission('user-restore')
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
+                                                @endpermission
+                                                @permission('user-remove')
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-remove"><i></i>{{trans('lang.Delete')}}
                                                 </button>
+                                                @endpermission
                                             </td>
                                         </tr>
                                     @empty

@@ -22,6 +22,15 @@ class UserController extends Controller
         $this->userRepository = $UserRepository;
         $this->roleRepository = $RoleRepository;
         $this->countryRepository = $CountryRepository;
+        $this->middleware(['permission:user-list','permission:acl-list'])->except('listIndex');
+        $this->middleware('permission:user-index')->only('index');
+        $this->middleware('permission:user-create')->only('create','store');
+        $this->middleware('permission:user-edit')->only('edit','update');
+        $this->middleware('permission:user-status')->only('changeStatus');
+        $this->middleware('permission:user-delete')->only('destroy');
+        $this->middleware('permission:user-index-delete')->only('destroyIndex');
+        $this->middleware('permission:user-restore')->only('restore');
+        $this->middleware('permission:user-remove')->only('remove');
     }
 
     public function index()
@@ -47,7 +56,8 @@ class UserController extends Controller
     {
         $role = $this->roleRepository->listData();
         $data = $this->userRepository->showData($id);
-        return view(checkView('admin.acl.user.edit'),compact('data','role'));
+        $country = $this->countryRepository->listData();
+        return view(checkView('admin.acl.user.edit'),compact('data','role','country'));
     }
 
     public function update(EditRequest $request, $id)

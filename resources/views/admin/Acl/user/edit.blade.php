@@ -42,7 +42,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             @include('errors.error')
-                            <form action="{{route('user.update',$data->id)}}" method="post" id="edit">
+                            <form action="{{route('user.update',$data->id)}}" method="post" id="edit" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group{{ $errors->has('fullname') ? ' is-invalid' : "" }}">
@@ -106,7 +106,7 @@
                                                 style="width: 100%;">
                                             @foreach($role as $ro)
                                                 <option value="{{$ro->id}}"
-                                                        @if($data->role_id == $ro->id) selected @endif      id="option-role-{{$ro->id}}">{{$ro->title ? $ro->title->value : ""}}</option>
+                                                        @if($data->role_id == $ro->id) selected @endif id="option-role-{{$ro->id}}">{{$ro->title ? $ro->title->value : ""}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -114,7 +114,7 @@
                                          id="image-{{$data->id}}" style="width:100px;height: 100px">
                                     <div class="form-group{{ $errors->has('image') ? ' has-error' : "" }}">
                                         <label>{{trans('lang.Image')}}</label>
-                                        <input type="file" value="" name="image"/>
+                                        <input type="file" value="{{Request::old('image')}}" name="image"/>
                                         <label for="image">jpg, png, gif</label>
                                     </div>
                                     <!-- /.form-group -->
@@ -142,17 +142,11 @@
     </div>
 @endsection
 @section('script_style')
-    <!-- Bootstrap4 Duallistbox -->
-    <script
-        src="{{asset('public/AdminLTE/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>
     <script>
-        //Bootstrap Duallistbox
-        $('.duallistbox').bootstrapDualListbox();
         //Date range picker
         $('#reservationdate').datetimepicker({
-            format: 'DD/MM/YYYY'
+            format: 'YYYY/MM/DD'
         });
     </script>
-
-    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\UpdateRequest','#edit') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\EditRequest','#edit') !!}
 @endsection

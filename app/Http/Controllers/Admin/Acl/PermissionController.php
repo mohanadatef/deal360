@@ -14,6 +14,14 @@ class PermissionController extends Controller
     public function __construct(PermissionRepository $PermissionRepository)
     {
         $this->permissionRepository = $PermissionRepository;
+        $this->middleware(['permission:permission-list','permission:acl-list'])->except('listIndex');
+        $this->middleware('permission:permission-index')->only('index');
+        $this->middleware('permission:permission-create')->only('store');
+        $this->middleware('permission:permission-edit')->only('show','update');
+        $this->middleware('permission:permission-delete')->only('destroy');
+        $this->middleware('permission:permission-index-delete')->only('destroyIndex');
+        $this->middleware('permission:permission-restore')->only('restore');
+        $this->middleware('permission:permission-remove')->only('remove');
     }
 
     public function index()

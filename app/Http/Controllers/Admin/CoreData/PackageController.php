@@ -5,15 +5,31 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Package\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Package\EditRequest;
+use App\Repositories\Admin\Acl\RoleRepository;
 use App\Repositories\Admin\CoreData\PackageRepository;
+use App\Repositories\Admin\CoreData\PackageRoleRepository;
 
 class PackageController extends Controller
 {
     private $packageRepository;
+    private $roleRepository;
+    private $packageRoleRepository;
 
-    public function __construct(PackageRepository $PackageRepository)
+    public function __construct(PackageRepository $PackageRepository,RoleRepository $RoleRepository,
+                                PackageRoleRepository $PackageRoleRepository)
     {
         $this->packageRepository = $PackageRepository;
+        $this->roleRepository = $RoleRepository;
+        $this->packageRoleRepository = $PackageRoleRepository;
+        $this->middleware(['permission:package-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:package-index')->only('index');
+        $this->middleware('permission:package-create')->only('create','store');
+        $this->middleware('permission:package-edit')->only('edit','update');
+        $this->middleware('permission:package-status')->only('changeStatus');
+        $this->middleware('permission:package-delete')->only('destroy');
+        $this->middleware('permission:package-index-delete')->only('destroyIndex');
+        $this->middleware('permission:package-restore')->only('restore');
+        $this->middleware('permission:package-remove')->only('remove');
     }
 
     public function index()
@@ -22,9 +38,23 @@ class PackageController extends Controller
         return view(checkView('admin.core_data.package.index'), compact('datas'));
     }
 
+    public function create()
+    {
+        $role = $this->roleRepository->listData();
+        return view(checkView('admin.core_data.package.create'),compact('role'));
+    }
+
     public function store(CreateRequest $request)
     {
         return response()->json($this->packageRepository->storeData($request));
+    }
+
+    public function edit($id)
+    {
+        $role = $this->roleRepository->listData();
+        $data = $this->roleRepository->showData($id);
+        $package_role = $this->packageRoleRepository->listData($id);
+        return view(checkView('admin.core_data.package.edit'),compact('data','role','package_role'));
     }
 
     public function update(EditRequest $request, $id)
@@ -61,10 +91,5 @@ class PackageController extends Controller
     public function listIndex()
     {
         return $this->packageRepository->listData();
-    }
-
-    public function show($id)
-    {
-        return $this->packageRepository->showData($id);
     }
 }

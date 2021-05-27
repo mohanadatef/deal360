@@ -15,6 +15,15 @@ class LanguageController extends Controller
     public function __construct(LanguageRepository $LanguageRepository)
     {
         $this->languageRepository = $LanguageRepository;
+        $this->middleware(['permission:language-list','permission:core-data-list'])->except('listIndex','language');
+        $this->middleware('permission:language-index')->only('index');
+        $this->middleware('permission:language-create')->only('store');
+        $this->middleware('permission:language-edit')->only('show','update');
+        $this->middleware('permission:language-status')->only('changeStatus');
+        $this->middleware('permission:language-delete')->only('destroy');
+        $this->middleware('permission:language-index-delete')->only('destroyIndex');
+        $this->middleware('permission:language-restore')->only('restore');
+        $this->middleware('permission:language-remove')->only('remove');
     }
 
     public function index()

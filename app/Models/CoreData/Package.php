@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Package extends Model
 {
     protected $fillable = [
-        'status','order','count_listing','type_date','count_date'
+        'status','order','count_listing','type_date','count_date','image_included','count_featured','price'
     ];
     protected $table = 'packages';
     public $timestamps = true;
@@ -31,9 +31,9 @@ class Package extends Model
             ->where('language_id' ,languageId())->withTrashed();
     }
 
-    public function scopeStatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 
     public function scopeOrder($query,$order)

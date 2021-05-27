@@ -14,6 +14,15 @@ class CountryController extends Controller
     public function __construct(CountryRepository $CountryRepository)
     {
         $this->countryRepository = $CountryRepository;
+        $this->middleware(['permission:country-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:country-index')->only('index');
+        $this->middleware('permission:country-create')->only('store');
+        $this->middleware('permission:country-edit')->only('show','update');
+        $this->middleware('permission:country-status')->only('changeStatus');
+        $this->middleware('permission:country-delete')->only('destroy');
+        $this->middleware('permission:country-index-delete')->only('destroyIndex');
+        $this->middleware('permission:country-restore')->only('restore');
+        $this->middleware('permission:country-remove')->only('remove');
     }
 
     public function index()

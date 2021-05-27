@@ -21,6 +21,15 @@ class RoleController extends Controller
         $this->roleRepository = $RoleRepository;
         $this->permissionRepository = $PermissionRepository;
         $this->rolePermissionRepository = $RolePermissionRepository;
+        $this->middleware(['permission:role-list','permission:acl-list'])->except('listIndex');
+        $this->middleware('permission:role-index')->only('index');
+        $this->middleware('permission:role-create')->only('create','store');
+        $this->middleware('permission:role-edit')->only('edit','update');
+        $this->middleware('permission:role-status')->only('changeStatus');
+        $this->middleware('permission:role-delete')->only('destroy');
+        $this->middleware('permission:role-index-delete')->only('destroyIndex');
+        $this->middleware('permission:role-restore')->only('restore');
+        $this->middleware('permission:role-remove')->only('remove');
     }
 
     public function index()

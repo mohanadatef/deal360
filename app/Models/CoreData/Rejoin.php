@@ -43,9 +43,9 @@ class Rejoin extends Model
         return $this->belongsTo(City::class, 'city_id')->withTrashed();
     }
 
-    public function scopeStatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 
     public function scopeOrder($query,$order)

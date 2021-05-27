@@ -73,4 +73,8 @@ return [
     'Enter_Password_Confirmation'=>'Enter Password Confirmation',
     'Phone'=>'Phone',
     'Enter_Phone'=>'Enter Phone',
+    'Gender'=>'Gender',
+    'Male'=>'Male',
+    'Famel'=>'Famel',
+    'DOB'=>'Birth Day',
 ];

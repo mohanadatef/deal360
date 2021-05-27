@@ -13,7 +13,10 @@ class CreatePackagesTable extends Migration {
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
 			$table->increments('id');
-			$table->integer('count_listing');
+			$table->integer('count_listing')->default('0');
+			$table->integer('image_included')->default('0');
+			$table->integer('count_featured')->default('0');
+            $table->float('price')->default('0');
             $table->string('type_date',255)->default('year');
             $table->integer('count_date')->default('1');
             $table->integer('status')->default('1');

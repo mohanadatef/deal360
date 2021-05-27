@@ -12,10 +12,6 @@ class RolePermission extends Model
     ];
     protected $table = 'role_permissions';
     public $timestamps = true;
-    public function permission()
-    {
-        return $this->belongsTo(Permission::Class, 'permission_id')->select('name');
-    }
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];

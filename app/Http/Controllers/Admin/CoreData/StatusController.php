@@ -14,6 +14,15 @@ class StatusController extends Controller
     public function __construct(StatusRepository $StatusRepository)
     {
         $this->statusRepository = $StatusRepository;
+        $this->middleware(['permission:status-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:status-index')->only('index');
+        $this->middleware('permission:status-create')->only('store');
+        $this->middleware('permission:status-edit')->only('show','update');
+        $this->middleware('permission:status-status')->only('changeStatus');
+        $this->middleware('permission:status-delete')->only('destroy');
+        $this->middleware('permission:status-index-delete')->only('destroyIndex');
+        $this->middleware('permission:status-restore')->only('restore');
+        $this->middleware('permission:status-remove')->only('remove');
     }
 
     public function index()

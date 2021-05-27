@@ -38,14 +38,14 @@ class User extends Authenticatable
         return $this->morphOne(Image::class, 'category')->withTrashed();
     }
 
-    public function scopeStatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 
     public function scopeOrder($query,$order)
     {
-        return $query->orderby('order',$order);
+        return $query->orderby('fullname',$order);
     }
 
     public function role()
@@ -85,7 +85,7 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->belongsTo(Country::Class, 'countries')->withTrashed();
+        return $this->belongsTo(Country::Class, 'country_id')->withTrashed();
     }
 
     public function favourite()

@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('image') ? ' has-error' : "" }}">
                                         <label>{{trans('lang.Image')}}</label>
-                                        <input type="file" value="" name="image"/>
+                                        <input type="file" value="{{Request::old('image')}}" name="image"/>
                                         <label for="image">jpg, png, gif</label>
                                     </div>
                                     <!-- /.form-group -->
@@ -153,17 +153,11 @@
     </div>
 @endsection
 @section('script_style')
-    <!-- Bootstrap4 Duallistbox -->
-    <script
-        src="{{asset('public/AdminLTE/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>
-    <script>
-        //Bootstrap Duallistbox
-        $('.duallistbox').bootstrapDualListbox();
+   <script>
         //Date range picker
         $('#reservationdate').datetimepicker({
             format: 'DD/MM/YYYY'
         });
     </script>
-
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\CreateRequest','#create') !!}
 @endsection

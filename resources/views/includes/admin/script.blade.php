@@ -33,12 +33,6 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('public/AdminLTE/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('public/AdminLTE/plugins/toastr/toastr.min.js')}}"></script>
-{{--<!-- Select2 -->
-<script src="{{asset('public/AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
-<script>
-   //Initialize Select2 Elements
-    $('.select2').select2();
-</script>--}}
 <!-- Bootstrap Switch -->
 <script src="{{asset('public/AdminLTE/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
 <script>
@@ -47,7 +41,6 @@
         $(this).bootstrapSwitch('state', $(this).prop('checked'));
     });
 </script>
-
 <!-- Laravel Javascript Validation -->
 <script type="text/javascript" src="{{ asset('public/vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 @yield('script')

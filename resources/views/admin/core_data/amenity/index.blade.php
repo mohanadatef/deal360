@@ -33,10 +33,12 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
+                                        @permission('amenity-create')
                                         <button type="button" class="btn btn-success" data-toggle="modal"
                                                 data-target="#modal-create">
                                             {{trans('lang.Create')}}
                                         </button>
+                                        @endpermission
                                     </h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -46,7 +48,9 @@
                                         <tr>
                                             <th>{{trans('lang.Title')}}</th>
                                             <th>{{trans('lang.Image')}}</th>
+                                            @permission('amenity-status')
                                             <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </thead>
@@ -59,15 +63,17 @@
                                                     <img src="{{ getImag($data->image,'amenity') }}"
                                                          id="image-{{$data->id}}" style="width:100px;height: 100px">
                                                 </td>
+                                                @permission('amenity-status')
                                                 <td>
-                                                    <input onfocus="changeStatus({{$data->id}})"
-                                                           type="checkbox"
+                                                    <input onfocus="changeStatus({{$data->id}})" type="checkbox"
                                                            name="status" @if($data->status) checked
                                                            @endif id="status-{{$data->id}}"
                                                            data-bootstrap-switch data-off-color="danger"
                                                            data-on-color="success">
                                                 </td>
+                                                @endpermission
                                                 <td>
+                                                    @permission('amenity-edit')
                                                     <button type="button"
                                                             class="btn btn-outline-primary btn-block btn-sm"
                                                             onclick="showItem({{$data->id}})">
@@ -77,11 +83,14 @@
                                                             data-toggle="modal"
                                                             data-target="#modal-edit">
                                                     </button>
+                                                    @endpermission
+                                                    @permission('amenity-delete')
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
                                                             onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                             data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
+                                                    @endpermission
                                                 </td>
                                             </tr>
                                         @empty
@@ -91,7 +100,9 @@
                                         <tr>
                                             <th>{{trans('lang.Title')}}</th>
                                             <th>{{trans('lang.Image')}}</th>
+                                            @permission('amenity-status')
                                             <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </tfoot>
@@ -110,7 +121,7 @@
         </section>
         <!-- /.content -->
     </div>
-
+    @permission('amenity-create')
     <div class="modal fade" id="modal-create">
         <div class="modal-dialog">
             <div class="modal-content bg-success">
@@ -157,7 +168,8 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
+    @endpermission
+    @permission('amenity-edit')
     <div class="modal fade" id="modal-edit">
         <div class="modal-dialog">
             <div class="modal-content bg-info">
@@ -204,9 +216,11 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    @endpermission
 @endsection
 @section('script_style')
     @include('includes.admin.dataTables.script_DataTables')
+    @permission('amenity-edit')
     <script>
         //show item
         function showData(res) {
@@ -222,4 +236,5 @@
             $(`#image-${res.id}`).attr('src', res.image);
         }
     </script>
+    @endpermission
 @endsection

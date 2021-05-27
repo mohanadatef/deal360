@@ -42,9 +42,9 @@ class City extends Model
         return $this->hasMany(Rejoin::class);
     }
 
-    public function scopeStatus($query,$status)
+   public function scopeStatus($query,$status)
     {
-        return $query->where('status',$status);
+        return $query->whereStatus($status);
     }
 
     public function scopeOrder($query,$order)

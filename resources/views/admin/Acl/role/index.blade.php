@@ -33,8 +33,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
+                                        @permission('role-create')
                                         <a href="{{  route('role.create') }}"
                                            class="btn btn-success"> {{trans('lang.Create')}}</a>
+                                        @endpermission
                                     </h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -45,7 +47,9 @@
                                             <th>{{trans('lang.Title')}}</th>
                                             <th>{{trans('lang.Code')}}</th>
                                             <th>{{trans('lang.Type_access')}}</th>
+                                            @permission('role-status')
                                             <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </thead>
@@ -56,6 +60,7 @@
                                                     data-order="{{$data->order}}">{{$data->title ? $data->title->value : ""}}</td>
                                                 <td id="code-{{$data->id}}">{{$data->code}}</td>
                                                 <td id="type_access-{{$data->id}}">{{trans('lang.'.$data->type_access)}}</td>
+                                                @permission('role-status')
                                                 <td>
                                                     <input onfocus="changeStatus({{$data->id}})" type="checkbox"
                                                            name="status" @if($data->status) checked
@@ -63,14 +68,19 @@
                                                            data-bootstrap-switch data-off-color="danger"
                                                            data-on-color="success">
                                                 </td>
+                                                @endpermission
                                                 <td>
+                                                    @permission('role-edit')
                                                     <a href="{{  route('role.edit',$data->id) }}"
                                                        class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>{{trans('lang.Edit')}}</a>
+                                                    @endpermission
+                                                    @permission('role-delete')
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
                                                             onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                             data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
+                                                    @endpermission
                                                 </td>
                                             </tr>
                                         @empty
@@ -81,7 +91,9 @@
                                             <th>{{trans('lang.Title')}}</th>
                                             <th>{{trans('lang.Code')}}</th>
                                             <th>{{trans('lang.Type_access')}}</th>
+                                            @permission('role-status')
                                             <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </tfoot>

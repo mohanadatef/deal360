@@ -14,6 +14,15 @@ class MetaController extends Controller
     public function __construct(MetaRepository $MetaRepository)
     {
         $this->metaRepository = $MetaRepository;
+        $this->middleware(['permission:meta-list','permission:setting-list'])->except('listIndex');
+        $this->middleware('permission:meta-index')->only('index');
+        $this->middleware('permission:meta-create')->only('store');
+        $this->middleware('permission:meta-edit')->only('show','update');
+        $this->middleware('permission:meta-status')->only('changeStatus');
+        $this->middleware('permission:meta-delete')->only('destroy');
+        $this->middleware('permission:meta-index-delete')->only('destroyIndex');
+        $this->middleware('permission:meta-restore')->only('restore');
+        $this->middleware('permission:meta-remove')->only('remove');
     }
 
     public function index()

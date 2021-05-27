@@ -14,6 +14,15 @@ class CategoryController extends Controller
     public function __construct(CategoryRepository $CategoryRepository)
     {
         $this->categoryRepository = $CategoryRepository;
+        $this->middleware(['permission:category-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:category-index')->only('index');
+        $this->middleware('permission:category-create')->only('store');
+        $this->middleware('permission:category-edit')->only('show','update');
+        $this->middleware('permission:category-status')->only('changeStatus');
+        $this->middleware('permission:category-delete')->only('destroy');
+        $this->middleware('permission:category-index-delete')->only('destroyIndex');
+        $this->middleware('permission:category-restore')->only('restore');
+        $this->middleware('permission:category-remove')->only('remove');
     }
 
     public function index()

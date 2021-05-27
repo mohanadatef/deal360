@@ -24,6 +24,9 @@ class EditRequest extends FormRequest
             'count_listing' => 'required|numeric',
             'type_date' => 'required|string',
             'count_date' => 'required|numeric',
+            'image_included' => 'required|numeric',
+            'count_featured' => 'required|numeric',
+            'price' => 'required|numeric',
         ];
         foreach(language() as $lang)
         {

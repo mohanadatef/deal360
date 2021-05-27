@@ -16,6 +16,15 @@ class RejoinController extends Controller
     {
         $this->rejoinRepository = $RejoinRepository;
         $this->countryRepository = $CountryRepository;
+        $this->middleware(['permission:rejoin-list','permission:core-data-list'])->except('listIndex');
+        $this->middleware('permission:rejoin-index')->only('index');
+        $this->middleware('permission:rejoin-create')->only('store');
+        $this->middleware('permission:rejoin-edit')->only('show','update');
+        $this->middleware('permission:rejoin-status')->only('changeStatus');
+        $this->middleware('permission:rejoin-delete')->only('destroy');
+        $this->middleware('permission:rejoin-index-delete')->only('destroyIndex');
+        $this->middleware('permission:rejoin-restore')->only('restore');
+        $this->middleware('permission:rejoin-remove')->only('remove');
     }
 
     public function index()

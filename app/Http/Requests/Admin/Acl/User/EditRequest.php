@@ -27,14 +27,12 @@ class EditRequest extends FormRequest
     {
         return  [
             'fullname' => 'required|string|unique:users,fullname,'.$this->id.',id',
-            'username' => 'required|string|unique:users,username,'.$this->id.',id',
             'email' => 'required|email|unique:users,email,'.$this->id.',id',
             'phone' => 'required|numeric|unique:users,phone,'.$this->id.',id',
             'gender' => 'required',
             'dob' => 'required',
             'role' => 'required|exists:roles,id',
             'country' => 'required|exists:countries,id',
-            'password' => 'required|string|min:6|confirmed',
             'image' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
         ];
     }

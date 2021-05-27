@@ -33,8 +33,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">
+                                        @permission('user-create')
                                         <a href="{{  route('user.create') }}"
                                            class="btn btn-success"> {{trans('lang.Create')}}</a>
+                                        @endpermission
                                     </h3>
                                 </div>
                                 <!-- /.card-header -->
@@ -48,21 +50,23 @@
                                             <th>{{trans('lang.Role')}}</th>
                                             <th>{{trans('lang.Country')}}</th>
                                             <th>{{trans('lang.Image')}}</th>
+                                            @permission('user-status')
                                             <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody id="body">
                                         @forelse($datas as $data)
                                             <tr id="data-{{$data->id}}">
-                                                <td id="full-name-{{$data->id}}"
-                                                    data-order="{{$data->order}}">{{$data->fullname}}</td>
+                                                <td id="full-name-{{$data->id}}">{{$data->fullname}}</td>
                                                 <td id="user-name-{{$data->id}}">{{$data->username}}</td>
                                                 <td id="email-{{$data->id}}">{{$data->email}}</td>
                                                 <td id="role-{{$data->id}}">{{$data->role->title ? $data->role->title->value : ""}}</td>
                                                 <td id="country-{{$data->id}}">{{$data->country->title ? $data->country->title->value : ""}}</td>
                                                 <td id="image-{{$data->id}}"><img src="{{ getImag($data->image,'user') }}"
                                                                                   id="image-{{$data->id}}" style="width:100px;height: 100px"></td>
+                                                @permission('user-status')
                                                 <td>
                                                     <input onfocus="changeStatus({{$data->id}})" type="checkbox"
                                                            name="status" @if($data->status) checked
@@ -70,14 +74,19 @@
                                                            data-bootstrap-switch data-off-color="danger"
                                                            data-on-color="success">
                                                 </td>
+                                                @endpermission
                                                 <td>
+                                                    @permission('user-edit')
                                                     <a href="{{  route('user.edit',$data->id) }}"
                                                        class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>{{trans('lang.Edit')}}</a>
+                                                    @endpermission
+                                                    @permission('user-delete')
                                                     <button type="button"
                                                             class="btn btn-outline-danger btn-block btn-sm"
                                                             onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                             data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
                                                     </button>
+                                                    @endpermission
                                                 </td>
                                             </tr>
                                         @empty
@@ -91,7 +100,9 @@
                                             <th>{{trans('lang.Role')}}</th>
                                             <th>{{trans('lang.Country')}}</th>
                                             <th>{{trans('lang.Image')}}</th>
+                                            @permission('user-status')
                                             <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </tfoot>
