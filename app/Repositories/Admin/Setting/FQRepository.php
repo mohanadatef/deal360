@@ -30,10 +30,20 @@ class FQRepository implements MeanInterface
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
             foreach (language() as $lang) {
-                $data->translation()->create(['key' => 'question', 'value' => $request->question[$lang->code],
-                    'language_id' => $lang->id]);
-                $data->translation()->create(['key' => 'answer', 'value' => $request->answer[$lang->code],
-                    'language_id' => $lang->id]);
+                if (isset($request->question[$lang->code])) {
+                    $data->translation()->create(['key' => 'question', 'value' => $request->question[$lang->code],
+                        'language_id' => $lang->id]);
+                } else {
+                    $data->translation()->create(['key' => 'question', 'value' => $request->question['en'],
+                        'language_id' => $lang->id]);
+                }
+                if (isset($request->question[$lang->code])) {
+                    $data->translation()->create(['key' => 'answer', 'value' => $request->answer[$lang->code],
+                        'language_id' => $lang->id]);
+                } else {
+                    $data->translation()->create(['key' => 'answer', 'value' => $request->answer['en'],
+                        'language_id' => $lang->id]);
+                }
             }
             return '<tr id="' . $data->id . '"><td id="question-' . $data->id . '" data-order="' . $data->order . '">' . $data->question->value . '</td>
                     <td id="answer-' . $data->id . '">' . $data->answer->value . '</td>
@@ -64,15 +74,25 @@ class FQRepository implements MeanInterface
                 if ($translation) {
                     $translation->update(['value' => $request->question[$lang->code]]);
                 } else {
-                    $data->translation()->create(['key' => 'question', 'value' => $request->question[$lang->code],
-                        'language_id' => $lang->id]);
+                    if (isset($request->question[$lang->code])) {
+                        $data->translation()->create(['key' => 'question', 'value' => $request->question[$lang->code],
+                            'language_id' => $lang->id]);
+                    } else {
+                        $data->translation()->create(['key' => 'question', 'value' => $request->question['en'],
+                            'language_id' => $lang->id]);
+                    }
                 }
                 $translation = $data->translation->where('language_id', $lang->id)->where('key','answer')->first();
                 if ($translation) {
                     $translation->update(['value' => $request->answer[$lang->code]]);
                 } else {
-                    $data->translation()->create(['key' => 'answer', 'value' => $request->question[$lang->code],
-                        'language_id' => $lang->id]);
+                    if (isset($request->question[$lang->code])) {
+                        $data->translation()->create(['key' => 'answer', 'value' => $request->answer[$lang->code],
+                            'language_id' => $lang->id]);
+                    } else {
+                        $data->translation()->create(['key' => 'answer', 'value' => $request->answer['en'],
+                            'language_id' => $lang->id]);
+                    }
                 }
             }
             $data = $this->showData($id);

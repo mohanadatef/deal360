@@ -30,18 +30,33 @@ class CreateRequest extends FormRequest
         ];
         foreach(language() as $lang)
         {
-            $rules['question.'.$lang->code] = ['required','string',
-                Rule::unique('translations','value')
-                ->where('category_type',FQ::class)
-                ->where('key','question')
-                ->where('language_id',$lang->id)
-            ];
-            $rules['answer.'.$lang->code] = ['required','string',
-                Rule::unique('translations','value')
-                    ->where('category_type',FQ::class)
-                    ->where('key','answer')
-                    ->where('language_id',$lang->id)
-            ];
+            if ($lang->code == 'en') {
+                $rules['question.' . $lang->code] = ['required', 'string',
+                    Rule::unique('translations', 'value')
+                        ->where('category_type', FQ::class)
+                        ->where('key', 'question')
+                        ->where('language_id', $lang->id)
+                ];
+                $rules['answer.' . $lang->code] = ['required', 'string',
+                    Rule::unique('translations', 'value')
+                        ->where('category_type', FQ::class)
+                        ->where('key', 'answer')
+                        ->where('language_id', $lang->id)
+                ];
+            }else{
+                $rules['question.' . $lang->code] = [
+                    Rule::unique('translations', 'value')
+                        ->where('category_type', FQ::class)
+                        ->where('key', 'question')
+                        ->where('language_id', $lang->id)
+                ];
+                $rules['answer.' . $lang->code] = [
+                    Rule::unique('translations', 'value')
+                        ->where('category_type', FQ::class)
+                        ->where('key', 'answer')
+                        ->where('language_id', $lang->id)
+                ];
+            }
         }
         return $rules;
     }

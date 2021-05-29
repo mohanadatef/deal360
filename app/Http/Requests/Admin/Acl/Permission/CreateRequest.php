@@ -28,14 +28,22 @@ class CreateRequest extends FormRequest
         $rules = [
             'name' => 'required|string|unique:permissions',
         ];
-        foreach(language() as $lang)
-        {
-            $rules['title.'.$lang->code] = ['required','string',
-                Rule::unique('translations','value')
-                    ->where('category_type',Permission::class)
-                    ->where('key','title')
-                    ->where('language_id',$lang->id)
-            ];
+        foreach (language() as $lang) {
+            if ($lang->code == 'en') {
+                $rules['title.' . $lang->code] = ['required', 'string',
+                    Rule::unique('translations', 'value')
+                        ->where('category_type', Permission::class)
+                        ->where('key', 'title')
+                        ->where('language_id', $lang->id)
+                ];
+            } else {
+                $rules['title.' . $lang->code] = [
+                    Rule::unique('translations', 'value')
+                        ->where('category_type', Permission::class)
+                        ->where('key', 'title')
+                        ->where('language_id', $lang->id)
+                ];
+            }
         }
         return $rules;
     }

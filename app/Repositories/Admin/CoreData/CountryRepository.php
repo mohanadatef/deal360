@@ -30,8 +30,13 @@ class CountryRepository implements MeanInterface
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
             foreach (language() as $lang) {
-                $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                    'language_id'=>$lang->id]);
+                if (isset($request->title[$lang->code])) {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                        'language_id' => $lang->id]);
+                } else {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                        'language_id' => $lang->id]);
+                }
             }
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $data->image()->create(['image' => $imageName]);
@@ -65,8 +70,13 @@ class CountryRepository implements MeanInterface
                 if ($translation) {
                     $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
+                    if (isset($request->title[$lang->code])) {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                            'language_id' => $lang->id]);
+                    } else {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                            'language_id' => $lang->id]);
+                    }
                 }
             }
             if (isset($request->image)) {

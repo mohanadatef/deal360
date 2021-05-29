@@ -31,8 +31,13 @@ class RoleRepository implements MeanInterface
             $data = $this->data->create($request->all());
             $data->permission()->sync((array)$request->permission);
             foreach (language() as $lang) {
-                $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                    'language_id'=>$lang->id]);
+                if (isset($request->title[$lang->code])) {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                        'language_id' => $lang->id]);
+                } else {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                        'language_id' => $lang->id]);
+                }
             }
         });
     }
@@ -53,8 +58,13 @@ class RoleRepository implements MeanInterface
                 if ($translation) {
                     $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
+                    if (isset($request->title[$lang->code])) {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                            'language_id' => $lang->id]);
+                    } else {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                            'language_id' => $lang->id]);
+                    }
                 }
             }
         });

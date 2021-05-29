@@ -30,8 +30,13 @@ class PermissionRepository implements PermissionInterface
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
             foreach (language() as $lang) {
-                $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                    'language_id'=>$lang->id]);
+                if (isset($request->title[$lang->code])) {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                        'language_id' => $lang->id]);
+                } else {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                        'language_id' => $lang->id]);
+                }
             }
             return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" >'.$data->title->value.'</td>
                 <td id="name-'.$data->id.'" >'.$data->name.'</td>
@@ -60,8 +65,13 @@ class PermissionRepository implements PermissionInterface
                 if ($translation) {
                     $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
+                    if (isset($request->title[$lang->code])) {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                            'language_id' => $lang->id]);
+                    } else {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                            'language_id' => $lang->id]);
+                    }
                 }
             }
             $data = $this->showData($id);

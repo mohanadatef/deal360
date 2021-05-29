@@ -22,7 +22,7 @@ class TypeRepository implements MeanInterface
 
     public function getData()
     {
-        return $this->data->with('title','image')->order('asc')->get();
+        return $this->data->with('title', 'image')->order('asc')->get();
     }
 
     public function storeData($request)
@@ -30,29 +30,34 @@ class TypeRepository implements MeanInterface
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
             foreach (language() as $lang) {
-                $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                    'language_id'=>$lang->id]);
+                if (isset($request->title[$lang->code])) {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                        'language_id' => $lang->id]);
+                } else {
+                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                        'language_id' => $lang->id]);
+                }
             }
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $data->image()->create(['image' => $imageName]);
             !$image->image ? false : $this->uploadImage($request->image, 'data', $imageName);
-            return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" data-order="'.$data->order.'">'.$data->title->value.'</td>
-                <td><img src="'.getImag($data->image,'data').'" id="image-'.$data->id.'" style="width:100px;height: 100px"></td>
-                <td><input onfocus="changeStatus('.$data->id.')" data="checkbox" name="status" id="status-'.$data->id.'"
+            return '<tr id="' . $data->id . '"><td id="title-' . $data->id . '" data-order="' . $data->order . '">' . $data->title->value . '</td>
+                <td><img src="' . getImag($data->image, 'data') . '" id="image-' . $data->id . '" style="width:100px;height: 100px"></td>
+                <td><input onfocus="changeStatus(' . $data->id . ')" data="checkbox" name="status" id="status-' . $data->id . '"
                 checked data-bootstrap-switch data-off-color="danger" data-on-color="success"></td>
                 <td><button data="button" class="btn btn-outline-primary btn-block btn-sm"
-                onclick="showItem('.$data->id.')"><i class="fa fa-edit"></i> '.trans('lang.Edit').'</button>
-                <button id="openModael'.$data->id.'" data="button" class="d-none" data-toggle="modal"
+                onclick="showItem(' . $data->id . ')"><i class="fa fa-edit"></i> ' . trans('lang.Edit') . '</button>
+                <button id="openModael' . $data->id . '" data="button" class="d-none" data-toggle="modal"
                 data-target="#modal-edit"></button>
                 <button data="button" class="btn btn-outline-danger btn-block btn-sm"
-                onclick="selectItem('.$data->id.')" data-toggle="modal"
-                data-target="#modal-delete"><i></i> '.trans('lang.Delete').'</button></td></tr>';
+                onclick="selectItem(' . $data->id . ')" data-toggle="modal"
+                data-target="#modal-delete"><i></i> ' . trans('lang.Delete') . '</button></td></tr>';
         });
     }
 
     public function showData($id)
     {
-        return $this->data->with('translation.language','image')->findorFail($id);
+        return $this->data->with('translation.language', 'image')->findorFail($id);
     }
 
     public function updateData($request, $id)
@@ -65,8 +70,13 @@ class TypeRepository implements MeanInterface
                 if ($translation) {
                     $translation->update(['value' => $request->title[$lang->code]]);
                 } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
+                    if (isset($request->title[$lang->code])) {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
+                            'language_id' => $lang->id]);
+                    } else {
+                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
+                            'language_id' => $lang->id]);
+                    }
                 }
             }
             if (isset($request->image)) {
@@ -87,17 +97,17 @@ class TypeRepository implements MeanInterface
 
     public function deleteData($id)
     {
-      $this->showData($id)->delete();
+        $this->showData($id)->delete();
     }
 
     public function getDataDelete()
     {
-        return $this->data->onlyTrashed()->with('translation','image')->order('asc')->get();
+        return $this->data->onlyTrashed()->with('translation', 'image')->order('asc')->get();
     }
 
     public function restoreData($id)
     {
-       $this->data->withTrashed()->find($id)->restore();
+        $this->data->withTrashed()->find($id)->restore();
     }
 
     public function removeData($id)
