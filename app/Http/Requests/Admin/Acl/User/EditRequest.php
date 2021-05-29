@@ -34,6 +34,11 @@ class EditRequest extends FormRequest
             'role' => 'required|exists:roles,id',
             'country' => 'required|exists:countries,id',
             'image' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
+            'facebook' => 'url',
+            'instagram' => 'url',
+            'youtube' => 'url',
+            'twitter' => 'url',
+            'website' => 'url',
         ];
     }
 }

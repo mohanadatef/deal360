@@ -33,6 +33,7 @@ class CreateRequest extends FormRequest
             'image_included' => 'required|numeric',
             'count_featured' => 'required|numeric',
             'price' => 'required|numeric',
+            'currency_id' => 'required|exists:currencies,id',
         ];
         foreach(language() as $lang)
         {

@@ -7,6 +7,7 @@ use Database\Seeders\Acl\RolePermissionTableSeeder;
 use Database\Seeders\Acl\RoleTableSeeder;
 use Database\Seeders\Acl\UserTableSeeder;
 use Database\Seeders\CoreData\CountryTableSeeder;
+use Database\Seeders\CoreData\CurrencyTableSeeder;
 use Database\Seeders\CoreData\LanguageTableSeeder;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(RolePermissionTableSeeder::class);
         $this->call(CountryTableSeeder::class);
+        $this->call(CurrencyTableSeeder::class);
         $this->call(UserTableSeeder::class);
     }
 }

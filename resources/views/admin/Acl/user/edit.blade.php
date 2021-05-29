@@ -117,6 +117,36 @@
                                         <input type="file" value="{{Request::old('image')}}" name="image"/>
                                         <label for="image">jpg, png, gif</label>
                                     </div>
+                                    <div class="form-group{{ $errors->has('facebook') ? ' is-invalid' : "" }}">
+                                        <label for="facebook">{{trans('lang.Facebook')}}</label>
+                                        <input type="text" name="facebook" class="form-control" id="facebook"
+                                               value="{{$data->facebook}}"
+                                               placeholder="{{trans('lang.Enter_Facebook')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('website') ? ' is-invalid' : "" }}">
+                                        <label for="website">{{trans('lang.Website')}}</label>
+                                        <input type="text" name="website" class="form-control" id="website"
+                                               value="{{$data->website}}"
+                                               placeholder="{{trans('lang.Enter_Website')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('youtube') ? ' is-invalid' : "" }}">
+                                        <label for="youtube">{{trans('lang.Youtube')}}</label>
+                                        <input type="text" name="youtube" class="form-control" id="youtube"
+                                               value="{{$data->youtube}}"
+                                               placeholder="{{trans('lang.Enter_Youtube')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('twitter') ? ' is-invalid' : "" }}">
+                                        <label for="twitter">{{trans('lang.Twitter')}}</label>
+                                        <input type="text" name="twitter" class="form-control" id="twitter"
+                                               value="{{$data->twitter}}"
+                                               placeholder="{{trans('lang.Enter_Twitter')}}">
+                                    </div>
+                                    <div class="form-group{{ $errors->has('instagram') ? ' is-invalid' : "" }}">
+                                        <label for="instagram">{{trans('lang.Instagram')}}</label>
+                                        <input type="text" name="instagram" class="form-control" id="instagram"
+                                               value="{{$data->instagram}}"
+                                               placeholder="{{trans('lang.Enter_Instagram')}}">
+                                    </div>
                                     <!-- /.form-group -->
                                     <!-- /.col -->
                                 </div>

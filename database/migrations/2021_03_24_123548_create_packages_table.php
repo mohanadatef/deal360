@@ -18,6 +18,7 @@ class CreatePackagesTable extends Migration {
 			$table->integer('count_featured')->default('0');
             $table->float('price')->default('0');
             $table->string('type_date',255)->default('year');
+            $table->integer('currency_id')->unsigned()->index();
             $table->integer('count_date')->default('1');
             $table->integer('status')->default('1');
             $table->integer('order')->unique();

@@ -32,6 +32,11 @@ class CreateUsersTable extends Migration
             $table->text('google_id')->nullable();
             $table->text('facebook_id')->nullable();
             $table->text('apple_id')->nullable();
+            $table->string('facebook',255)->nullable();
+            $table->string('website',255)->nullable();
+            $table->string('youtube',255)->nullable();
+            $table->string('twitter',255)->nullable();
+            $table->string('instagram',255)->nullable();
             $table->integer('wp_user_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->text('token')->nullable();

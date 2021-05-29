@@ -113,6 +113,11 @@ class CreateForeignKeys extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
+        Schema::table('packages', function (Blueprint $table) {
+            $table->foreign('currency_id')->references('id')->on('currencies')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+        });
         Schema::table('favourites', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade')
@@ -242,6 +247,9 @@ class CreateForeignKeys extends Migration
         Schema::table('user_packages', function (Blueprint $table) {
             $table->dropForeign('user_packages_user_id_foreign');
             $table->dropForeign('user_packages_package_id_foreign');
+        });
+        Schema::table('packages', function (Blueprint $table) {
+            $table->dropForeign('packages_currency_id_foreign');
         });
         Schema::table('favourites', function (Blueprint $table) {
             $table->dropForeign('favourites_user_id_foreign');
