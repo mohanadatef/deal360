@@ -16,16 +16,16 @@ class UserController extends Controller
     private $roleRepository;
     private $countryRepository;
 
-    public function __construct(UserRepository $UserRepository,RoleRepository $RoleRepository,
+    public function __construct(UserRepository $UserRepository, RoleRepository $RoleRepository,
                                 CountryRepository $CountryRepository)
     {
         $this->userRepository = $UserRepository;
         $this->roleRepository = $RoleRepository;
         $this->countryRepository = $CountryRepository;
-        $this->middleware(['permission:user-list','permission:acl-list'])->except('listIndex');
+        $this->middleware(['permission:user-list', 'permission:acl-list'])->except('listIndex');
         $this->middleware('permission:user-index')->only('index');
-        $this->middleware('permission:user-create')->only('create','store');
-        $this->middleware('permission:user-edit')->only('edit','update');
+        $this->middleware('permission:user-create')->only('create', 'store');
+        $this->middleware('permission:user-edit')->only('edit', 'update');
         $this->middleware('permission:user-status')->only('changeStatus');
         $this->middleware('permission:user-delete')->only('destroy');
         $this->middleware('permission:user-index-delete')->only('destroyIndex');
@@ -36,14 +36,17 @@ class UserController extends Controller
     public function index()
     {
         $datas = $this->userRepository->getData();
-        return view(checkView('admin.acl.user.index'),compact('datas'));
+        $paginator = ['total_pages' => ceil($datas->Total() / $datas->PerPage()),
+            'current_page' => $datas->CurrentPage(),
+            'url_page' => url('admin/user?page=')];
+        return view(checkView('admin.acl.user.index'), compact('datas', 'paginator'));
     }
 
     public function create()
     {
         $role = $this->roleRepository->listData();
         $country = $this->countryRepository->listData();
-        return view(checkView('admin.acl.user.create'),compact('role','country'));
+        return view(checkView('admin.acl.user.create'), compact('role', 'country'));
     }
 
     public function store(CreateRequest $request)
@@ -57,7 +60,7 @@ class UserController extends Controller
         $role = $this->roleRepository->listData();
         $data = $this->userRepository->showData($id);
         $country = $this->countryRepository->listData();
-        return view(checkView('admin.acl.user.edit'),compact('data','role','country'));
+        return view(checkView('admin.acl.user.edit'), compact('data', 'role', 'country'));
     }
 
     public function update(EditRequest $request, $id)
@@ -77,14 +80,18 @@ class UserController extends Controller
     }
 
     public function remove($id)
-    {;
+    {
+        ;
         $this->userRepository->removeData($id);
     }
 
     public function destroyIndex()
     {
         $datas = $this->userRepository->getDataDelete();
-        return view(checkView('admin.acl.user.destroy'), compact('datas'));
+        $paginator = ['total_pages' => ceil($datas->Total() / $datas->PerPage()),
+            'current_page' => $datas->CurrentPage(),
+            'url_page' => url('admin/user?page=')];
+        return view(checkView('admin.acl.user.destroy'), compact('datas','paginator'));
     }
 
     public function restore($id)

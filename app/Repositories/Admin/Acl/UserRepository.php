@@ -23,7 +23,7 @@ class UserRepository implements UserInterface
 
     public function getData()
     {
-        return $this->data->with('role', 'country','image')->whereKeyNot(1)->order('asc')->get();
+        return $this->data->with('role', 'country','image')->whereKeyNot(1)->order('asc')->paginate(50);
     }
 
     public function storeData($request)
@@ -76,7 +76,7 @@ class UserRepository implements UserInterface
 
     public function getDataDelete()
     {
-        return $this->data->onlyTrashed()->with('role', 'country','image')->order('asc')->get();
+        return $this->data->onlyTrashed()->with('role', 'country','image')->order('asc')->paginate(50);
     }
 
     public function restoreData($id)

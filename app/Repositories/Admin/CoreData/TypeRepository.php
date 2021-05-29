@@ -40,7 +40,7 @@ class TypeRepository implements MeanInterface
             }
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $data->image()->create(['image' => $imageName]);
-            !$image->image ? false : $this->uploadImage($request->image, 'data', $imageName);
+            !$image->image ? false : $this->uploadImage($request->image, 'type', $imageName);
             return '<tr id="' . $data->id . '"><td id="title-' . $data->id . '" data-order="' . $data->order . '">' . $data->title->value . '</td>
                 <td><img src="' . getImag($data->image, 'data') . '" id="image-' . $data->id . '" style="width:100px;height: 100px"></td>
                 <td><input onfocus="changeStatus(' . $data->id . ')" data="checkbox" name="status" id="status-' . $data->id . '"
@@ -83,7 +83,7 @@ class TypeRepository implements MeanInterface
                 $imageName = time() . $request->image->getClientOriginalname();
                 $data->image()->forceDelete();
                 $image = $data->image()->create(['image' => $imageName]);
-                !$image->image ? false : $this->uploadImage($request->image, 'data', $imageName);
+                !$image->image ? false : $this->uploadImage($request->image, 'type', $imageName);
             }
             $data = $this->showData($id);
             return new TypeResource($data);
