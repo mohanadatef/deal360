@@ -543,6 +543,35 @@
                             </ul>
                         </li>
                         @endpermission
+                        @permission('fq-list')
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    {{trans('lang.FQ')}}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @permission('fq-index')
+                                <li class="nav-item">
+                                    <a href="{{route('fq.index')}}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{trans('lang.Index')}}</p>
+                                    </a>
+                                </li>
+                                @endpermission
+                                @permission('meta-index-delete')
+                                <li class="nav-item">
+                                    <a href="{{route('fq.delete_index')}}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
+                                    </a>
+                                </li>
+                                @endpermission
+                            </ul>
+                        </li>
+                        @endpermission
                     </ul>
                 </li>
                 @endpermission

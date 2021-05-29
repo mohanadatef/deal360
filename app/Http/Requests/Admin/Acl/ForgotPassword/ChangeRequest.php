@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Admin\Setting\CallUs;
+namespace App\Http\Requests\Admin\Acl\ForgotPassword;
 
+use App\Models\Acl\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StatusEditRequest extends FormRequest
+class ChangeRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,12 +27,7 @@ class StatusEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'changeStatus' => 'required|exists:call_us,id',
+            'password' => 'required|string|min:6|confirmed',
         ];
-    }
-
-    public function messages()
-    {
-        return languageLocale() == 'ar' ? ['changeStatus.required' => 'برجاء الاختيار',]: [];
     }
 }

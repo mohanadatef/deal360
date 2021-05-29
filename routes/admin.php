@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Acl\PermissionController;
 use App\Http\Controllers\Admin\Acl\RoleController;
 use App\Http\Controllers\Admin\Acl\UserController;
+use App\Http\Controllers\Admin\Acl\ForgotPasswordController;
 use App\Http\Controllers\Admin\CoreData\LanguageController;
 use App\Http\Controllers\Admin\CoreData\StatusController;
 use App\Http\Controllers\Admin\CoreData\TypeController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Admin\CoreData\RejoinController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
 use App\Http\Controllers\Admin\Setting\MetaController;
+use App\Http\Controllers\Admin\Setting\FQController;
 
 Route::group(['middleware' => /*'admin',*/ 'auth', 'language', 'permission:dashboard-show'], function () {
     /*dashboard list*/
@@ -154,6 +156,17 @@ Route::group(['middleware' => /*'admin',*/ 'auth', 'language', 'permission:dashb
         Route::post('/{id}', [MetaController::class, 'update'])->name('update');
         Route::get('/{id}', [MetaController::class, 'show'])->name('show');
     });
+    /* fq route list */
+    Route::apiresource('fq', FQController::class,
+        ['except' => ['show', 'update']])->parameters(['fq' => 'id']);
+    Route::prefix('/fq')->name('fq.')->group(function () {
+        Route::get('/change_status/{id}', [FQController::class, 'changeStatus'])->name('status');
+        Route::get('/delete', [FQController::class, 'destroyIndex'])->name('delete_index');
+        Route::get('/restore/{id}', [FQController::class, 'restore'])->name('restore');
+        Route::get('/remove/{id}', [FQController::class, 'remove'])->name('remove');
+        Route::post('/{id}', [FQController::class, 'update'])->name('update');
+        Route::get('/{id}', [FQController::class, 'show'])->name('show');
+    });
     /* Acl route list */
     /*permission route list */
     Route::apiresource('permission', PermissionController::class,
@@ -184,5 +197,9 @@ Route::group(['middleware' => /*'admin',*/ 'auth', 'language', 'permission:dashb
         Route::get('/restore/{id}', [UserController::class, 'restore'])->name('restore');
         Route::get('/remove/{id}', [UserController::class, 'remove'])->name('remove');
         Route::post('/{id}', [UserController::class, 'update'])->name('update');
+    });
+    /* forgot password route list */
+    Route::prefix('/forgotpassword')->name('forgotpassword.')->group(function () {
+        Route::post('/{id}', [ForgotPasswordController::class, 'update'])->name('update');
     });
 });

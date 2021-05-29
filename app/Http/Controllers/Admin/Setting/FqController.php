@@ -3,83 +3,77 @@
 namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Setting\FQ\CreateRequest;
+use App\Http\Requests\Admin\Setting\FQ\EditRequest;
+use App\Repositories\Admin\Setting\FQRepository;
 
-class FqController extends Controller
+class FQController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $fqRepository;
+
+    public function __construct(FQRepository $FQRepository)
+    {
+        $this->fqRepository = $FQRepository;
+        $this->middleware(['permission:fq-list','permission:setting-list'])->except('listIndex');
+        $this->middleware('permission:fq-index')->only('index');
+        $this->middleware('permission:fq-create')->only('store');
+        $this->middleware('permission:fq-edit')->only('show','update');
+        $this->middleware('permission:fq-status')->only('changeStatus');
+        $this->middleware('permission:fq-delete')->only('destroy');
+        $this->middleware('permission:fq-index-delete')->only('destroyIndex');
+        $this->middleware('permission:fq-restore')->only('restore');
+        $this->middleware('permission:fq-remove')->only('remove');
+    }
+
     public function index()
     {
-        //
+        $datas = $this->fqRepository->getData();
+        return view(checkView('admin.setting.fq.index'), compact('datas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(CreateRequest $request)
     {
-        //
+        return response()->json($this->fqRepository->storeData($request));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update(EditRequest $request, $id)
     {
-        //
+        return response()->json($this->fqRepository->updateData($request, $id));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function changeStatus($id)
     {
-        //
+        $this->fqRepository->updateStatusData($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $this->fqRepository->deleteData($id);
+    }
+
+    public function remove($id)
+    {
+        $this->fqRepository->removeData($id);
+    }
+
+    public function destroyIndex()
+    {
+        $datas = $this->fqRepository->getDataDelete();
+        return view(checkView('admin.setting.fq.destroy'), compact('datas'));
+    }
+
+    public function restore($id)
+    {
+        $this->fqRepository->restoreData($id);
+    }
+
+    public function listIndex()
+    {
+        return $this->fqRepository->listData();
+    }
+
+    public function show($id)
+    {
+        return $this->fqRepository->showData($id);
     }
 }

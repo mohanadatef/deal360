@@ -164,5 +164,28 @@
             }
         });
     }
+    /*change password data*/
+    $(document).ready(function () {
+        $("#forgotpassword").on("submit", function (event) {
+            event.preventDefault();
+            url = "{{url('admin/forgotpassword/id')}}";
+            url = url.replace('id', id);
+            $.ajax({
+                type: "post",
+                url: url,
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    $('#modal-forgotpassword').modal('toggle');
+                    toastr.info('{{trans('lang.Edit_Password')}}');
+                }, error: function (res) {
+                    for (let err in res.responseJSON.errors) {
+                        toastr.error(res.responseJSON.errors[err]);
+                    }
+                }
+            });
+        });
+    });
 </script>
 @yield('curl')

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CoreData\AmenityController;
 use App\Http\Controllers\Admin\CoreData\PackageController;
 use App\Http\Controllers\Admin\CoreData\HighLightController;
 use App\Http\Controllers\Admin\Setting\MetaController;
+use App\Http\Controllers\Admin\Setting\FQController;
 use App\Http\Controllers\Admin\Acl\PermissionController;
 use App\Http\Controllers\Admin\Acl\RoleController;
 /*
@@ -85,10 +86,16 @@ Route::prefix('/highlight')->group(function () {
     Route::get('/list', [HighLightController::class, 'listIndex'])
         ->name('highlight.list');
 });
+//setting
 //meta
 Route::prefix('/meta')->group(function () {
     Route::get('/list', [MetaController::class, 'listIndex'])
         ->name('meta.list');
+});
+//fq
+Route::prefix('/fq')->group(function () {
+    Route::get('/list', [FQController::class, 'listIndex'])
+        ->name('fq.list');
 });
 //acl
 //permission

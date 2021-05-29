@@ -23,7 +23,7 @@ class UserRepository implements UserInterface
 
     public function getData()
     {
-        return $this->data->with('role', 'country','image')->order('asc')->get();
+        return $this->data->with('role', 'country','image')->whereKeyNot(1)->order('asc')->get();
     }
 
     public function storeData($request)

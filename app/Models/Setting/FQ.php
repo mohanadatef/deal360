@@ -18,12 +18,23 @@ class FQ extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function translation($key)
+    public function translation()
     {
-        return $this->morphOne(Translation::class, 'translation')
-            ->where('language_id',languageId())
-            ->where('key',$key)
-            ->select('value as'.$key);
+        return $this->morphMany(Translation::class, 'category')->withTrashed();
+    }
+
+    public function question()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'question')
+            ->where('language_id' ,languageId())->withTrashed();
+    }
+
+    public function answer()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'answer')
+            ->where('language_id' ,languageId())->withTrashed();
     }
 
    public function scopeStatus($query,$status)
@@ -34,5 +45,20 @@ class FQ extends Model
     public function scopeOrder($query,$order)
     {
         return $query->orderby('order',$order);
+    }
+
+    public static function boot() {
+        parent::boot();
+        static::deleting(function($fq) {
+            $fq->translation()->delete();
+        });
+
+        static::restoring(function($fq) {
+            $fq->translation()->withTrashed()->restore();
+        });
+
+        static::forceDeleted(function($fq) {
+            $fq->translation()->forceDelete();
+        });
     }
 }

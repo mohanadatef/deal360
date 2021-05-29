@@ -107,6 +107,10 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'user-remove',
                 'title' => ['en' => 'user remove', 'ar' => 'حذف المستخدم'],
             ],
+            [
+                'name' => 'user-forgot-password',
+                'title' => ['en' => 'user forgot password', 'ar' => 'تغير كلمه السر المستخدم'],
+            ],
             //role
             [
                 'name' => 'role-list',
@@ -185,6 +189,43 @@ class PermissionTableSeeder extends Seeder
             [
                 'name' => 'meta-remove',
                 'title' => ['en' => 'meta remove', 'ar' => 'حذف كلمه تعريفيه'],
+            ],
+            //fq
+            [
+                'name' => 'fq-list',
+                'title' => ['en' => 'fq list', 'ar' => 'قائمه اذنات اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-index',
+                'title' => ['en' => 'fq index', 'ar' => 'قائمه اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-create',
+                'title' => ['en' => 'fq create', 'ar' => 'اضافه اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-edit',
+                'title' => ['en' => 'fq edit', 'ar' => 'تعديل اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-status',
+                'title' => ['en' => 'fq status', 'ar' => 'تغير حاله اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-delete',
+                'title' => ['en' => 'fq delete', 'ar' => 'مسح اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-index-delete',
+                'title' => ['en' => 'fq index delete', 'ar' => 'قائمه مسح اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-restore',
+                'title' => ['en' => 'fq restore', 'ar' => 'استرجاع اسئله و اجابه'],
+            ],
+            [
+                'name' => 'fq-remove',
+                'title' => ['en' => 'fq remove', 'ar' => 'حذف اسئله و اجابه'],
             ],
             //core data
             [

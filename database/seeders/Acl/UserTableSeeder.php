@@ -32,15 +32,25 @@ class UserTableSeeder extends Seeder
         $user = [
             //user
             [
-                'id'=>3,
+                'id'=>1,
+                'fullname' => 'Developer',
+                'username' => 'superadmin',
+                'email' => 'superadmin@deal360.com',
+                'password' => Hash::make('123456'),
+                'phone' => '00000000000',
+                'approve' => '1',
+                'email_verified_at' => Carbon::now(),
+                'role_id' => Role::where('code','sad')->first()->id,
+                'country_id' => 1,
+            ],
+            [
+                'id'=>2,
                 'fullname' => 'mohanad atef',
                 'username' => 'mohanadatef',
                 'email' => 'mohanad@deal360.com',
                 'password' => Hash::make('M0h@n@d7'),
                 'phone' => '01011666755',
                 'approve' => '1',
-                'gender' => '0',
-                'dob' => Carbon::now(),
                 'email_verified_at' => Carbon::now(),
                 'role_id' => Role::where('code','sad')->first()->id,
                 'country_id' => 1,
