@@ -74,10 +74,7 @@ class Country extends Model
     {
         return $this->hasMany(User::Class);
     }
-    public function agency()
-    {
-        return $this->hasMany(Agency::Class);
-    }
+
     public function property()
     {
         return $this->hasmany(Property::Class);

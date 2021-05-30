@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->hasOne(Agency::Class);
     }
 
+    public function developer()
+    {
+        return $this->hasOne(Developer::Class);
+    }
+
     public function agent()
     {
         return $this->hasOne(Agent::Class);

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreateUserPackagesTable extends Migration
+class CreateDevelopersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,11 @@ class CreateUserPackagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_packages', function (Blueprint $table) {
+        Schema::create('developers', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_general_ci';
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('package_id')->unsigned()->index();
-            $table->timestamp('started_at')->default(\Carbon\Carbon::now());
-            $table->timestamp('ended_at')->nullable();
-            $table->integer('status')->default('1');
-            $table->integer('count_listing')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -37,7 +32,7 @@ class CreateUserPackagesTable extends Migration
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::dropIfExists('user_packages');
+        Schema::dropIfExists('developers');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -23,7 +23,7 @@ class TypeController extends Controller
     public function store($response)
     {
         $count_type = Type::latest('id')->first();
-        $count_type = empty($count_type) ? 0 : $count_type;
+        $count_type = empty($count_type) ? 0 : $count_type->id;
         $data_type = array();
         $data_translation = array();
         $language = language();

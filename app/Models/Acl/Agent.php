@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Agent extends Model
 {
     protected $fillable = [
-        'user_id','whatsapp','mobile','count_view'
+        'user_id'
     ];
     protected $table = 'agents';
     public $timestamps = true;
@@ -18,18 +18,6 @@ class Agent extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function translation()
-    {
-        return $this->morphMany(Translation::class, 'category')->withTrashed();
-    }
-
-    public function about_me()
-    {
-        return $this->morphone(Translation::class, 'category')
-            ->where('key' ,'about_me')
-            ->where('language_id' ,languageId())->withTrashed();
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,6 +25,6 @@ class Agent extends Model
 
     public function agency()
     {
-        return $this->belongsTo(Agency::class, 'agencyagents');
+        return $this->belongsTo(Agency::class, 'agency_agents');
     }
 }

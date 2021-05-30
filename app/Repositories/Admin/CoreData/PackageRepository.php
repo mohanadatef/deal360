@@ -36,7 +36,7 @@ class PackageRepository implements MeanInterface
 
     public function showData($id)
     {
-        return $this->data->with('translation.language','currency')->findorFail($id);
+        return $this->data->with('translation.language','package_role','currency')->findorFail($id);
     }
 
     public function updateData($request, $id)

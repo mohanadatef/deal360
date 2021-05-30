@@ -1,6 +1,6 @@
 @extends('includes.admin.master_admin')
 @section('title')
-    {{trans('lang.Create')}}
+    {{trans('lang.Update')}}
 @endsection
 @section('head_style')
     @include('includes.admin.dataTables.head_DataTables')
@@ -103,14 +103,14 @@
                                             <div class="form-group{{ $errors->has('price') ? ' is-invalid' : "" }}">
                                                 <label for="order">{{trans('lang.Price')}}</label>
                                                 <input type="text" name="price" class="form-control" id="price"
-                                                       value="{{$data->price)}}"
+                                                       value="{{$data->price}}"
                                                        placeholder="{{trans('lang.Enter_Price')}}">
                                             </div>
                                             <div class="form-group{{ $errors->has('role') ? ' has-error' : "" }}">
                                                 <label>{{trans('lang.Role')}}</label>
                                                 <select class="duallistbox" multiple="multiple" name="role[]">
                                                     @foreach($role as $key => $ro)
-                                                        <option @foreach($package_role as  $pr) @if($pr->id ==$ro->id) selected   @endif @endforeach value="{{$ro->id}}">{{$ro->title->value}}</option>
+                                                        <option @foreach($data->package_role as  $pr) @if($pr->id ==$ro->id) selected   @endif @endforeach value="{{$ro->id}}">{{$ro->title->value}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

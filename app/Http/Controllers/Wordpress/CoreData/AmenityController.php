@@ -23,7 +23,7 @@ class AmenityController extends Controller
     public function store($response)
     {
         $count_amenity = Amenity::latest('id')->first();
-        $count_amenity = empty($count_amenity) ? 0 : $count_amenity;
+        $count_amenity = empty($count_amenity) ? 0 : $count_amenity->id;
         $data_amenity = array();
         $data_translation = array();
         $language = language();

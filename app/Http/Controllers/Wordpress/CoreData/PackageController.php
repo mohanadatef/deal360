@@ -14,8 +14,7 @@ class PackageController extends Controller
     {
         $response = Http::get('https://crm.deal360.ae/backend/api/fillPackages')->json();
         $this->store($response);
-        if($return == 1)
-        {
+        if ($return == 1) {
             return redirect(route('admin.dashboard'));
         }
     }
@@ -23,7 +22,7 @@ class PackageController extends Controller
     public function store($response)
     {
         $count_package = Package::latest('id')->first();
-        $count_package = empty($count_package) ? 0 : $count_package;
+        $count_package = empty($count_package) ? 0 : $count_package->id;
         $response = Http::get('https://crm.deal360.ae/backend/api/fillPackages')->json();
         $data_package = array();
         $data_role = array();
@@ -31,7 +30,8 @@ class PackageController extends Controller
         $language = language();
         $wp_packages_id = DB::table('packages')->pluck('wp_package_id', 'wp_package_id')->toarray();
         $role_name = DB::table('Translations')->where('category_type', Role::class)
-            ->where('key', 'title')->pluck('value', 'category_id')->toarray();
+            ->where('language_id', languageId())->where('key', 'title')
+            ->pluck('value', 'category_id')->toarray();
         foreach ($response['data'] as $key => $package) {
             if (!in_array($package['wp_packages_id'], $wp_packages_id)) {
                 $data_package[] = array('id' => $count_package + $key + 1,
@@ -47,8 +47,8 @@ class PackageController extends Controller
                     'wp_package_id' => $package['wp_packages_id']);
                 if (!empty($package['pack_visible_user_role'])) {
                     foreach ($package['pack_visible_user_role'] as $role) {
-                        if (in_array(strtolower($role),$role_name)) {
-                            $data_role[] = array('package_id' => $count_package + $key + 1, 'role_id' => array_search(strtolower($role),$role_name));
+                        if (in_array(strtolower($role), $role_name)) {
+                            $data_role[] = array('package_id' => $count_package + $key + 1, 'role_id' => array_search(strtolower($role), $role_name));
                         }
                     }
                 }
@@ -59,7 +59,7 @@ class PackageController extends Controller
                 }
             }
         }
-        DB::transaction(function () use ($data_package,$data_role,$data_translation) {
+        DB::transaction(function () use ($data_package, $data_role, $data_translation) {
             DB::table('packages')->insert($data_package);
             DB::table('package_roles')->insert($data_role);
             DB::table('translations')->insert($data_translation);

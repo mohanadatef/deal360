@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Package\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Package\EditRequest;
 use App\Repositories\Admin\Acl\RoleRepository;
+use App\Repositories\Admin\CoreData\CurrencyRepository;
 use App\Repositories\Admin\CoreData\PackageRepository;
 
 class PackageController extends Controller
@@ -53,7 +54,7 @@ class PackageController extends Controller
     {
         $role = $this->roleRepository->listData();
         $currency = $this->currencyRepository->listData();
-        $data = $this->roleRepository->showData($id);
+        $data = $this->packageRepository->showData($id);
         return view(checkView('admin.core_data.package.edit'),compact('data','role','currency'));
     }
 

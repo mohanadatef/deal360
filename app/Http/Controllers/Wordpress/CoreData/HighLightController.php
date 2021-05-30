@@ -23,7 +23,7 @@ class HighLightController extends Controller
     public function store($response)
     {
         $count_high_light = HighLight::latest('id')->first();
-        $count_high_light = empty($count_high_light) ? 0 : $count_high_light;
+        $count_high_light = empty($count_high_light) ? 0 : $count_high_light->id;
         $data_high_light = array();
         $data_translation = array();
         $language = language();

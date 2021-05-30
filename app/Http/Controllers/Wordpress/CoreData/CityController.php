@@ -23,7 +23,7 @@ class CityController extends Controller
     public function store($response)
     {
         $count_city = City::latest('id')->first();
-        $count_city = empty($count_city) ? 0 : $count_city;
+        $count_city = empty($count_city) ? 0 : $count_city->id;
         $data_city = array();
         $data_translation = array();
         $language = language();

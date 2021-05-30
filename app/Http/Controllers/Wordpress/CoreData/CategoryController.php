@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function store($response)
     {
         $count_category = Category::latest('id')->first();
-        $count_category = empty($count_category) ? 0 : $count_category;
+        $count_category = empty($count_category) ? 0 : $count_category->id;
         $data_category = array();
         $data_translation = array();
         $language = language();

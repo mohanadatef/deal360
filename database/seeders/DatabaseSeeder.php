@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\Wordpress\CoreData\CoreDataController;
+use App\Http\Controllers\Wordpress\WordpressController;
 use Database\Seeders\Acl\PermissionTableSeeder;
 use Database\Seeders\Acl\RolePermissionTableSeeder;
 use Database\Seeders\Acl\RoleTableSeeder;
@@ -14,10 +14,10 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    private $core_data;
-    public function __construct(CoreDataController $CoreDataController)
+    private $wordpress;
+    public function __construct(WordpressController $WordpressController)
     {
-        $this->core_data=$CoreDataController;
+        $this->wordpress=$WordpressController;
     }
     /**
      * Seed the application's database.
@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrencyTableSeeder::class);
         $this->call(UserTableSeeder::class);
         executionTime();
-        $this->core_data->index(0);
+        $this->wordpress->index(0);
+        executionTime();
     }
 }

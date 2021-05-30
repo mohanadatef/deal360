@@ -7,12 +7,12 @@ use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Agency extends Model
+class Developer extends Model
 {
     protected $fillable = [
         'user_id'
     ];
-    protected $table = 'agencies';
+    protected $table = 'developers';
     public $timestamps = true;
 
     use SoftDeletes;
@@ -22,10 +22,5 @@ class Agency extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function agent()
-    {
-        return $this->belongsTo(Agent::class, 'agency_agents');
     }
 }
