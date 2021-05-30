@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\Acl\Permission\PermissionListResource;
 use App\Http\Resources\Admin\Acl\Permission\PermissionResource;
 use App\Interfaces\Admin\Acl\PermissionInterface;
 use App\Models\Acl\Permission;
-use App\Traits\Service;
+use App\Traits\ServiceData;
 use Illuminate\Support\Facades\DB;
 
 class PermissionRepository implements PermissionInterface
 {
-    use Service;
+    use ServiceData;
 
     protected $data;
 
@@ -29,15 +29,7 @@ class PermissionRepository implements PermissionInterface
     {
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
-            foreach (language() as $lang) {
-                if (isset($request->title[$lang->code])) {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
-                } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                        'language_id' => $lang->id]);
-                }
-            }
+            $this->storeCheckLanguage($data,$request);
             return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" >'.$data->title->value.'</td>
                 <td id="name-'.$data->id.'" >'.$data->name.'</td>
                 <td><button data="button" class="btn btn-outline-primary btn-block btn-sm"
@@ -60,20 +52,7 @@ class PermissionRepository implements PermissionInterface
         return DB::transaction(function () use ($request, $id) {
             $data = $this->showData($id);
             $data->update($request->all());
-            foreach (language() as $lang) {
-                $translation = $data->translation->where('language_id', $lang->id)->first();
-                if ($translation) {
-                    $translation->update(['value' => $request->title[$lang->code]]);
-                } else {
-                    if (isset($request->title[$lang->code])) {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                            'language_id' => $lang->id]);
-                    } else {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                            'language_id' => $lang->id]);
-                    }
-                }
-            }
+            $this->updateCheckLanguage($data,$request);
             $data = $this->showData($id);
             return new PermissionResource($data);
         });

@@ -6,12 +6,13 @@ use App\Http\Resources\Admin\CoreData\Category\CategoryListResource;
 use App\Http\Resources\Admin\CoreData\Category\CategoryResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Category;
-use App\Traits\Service;
+use App\Traits\Image;
+use App\Traits\ServiceData;
 use Illuminate\Support\Facades\DB;
 
 class CategoryRepository implements MeanInterface
 {
-    use Service;
+    use ServiceData,Image;
 
     protected $data;
 
@@ -29,15 +30,7 @@ class CategoryRepository implements MeanInterface
     {
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
-            foreach (language() as $lang) {
-                if (isset($request->title[$lang->code])) {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
-                } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                        'language_id' => $lang->id]);
-                }
-            }
+            $this->storeCheckLanguage($data,$request);
             $imageName = time() . $request->image->getClientOriginalname();
             $image = $data->image()->create(['image' => $imageName]);
             !$image->image ? false : $this->uploadImage($request->image, 'category', $imageName);
@@ -65,20 +58,7 @@ class CategoryRepository implements MeanInterface
         return  DB::transaction(function () use ($request, $id) {
             $data = $this->showData($id);
             $data->update($request->all());
-            foreach (language() as $lang) {
-                $translation = $data->translation->where('language_id', $lang->id)->first();
-                if ($translation) {
-                    $translation->update(['value' => $request->title[$lang->code]]);
-                } else {
-                    if (isset($request->title[$lang->code])) {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                            'language_id' => $lang->id]);
-                    } else {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                            'language_id' => $lang->id]);
-                    }
-                }
-            }
+            $this->updateCheckLanguage($data,$request);
             if (isset($request->image)) {
                 $imageName = time() . $request->image->getClientOriginalname();
                 $data->image()->forceDelete();

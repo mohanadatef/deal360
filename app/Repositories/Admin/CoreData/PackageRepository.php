@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\Package\PackageListResource;
 use App\Http\Resources\Admin\CoreData\Package\PackageResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Package;
-use App\Traits\Service;
+use App\Traits\ServiceData;
 use Illuminate\Support\Facades\DB;
 
 class PackageRepository implements MeanInterface
 {
-    use Service;
+    use ServiceData;
 
     protected $data;
 
@@ -30,15 +30,7 @@ class PackageRepository implements MeanInterface
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
             $data->role()->sync((array)$request->role);
-            foreach (language() as $lang) {
-                if (isset($request->title[$lang->code])) {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
-                } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                        'language_id' => $lang->id]);
-                }
-            }
+            $this->storeCheckLanguage($data,$request);
         });
     }
 
@@ -53,20 +45,7 @@ class PackageRepository implements MeanInterface
             $data = $this->showData($id);
             $data->update($request->all());
             $data->role()->sync((array)$request->role);
-            foreach (language() as $lang) {
-                $translation = $data->translation->where('language_id', $lang->id)->first();
-                if ($translation) {
-                    $translation->update(['value' => $request->title[$lang->code]]);
-                } else {
-                    if (isset($request->title[$lang->code])) {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                            'language_id' => $lang->id]);
-                    } else {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                            'language_id' => $lang->id]);
-                    }
-                }
-            }
+            $this->updateCheckLanguage($data,$request);
         });
     }
 

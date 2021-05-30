@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\Rejoin\RejoinListResource;
 use App\Http\Resources\Admin\CoreData\Rejoin\RejoinResource;
 use App\Interfaces\Admin\CoreData\RejoinInterface;
 use App\Models\CoreData\Rejoin;
-use App\Traits\Service;
+use App\Traits\ServiceData;
 use Illuminate\Support\Facades\DB;
 
 class RejoinRepository implements RejoinInterface
 {
-    use Service;
+    use ServiceData;
 
     protected $data;
 
@@ -29,15 +29,7 @@ class RejoinRepository implements RejoinInterface
     {
         return DB::transaction(function () use ($request) {
             $data = $this->data->create($request->all());
-            foreach (language() as $lang) {
-                if (isset($request->title[$lang->code])) {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                        'language_id' => $lang->id]);
-                } else {
-                    $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                        'language_id' => $lang->id]);
-                }
-            }
+            $this->storeCheckLanguage($data,$request);
             return '<tr id="'.$data->id.'"><td id="title-'.$data->id.'" data-order="'.$data->order.'">'.$data->title->value.'</td>
                 <td id="country-'.$data->id.'">'.$data->country->title->value.'</td><td id="city-'.$data->id.'">'.$data->city->title->value.'</td>
                    <td><input onfocus="changeStatus('.$data->id.')" type="checkbox" name="status" id="status-'.$data->id.'"
@@ -62,20 +54,7 @@ class RejoinRepository implements RejoinInterface
         return DB::transaction(function () use ($request, $id) {
             $data = $this->showData($id);
             $data->update($request->all());
-            foreach (language() as $lang) {
-                $translation = $data->translation->where('language_id', $lang->id)->first();
-                if ($translation) {
-                    $translation->update(['value' => $request->title[$lang->code]]);
-                } else {
-                    if (isset($request->title[$lang->code])) {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title[$lang->code],
-                            'language_id' => $lang->id]);
-                    } else {
-                        $data->translation()->create(['key' => 'title', 'value' => $request->title['en'],
-                            'language_id' => $lang->id]);
-                    }
-                }
-            }
+            $this->updateCheckLanguage($data,$request);
             $data = $this->showData($id);
             return new RejoinResource($data);
         });

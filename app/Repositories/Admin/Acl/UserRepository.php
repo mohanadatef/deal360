@@ -2,17 +2,17 @@
 
 namespace App\Repositories\Admin\Acl;
 
-use App\Http\Resources\Admin\Acl\User\UserResource;
 use App\Interfaces\Admin\Acl\UserInterface;
 use App\Models\Acl\User;
-use App\Traits\Service;
+use App\Traits\Image;
+use App\Traits\ServiceData;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserInterface
 {
-    use Service;
+    use ServiceData,Image;
 
     protected $data;
 

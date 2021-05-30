@@ -6,12 +6,13 @@ use App\Http\Resources\Admin\CoreData\Language\LanguageListResource;
 use App\Http\Resources\Admin\CoreData\Language\LanguageResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Language;
-use App\Traits\Service;
+use App\Traits\Image;
+use App\Traits\ServiceData;
 use Illuminate\Support\Facades\DB;
 
 class LanguageRepository implements MeanInterface
 {
-    use Service;
+    use ServiceData,Image;
 
     protected $data;
 
