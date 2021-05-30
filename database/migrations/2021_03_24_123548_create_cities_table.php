@@ -16,6 +16,7 @@ class CreateCitiesTable extends Migration {
 			$table->integer('country_id')->unsigned();
 			$table->integer('status')->default('1');
             $table->integer('order')->unique();
+            $table->integer('wp_city_id')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

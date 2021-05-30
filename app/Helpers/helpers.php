@@ -82,3 +82,11 @@ if (!function_exists('getImag')) {
         }
     }
 }
+if (!function_exists('executionTime')) {
+    function executionTime()
+    {
+        ini_set('max_execution_time', 120000);
+        ini_set('post_max_size', 120000);
+        ini_set('upload_max_filesize', 100000);
+    }
+}

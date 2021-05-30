@@ -20,13 +20,12 @@ class RolePermissionTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         RolePermission::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        $sa = Role::where('code', 'sad')->first();
-        $role = Role::all();
-        $permission = Permission::wherenotbetween('id',[1,7])->get();
-        $permissionsa = Permission::wherebetween('id',[1,7])->get();
-        foreach ($permissionsa as $value) {
-            RolePermission::create(['role_id' => $sa->id, 'permission_id' => $value->id]);
+        $role = Role::wherebetween('id',[1,2])->get();
+        $permission = Permission::wherebetween('id',[1,7])->get();
+        foreach ($permission as $value) {
+            RolePermission::create(['role_id' => 1, 'permission_id' => $value->id]);
         }
+        $permission = Permission::wherenotbetween('id',[1,7])->get();
         foreach ($role as $values) {
             foreach ($permission as $value) {
                 RolePermission::create(['role_id' => $values->id, 'permission_id' => $value->id]);

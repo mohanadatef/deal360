@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Wordpress\CoreData\CoreDataController;
 use App\Http\Controllers\Wordpress\CoreData\PackageController;
+use App\Http\Controllers\Wordpress\CoreData\AmenityController;
+use App\Http\Controllers\Wordpress\CoreData\CategoryController;
+use App\Http\Controllers\Wordpress\CoreData\TypeController;
+use App\Http\Controllers\Wordpress\CoreData\CityController;
+use App\Http\Controllers\Wordpress\CoreData\HighLightController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +19,10 @@ use App\Http\Controllers\Wordpress\CoreData\PackageController;
 |
 */
 
-Route::get('package', [PackageController::class, 'store'])->name('wordpress.package.store');
+Route::get('core_data/{return}', [CoreDataController::class, 'index'])->name('wordpress.core_data.index');
+Route::get('package/{return}', [PackageController::class, 'index'])->name('wordpress.package.index');
+Route::get('amenity/{return}', [AmenityController::class, 'index'])->name('wordpress.amenity.index');
+Route::get('category/{return}', [CategoryController::class, 'index'])->name('wordpress.category.index');
+Route::get('type/{return}', [TypeController::class, 'index'])->name('wordpress.type.index');
+Route::get('city/{return}', [CityController::class, 'index'])->name('wordpress.city.index');
+Route::get('high_light/{return}', [HighLightController::class, 'index'])->name('wordpress.high_light.index');

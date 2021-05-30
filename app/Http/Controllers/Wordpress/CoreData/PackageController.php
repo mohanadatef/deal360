@@ -5,21 +5,26 @@ namespace App\Http\Controllers\Wordpress\CoreData;
 use App\Http\Controllers\Controller;
 use App\Models\Acl\Role;
 use App\Models\CoreData\Package;
-use App\Models\Translation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class PackageController extends Controller
 {
-    public function store()
+    public function index($return)
+    {
+        $response = Http::get('https://crm.deal360.ae/backend/api/fillPackages')->json();
+        $this->store($response);
+        if($return == 1)
+        {
+            return redirect(route('admin.dashboard'));
+        }
+    }
+
+    public function store($response)
     {
         $count_package = Package::latest('id')->first();
         $count_package = empty($count_package) ? 0 : $count_package;
-        $url = 'https://crm.deal360.ae/backend/api/fillPackages';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = json_decode(curl_exec($ch), TRUE);
-        curl_close($ch);
+        $response = Http::get('https://crm.deal360.ae/backend/api/fillPackages')->json();
         $data_package = array();
         $data_role = array();
         $data_translation = array();
@@ -54,9 +59,10 @@ class PackageController extends Controller
                 }
             }
         }
-        DB::table('packages')->insert($data_package);
-        DB::table('package_roles')->insert($data_role);
-        DB::table('translations')->insert($data_translation);
-        return redirect(route('admin.dashboard'));
+        DB::transaction(function () use ($data_package,$data_role,$data_translation) {
+            DB::table('packages')->insert($data_package);
+            DB::table('package_roles')->insert($data_role);
+            DB::table('translations')->insert($data_translation);
+        });
     }
 }

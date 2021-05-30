@@ -15,6 +15,7 @@ class CreateTypesTable extends Migration {
 			$table->increments('id');
 			$table->integer('status')->default('1');
             $table->integer('order')->unique();
+            $table->integer('wp_type_id')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});
