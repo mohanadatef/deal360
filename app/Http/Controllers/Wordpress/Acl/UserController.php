@@ -34,6 +34,7 @@ class UserController extends Controller
         $developer = array();
         $agent_translation = array();
         $language = language();
+        $image = array();
         $role = array('2' => 0, '3' => 1, '5' => 2, '4' => 3, '6' => 4);
         $wp_users_id = DB::table('users')->pluck('wp_user_id', 'wp_user_id')->toarray();
         executionTime();
@@ -48,6 +49,9 @@ class UserController extends Controller
                     if (!empty($user['full_name']) && !in_array($user['full_name'], $full_name) && !in_array($user['full_name'], $username_users)) {
                         $username[] = !empty($user['username']) ? $user['username'] : 'test';
                         $full_name[] = !empty($user['full_name']) ? $user['full_name'] : 'test';
+                        if (!empty($user['image'])) {
+                            $image[] = array('id' => $count_user + $key + 1, 'image_url' => $user['image']);
+                        }
                         $data_user[] = array('id' => $count_user + $key + 1, 'wp_user_id' => $user['wp_user_id'],
                             'username' => empty($user['username']) ? 'username ' . ($count_user + $key + 1) : $user['username'],
                             'password' => $user['password'], 'email' => empty($user['mail']) ? 'mail@test.com' . ($count_user + $key + 1) : $user['mail'],
@@ -97,13 +101,24 @@ class UserController extends Controller
             }
         }
         executionTime();
-        DB::transaction(function () use ($data_user, $data_user_package, $agency, $agent, $developer, $agent_translation) {
+        DB::transaction(function () use ($data_user, $data_user_package, $agency, $agent, $developer, $agent_translation, $image) {
             DB::table('users')->insert($data_user);
             DB::table('user_packages')->insert($data_user_package);
             DB::table('agencies')->insert($agency);
             DB::table('agents')->insert($agent);
             DB::table('developers')->insert($developer);
             DB::table('translations')->insert($agent_translation);
+            foreach ($image as $im) {
+                $contents = file_get_contents($im['image_url']);
+                $name = substr($im['image_url'], strrpos($im['image_url'], '/') + 1);
+                $patch = public_path('images/user/') . $name;
+                if (!\File::isDirectory($patch)) {
+                    \File::makeDirectory($patch, 0777, true, true);
+                }
+                file_put_contents($patch, $contents);
+                $user_image[] = array('category_type' => user::class, 'category_id' => $im['id'], 'image' => $name);
+            }
+            DB::table('images')->insert($user_image);
         });
     }
 }
