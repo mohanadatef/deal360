@@ -48,6 +48,8 @@ class WordpressController extends Controller
         executionTime();
         $this->high_light->store($response);
         executionTime();
+        $response = Http::get('https://crm.deal360.ae/backend/api/fillUsers')->json();
+        executionTime();
         $this->user->store($response);
         executionTime();
         if ($return == 1) {

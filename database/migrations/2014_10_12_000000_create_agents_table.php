@@ -19,6 +19,8 @@ class CreateAgentsTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
+            $table->integer('agency_id')->unsigned()->index();
+            $table->integer('wp_agent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

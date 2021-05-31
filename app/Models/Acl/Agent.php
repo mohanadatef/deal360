@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Agent extends Model
 {
     protected $fillable = [
-        'user_id'
+        'user_id','agency_id'
     ];
     protected $table = 'agents';
     public $timestamps = true;
@@ -25,6 +25,6 @@ class Agent extends Model
 
     public function agency()
     {
-        return $this->belongsTo(Agency::class, 'agency_agents');
+        return $this->belongsTo(Agency::class, 'agency_id');
     }
 }
