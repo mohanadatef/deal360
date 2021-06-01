@@ -33,10 +33,10 @@ class UserRepository implements UserInterface
             {
                 $data_auth['approve']=1;
                 $data_auth['email_verified_at']=Carbon::now();
-                $data=$this->data->create(array_merge($request->all(),$data_auth->toarray()));
+                $this->data->create(array_merge($request->all(),$data_auth->toarray()));
             }else
             {
-                $data=$this->data->create($request->all());
+                $this->data->create($request->all());
             }
             $data=$this->data->create($request->all());
             $imageName = time() . $request->image->getClientOriginalname();
@@ -56,6 +56,7 @@ class UserRepository implements UserInterface
             $data = $this->showData($id);
             $data->update($request->all());
             if (isset($request->image)) {
+                $this->deleteImage($data->image, 'user');
                 $imageName = time() . $request->image->getClientOriginalname();
                 $data->image()->forceDelete();
                 $image = $data->image()->create(['image' => $imageName]);
@@ -86,6 +87,8 @@ class UserRepository implements UserInterface
 
     public function removeData($id)
     {
-        $this->data->withTrashed()->find($id)->forceDelete();
+        $data=$this->data->withTrashed()->find($id);
+        $this->deleteImage($data->image, 'user');
+        $data->forceDelete();
     }
 }

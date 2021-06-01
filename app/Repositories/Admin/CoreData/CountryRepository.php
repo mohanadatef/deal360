@@ -60,6 +60,7 @@ class CountryRepository implements MeanInterface
             $data->update($request->all());
             $this->updateCheckLanguage($data,$request);
             if (isset($request->image)) {
+                $this->deleteImage($data->image, 'country');
                 $imageName = time() . $request->image->getClientOriginalname();
                 $data->image()->forceDelete();
                 $image = $data->image()->create(['image' => $imageName]);
@@ -92,7 +93,9 @@ class CountryRepository implements MeanInterface
 
     public function removeData($id)
     {
-        $this->data->withTrashed()->find($id)->forceDelete();
+        $data=$this->data->withTrashed()->find($id);
+        $this->deleteImage($data->image, 'country');
+        $data->forceDelete();
     }
 
     public function listData()

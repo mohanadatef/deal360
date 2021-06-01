@@ -4,6 +4,7 @@ namespace Database\Seeders\Acl;
 
 use App\Models\Acl\Role;
 use App\Models\Acl\User;
+use App\Traits\Image;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
+    use Image;
     /**
      * Run the database seeds.
      *
@@ -21,10 +23,12 @@ class UserTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $user = User::all();
         foreach ($user as $users) {
+            $this->deleteImage($users->image, 'user');
             $users->forceDelete();
         }
         $user = User::onlyTrashed()->get();
         foreach ($user as $users) {
+            $this->deleteImage($users->image, 'user');
             $users->forceDelete();
         }
         User::truncate();

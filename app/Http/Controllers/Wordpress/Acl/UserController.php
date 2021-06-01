@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Wordpress\Acl;
 use App\Http\Controllers\Controller;
 use App\Models\Acl\Agent;
 use App\Models\Acl\User;
+use App\Traits\Image;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
+    use Image;
     public function index($return)
     {
         $response = Http::get('https://crm.deal360.ae/backend/api/fillUsers')->json();
@@ -103,22 +105,27 @@ class UserController extends Controller
         executionTime();
         DB::transaction(function () use ($data_user, $data_user_package, $agency, $agent, $developer, $agent_translation, $image) {
             DB::table('users')->insert($data_user);
+            executionTime();
             DB::table('user_packages')->insert($data_user_package);
+            executionTime();
             DB::table('agencies')->insert($agency);
+            executionTime();
             DB::table('agents')->insert($agent);
+            executionTime();
             DB::table('developers')->insert($developer);
+            executionTime();
             DB::table('translations')->insert($agent_translation);
+            executionTime();
             foreach ($image as $im) {
-                $contents = file_get_contents($im['image_url']);
-                $name = substr($im['image_url'], strrpos($im['image_url'], '/') + 1);
-                $patch = public_path('images/user/') . $name;
-                if (!\File::isDirectory($patch)) {
-                    \File::makeDirectory($patch, 0777, true, true);
-                }
-                file_put_contents($patch, $contents);
+                executionTime();
+                $name = $this->uploadImageWordpress($im['image_url'], 'user');
+                executionTime();
                 $user_image[] = array('category_type' => user::class, 'category_id' => $im['id'], 'image' => $name);
+                executionTime();
             }
+            executionTime();
             DB::table('images')->insert($user_image);
+            executionTime();
         });
     }
 }

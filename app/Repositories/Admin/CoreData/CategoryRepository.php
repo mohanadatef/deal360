@@ -59,6 +59,7 @@ class CategoryRepository implements MeanInterface
             $data = $this->showData($id);
             $data->update($request->all());
             $this->updateCheckLanguage($data,$request);
+            $this->deleteImage($data->image, 'category');
             if (isset($request->image)) {
                 $imageName = time() . $request->image->getClientOriginalname();
                 $data->image()->forceDelete();
@@ -93,7 +94,9 @@ class CategoryRepository implements MeanInterface
 
     public function removeData($id)
     {
-        $this->data->withTrashed()->find($id)->forceDelete();
+        $data=$this->data->withTrashed()->find($id);
+        $this->deleteImage($data->image, 'category');
+        $data->forceDelete();
     }
 
     public function listData()
