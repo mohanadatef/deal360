@@ -27,104 +27,105 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="card card-solid">
-                <div class="card-body pb-0">
-                    <div class="row d-flex align-items-stretch">
-                        @forelse($datas as $data)
-                            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                                <div class="card bg-light">
-                                    <div class="card-header text-muted border-bottom-0">
-                                        {{$data->fullname}}
-                                    </div>
-                                    <div class="card-body pt-0">
-                                        <div class="row">
-                                            <div class="col-7">
-                                                <h2 class="lead"><b>{{$data->username}}</b></h2>
-                                                <p class="text-muted text-sm"><b>{{trans('lang.Role')}}
-                                                        :</b> {{$data->role->title ? $data->role->title->value : ""}}
-                                                </p>
-                                                <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                    <li class="small"><span class="fa-li"><i
-                                                                class="fas fa-lg fa-address-book"></i></span> {{$data->email}}
-                                                    </li>
-                                                    <li class="small"><span class="fa-li"><i
-                                                                class="fas fa-lg fa-phone"></i></span> {{$data->phone}}
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-5 text-center">
-                                                <img src="{{ getImag($data->image,'user') }}" alt="user-avatar"
-                                                     class="img-circle img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="text-right">
-                                            @permission('user-status')
-                                            <input onfocus="changeStatus({{$data->id}})" type="checkbox"
-                                                   name="status" @if($data->status) checked
-                                                   @endif id="status-{{$data->id}}"
-                                                   data-bootstrap-switch data-off-color="danger"
-                                                   data-on-color="success">
-                                            @endpermission
-                                            @permission('user-edit')
-                                            <a href="{{  route('user.edit',$data->id) }}"
-                                               class="btn btn-sm btn-primary">
-                                                <i class="fas fa-user"></i> {{trans('lang.Edit')}}
-                                            </a>
-                                            @endpermission
-                                            @permission('user-forgot-password')
-                                            <button type="button"
-                                                    class="btn btn-sm bg-danger"
-                                                    onclick="selectItem({{$data->id}})" data-toggle="modal"
-                                                    data-target="#modal-forgotpassword">
-                                                <i></i> {{trans('lang.Change_Password')}}
-                                            </button>
-                                            @endpermission
-                                            @permission('user-delete')
-                                            <button class="btn btn-sm bg-danger" type="button"
-                                                    onclick="selectItem({{$data->id}})" data-toggle="modal"
-                                                    data-target="#modal-delete">
-                                                <i class="fas fa-recycle"></i> {{trans('lang.Delete')}}
-                                            </button>
-                                            @endpermission
-                                        </div>
-                                    </div>
+            <form method="get" action="">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        @permission('user-create')
+                                        <a href="{{  route('user.create') }}"
+                                           class="btn btn-success"> {{trans('lang.Create')}}</a>
+                                        @endpermission
+                                    </h3>
                                 </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>{{trans('lang.Full_Name')}}</th>
+                                            <th>{{trans('lang.User_Name')}}</th>
+                                            <th>{{trans('lang.Email')}}</th>
+                                            <th>{{trans('lang.Role')}}</th>
+                                            <th>{{trans('lang.Country')}}</th>
+                                            <th>{{trans('lang.Image')}}</th>
+                                            @permission('user-status')
+                                            <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
+                                            <th>{{trans('lang.Controller')}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="body">
+                                        @forelse($datas as $data)
+                                            <tr id="data-{{$data->id}}">
+                                                <td id="full-name-{{$data->id}}">{{$data->fullname}}</td>
+                                                <td id="user-name-{{$data->id}}">{{$data->username}}</td>
+                                                <td id="email-{{$data->id}}">{{$data->email}}</td>
+                                                <td id="role-{{$data->id}}">{{$data->role->title ? $data->role->title->value : ""}}</td>
+                                                <td id="country-{{$data->id}}">{{$data->country->title ? $data->country->title->value : ""}}</td>
+                                                <td id="image-{{$data->id}}"><img src="{{ getImag($data->image,'user') }}"
+                                                                                  id="image-{{$data->id}}" style="width:100px;height: 100px"></td>
+                                                @permission('user-status')
+                                                <td>
+                                                    <input onfocus="changeStatus({{$data->id}})" type="checkbox"
+                                                           name="status" @if($data->status) checked
+                                                           @endif id="status-{{$data->id}}"
+                                                           data-bootstrap-switch data-off-color="danger"
+                                                           data-on-color="success">
+                                                </td>
+                                                @endpermission
+                                                <td>
+                                                    @permission('user-edit')
+                                                    <a href="{{  route('user.edit',$data->id) }}"
+                                                       class="btn btn-outline-primary btn-block btn-sm"><i class="fa fa-edit"></i>{{trans('lang.Edit')}}</a>
+                                                    @endpermission
+                                                    @permission('user-forgot-password')
+                                                    <button type="button"
+                                                            class="btn btn-outline-danger btn-block btn-sm"
+                                                            onclick="selectItem({{$data->id}})" data-toggle="modal"
+                                                            data-target="#modal-forgotpassword"><i></i> {{trans('lang.Change_Password')}}
+                                                    </button>
+                                                    @endpermission
+                                                    @permission('user-delete')
+                                                    <button type="button"
+                                                            class="btn btn-outline-danger btn-block btn-sm"
+                                                            onclick="selectItem({{$data->id}})" data-toggle="modal"
+                                                            data-target="#modal-delete"><i></i> {{trans('lang.Delete')}}
+                                                    </button>
+                                                    @endpermission
+                                                </td>
+                                            </tr>
+                                        @empty
+                                        @endforelse
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>{{trans('lang.Full_Name')}}</th>
+                                            <th>{{trans('lang.User_Name')}}</th>
+                                            <th>{{trans('lang.Email')}}</th>
+                                            <th>{{trans('lang.Role')}}</th>
+                                            <th>{{trans('lang.Country')}}</th>
+                                            <th>{{trans('lang.Image')}}</th>
+                                            @permission('user-status')
+                                            <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
+                                            <th>{{trans('lang.Controller')}}</th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
                             </div>
-                        @empty
-                        @endforelse
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
                     </div>
+                    <!-- /.row -->
                 </div>
-                <!-- /.card-body -->
-                @if($paginator['total_pages'] > 1)
-                    <div class="card-footer">
-                        <nav aria-label="Contacts Page Navigation">
-                            <ul class="pagination justify-content-center m-0">
-                                @for($i=1;$i<=$paginator['total_pages'];$i++)
-                                    @if ($i == 1)
-                                        <li><a class="page-link"
-                                               @if ($paginator['current_page'] == 1) style="pointer-events: none"
-                                               @endif href="{{$paginator['url_page'].($paginator['current_page']-1)}}">Preive</a>
-                                        </li>
-                                    @endif
-                                    <li @if($paginator['current_page'] == $i) class="page-item active"
-                                        @else class="page-item" @endif><a class="page-link"
-                                                                          href="{{$paginator['url_page'].$i}}">{{$i}}</a>
-                                    </li>
-                                    @if ($i == $paginator['total_pages'])
-                                        <li><a class="page-link"
-                                               @if ($paginator['current_page'] == $paginator['total_pages']) style="pointer-events: none"
-                                               @endif href="{{$paginator['url_page'].($paginator['current_page']+1)}}">Next</a>
-                                        </li>
-                                    @endif
-                                @endfor
-                            </ul>
-                        </nav>
-                    </div>
-            @endif
-            <!-- /.card-footer -->
-            </div>
+                <!-- /.container-fluid -->
+            </form>
         </section>
         <!-- /.content -->
     </div>
