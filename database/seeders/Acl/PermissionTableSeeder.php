@@ -111,6 +111,47 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'user-forgot-password',
                 'title' => ['en' => 'user forgot password', 'ar' => 'تغير كلمه السر المستخدم'],
             ],
+            //agency
+            [
+	            'name' => 'agency-list',
+	            'title' => ['en' => 'agency list', 'ar' => 'قائمه اذنات الشركه'],
+            ],
+            [
+	            'name' => 'agency-index',
+	            'title' => ['en' => 'agency index', 'ar' => 'قائمه الشركه'],
+            ],
+            [
+	            'name' => 'agency-create',
+	            'title' => ['en' => 'agency create', 'ar' => 'اضافه الشركه'],
+            ],
+            [
+	            'name' => 'agency-edit',
+	            'title' => ['en' => 'agency edit', 'ar' => 'تعديل الشركه'],
+            ],
+            [
+	            'name' => 'agency-status',
+	            'title' => ['en' => 'agency status', 'ar' => 'تغير حاله الشركه'],
+            ],
+            [
+	            'name' => 'agency-delete',
+	            'title' => ['en' => 'agency delete', 'ar' => 'مسح الشركه'],
+            ],
+            [
+	            'name' => 'agency-index-delete',
+	            'title' => ['en' => 'agency index delete', 'ar' => 'قائمه مسح الشركه'],
+            ],
+            [
+	            'name' => 'agency-restore',
+	            'title' => ['en' => 'agency restore', 'ar' => 'استرجاع الشركه'],
+            ],
+            [
+	            'name' => 'agency-remove',
+	            'title' => ['en' => 'agency remove', 'ar' => 'حذف الشركه'],
+            ],
+            [
+	            'name' => 'agency-forgot-password',
+	            'title' => ['en' => 'agency forgot password', 'ar' => 'تغير كلمه السر المستخدم'],
+            ],
             //role
             [
                 'name' => 'role-list',

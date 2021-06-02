@@ -91,6 +91,43 @@
                             </ul>
                         </li>
                         @endpermission
+                        @permission('agency-list')
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    {{trans('lang.Agency')}}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @permission('agency-index')
+                                <li class="nav-item">
+                                    <a href="{{route('agency.index')}}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{trans('lang.Index')}}</p>
+                                    </a>
+                                </li>
+                                @endpermission
+                                @permission('agency-create')
+                                <li class="nav-item">
+                                    <a href="{{route('agency.create')}}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{trans('lang.Create')}}</p>
+                                    </a>
+                                </li>
+                                @endpermission
+                                @permission('agency-index-delete')
+                                <li class="nav-item">
+                                    <a href="{{route('agency.delete_index')}}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>{{trans('lang.Delete')}} {{trans('lang.Index')}}</p>
+                                    </a>
+                                </li>
+                                @endpermission
+                            </ul>
+                        </li>
+                        @endpermission
                         @permission('role-list')
                         <li class="nav-item">
                             <a href="#" class="nav-link">

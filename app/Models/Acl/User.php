@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function agency()
     {
-        return $this->hasOne(Agency::Class);
+        return $this->hasOne(Agency::Class)->withTrashed();
     }
 
     public function developer()
@@ -107,14 +107,17 @@ class User extends Authenticatable
         parent::boot();
         static::deleting(function($user) {
             $user->image()->delete();
+	        $user->agency()->delete();
         });
 
         static::restoring(function($user) {
             $user->image()->withTrashed()->restore();
+	        $user->agency()->withTrashed()->restore();
         });
 
         static::forceDeleted(function($user) {
             $user->image()->forceDelete();
+	        $user->agency()->forceDelete();
         });
     }
 }

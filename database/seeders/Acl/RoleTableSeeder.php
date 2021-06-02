@@ -28,36 +28,42 @@ class RoleTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $role = [
             //role
+            //0
             [
                 'code' => 'sad',
                 'type_access' => 'all',
                 'order' => '0',
                 'title' => ['en' => 'super admin', 'ar' => 'سوبر ادمن'],
             ],
+            //1
             [
                 'code' => 'ad',
                 'type_access' => 'all',
                 'order' => '1',
                 'title' => ['en' => 'admin', 'ar' => 'ادمن'],
             ],
+            //2
             [
                 'code' => 'us',
                 'type_access' => 'deal360',
                 'order' => '2',
                 'title' => ['en' => 'user', 'ar' => 'مستخدم'],
             ],
+            //3
             [
                 'code' => 'ay',
                 'type_access' => 'deal360',
                 'order' => '3',
                 'title' => ['en' => 'agency', 'ar' => 'شركه'],
             ],
+            //4
             [
                 'code' => 'at',
                 'type_access' => 'deal360',
                 'order' => '4',
                 'title' => ['en' => 'agent', 'ar' => 'بائع'],
             ],
+            //5
             [
                 'code' => 'de',
                 'type_access' => 'deal360',

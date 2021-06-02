@@ -37,7 +37,7 @@ class FQRepository implements MeanInterface
                     $data->translation()->create(['key' => 'question', 'value' => $request->question['en'],
                         'language_id' => $lang->id]);
                 }
-                if (isset($request->question[$lang->code])) {
+                if (isset($request->answer[$lang->code])) {
                     $data->translation()->create(['key' => 'answer', 'value' => $request->answer[$lang->code],
                         'language_id' => $lang->id]);
                 } else {
@@ -86,7 +86,7 @@ class FQRepository implements MeanInterface
                 if ($translation) {
                     $translation->update(['value' => $request->answer[$lang->code]]);
                 } else {
-                    if (isset($request->question[$lang->code])) {
+                    if (isset($request->answer[$lang->code])) {
                         $data->translation()->create(['key' => 'answer', 'value' => $request->answer[$lang->code],
                             'language_id' => $lang->id]);
                     } else {
