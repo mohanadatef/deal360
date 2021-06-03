@@ -42,7 +42,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             @include('errors.error')
-                            <form action="{{route('user.store')}}" method="post" id="create">
+                            <form action="{{route('user.store')}}" method="post" id="create" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group{{ $errors->has('fullname') ? ' is-invalid' : "" }}">
@@ -103,9 +103,9 @@
                                             <option value="1">{{trans('lang.Famel')}}</option>
                                         </select>
                                     </div>
-                                    <div class="form-group{{ $errors->has('country') ? ' is-invalid' : "" }}">
+                                    <div class="form-group{{ $errors->has('country_id') ? ' is-invalid' : "" }}">
                                         <label>{{trans('lang.Country')}}</label>
-                                        <select class="form-control select2" id="country" name="country"
+                                        <select class="form-control select2" id="country" name="country_id"
                                                 style="width: 100%;">
                                             @foreach($country as $my)
                                                 <option value="{{$my->id}}"
@@ -113,9 +113,9 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group{{ $errors->has('role') ? ' is-invalid' : "" }}">
+                                    <div class="form-group{{ $errors->has('role_id') ? ' is-invalid' : "" }}">
                                         <label>{{trans('lang.Role')}}</label>
-                                        <select class="form-control select2" id="role" name="role"
+                                        <select class="form-control select2" id="role" name="role_id"
                                                 style="width: 100%;">
                                             @foreach($role as $ro)
                                                 <option value="{{$ro->id}}"

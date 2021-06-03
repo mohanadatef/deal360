@@ -23,11 +23,12 @@ class CreateRequest extends FormRequest
 	 */
 	public function rules()
 	{
-		$rules=['fullname' =>'required|string|unique:users','username'=>'required|string|unique:users',
-		        'email'    =>'required|email|unique:users','phone'=>'required|numeric|unique:users','facebook'=>'url',
-		        'instagram'=>'url','youtube'=>'url','twitter'=>'url','website'=>'url',
-		        'country'  =>'required|exists:countries,id','password'=>'required|string|min:6|confirmed',
-		        'image'    =>'required|image|mimes:jpg,jpeg,png,gif|max:2048',];
+		$rules=['fullname'=>'required|string|unique:users','username'=>'required|string|unique:users',
+		        'email'   =>'required|email|unique:users','phone'=>'required|numeric|unique:users',
+		        'facebook'=>'string|nullable','instagram'=>'string|nullable','youtube'=>'string|nullable',
+		        'twitter' =>'string|nullable','website'=>'string|nullable','country_id'=>'required|exists:countries,id',
+		        'password'=>'required|string|min:6|confirmed',
+		        'image'   =>'required|image|mimes:jpg,jpeg,png,gif|max:2048',];
 		foreach(language() as $lang)
 		{
 			if($lang->code == 'en')

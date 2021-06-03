@@ -21,7 +21,11 @@
         }
     });
     /*global variable*/
-    var id,url,model = window.location.href.split('admin/').pop().split('/')[0];
+    var id;
+    var url;
+    var model = window.location.href.split('admin/').pop().split('/')[0];
+    model=model.split('?')[0];
+    console.log(model)
     /*create item*/
     $(document).ready(function () {
         $("#create").on("submit", function (event) {
@@ -47,10 +51,12 @@
             });
         });
     });
+
     /*get id for item*/
     function selectItem(data) {
         id = data;
     }
+
     /*show item in model edit*/
     function showItem(data) {
         id = data;
@@ -70,6 +76,7 @@
             }
         });
     }
+
     /*edit data*/
     $(document).ready(function () {
         $("#edit").on("submit", function (event) {
@@ -95,6 +102,7 @@
             });
         });
     });
+
     /*change status for item*/
     function changeStatus(data) {
         url = "{{url('admin/model/change_status/id')}}";
@@ -112,6 +120,7 @@
             }
         });
     }
+
     /*delete item*/
     function deleteItem() {
         url = "{{url('admin/model/id')}}";
@@ -124,13 +133,14 @@
                 document.getElementById('data-' + id).remove();
                 $('#modal-delete').modal('toggle');
                 toastr.warning('{{trans('lang.Delete_Done')}}');
-            },error: function (res) {
+            }, error: function (res) {
                 for (let err in res.responseJSON.errors) {
                     toastr.error(res.responseJSON.errors[err]);
                 }
             }
         });
     }
+
     /*remove item*/
     function removeItem() {
         url = "{{url('admin/model/remove/id')}}";
@@ -150,6 +160,7 @@
             }
         });
     }
+
     /*restore item to index*/
     function restoreItem() {
         url = "{{url('admin/model/restore/id')}}";
@@ -169,6 +180,7 @@
             }
         });
     }
+
     /*change password data*/
     $(document).ready(function () {
         $("#forgotpassword").on("submit", function (event) {

@@ -10,10 +10,12 @@ use Illuminate\Validation\Rule;
 class EditRequest extends FormRequest
 {
 	private $agencyRepository;
+	
 	public function __construct(AgencyRepository $AgencyRepository)
 	{
-		$this->agencyRepository = $AgencyRepository;
+		$this->agencyRepository=$AgencyRepository;
 	}
+	
 	/**
 	 * Determine if the user is authorized to make this request.
 	 * @return bool
@@ -33,8 +35,9 @@ class EditRequest extends FormRequest
 		$rules=['fullname'=>'required|string|unique:users,fullname,'.$agency.',id',
 		        'email'   =>'required|email|unique:users,email,'.$agency.',id',
 		        'phone'   =>'required|numeric|unique:users,phone,'.$agency.',id',
-		        'country' =>'required|exists:countries,id','image'=>'image|mimes:jpg,jpeg,png,gif|max:2048',
-		        'facebook'=>'url','instagram'=>'url','youtube'=>'url','twitter'=>'url','website'=>'url',];
+		        'country_id' =>'required|exists:countries,id','image'=>'image|mimes:jpg,jpeg,png,gif|max:2048',
+		        'facebook'=>'url|nullable','instagram'=>'url|nullable','youtube'=>'url|nullable',
+		        'twitter' =>'url|nullable','website'=>'url|nullable'];
 		foreach(language() as $lang)
 		{
 			$rules['address.'.$lang->code]=['required','string',

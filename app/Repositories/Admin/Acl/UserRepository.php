@@ -31,10 +31,11 @@ class UserRepository implements UserInterface
 		{
 			$data_auth['approve']=1;
 			$data_auth['email_verified_at']=Carbon::now();
-			$data=$this->data->create(array_merge($request->all(),$data_auth->toarray()));
+			$data=$this->data->create(array_merge($request->toarray(),$data_auth));
 			$imageName=time().$request->image->getClientOriginalname();
 			$image=$data->image()->create(['image'=>$imageName]);
 			!$image->image?false:$this->uploadImage($request->image,'user',$imageName);
+			return $data;
 		});
 	}
 	

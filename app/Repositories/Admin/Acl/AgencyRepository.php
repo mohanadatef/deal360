@@ -30,14 +30,14 @@ class AgencyRepository implements MeanInterface
 	{
 		return DB::transaction(function() use ($request)
 		{
-			$data_user['role_id']=3;
-			$user=$this->userRepository->storeData(array_merge($request,$data_user));
+			$request->request->add(['role_id'=>3]);
+			$user['user_id']=$this->userRepository->storeData($request)->id;
 			$data=$this->data->create($user);
 			foreach(language() as $lang)
 			{
 				if(isset($request->address[$lang->code]))
 				{
-					$data->translation()->create(['key'        =>'address','value'=>$request->address[$lang->code],
+					$data->translation()->create(['key'=>'address','value'=>$request->address[$lang->code],
 					                              'language_id'=>$lang->id]);
 				}else
 				{

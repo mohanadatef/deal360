@@ -15,12 +15,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{trans('lang.User')}}</h1>
+                        <h1>{{trans('lang.Agency')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a
-                                    href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
+                                        href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
                             <li class="breadcrumb-item active">{{trans('lang.Agency')}}</li>
                         </ol>
                     </div>
@@ -42,7 +42,8 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             @include('errors.error')
-                            <form action="{{route('agency.update',$data->id)}}" method="post" id="edit" enctype="multipart/form-data">
+                            <form action="{{route('agency.update',$data->id)}}" method="post" id="edit"
+                                  enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group{{ $errors->has('fullname') ? ' is-invalid' : "" }}">
@@ -71,14 +72,28 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('country') ? ' is-invalid' : "" }}">
                                         <label>{{trans('lang.Country')}}</label>
-                                        <select class="form-control select2" id="country" name="country"
+                                        <select class="form-control select2" id="country" name="country_id"
                                                 style="width: 100%;">
                                             @foreach($country as $my)
                                                 <option value="{{$my->id}}"
-                                                        @if($data->user->country_id == $my->id) selected @endif   id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
+                                                        @if($data->user->country_id == $my->id) selected
+                                                        @endif   id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    @foreach($language as $lang)
+                                        <div
+                                                class="form-group{{ $errors->has('address['.$lang->code.']') ? ' is-invalid' : "" }}">
+                                            <label for="title">{{trans('lang.Address')}} {{$lang->title}}</label>
+                                            <input type="text" name="address[{{$lang->code}}]" class="form-control"
+                                                   id="address[{{$lang->code}}]"
+                                                   @php($address=$data->translation->where('key','address')->where('language_id', $lang->id)->first())
+                                                   @if($address)
+                                                   value="{{$address->value}}"
+                                                   @endif
+                                                   placeholder="{{trans('lang.Enter_Address')}} {{$lang->title}}">
+                                        </div>
+                                    @endforeach
                                     <img src="{{ getImag($data->user->image,'user') }}"
                                          id="image-{{$data->id}}" style="width:100px;height: 100px">
                                     <div class="form-group{{ $errors->has('image') ? ' has-error' : "" }}">
@@ -86,6 +101,18 @@
                                         <input type="file" value="{{Request::old('image')}}" name="image"/>
                                         <label for="image">jpg, png, gif</label>
                                     </div>
+                                    @foreach($language as $lang)
+                                        <div
+                                                class="form-group{{ $errors->has('about_me['.$lang->code.']') ? ' is-invalid' : "" }}">
+                                            <label for="about_me">{{trans('lang.About_Me')}} {{$lang->title}}</label>
+                                            <textarea type="text" name="about_me[{{$lang->code}}]" class="form-control"
+                                                      id="about_me[{{$lang->code}}]"
+                                                      placeholder="{{trans('lang.Enter_About_Me')}} {{$lang->title}}">@php($about_me=$data->translation->where('key','about_me')->where('language_id', $lang->id)->first())
+                                                @if($about_me)
+                                                    {{$about_me->value}}
+                                                @endif</textarea>
+                                        </div>
+                                    @endforeach
                                     <div class="form-group{{ $errors->has('facebook') ? ' is-invalid' : "" }}">
                                         <label for="facebook">{{trans('lang.Facebook')}}</label>
                                         <input type="text" name="facebook" class="form-control" id="facebook"
