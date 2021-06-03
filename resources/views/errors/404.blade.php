@@ -1,4 +1,4 @@
-@extends('includes.admin.master_admin')
+@extends('errors.layout')
 @section('title')
     AdminLTE 3 | 404 Page not found
 @endsection
