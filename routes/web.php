@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Acl\PermissionController;
 use App\Http\Controllers\Admin\Acl\RoleController;
 use App\Http\Controllers\Admin\Acl\AgencyController;
 use App\Http\Controllers\Admin\Acl\DeveloperController;
+use App\Http\Controllers\Admin\Acl\AgentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -119,4 +120,9 @@ Route::prefix('/agency')->group(function () {
 Route::prefix('/developer')->group(function () {
 	Route::get('/list', [DeveloperController::class, 'listIndex'])
 		->name('developer.list');
+});
+//agent
+Route::prefix('/agent')->group(function () {
+	Route::get('/list', [AgentController::class, 'listIndex'])
+		->name('agent.list');
 });

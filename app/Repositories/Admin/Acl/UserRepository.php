@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Admin\Acl;
 
-use App\Interfaces\Admin\Acl\UserInterface;
+use App\Interfaces\Admin\Acl\AdminInterface;
 use App\Models\Acl\User;
 use App\Traits\Image;
 use App\Traits\ServiceData;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class UserRepository implements UserInterface
+class UserRepository implements AdminInterface
 {
 	use ServiceData,Image;
 	

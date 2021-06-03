@@ -3,13 +3,13 @@
 namespace App\Repositories\Admin\Acl;
 
 use App\Http\Resources\Admin\Acl\Developer\DeveloperListResource;
-use App\Interfaces\Admin\MeanInterface;
+use App\Interfaces\Admin\Acl\UserInterface;
 use App\Models\Acl\Developer;
 use App\Traits\Image;
 use App\Traits\ServiceData;
 use Illuminate\Support\Facades\DB;
 
-class DeveloperRepository implements MeanInterface
+class DeveloperRepository implements UserInterface
 {
 	use ServiceData,Image;
 	
@@ -113,6 +113,11 @@ class DeveloperRepository implements MeanInterface
 		$this->userRepository->updateStatusData($id);
 	}
 	
+	public function updateApproveData($id)
+	{
+		$this->changeApprove($this->userRepository->showData($id));
+	}
+	
 	public function deleteData($id)
 	{
 		$this->showData($id)->delete();
@@ -137,6 +142,6 @@ class DeveloperRepository implements MeanInterface
 	public function listData()
 	{
 		return DeveloperListResource::collection(DB::table('developers')->join('users','users.id','=','developers.user_id')
-			->where('users.status',1)->orderby('users.fullname','asc')->select('users.*','developers.*')->get());
+			->where('users.status',1)->orderby('users.fullname','asc')->select('users.fullname','developers.*')->get());
 	}
 }

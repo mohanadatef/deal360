@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Acl\RoleController;
 use App\Http\Controllers\Admin\Acl\UserController;
 use App\Http\Controllers\Admin\Acl\AgencyController;
 use App\Http\Controllers\Admin\Acl\DeveloperController;
+use App\Http\Controllers\Admin\Acl\AgentController;
 use App\Http\Controllers\Admin\Acl\ForgotPasswordController;
 use App\Http\Controllers\Admin\CoreData\LanguageController;
 use App\Http\Controllers\Admin\CoreData\StatusController;
@@ -230,5 +231,15 @@ Route::group(['middleware'=> /*'admin',*/ 'auth','language','permission:dashboar
 		Route::get('/restore/{id}',[DeveloperController::class,'restore'])->name('restore');
 		Route::get('/remove/{id}',[DeveloperController::class,'remove'])->name('remove');
 		Route::post('/{id}',[DeveloperController::class,'update'])->name('update');
+	});
+	/* agent route list */
+	Route::resource('agent',AgentController::class,['except'=>['show','update']])->parameters(['agent'=>'id']);
+	Route::prefix('/agent')->name('agent.')->group(function()
+	{
+		Route::get('/change_status/{id}',[AgentController::class,'changeStatus'])->name('status');
+		Route::get('/delete',[AgentController::class,'destroyIndex'])->name('delete_index');
+		Route::get('/restore/{id}',[AgentController::class,'restore'])->name('restore');
+		Route::get('/remove/{id}',[AgentController::class,'remove'])->name('remove');
+		Route::post('/{id}',[AgentController::class,'update'])->name('update');
 	});
 });

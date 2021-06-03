@@ -3,13 +3,13 @@
 namespace App\Repositories\Admin\Acl;
 
 use App\Http\Resources\Admin\Acl\Agency\AgencyListResource;
-use App\Interfaces\Admin\MeanInterface;
+use App\Interfaces\Admin\Acl\UserInterface;
 use App\Models\Acl\Agency;
 use App\Traits\Image;
 use App\Traits\ServiceData;
 use Illuminate\Support\Facades\DB;
 
-class AgencyRepository implements MeanInterface
+class AgencyRepository implements UserInterface
 {
 	use ServiceData,Image;
 	
@@ -113,6 +113,11 @@ class AgencyRepository implements MeanInterface
 		$this->userRepository->updateStatusData($id);
 	}
 	
+	public function updateApproveData($id)
+	{
+		$this->changeApprove($this->userRepository->showData($id));
+	}
+	
 	public function deleteData($id)
 	{
 		$this->showData($id)->delete();
@@ -137,6 +142,6 @@ class AgencyRepository implements MeanInterface
 	public function listData()
 	{
 		return AgencyListResource::collection(DB::table('agencies')->join('users','users.id','=','agencies.user_id')
-			->where('users.status',1)->orderby('users.fullname','asc')->select('users.*','agencies.*')->get());
+			->where('users.status',1)->orderby('users.fullname','asc')->select('users.fullname','agencies.*')->get());
 	}
 }

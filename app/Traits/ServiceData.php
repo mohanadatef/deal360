@@ -13,6 +13,16 @@ trait ServiceData
         }
         $data->update();
     }
+    
+    public function changeApprove($data)
+    {
+        if ($data->approve) {
+            $data->approve = 0;
+        } else{
+            $data->approve = 1;
+        }
+        $data->update();
+    }
 
     public function storeCheckLanguage($data,$request)
     {
