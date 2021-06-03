@@ -2,7 +2,6 @@
 
 namespace App\Models\Acl;
 
-use App\Models\CoreData\Country;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

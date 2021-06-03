@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Requests\Admin\Acl\Agency;
+namespace App\Http\Requests\Admin\Acl\Developer;
 
-use App\Models\Acl\Agency;
-use App\Repositories\Admin\Acl\AgencyRepository;
+use App\Models\Acl\Developer;
+use App\Repositories\Admin\Acl\DeveloperRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class EditRequest extends FormRequest
 {
-	private $agencyRepository;
+	private $developerRepository;
 	
-	public function __construct(AgencyRepository $AgencyRepository)
+	public function __construct(DeveloperRepository $DeveloperRepository)
 	{
-		$this->agencyRepository=$AgencyRepository;
+		$this->developerRepository=$DeveloperRepository;
 	}
 	
 	/**
@@ -31,10 +31,10 @@ class EditRequest extends FormRequest
 	 */
 	public function rules()
 	{
-		$agency=$this->agencyRepository->showData($this->id)->user_id;
-		$rules=['fullname'=>'required|string|unique:users,fullname,'.$agency.',id',
-		        'email'   =>'required|email|unique:users,email,'.$agency.',id',
-		        'phone'   =>'required|numeric|unique:users,phone,'.$agency.',id',
+		$developer=$this->developerRepository->showData($this->id)->user_id;
+		$rules=['fullname'=>'required|string|unique:users,fullname,'.$developer.',id',
+		        'email'   =>'required|email|unique:users,email,'.$developer.',id',
+		        'phone'   =>'required|numeric|unique:users,phone,'.$developer.',id',
 		        'country_id' =>'required|exists:countries,id','image'=>'image|mimes:jpg,jpeg,png,gif|max:2048',
 		        'facebook'=>'string|nullable','instagram'=>'string|nullable','youtube'=>'string|nullable',
 		        'twitter' =>'string|nullable','website'=>'string|nullable'];
@@ -42,11 +42,11 @@ class EditRequest extends FormRequest
 		{
 			$rules['address.'.$lang->code]=['required','string',
 			                                Rule::unique('translations','value')->ignore($this->id,'category_id')
-				                                ->where('category_type',Agency::class)->where('key','address')
+				                                ->where('category_type',Developer::class)->where('key','address')
 				                                ->where('language_id',$lang->id)];
 			$rules['about_me.'.$lang->code]=['required','string',
 			                                 Rule::unique('translations','value')->ignore($this->id,'category_id')
-				                                 ->where('category_type',Agency::class)->where('key','about_me')
+				                                 ->where('category_type',Developer::class)->where('key','about_me')
 				                                 ->where('language_id',$lang->id)];
 		}
 		return $rules;
