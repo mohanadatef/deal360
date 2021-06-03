@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function developer()
     {
-        return $this->hasOne(Developer::Class);
+        return $this->hasOne(Developer::Class)->withTrashed();
     }
 
     public function agent()
@@ -108,16 +108,19 @@ class User extends Authenticatable
         static::deleting(function($user) {
             $user->image()->delete();
 	        $user->agency()->delete();
+	        $user->developer()->delete();
         });
 
         static::restoring(function($user) {
             $user->image()->withTrashed()->restore();
 	        $user->agency()->withTrashed()->restore();
+	        $user->developer()->withTrashed()->restore();
         });
 
         static::forceDeleted(function($user) {
             $user->image()->forceDelete();
 	        $user->agency()->forceDelete();
+	        $user->developer()->forceDelete();
         });
     }
 }

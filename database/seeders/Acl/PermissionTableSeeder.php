@@ -150,7 +150,48 @@ class PermissionTableSeeder extends Seeder
             ],
             [
 	            'name' => 'agency-forgot-password',
-	            'title' => ['en' => 'agency forgot password', 'ar' => 'تغير كلمه السر المستخدم'],
+	            'title' => ['en' => 'agency forgot password', 'ar' => 'تغير كلمه السر الشركه'],
+            ],
+            //developer
+            [
+	            'name' => 'developer-list',
+	            'title' => ['en' => 'developer list', 'ar' => 'قائمه اذنات المطور'],
+            ],
+            [
+	            'name' => 'developer-index',
+	            'title' => ['en' => 'developer index', 'ar' => 'قائمه المطور'],
+            ],
+            [
+	            'name' => 'developer-create',
+	            'title' => ['en' => 'developer create', 'ar' => 'اضافه المطور'],
+            ],
+            [
+	            'name' => 'developer-edit',
+	            'title' => ['en' => 'developer edit', 'ar' => 'تعديل المطور'],
+            ],
+            [
+	            'name' => 'developer-status',
+	            'title' => ['en' => 'developer status', 'ar' => 'تغير حاله المطور'],
+            ],
+            [
+	            'name' => 'developer-delete',
+	            'title' => ['en' => 'developer delete', 'ar' => 'مسح المطور'],
+            ],
+            [
+	            'name' => 'developer-index-delete',
+	            'title' => ['en' => 'developer index delete', 'ar' => 'قائمه مسح المطور'],
+            ],
+            [
+	            'name' => 'developer-restore',
+	            'title' => ['en' => 'developer restore', 'ar' => 'استرجاع المطور'],
+            ],
+            [
+	            'name' => 'developer-remove',
+	            'title' => ['en' => 'developer remove', 'ar' => 'حذف المطور'],
+            ],
+            [
+	            'name' => 'developer-forgot-password',
+	            'title' => ['en' => 'developer forgot password', 'ar' => 'تغير كلمه السر المطور'],
             ],
             //role
             [

@@ -56,14 +56,14 @@
                                            <td id="image-{{$data->id}}"><img src="{{ getImag($data->user->image,'user') }}"
                                                                               id="image-{{$data->id}}" style="width:100px;height: 100px"></td>
                                             <td>
-                                                @permission('user-restore')
+                                                @permission('agency-restore')
                                                 <button type="button" class="btn btn-outline-primary btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-restore">
                                                     <i class="fa fa-edit"></i> {{trans('lang.Restore')}}
                                                 </button>
                                                 @endpermission
-                                                @permission('user-remove')
+                                                @permission('agency-remove')
                                                 <button type="button" class="btn btn-outline-danger btn-block btn-sm"
                                                         onclick="selectItem({{$data->id}})" data-toggle="modal"
                                                         data-target="#modal-remove"><i></i>{{trans('lang.Delete')}}
