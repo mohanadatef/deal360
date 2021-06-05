@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use \Illuminate\Support\Facades\App;
-use \App\Models\CoreData\Language;
+use Illuminate\Support\Facades\App;
+use App\Models\CoreData\Language;
+use Illuminate\Support\Facades\Schema;
 
 if (!function_exists('languageLocale')) {
     function languageLocale()
@@ -15,14 +16,20 @@ if (!function_exists('languageLocale')) {
 if (!function_exists('language')) {
     function language()
     {
-        return Language::Order('asc')->get();
+	    if (Schema::hasTable('languages'))
+	    {
+		    return Language::Order('asc')->get();
+	    }
     }
 }
 
 if (!function_exists('languageActive')) {
     function languageActive()
     {
+	    if (Schema::hasTable('languages'))
+	    {
         return Language::status('1')->Order('asc')->get();
+	    }
     }
 }
 

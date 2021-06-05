@@ -15,13 +15,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{trans('lang.Developer')}}</h1>
+                        <h1>{{trans('lang.Agent')}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a
                                         href="{{route('admin.dashboard')}}">{{trans('lang.Home')}}</a></li>
-                            <li class="breadcrumb-item active">{{trans('lang.Developer')}}</li>
+                            <li class="breadcrumb-item active">{{trans('lang.Agent')}}</li>
                         </ol>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             @include('errors.error')
-                            <form action="{{route('developer.update',$data->id)}}" method="post" id="edit"
+                            <form action="{{route('agent.update',$data->id)}}" method="post" id="edit"
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
@@ -78,6 +78,19 @@
                                                 <option value="{{$my->id}}"
                                                         @if($data->user->country_id == $my->id) selected
                                                         @endif   id="option-country-{{$my->id}}">{{$my->title ? $my->title->value : ""}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group{{ $errors->has('company') ? ' is-invalid' : "" }}">
+                                        <label>{{trans('lang.Company')}}</label>
+                                        <select class="form-control select2" id="company" name="company_id"
+                                                style="width: 100%;">
+                                            <option value="0" @if($data->company_id == 0) selected
+                                                    @endif>{{trans('lang.Alone')}}</option>
+                                            @foreach($company as $my)
+                                                <option value="{{$my->id}}" @if($data->company_id == $my->id) selected
+                                                        @endif
+                                                        id="option-company-{{$my->id}}">{{$my->user ? $my->user->fullname : ""}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -168,5 +181,5 @@
     </div>
 @endsection
 @section('script_style')
-    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\Developer\EditRequest','#edit') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\Agent\EditRequest','#edit') !!}
 @endsection

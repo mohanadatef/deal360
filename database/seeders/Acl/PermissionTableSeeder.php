@@ -193,6 +193,47 @@ class PermissionTableSeeder extends Seeder
 	            'name' => 'developer-forgot-password',
 	            'title' => ['en' => 'developer forgot password', 'ar' => 'تغير كلمه السر المطور'],
             ],
+            //agent
+            [
+	            'name' => 'agent-list',
+	            'title' => ['en' => 'agent list', 'ar' => 'قائمه اذنات العامل'],
+            ],
+            [
+	            'name' => 'agent-index',
+	            'title' => ['en' => 'agent index', 'ar' => 'قائمه العامل'],
+            ],
+            [
+	            'name' => 'agent-create',
+	            'title' => ['en' => 'agent create', 'ar' => 'اضافه العامل'],
+            ],
+            [
+	            'name' => 'agent-edit',
+	            'title' => ['en' => 'agent edit', 'ar' => 'تعديل العامل'],
+            ],
+            [
+	            'name' => 'agent-status',
+	            'title' => ['en' => 'agent status', 'ar' => 'تغير حاله العامل'],
+            ],
+            [
+	            'name' => 'agent-delete',
+	            'title' => ['en' => 'agent delete', 'ar' => 'مسح العامل'],
+            ],
+            [
+	            'name' => 'agent-index-delete',
+	            'title' => ['en' => 'agent index delete', 'ar' => 'قائمه مسح العامل'],
+            ],
+            [
+	            'name' => 'agent-restore',
+	            'title' => ['en' => 'agent restore', 'ar' => 'استرجاع العامل'],
+            ],
+            [
+	            'name' => 'agent-remove',
+	            'title' => ['en' => 'agent remove', 'ar' => 'حذف العامل'],
+            ],
+            [
+	            'name' => 'agent-forgot-password',
+	            'title' => ['en' => 'agent forgot password', 'ar' => 'تغير كلمه السر العامل'],
+            ],
             //role
             [
                 'name' => 'role-list',

@@ -9,11 +9,11 @@ use Illuminate\Validation\Rule;
 
 class EditRequest extends FormRequest
 {
-	private $developerRepository;
+	private $agentRepository;
 	
 	public function __construct(AgentRepository $AgentRepository)
 	{
-		$this->developerRepository=$AgentRepository;
+		$this->agentRepository=$AgentRepository;
 	}
 	
 	/**
@@ -31,13 +31,18 @@ class EditRequest extends FormRequest
 	 */
 	public function rules()
 	{
-		$developer=$this->developerRepository->showData($this->id)->user_id;
-		$rules=['fullname'=>'required|string|unique:users,fullname,'.$developer.',id',
-		        'email'   =>'required|email|unique:users,email,'.$developer.',id',
-		        'phone'   =>'required|numeric|unique:users,phone,'.$developer.',id',
-		        'country_id' =>'required|exists:countries,id','image'=>'image|mimes:jpg,jpeg,png,gif|max:2048',
-		        'facebook'=>'string|nullable','instagram'=>'string|nullable','youtube'=>'string|nullable',
-		        'twitter' =>'string|nullable','website'=>'string|nullable','company_id'=>'required'];
+		$agent=$this->agentRepository->showData($this->id)->user_id;
+		$rules=['fullname'=>'required|string|unique:users,fullname,'.$agent.',id',
+		        'email' =>'required|email|unique:users,email,'.$agent.',id',
+		        'phone' =>'required|numeric|unique:users,phone,'.$agent.',id',
+		        'country_id' =>'required|exists:countries,id',
+		        'image'=>'image|mimes:jpg,jpeg,png,gif|max:2048',
+		        'facebook'=>'string|nullable',
+		        'instagram'=>'string|nullable',
+		        'youtube'=>'string|nullable',
+		        'twitter' =>'string|nullable',
+		        'website'=>'string|nullable',
+		        'company_id'=>'required'];
 		foreach(language() as $lang)
 		{
 			$rules['address.'.$lang->code]=['required','string',

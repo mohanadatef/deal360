@@ -44,21 +44,36 @@ class Agency extends Model
 
     public function agent()
     {
-        return $this->hasMany(Agent::class);
+        return $this->hasMany(Agent::class,'company_id')->withTrashed();
     }
 	
 	public static function boot() {
 		parent::boot();
 		static::deleting(function($agency) {
 			$agency->user->delete();
+			$agency->translation()->delete();
+			foreach($agency->agent as $agent)
+			{
+				$agent->delete();
+			}
 		});
 		
 		static::restoring(function($agency) {
 			$agency->user->withTrashed()->restore();
+			$agency->translation()->withTrashed()->restore();
+			foreach($agency->agent as $agent)
+			{
+				$agent->withTrashed()->restore();
+			}
 		});
 		
 		static::forceDeleted(function($agency) {
 			$agency->user->forceDelete();
+			$agency->translation()->forceDelete();
+			foreach($agency->agent as $agent)
+			{
+				$agent->forceDelete();
+			}
 		});
 	}
 }

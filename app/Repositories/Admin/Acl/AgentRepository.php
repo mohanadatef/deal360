@@ -23,7 +23,7 @@ class AgentRepository implements UserInterface
 	
 	public function getData()
 	{
-		return $this->data->with('user.country','user.image','company')->paginate(25);
+		return $this->data->with('user','company')->paginate(25);
 	}
 	
 	public function storeData($request)
@@ -125,7 +125,7 @@ class AgentRepository implements UserInterface
 	
 	public function getDataDelete()
 	{
-		return $this->data->onlyTrashed()->with('user')->paginate(25);
+		return $this->data->onlyTrashed()->with('user','company')->paginate(25);
 	}
 	
 	public function restoreData($id)
@@ -142,6 +142,6 @@ class AgentRepository implements UserInterface
 	public function listData()
 	{
 		return AgentListResource::collection(DB::table('agents')->join('users','users.id','=','agents.user_id')
-			->where('users.status',1)->orderby('users.fullname','asc')->select('users.fullname','agents.*')->get());
+			->where('users.status',1)->where('users.approve',1)->orderby('users.fullname','asc')->select('users.fullname','agents.*')->get());
 	}
 }

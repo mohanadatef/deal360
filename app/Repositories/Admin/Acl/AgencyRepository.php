@@ -23,7 +23,7 @@ class AgencyRepository implements UserInterface
 	
 	public function getData()
 	{
-		return $this->data->with('user.country','user.image')->paginate(25);
+		return $this->data->with('user')->paginate(25);
 	}
 	
 	public function storeData($request)
@@ -142,6 +142,6 @@ class AgencyRepository implements UserInterface
 	public function listData()
 	{
 		return AgencyListResource::collection(DB::table('agencies')->join('users','users.id','=','agencies.user_id')
-			->where('users.status',1)->orderby('users.fullname','asc')->select('users.fullname','agencies.*')->get());
+			->where('users.status',1)->where('users.approve',1)->orderby('users.fullname','asc')->select('users.fullname','agencies.*')->get());
 	}
 }

@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Resources\Admin\Acl\Company;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class CompanyListResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+	        'id' => $this->company_id,
+	        'user_id' => $this->id,
+	        'fullname' => $this->fullname,
+        ];
+    }
+}

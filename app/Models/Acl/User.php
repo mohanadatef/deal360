@@ -42,10 +42,15 @@ class User extends Authenticatable
     {
         return $query->whereStatus($status);
     }
-
-    public function scopeOrder($query,$order)
+    
+	public function scopeOrder($query,$order)
+	{
+		return $query->orderby('fullname',$order);
+	}
+    
+    public function scopeApprove($query,$approve)
     {
-        return $query->orderby('fullname',$order);
+        return $query->whereApprove($approve);
     }
 
     public function role()
@@ -65,7 +70,7 @@ class User extends Authenticatable
 
     public function agent()
     {
-        return $this->hasOne(Agent::Class);
+        return $this->hasOne(Agent::Class)->withTrashed();
     }
 
     public function forgotpassword()
@@ -109,18 +114,21 @@ class User extends Authenticatable
             $user->image()->delete();
 	        $user->agency()->delete();
 	        $user->developer()->delete();
+	        $user->agent()->delete();
         });
 
         static::restoring(function($user) {
             $user->image()->withTrashed()->restore();
 	        $user->agency()->withTrashed()->restore();
 	        $user->developer()->withTrashed()->restore();
+	        $user->agent()->withTrashed()->restore();
         });
 
         static::forceDeleted(function($user) {
             $user->image()->forceDelete();
 	        $user->agency()->forceDelete();
 	        $user->developer()->forceDelete();
+	        $user->agent()->forceDelete();
         });
     }
 }

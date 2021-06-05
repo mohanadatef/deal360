@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Acl\Agent\CreateRequest;
 use App\Http\Requests\Admin\Acl\Agent\EditRequest;
 use App\Repositories\Admin\Acl\AgentRepository;
+use App\Repositories\Admin\Acl\CompanyRepository;
 use App\Repositories\Admin\CoreData\CountryRepository;
 
 class AgentController extends Controller
@@ -56,9 +57,9 @@ class AgentController extends Controller
     public function edit($id)
     {
         $data = $this->agentRepository->showData($id);
-        $country = $this->countryRepository->listData();
+	    $country = $this->countryRepository->listData();
 	    $company = $this->companyRepository->listData();
-        return view(checkView('admin.acl.agent.edit'), compact('data',  'country','company'));
+	    return view(checkView('admin.acl.agent.edit'), compact('data',  'country','company'));
     }
 
     public function update(EditRequest $request, $id)

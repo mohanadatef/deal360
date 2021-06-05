@@ -168,5 +168,5 @@
     </div>
 @endsection
 @section('script_style')
-    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\EditRequest','#edit') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\Agency\EditRequest','#edit') !!}
 @endsection

@@ -23,7 +23,7 @@ class DeveloperRepository implements UserInterface
 	
 	public function getData()
 	{
-		return $this->data->with('user.country','user.image')->paginate(25);
+		return $this->data->with('user')->paginate(25);
 	}
 	
 	public function storeData($request)
@@ -142,6 +142,6 @@ class DeveloperRepository implements UserInterface
 	public function listData()
 	{
 		return DeveloperListResource::collection(DB::table('developers')->join('users','users.id','=','developers.user_id')
-			->where('users.status',1)->orderby('users.fullname','asc')->select('users.fullname','developers.*')->get());
+			->where('users.status',1)->where('users.approve',1)->orderby('users.fullname','asc')->select('users.fullname','developers.*')->get());
 	}
 }

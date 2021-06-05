@@ -37,6 +37,11 @@ class Developer extends Model
 			->where('language_id' ,languageId())->withTrashed();
 	}
 	
+	public function agent()
+	{
+		return $this->hasMany(Agent::class,'company_id')->withTrashed();
+	}
+	
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'user_id')->withTrashed();
@@ -46,14 +51,29 @@ class Developer extends Model
 		parent::boot();
 		static::deleting(function($developer) {
 			$developer->user->delete();
+			$developer->translation()->delete();
+			foreach($developer->agent as $agent)
+			{
+				$agent->delete();
+			}
 		});
 		
 		static::restoring(function($developer) {
 			$developer->user->withTrashed()->restore();
+			$developer->translation()->withTrashed()->restore();
+			foreach($developer->agent as $agent)
+			{
+				$agent->withTrashed()->restore();
+			}
 		});
 		
 		static::forceDeleted(function($developer) {
+			$developer->translation()->forceDelete();
 			$developer->user->forceDelete();
+			foreach($developer->agent as $agent)
+			{
+				$agent->forceDelete();
+			}
 		});
 	}
 }

@@ -56,4 +56,22 @@ class Agent extends Model
 	{
 		return $this->belongsTo(User::class, 'company_id')->withTrashed();
 	}
+	
+	public static function boot() {
+		parent::boot();
+		static::deleting(function($agent) {
+			$agent->user->delete();
+			$agent->translation()->delete();
+		});
+		
+		static::restoring(function($agent) {
+			$agent->user->withTrashed()->restore();
+			$agent->translation()->withTrashed()->restore();
+		});
+		
+		static::forceDeleted(function($agent) {
+			$agent->translation()->forceDelete();
+			$agent->user->forceDelete();
+		});
+	}
 }

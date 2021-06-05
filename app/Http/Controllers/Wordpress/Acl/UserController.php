@@ -66,7 +66,7 @@ class UserController extends Controller
                             'started_at' => empty($user['package_activation']) ? Carbon::now() : $user['package_activation']);
                         if (!empty($user['role_id'])) {
                             if ($user['role_id'] == 2) {
-                                $agent[] = array('user_id' => $count_user + $key + 1, 'agency_id' => 0, 'wp_agent_id' => $user['wp_user_id']);
+                                $agent[] = array('user_id' => $count_user + $key + 1, 'company_id' => 0, 'wp_agent_id' => $user['wp_user_id']);
                                 if (!empty($user['agent']['about_me'])) {
                                     foreach ($language as $lang) {
                                         $agent_translation[] = array('category_type' => Agent::class, 'category_id' => $count_user + $key + 1,
@@ -97,7 +97,7 @@ class UserController extends Controller
         foreach ($agency_agent as $agencyagent) {
             foreach ($agent as $key => $agentid) {
                 if ($agentid['wp_agent_id'] == $agencyagent['agent_id']) {
-                    $agent[] = array('user_id' => $agentid['user_id'], 'agency_id' => $agencyagent['agency_id'], 'wp_agent_id' => $agentid['wp_agent_id']);
+                    $agent[] = array('user_id' => $agentid['user_id'], 'company_id' => $agencyagent['agency_id'], 'wp_agent_id' => $agentid['wp_agent_id']);
                     unset($agent[$key]);
                 }
             }
