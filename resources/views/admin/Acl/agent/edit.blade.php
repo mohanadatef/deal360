@@ -90,7 +90,7 @@
                                             @foreach($company as $my)
                                                 <option value="{{$my->id}}" @if($data->company_id == $my->id) selected
                                                         @endif
-                                                        id="option-company-{{$my->id}}">{{$my->user ? $my->user->fullname : ""}}</option>
+                                                        id="option-company-{{$my->id}}">{{$my->fullname ? $my->fullname : ""}}</option>
                                             @endforeach
                                         </select>
                                     </div>

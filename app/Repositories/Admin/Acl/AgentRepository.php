@@ -30,7 +30,7 @@ class AgentRepository implements UserInterface
 	{
 		return DB::transaction(function() use ($request)
 		{
-			$request->request->add(['role_id'=>4]);
+			$request->request->add(['role_id'=>5]);
 			$user['user_id']=$this->userRepository->storeData($request)->id;
 			$data=$this->data->create(array_merge($request->all(),$user));
 			foreach(language() as $lang)

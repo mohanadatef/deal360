@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Acl\RoleController;
 use App\Http\Controllers\Admin\Acl\AgencyController;
 use App\Http\Controllers\Admin\Acl\DeveloperController;
 use App\Http\Controllers\Admin\Acl\AgentController;
+use App\Http\Controllers\Admin\Acl\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,4 +126,9 @@ Route::prefix('/developer')->group(function () {
 Route::prefix('/agent')->group(function () {
 	Route::get('/list', [AgentController::class, 'listIndex'])
 		->name('agent.list');
+});
+//company
+Route::prefix('/company')->group(function () {
+	Route::get('/list', [CompanyController::class, 'listIndex'])
+		->name('company.list');
 });

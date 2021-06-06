@@ -33,9 +33,9 @@ class CreateRequest extends FormRequest
 		{
 			if($lang->code == 'en')
 			{
-				$rules['address.'.$lang->code]=['required','string',Rule::unique('translations','value')
+				$rules['address.'.$lang->code]=['string',Rule::unique('translations','value')
 					->where('category_type',Developer::class)->where('key','address')->where('language_id',$lang->id)];
-				$rules['about_me.'.$lang->code]=['required','string',Rule::unique('translations','value')
+				$rules['about_me.'.$lang->code]=['string',Rule::unique('translations','value')
 					->where('category_type',Developer::class)->where('key','about_me')->where('language_id',$lang->id)];
 			}else
 			{

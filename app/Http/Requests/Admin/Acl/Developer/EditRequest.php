@@ -13,6 +13,7 @@ class EditRequest extends FormRequest
 	
 	public function __construct(DeveloperRepository $DeveloperRepository)
 	{
+		parent::__construct();
 		$this->developerRepository=$DeveloperRepository;
 	}
 	
@@ -40,11 +41,11 @@ class EditRequest extends FormRequest
 		        'twitter' =>'string|nullable','website'=>'string|nullable'];
 		foreach(language() as $lang)
 		{
-			$rules['address.'.$lang->code]=['required','string',
+			$rules['address.'.$lang->code]=['string',
 			                                Rule::unique('translations','value')->ignore($this->id,'category_id')
 				                                ->where('category_type',Developer::class)->where('key','address')
 				                                ->where('language_id',$lang->id)];
-			$rules['about_me.'.$lang->code]=['required','string',
+			$rules['about_me.'.$lang->code]=['string',
 			                                 Rule::unique('translations','value')->ignore($this->id,'category_id')
 				                                 ->where('category_type',Developer::class)->where('key','about_me')
 				                                 ->where('language_id',$lang->id)];

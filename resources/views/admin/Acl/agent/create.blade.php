@@ -42,7 +42,7 @@
                             <!-- /.card-header -->
                             <!-- form start -->
                             @include('errors.error')
-                            <form action="{{route('developer.store')}}" method="post" id="create" enctype="multipart/form-data">
+                            <form action="{{route('agent.store')}}" method="post" id="create" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group{{ $errors->has('fullname') ? ' is-invalid' : "" }}">
@@ -99,7 +99,7 @@
                                             <option value="0">{{trans('lang.Alone')}}</option>
                                             @foreach($company as $my)
                                                 <option value="{{$my->id}}"
-                                                        id="option-company-{{$my->id}}">{{$my->user ? $my->user->fullname : ""}}</option>
+                                                        id="option-company-{{$my->id}}">{{$my->fullname ? $my->fullname : ""}}</option>
                                             @endforeach
                                         </select>
                                     </div>

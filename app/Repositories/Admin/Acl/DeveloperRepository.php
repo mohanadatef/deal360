@@ -30,7 +30,7 @@ class DeveloperRepository implements UserInterface
 	{
 		return DB::transaction(function() use ($request)
 		{
-			$request->request->add(['role_id'=>5]);
+			$request->request->add(['role_id'=>6]);
 			$user['user_id']=$this->userRepository->storeData($request)->id;
 			$data=$this->data->create($user);
 			foreach(language() as $lang)

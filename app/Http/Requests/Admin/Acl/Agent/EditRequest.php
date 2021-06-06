@@ -10,12 +10,11 @@ use Illuminate\Validation\Rule;
 class EditRequest extends FormRequest
 {
 	private $agentRepository;
-	
 	public function __construct(AgentRepository $AgentRepository)
 	{
+		parent::__construct();
 		$this->agentRepository=$AgentRepository;
 	}
-	
 	/**
 	 * Determine if the user is authorized to make this request.
 	 * @return bool
@@ -31,6 +30,7 @@ class EditRequest extends FormRequest
 	 */
 	public function rules()
 	{
+		//$agent=Agent::with('user','about_me','address','company')->findorFail($this->id)->user_id;
 		$agent=$this->agentRepository->showData($this->id)->user_id;
 		$rules=['fullname'=>'required|string|unique:users,fullname,'.$agent.',id',
 		        'email' =>'required|email|unique:users,email,'.$agent.',id',
@@ -45,11 +45,11 @@ class EditRequest extends FormRequest
 		        'company_id'=>'required'];
 		foreach(language() as $lang)
 		{
-			$rules['address.'.$lang->code]=['required','string',
+			$rules['address.'.$lang->code]=['string',
 			                                Rule::unique('translations','value')->ignore($this->id,'category_id')
 				                                ->where('category_type',Agent::class)->where('key','address')
 				                                ->where('language_id',$lang->id)];
-			$rules['about_me.'.$lang->code]=['required','string',
+			$rules['about_me.'.$lang->code]=['string',
 			                                 Rule::unique('translations','value')->ignore($this->id,'category_id')
 				                                 ->where('category_type',Agent::class)->where('key','about_me')
 				                                 ->where('language_id',$lang->id)];
