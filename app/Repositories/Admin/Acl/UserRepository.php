@@ -29,9 +29,15 @@ class UserRepository implements AdminInterface
 	{
 		return DB::transaction(function() use ($request)
 		{
-			$data_auth['approve']=1;
-			$data_auth['email_verified_at']=Carbon::now();
-			$data=$this->data->create(array_merge($request->toarray(),$data_auth));
+			if(!isset($request->approve))
+			{
+				$data_auth['approve']=1;
+				$data_auth['email_verified_at']=Carbon::now();
+				$data=$this->data->create(array_merge($request->toarray(),$data_auth));
+			}else
+			{
+				$data=$this->data->create($request->toarray());
+			}
 			$imageName=time().$request->image->getClientOriginalname();
 			$image=$data->image()->create(['image'=>$imageName]);
 			!$image->image?false:$this->uploadImage($request->image,'user',$imageName);

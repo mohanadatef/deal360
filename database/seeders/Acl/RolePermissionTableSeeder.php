@@ -21,11 +21,11 @@ class RolePermissionTableSeeder extends Seeder
         RolePermission::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $role = Role::wherebetween('id',[1,2])->get();
-        $permission = Permission::wherebetween('id',[1,7])->get();
+        $permission = Permission::wherebetween('id',[1,8])->get();
         foreach ($permission as $value) {
             RolePermission::create(['role_id' => 1, 'permission_id' => $value->id]);
         }
-        $permission = Permission::wherenotbetween('id',[1,7])->get();
+        $permission = Permission::wherenotbetween('id',[1,8])->get();
         foreach ($role as $values) {
             foreach ($permission as $value) {
                 RolePermission::create(['role_id' => $values->id, 'permission_id' => $value->id]);

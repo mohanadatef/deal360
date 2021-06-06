@@ -60,6 +60,11 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'permission-remove',
                 'title' => ['en' => 'permission remove', 'ar' => 'حذف اذنات'],
             ],
+            //permission for super admin
+            [
+            	'name'=>'clear-cache',
+	            'title' => ['en' => 'clear cache', 'ar' => 'تنظيف الكاش'],
+            ],
             //dashboard
             [
                 'name' => 'dashboard-show',
@@ -152,6 +157,10 @@ class PermissionTableSeeder extends Seeder
 	            'name' => 'agency-forgot-password',
 	            'title' => ['en' => 'agency forgot password', 'ar' => 'تغير كلمه السر الشركه'],
             ],
+            [
+	            'name' => 'agency-approve',
+	            'title' => ['en' => 'agency approve', 'ar' => 'تاكيد الشركه'],
+            ],
             //developer
             [
 	            'name' => 'developer-list',
@@ -193,6 +202,10 @@ class PermissionTableSeeder extends Seeder
 	            'name' => 'developer-forgot-password',
 	            'title' => ['en' => 'developer forgot password', 'ar' => 'تغير كلمه السر المطور'],
             ],
+            [
+	            'name' => 'developer-approve',
+	            'title' => ['en' => 'developer approve', 'ar' => 'تاكيد المطور'],
+            ],
             //agent
             [
 	            'name' => 'agent-list',
@@ -233,6 +246,10 @@ class PermissionTableSeeder extends Seeder
             [
 	            'name' => 'agent-forgot-password',
 	            'title' => ['en' => 'agent forgot password', 'ar' => 'تغير كلمه السر العامل'],
+            ],
+            [
+	            'name' => 'agent-approve',
+	            'title' => ['en' => 'agent approve', 'ar' => 'تاكيد العامل'],
             ],
             //role
             [

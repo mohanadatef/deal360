@@ -217,6 +217,7 @@ Route::group(['middleware'=> /*'admin',*/ 'auth','language','permission:dashboar
 	Route::prefix('/agency')->name('agency.')->group(function()
 	{
 		Route::get('/change_status/{id}',[AgencyController::class,'changeStatus'])->name('status');
+		Route::get('/change_approve/{id}',[AgencyController::class,'changeApprove'])->name('approve');
 		Route::get('/delete',[AgencyController::class,'destroyIndex'])->name('delete_index');
 		Route::get('/restore/{id}',[AgencyController::class,'restore'])->name('restore');
 		Route::get('/remove/{id}',[AgencyController::class,'remove'])->name('remove');
@@ -227,6 +228,7 @@ Route::group(['middleware'=> /*'admin',*/ 'auth','language','permission:dashboar
 	Route::prefix('/developer')->name('developer.')->group(function()
 	{
 		Route::get('/change_status/{id}',[DeveloperController::class,'changeStatus'])->name('status');
+		Route::get('/change_approve/{id}',[DeveloperController::class,'changeApprove'])->name('approve');
 		Route::get('/delete',[DeveloperController::class,'destroyIndex'])->name('delete_index');
 		Route::get('/restore/{id}',[DeveloperController::class,'restore'])->name('restore');
 		Route::get('/remove/{id}',[DeveloperController::class,'remove'])->name('remove');
@@ -237,6 +239,7 @@ Route::group(['middleware'=> /*'admin',*/ 'auth','language','permission:dashboar
 	Route::prefix('/agent')->name('agent.')->group(function()
 	{
 		Route::get('/change_status/{id}',[AgentController::class,'changeStatus'])->name('status');
+		Route::get('/change_approve/{id}',[AgentController::class,'changeApprove'])->name('approve');
 		Route::get('/delete',[AgentController::class,'destroyIndex'])->name('delete_index');
 		Route::get('/restore/{id}',[AgentController::class,'restore'])->name('restore');
 		Route::get('/remove/{id}',[AgentController::class,'remove'])->name('remove');

@@ -66,6 +66,11 @@ class AgencyController extends Controller
     {
         $this->agencyRepository->updateStatusData($id);
     }
+    
+    public function changeApprove($id)
+    {
+        $this->agencyRepository->updateApproveData($id);
+    }
 
     public function destroy($id)
     {

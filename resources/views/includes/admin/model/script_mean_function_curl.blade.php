@@ -121,6 +121,24 @@
         });
     }
 
+    /*change approve for item*/
+    function changeApprove(data) {
+        url = "{{url('admin/model/change_approve/id')}}";
+        url = url.replace('id', data);
+        url = url.replace('model', model);
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function () {
+                $(`#approve-${data}:checkbox:checked`).length == 1 ? toastr.info('{{trans('lang.Approve')}}') : toastr.warning('{{trans('lang.An_Approve')}}');
+            }, error: function (res) {
+                for (let err in res.responseJSON.errors) {
+                    toastr.error(res.responseJSON.errors[err]);
+                }
+            }
+        });
+    }
+
     /*delete item*/
     function deleteItem() {
         url = "{{url('admin/model/id')}}";

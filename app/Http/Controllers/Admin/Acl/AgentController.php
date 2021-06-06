@@ -72,6 +72,11 @@ class AgentController extends Controller
     {
         $this->agentRepository->updateStatusData($id);
     }
+    
+	public function changeApprove($id)
+	{
+		$this->agentRepository->updateApproveData($id);
+	}
 
     public function destroy($id)
     {

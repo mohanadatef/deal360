@@ -66,6 +66,11 @@ class DeveloperController extends Controller
     {
         $this->developerRepository->updateStatusData($id);
     }
+	
+	public function changeApprove($id)
+	{
+		$this->developerRepository->updateApproveData($id);
+	}
 
     public function destroy($id)
     {

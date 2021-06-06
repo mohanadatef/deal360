@@ -80,6 +80,6 @@ class PermissionRepository implements PermissionInterface
 
     public function listData()
     {
-        return PermissionListResource::collection($this->getData()->wherenotbetween('id',[1,7]));
+        return PermissionListResource::collection($this->getData()->wherenotbetween('id',[1,8]));
     }
 }

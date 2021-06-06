@@ -53,6 +53,9 @@
                                             @permission('agency-status')
                                             <th>{{trans('lang.Status')}}</th>
                                             @endpermission
+                                            @permission('agency-approve')
+                                            <th>{{trans('lang.Approve')}}</th>
+                                            @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
                                         </thead>
@@ -70,6 +73,15 @@
                                                     <input onfocus="changeStatus({{$data->user_id}})" type="checkbox"
                                                            name="status" @if($data->user->status) checked
                                                            @endif id="status-{{$data->id}}"
+                                                           data-bootstrap-switch data-off-color="danger"
+                                                           data-on-color="success">
+                                                </td>
+                                                @endpermission
+                                                @permission('agency-approve')
+                                                <td>
+                                                    <input onfocus="changeApprove({{$data->user_id}})" type="checkbox"
+                                                           name="status" @if($data->user->approve) checked
+                                                           @endif id="approve-{{$data->id}}"
                                                            data-bootstrap-switch data-off-color="danger"
                                                            data-on-color="success">
                                                 </td>
@@ -107,6 +119,9 @@
                                             <th>{{trans('lang.Image')}}</th>
                                             @permission('agency-status')
                                             <th>{{trans('lang.Status')}}</th>
+                                            @endpermission
+                                            @permission('agency-approve')
+                                            <th>{{trans('lang.Approve')}}</th>
                                             @endpermission
                                             <th>{{trans('lang.Controller')}}</th>
                                         </tr>
