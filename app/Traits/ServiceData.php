@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+use App\Events\EmailVerifiedEvent;
 use App\Mail\EmailVerifiedMail;
 
 trait ServiceData
@@ -21,11 +22,7 @@ trait ServiceData
             $data->approve = 0;
         } else{
             $data->approve = 1;
-	        $details = [
-		        'title' => 'Mail for verify',
-		        'body' =>  'dddd',
-	        ];
-	        \Mail::to($data->email)->send(new EmailVerifiedMail($details));
+	       event(new EmailVerifiedEvent($data));
         }
         $data->update();
         
