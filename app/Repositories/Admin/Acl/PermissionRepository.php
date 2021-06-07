@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\Acl\Permission\PermissionListResource;
 use App\Http\Resources\Admin\Acl\Permission\PermissionResource;
 use App\Interfaces\Admin\Acl\PermissionInterface;
 use App\Models\Acl\Permission;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class PermissionRepository implements PermissionInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

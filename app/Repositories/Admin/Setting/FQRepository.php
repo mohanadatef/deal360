@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\Setting\FQ\FQListResource;
 use App\Http\Resources\Admin\Setting\FQ\FQResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\Setting\FQ;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class FQRepository implements MeanInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

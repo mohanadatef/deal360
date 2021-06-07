@@ -6,13 +6,13 @@ use App\Http\Resources\Admin\CoreData\Type\TypeListResource;
 use App\Http\Resources\Admin\CoreData\Type\TypeResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Type;
-use App\Traits\Image;
-use App\Traits\ServiceData;
+use App\Traits\ImageTrait;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class TypeRepository implements MeanInterface
 {
-    use ServiceData,Image;
+    use ServiceDataTrait,ImageTrait;
 
     protected $data;
 

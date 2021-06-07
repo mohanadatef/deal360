@@ -27,10 +27,6 @@ class EmailVerifiedListener
      */
     public function handle($event)
     {
-        $details = [
-        'title' => 'Mail for verify',
-        'body' =>  'dddd',
-    ];
-        Mail::to($event->data->email)->send(new EmailVerifiedMail($details));
+        Mail::to($event->data->email)->send(new EmailVerifiedMail($event->details));
     }
 }

@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Wordpress\Acl;
 use App\Http\Controllers\Controller;
 use App\Models\Acl\Agent;
 use App\Models\Acl\User;
-use App\Traits\Image;
+use App\Traits\ImageTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
-    use Image;
+    use ImageTrait;
     public function index($return)
     {
         $response = Http::get('https://crm.deal360.ae/backend/api/fillUsers')->json();

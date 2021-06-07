@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\Rejoin\RejoinListResource;
 use App\Http\Resources\Admin\CoreData\Rejoin\RejoinResource;
 use App\Interfaces\Admin\CoreData\RejoinInterface;
 use App\Models\CoreData\Rejoin;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class RejoinRepository implements RejoinInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

@@ -6,13 +6,13 @@ use App\Http\Resources\Admin\CoreData\Category\CategoryListResource;
 use App\Http\Resources\Admin\CoreData\Category\CategoryResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Category;
-use App\Traits\Image;
-use App\Traits\ServiceData;
+use App\Traits\ImageTrait;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class CategoryRepository implements MeanInterface
 {
-    use ServiceData,Image;
+    use ServiceDataTrait,ImageTrait;
 
     protected $data;
 

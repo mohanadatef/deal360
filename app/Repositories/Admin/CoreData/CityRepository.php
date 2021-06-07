@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\City\CityListResource;
 use App\Http\Resources\Admin\CoreData\City\CityResource;
 use App\Interfaces\Admin\CoreData\CityInterface;
 use App\Models\CoreData\City;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class CityRepository implements CityInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

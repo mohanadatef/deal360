@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\Setting\Meta\MetaListResource;
 use App\Http\Resources\Admin\Setting\Meta\MetaResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\Setting\Meta;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class MetaRepository implements MeanInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

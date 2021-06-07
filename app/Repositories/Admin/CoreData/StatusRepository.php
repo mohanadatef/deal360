@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\Status\StatusListResource;
 use App\Http\Resources\Admin\CoreData\Status\StatusResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Status;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class StatusRepository implements MeanInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

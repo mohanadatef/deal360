@@ -4,14 +4,14 @@ namespace App\Repositories\Admin\Acl;
 
 use App\Interfaces\Admin\Acl\AdminInterface;
 use App\Models\Acl\User;
-use App\Traits\Image;
-use App\Traits\ServiceData;
+use App\Traits\ImageTrait;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository implements AdminInterface
 {
-	use ServiceData,Image;
+	use ServiceDataTrait,ImageTrait;
 	
 	protected $data;
 	

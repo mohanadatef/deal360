@@ -5,13 +5,13 @@ namespace App\Repositories\Admin\Acl;
 use App\Http\Resources\Admin\Acl\Agent\AgentListResource;
 use App\Interfaces\Admin\Acl\UserInterface;
 use App\Models\Acl\Agent;
-use App\Traits\Image;
-use App\Traits\ServiceData;
+use App\Traits\ImageTrait;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class AgentRepository implements UserInterface
 {
-	use ServiceData,Image;
+	use ServiceDataTrait,ImageTrait;
 	
 	protected $data,$userRepository;
 	

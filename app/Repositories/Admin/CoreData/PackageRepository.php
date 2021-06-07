@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\Package\PackageListResource;
 use App\Http\Resources\Admin\CoreData\Package\PackageResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Package;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class PackageRepository implements MeanInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

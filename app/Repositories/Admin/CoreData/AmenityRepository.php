@@ -6,13 +6,13 @@ use App\Http\Resources\Admin\CoreData\Amenity\AmenityListResource;
 use App\Http\Resources\Admin\CoreData\Amenity\AmenityResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Amenity;
-use App\Traits\Image;
-use App\Traits\ServiceData;
+use App\Traits\ImageTrait;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class AmenityRepository implements MeanInterface
 {
-    use ServiceData,Image;
+    use ServiceDataTrait,ImageTrait;
 
     protected $data;
 

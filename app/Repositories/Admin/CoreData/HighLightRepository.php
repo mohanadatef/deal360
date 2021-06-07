@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\HighLight\HighLightListResource;
 use App\Http\Resources\Admin\CoreData\HighLight\HighLightResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\HighLight;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class HighLightRepository implements MeanInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

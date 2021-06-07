@@ -6,12 +6,12 @@ use App\Http\Resources\Admin\CoreData\Currency\CurrencyListResource;
 use App\Http\Resources\Admin\CoreData\Currency\CurrencyResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Currency;
-use App\Traits\ServiceData;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class CurrencyRepository implements MeanInterface
 {
-    use ServiceData;
+    use ServiceDataTrait;
 
     protected $data;
 

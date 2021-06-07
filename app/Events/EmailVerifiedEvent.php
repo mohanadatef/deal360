@@ -14,17 +14,17 @@ class EmailVerifiedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     
-    public $data;
+    public $data, $details;
     
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data,$details)
     {
-        //
         $this->data=$data;
+        $this->details=$details;
     }
 
     /**

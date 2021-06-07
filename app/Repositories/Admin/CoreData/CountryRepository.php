@@ -6,13 +6,13 @@ use App\Http\Resources\Admin\CoreData\Country\CountryListResource;
 use App\Http\Resources\Admin\CoreData\Country\CountryResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Country;
-use App\Traits\Image;
-use App\Traits\ServiceData;
+use App\Traits\ImageTrait;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class CountryRepository implements MeanInterface
 {
-    use ServiceData,Image;
+    use ServiceDataTrait,ImageTrait;
 
     protected $data;
 
