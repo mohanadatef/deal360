@@ -44,10 +44,9 @@
         //$name => permission name we want check it
         function permissionShow($name)
         {
-            $permission=DB::table('permissions')
+            return DB::table('permissions')
                 ->join('role_permissions','role_permissions.permission_id','=','permissions.id')
                 ->where('role_permissions.role_id',Auth::user()->role_id)->where('permissions.name',$name)->count();
-            return $permission?true:false;
         }
     }
     //change locale language in app function

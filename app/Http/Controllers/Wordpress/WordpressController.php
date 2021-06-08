@@ -10,15 +10,16 @@ use App\Http\Controllers\Wordpress\CoreData\CityController;
 use App\Http\Controllers\Wordpress\CoreData\HighLightController;
 use App\Http\Controllers\Wordpress\CoreData\PackageController;
 use App\Http\Controllers\Wordpress\CoreData\TypeController;
+use App\Http\Controllers\Wordpress\Property\PropertyController;
 use Illuminate\Support\Facades\Http;
 
 class WordpressController extends Controller
 {
-    private $amenity, $category, $type, $city, $high_light, $package, $user;
+    private $amenity, $category, $type, $city, $high_light, $package, $user,$property;
 
     public function __construct(AmenityController $AmenityController, CategoryController $CategoryController,
                                 TypeController $TypeController, CityController $CityController, UserController $UserController,
-                                HighLightController $HighLightController, PackageController $PackageController)
+                                HighLightController $HighLightController, PackageController $PackageController,PropertyController $PropertyController)
     {
         $this->amenity = $AmenityController;
         $this->category = $CategoryController;
@@ -27,6 +28,7 @@ class WordpressController extends Controller
         $this->high_light = $HighLightController;
         $this->package = $PackageController;
         $this->user = $UserController;
+        $this->property = $PropertyController;
     }
 
     public function index($return)
@@ -52,6 +54,10 @@ class WordpressController extends Controller
         executionTime();
         $this->user->store($response);
         executionTime();
+        $link='http://crm.deal360.ae/backend/api/fillProperty?num=50&page=1';
+        $response=Http::get($link)->json();
+        executionTime();
+        $this->property->store($response);
         if ($return == 1) {
             return redirect(route('admin.dashboard'));
         }

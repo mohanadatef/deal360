@@ -4,7 +4,7 @@ namespace Database\Seeders\Acl;
 
 use App\Models\Acl\Role;
 use App\Models\Acl\User;
-use App\Traits\Image;
+use App\Traits\ImageTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
-    use Image;
+    use ImageTrait;
     /**
      * Run the database seeds.
      *

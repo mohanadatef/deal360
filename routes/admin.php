@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\CoreData\HighLightController;
 use App\Http\Controllers\Admin\Setting\MetaController;
 use App\Http\Controllers\Admin\Setting\FQController;
 
-Route::group(['middleware'=> /*'admin',*/ 'auth','language','permission:dashboard-show'],function()
+Route::group(['middleware'=> 'admin', 'auth','language','permission:dashboard-show'],function()
 {
 	/*dashboard list*/
 	Route::get('/',[HomeController::class,'index'])->name('admin.dashboard');

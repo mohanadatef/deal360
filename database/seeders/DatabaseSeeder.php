@@ -7,9 +7,12 @@ use Database\Seeders\Acl\PermissionTableSeeder;
 use Database\Seeders\Acl\RolePermissionTableSeeder;
 use Database\Seeders\Acl\RoleTableSeeder;
 use Database\Seeders\Acl\UserTableSeeder;
+use Database\Seeders\CoreData\CityTableSeeder;
 use Database\Seeders\CoreData\CountryTableSeeder;
 use Database\Seeders\CoreData\CurrencyTableSeeder;
 use Database\Seeders\CoreData\LanguageTableSeeder;
+use Database\Seeders\CoreData\RejoinTableSeeder;
+use Database\Seeders\CoreData\StatusTableSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,6 +38,11 @@ class DatabaseSeeder extends Seeder
         executionTime();
         $this->call(CountryTableSeeder::class);
         $this->call(CurrencyTableSeeder::class);
+        executionTime();
+        $this->call(CityTableSeeder::class);
+        $this->call(RejoinTableSeeder::class);
+        executionTime();
+        $this->call(StatusTableSeeder::class);
         $this->call(UserTableSeeder::class);
         executionTime();
         $this->wordpress->index(0);

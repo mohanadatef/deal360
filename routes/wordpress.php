@@ -9,6 +9,7 @@ use App\Http\Controllers\Wordpress\CoreData\TypeController;
 use App\Http\Controllers\Wordpress\CoreData\CityController;
 use App\Http\Controllers\Wordpress\CoreData\HighLightController;
 use App\Http\Controllers\Wordpress\Acl\UserController;
+use App\Http\Controllers\Wordpress\Property\PropertyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +29,4 @@ Route::get('type/{return}', [TypeController::class, 'index'])->name('wordpress.t
 Route::get('city/{return}', [CityController::class, 'index'])->name('wordpress.city.index');
 Route::get('high_light/{return}', [HighLightController::class, 'index'])->name('wordpress.high_light.index');
 Route::get('user/{return}', [UserController::class, 'index'])->name('wordpress.user.index');
+Route::get('property/{return}', [PropertyController::class, 'index'])->name('wordpress.user.index');

@@ -33,6 +33,8 @@ class CreatePropertiesTable extends Migration {
             $table->integer('area')->default('0');
             $table->text('latitude');
             $table->text('longitude');
+            $table->text('virtual_tour')->nullable();
+            $table->text('youtube_id')->nullable();
             $table->date('available_from')->default(\Carbon\Carbon::now())->nullable();
             $table->integer('floor_number')->default('0');
             $table->string('type_date',255)->default('year')->nullable();

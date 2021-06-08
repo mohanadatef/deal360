@@ -19,10 +19,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Property extends Model
 {
     protected $fillable = [
-        'status','order','user_id','country_id','city_id','rejoin_id','status_id','type_id','category_id',
-        'price','size','room','bedroom','bathroom','bathroom','latitude','longitude','order','high_light_id'
+        'status','order','user_id','country_id','city_id','rejoin_id','status_id','type_id','category_id','virtual_tour','available_from',
+        'price','size','lot_size','room','bedroom','bathroom','garage','bathroom','latitude','longitude','order','high_light_id','youtube_id'
     ];
-    protected $table = 'types';
+    protected $table = 'properties';
     public $timestamps = true;
 
     use SoftDeletes;
