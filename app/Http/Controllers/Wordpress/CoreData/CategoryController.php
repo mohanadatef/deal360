@@ -29,7 +29,9 @@ class CategoryController extends Controller
         $language = language();
         $wp_categories_id = DB::table('categories')->pluck('wp_category_id', 'wp_category_id')->toarray();
         foreach ($response['data']['property_category'] as $key => $category) {
+            executionTime();
             if (!in_array($category['id'], $wp_categories_id)) {
+                executionTime();
                 $data_category[] = array('id' => $count_category + $key + 1,
                     'order' => $count_category + $key + 1,
                     'wp_category_id' => $category['id']);

@@ -29,7 +29,9 @@ class HighLightController extends Controller
         $language = language();
         $wp_high_lights_id = DB::table('high_lights')->pluck('wp_high_light_id', 'wp_high_light_id')->toarray();
         foreach ($response['data']['property_status'] as $key => $high_light) {
+            executionTime();
             if (!in_array($high_light['id'], $wp_high_lights_id)) {
+                executionTime();
                 $data_high_light[] = array('id' => $count_high_light + $key + 1,
                     'order' => $count_high_light + $key + 1,
                     'wp_high_light_id' => $high_light['id']);

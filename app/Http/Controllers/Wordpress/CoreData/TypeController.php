@@ -29,7 +29,9 @@ class TypeController extends Controller
         $language = language();
         $wp_types_id = DB::table('types')->pluck('wp_type_id', 'wp_type_id')->toarray();
         foreach ($response['data']['property_action_category'] as $key => $type) {
+            executionTime();
             if (!in_array($type['id'], $wp_types_id)) {
+                executionTime();
                 $data_type[] = array('id' => $count_type + $key + 1,
                     'order' => $count_type + $key + 1,
                     'wp_type_id' => $type['id']);

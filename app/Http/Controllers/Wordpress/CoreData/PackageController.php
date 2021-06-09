@@ -33,7 +33,9 @@ class PackageController extends Controller
             ->where('language_id', languageId())->where('key', 'title')
             ->pluck('value', 'category_id')->toarray();
         foreach ($response['data'] as $key => $package) {
+            executionTime();
             if (!in_array($package['wp_packages_id'], $wp_packages_id)) {
+                executionTime();
                 $data_package[] = array('id' => $count_package + $key + 1,
                     'count_listing' => !empty($package['pack_listings']) ? $package['pack_listings'] : "0",
                     'image_included' => !empty($package['pack_image_included']) ? $package['pack_image_included'] : "0",

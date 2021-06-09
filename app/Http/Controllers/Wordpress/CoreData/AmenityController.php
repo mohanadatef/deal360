@@ -29,7 +29,9 @@ class AmenityController extends Controller
         $language = language();
         $wp_amenities_id = DB::table('amenities')->pluck('wp_amenity_id', 'wp_amenity_id')->toarray();
         foreach ($response['data']['property_features'] as $key => $amenity) {
+            executionTime();
             if (!in_array($amenity['id'], $wp_amenities_id)) {
+                executionTime();
                 $data_amenity[] = array('id' => $count_amenity + $key + 1,
                     'order' => $count_amenity + $key + 1,
                     'wp_amenity_id' => $amenity['id']);

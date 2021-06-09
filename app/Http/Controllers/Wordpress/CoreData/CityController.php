@@ -29,7 +29,9 @@ class CityController extends Controller
         $language = language();
         $wp_cities_id = DB::table('cities')->pluck('wp_city_id', 'wp_city_id')->toarray();
         foreach ($response['data']['property_city'] as $key => $city) {
+            executionTime();
             if (!in_array($city['id'], $wp_cities_id)) {
+                executionTime();
                 $data_city[] = array('id' => $count_city + $key + 1,
                     'order' => $count_city + $key + 1,
                     'country_id' => 1,
