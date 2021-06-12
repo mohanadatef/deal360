@@ -28,13 +28,10 @@ class Property extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-
-    public function translation($key)
+    
+    public function translation()
     {
-        return $this->morphOne(Translation::class, 'translation')
-            ->where('language_id',languageId())
-            ->where('key',$key)
-            ->select('value as'.$key);
+        return $this->morphMany(Translation::class, 'category')->withTrashed();
     }
 
     public function image()
