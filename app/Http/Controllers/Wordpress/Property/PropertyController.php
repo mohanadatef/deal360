@@ -39,7 +39,6 @@
             $count_property=empty($count_property)?0:$count_property->id;
             $data_property=array();
             $data_translation=array();
-            $data_translations=array();
             $property_image=array();
             $property_image_plan=array();
             $language=language();
@@ -244,17 +243,18 @@
                                             executionTime();
                                             $image_plan[]=array('id'=>$id_plan,'image_url'=>$property_plan['image']);
                                         }
-                                       
+                                        foreach($language as $lang)
+                                        {
                                             executionTime();
-                                            $data_translations[]=array('category_type'=>PropertyFloorPlan::class,
+                                            $data_translation[]=array('category_type'=>PropertyFloorPlan::class,
                                                                       'category_id'  =>$id_plan,'key'=>'title',
-                                                                      'value'        =>!empty($property['title'])?$property['title']:" ",
-                                                                      'language_id'  =>$language_id);
-                                            $data_translations[]=array('category_type'=>PropertyFloorPlan::class,
+                                                                      'value'        =>!empty($property['title'][$lang->code])?$property['title'][$lang->code]:" ",
+                                                                      'language_id'  =>$lang->id);
+                                            $data_translation[]=array('category_type'=>PropertyFloorPlan::class,
                                                                       'category_id'  =>$id_plan,'key'=>'description',
-                                                                      'value'        =>!empty($property['description'])?$property['description']:" ",
-                                                                      'language_id'  =>$language_id);
-                                        
+                                                                      'value'        =>!empty($property['description'][$lang->code])?$property['description'][$lang->code]:" ",
+                                                                      'language_id'  =>$lang->id);
+                                        }
                                     }
                                 }
                             }
@@ -266,7 +266,7 @@
                 executionTime();
             }
             executionTime();
-            DB::transaction(function() use ($data_property,$data_translation,$data_translations,$image,$photographer,$amenity_property,$floor_plan,$image_plan,$property_image,$property_image_plan)
+            DB::transaction(function() use ($data_property,$data_translation,$image,$photographer,$amenity_property,$floor_plan,$image_plan,$property_image,$property_image_plan)
             {
                 DB::table('properties')->insert($data_property);
                 executionTime();
@@ -277,8 +277,6 @@
                 DB::table('property_amenities')->insert($amenity_property);
                 executionTime();
                 DB::table('translations')->insert($data_translation);
-                executionTime();
-                DB::table('translations')->insert($data_translations);//error string to array
                 executionTime();
                 foreach($image as $im)
                 {

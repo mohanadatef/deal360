@@ -14,7 +14,7 @@ class CreateImagesTable extends Migration {
             $table->collation = 'utf8_general_ci';
 			$table->increments('id');
 			$table->morphs('category');
-			$table->text('image');
+			$table->text('image')->index();
 			$table->timestamps();
 			$table->softDeletes();
 		});

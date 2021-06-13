@@ -14,8 +14,8 @@ class CreateTranslationsTable extends Migration {
             $table->collation = 'utf8_general_ci';
 			$table->increments('id');
 			$table->morphs('category');
-			$table->text('key');
-			$table->text('value');
+			$table->text('key')->index();
+			$table->longText('value')->index();
 			$table->integer('language_id')->unsigned()->index();
 			$table->timestamps();
 			$table->softDeletes();

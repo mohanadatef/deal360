@@ -15,12 +15,12 @@ class CreatePropertyPhotographicInformationsTable extends Migration {
 			$table->increments('id');
             $table->integer('property_id')->unsigned()->index();
             $table->integer('user_id')->unsigned()->index();
-            $table->text('number');
-            $table->text('name');
-            $table->date('date')->default(\Carbon\Carbon::now());
-            $table->time('time')->default(\Carbon\Carbon::now());
-            $table->text('address');
-            $table->text('notes');
+            $table->text('number')->nullable();
+            $table->text('name')->nullable();
+            $table->date('date')->default(\Carbon\Carbon::now())->nullable();
+            $table->time('time')->default(\Carbon\Carbon::now())->nullable();
+            $table->text('address')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
 			$table->softDeletes();
 		});
