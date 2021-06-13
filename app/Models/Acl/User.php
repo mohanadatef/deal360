@@ -8,15 +8,15 @@ use App\Models\Image;
 use App\Models\Property\Property;
 use App\Models\Property\Review;
 use App\Models\View;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable,SoftDeletes;
+    use HasApiTokens,HasFactory, Notifiable,SoftDeletes;
 
     protected $fillable = [
         'username','email','password','token','phone','status','approve','gender','dob',
