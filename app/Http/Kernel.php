@@ -44,6 +44,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\LangApiMiddelware::class,
         ],
     ];
 
@@ -66,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdminMiddelware::class,
         'language' => \App\Http\Middleware\LangMiddelware::class,
+        'language_api' => \App\Http\Middleware\LangApiMiddelware::class,
         'permission' => \App\Http\Middleware\PermissionMiddelware::class,
     ];
 }

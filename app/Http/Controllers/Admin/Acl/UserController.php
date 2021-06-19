@@ -14,7 +14,7 @@ class UserController extends Controller
 	private $userRepository;
 	private $roleRepository;
 	private $countryRepository;
-	
+
 	public function __construct(UserRepository $UserRepository,RoleRepository $RoleRepository,CountryRepository $CountryRepository)
 	{
 		$this->userRepository=$UserRepository;
@@ -30,7 +30,7 @@ class UserController extends Controller
 		$this->middleware('permission:user-restore')->only('restore');
 		$this->middleware('permission:user-remove')->only('remove');
 	}
-	
+
 	public function index()
 	{
 		$datas=$this->userRepository->getData();
@@ -38,20 +38,20 @@ class UserController extends Controller
 		            'url_page'   =>url('admin/user?page=')];
 		return view(checkView('admin.acl.user.index'),compact('datas','paginator'));
 	}
-	
+
 	public function create()
 	{
 		$role=$this->roleRepository->listData();
 		$country=$this->countryRepository->listData();
 		return view(checkView('admin.acl.user.create'),compact('role','country'));
 	}
-	
+
 	public function store(CreateRequest $request)
 	{
 		$this->userRepository->storeData($request);
 		return redirect(route('user.index'))->with(trans('Done'));
 	}
-	
+
 	public function edit($id)
 	{
 		$role=$this->roleRepository->listData();
@@ -59,29 +59,29 @@ class UserController extends Controller
 		$country=$this->countryRepository->listData();
 		return view(checkView('admin.acl.user.edit'),compact('data','role','country'));
 	}
-	
+
 	public function update(EditRequest $request,$id)
 	{
 		$this->userRepository->updateData($request,$id);
 		return redirect(route('user.index'))->with(trans('Done'));
 	}
-	
+
 	public function changeStatus($id)
 	{
 		$this->userRepository->updateStatusData($id);
 	}
-	
+
 	public function destroy($id)
 	{
 		$this->userRepository->deleteData($id);
 	}
-	
+
 	public function remove($id)
 	{
 		;
 		$this->userRepository->removeData($id);
 	}
-	
+
 	public function destroyIndex()
 	{
 		$datas=$this->userRepository->getDataDelete();
@@ -89,7 +89,7 @@ class UserController extends Controller
 		            'url_page'   =>url('admin/user?page=')];
 		return view(checkView('admin.acl.user.destroy'),compact('datas','paginator'));
 	}
-	
+
 	public function restore($id)
 	{
 		$this->userRepository->restoreData($id);
