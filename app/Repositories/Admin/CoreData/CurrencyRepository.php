@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Currency\CurrencyListResource;
-use App\Http\Resources\Admin\CoreData\Currency\CurrencyResource;
+use App\Http\Resources\CoreData\Currency\CurrencyListResource;
+use App\Http\Resources\CoreData\Currency\CurrencyResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Currency;
 use App\Traits\ServiceDataTrait;

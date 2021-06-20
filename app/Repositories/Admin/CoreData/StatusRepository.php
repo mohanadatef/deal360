@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Status\StatusListResource;
-use App\Http\Resources\Admin\CoreData\Status\StatusResource;
+use App\Http\Resources\CoreData\Status\StatusListResource;
+use App\Http\Resources\CoreData\Status\StatusResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Status;
 use App\Traits\ServiceDataTrait;

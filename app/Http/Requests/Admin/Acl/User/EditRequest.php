@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Admin\Acl\User;
 
-use App\Models\Acl\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class EditRequest extends FormRequest
 {

@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Language\LanguageListResource;
-use App\Http\Resources\Admin\CoreData\Language\LanguageResource;
+use App\Http\Resources\CoreData\Language\LanguageListResource;
+use App\Http\Resources\CoreData\Language\LanguageResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Language;
 use App\Traits\ImageTrait;

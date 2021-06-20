@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('fullname',255)->unique()->index();
             $table->string('username',255)->unique()->index();
             $table->string('email',255)->unique()->index();
-            $table->text('phone')->unique()->index();
+            $table->text('phone')->unique()->index()->nullable();
             $table->integer('status')->default('1');
             $table->integer('approve')->default('0');
             $table->integer('gender')->default('1')->nullable();

@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\Setting;
 
-use App\Http\Resources\Admin\Setting\FQ\FQListResource;
-use App\Http\Resources\Admin\Setting\FQ\FQResource;
+use App\Http\Resources\Setting\FQ\FQListResource;
+use App\Http\Resources\Setting\FQ\FQResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\Setting\FQ;
 use App\Traits\ServiceDataTrait;

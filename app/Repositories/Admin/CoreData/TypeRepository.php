@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Type\TypeListResource;
-use App\Http\Resources\Admin\CoreData\Type\TypeResource;
+use App\Http\Resources\CoreData\Type\TypeListResource;
+use App\Http\Resources\CoreData\Type\TypeResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Type;
 use App\Traits\ImageTrait;

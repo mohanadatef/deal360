@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Admin\Acl;
 
-use App\Http\Resources\Admin\Acl\Developer\DeveloperListResource;
+use App\Http\Resources\Acl\Developer\DeveloperListResource;
 use App\Interfaces\Admin\Acl\UserInterface;
 use App\Models\Acl\Developer;
 use App\Traits\ImageTrait;
@@ -12,20 +12,20 @@ use Illuminate\Support\Facades\DB;
 class DeveloperRepository implements UserInterface
 {
 	use ServiceDataTrait,ImageTrait;
-	
+
 	protected $data,$userRepository;
-	
+
 	public function __construct(Developer $Developer,UserRepository $UserRepository)
 	{
 		$this->data=$Developer;
 		$this->userRepository=$UserRepository;
 	}
-	
+
 	public function getData()
 	{
 		return $this->data->with('user')->paginate(25);
 	}
-	
+
 	public function storeData($request)
 	{
 		return DB::transaction(function() use ($request)
@@ -56,12 +56,12 @@ class DeveloperRepository implements UserInterface
 			}
 		});
 	}
-	
+
 	public function showData($id)
 	{
 		return $this->data->with('user','about_me','address')->findorFail($id);
 	}
-	
+
 	public function updateData($request,$id)
 	{
 		return DB::transaction(function() use ($request,$id)
@@ -107,38 +107,38 @@ class DeveloperRepository implements UserInterface
 			}
 		});
 	}
-	
+
 	public function updateStatusData($id)
 	{
 		$this->userRepository->updateStatusData($id);
 	}
-	
+
 	public function updateApproveData($id)
 	{
 		$this->changeApprove($this->userRepository->showData($id));
 	}
-	
+
 	public function deleteData($id)
 	{
 		$this->showData($id)->delete();
 	}
-	
+
 	public function getDataDelete()
 	{
 		return $this->data->onlyTrashed()->with('user')->paginate(25);
 	}
-	
+
 	public function restoreData($id)
 	{
 		$this->data->withTrashed()->find($id)->restore();
 	}
-	
+
 	public function removeData($id)
 	{
 		$data=$this->data->withTrashed()->find($id);
 		$data->forceDelete();
 	}
-	
+
 	public function listData()
 	{
 		return DeveloperListResource::collection(DB::table('developers')->join('users','users.id','=','developers.user_id')

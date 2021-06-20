@@ -36,4 +36,18 @@ trait ImageTrait
             \File::delete($image_path);
         }
     }
+
+    public function uploadImageBase64($image, $file_name)
+    {
+        $folderPath = public_path('images/'.$file_name);
+        $image_type = 'png';
+        $image_base64 = base64_decode($image);
+        $imageName = time() . uniqid() . '.' . $image_type;
+        $file = $folderPath . $imageName;
+        if(!\File::isDirectory($folderPath)){
+            \File::makeDirectory($folderPath, 0777, true, true);
+        }
+        file_put_contents($file, $image_base64);
+        return $imageName;
+    }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\City\CityListResource;
-use App\Http\Resources\Admin\CoreData\City\CityResource;
+use App\Http\Resources\CoreData\City\CityListResource;
+use App\Http\Resources\CoreData\City\CityResource;
 use App\Interfaces\Admin\CoreData\CityInterface;
 use App\Models\CoreData\City;
 use App\Traits\ServiceDataTrait;

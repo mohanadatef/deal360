@@ -10,6 +10,7 @@ use App\Http\Controllers\Wordpress\CoreData\CityController;
 use App\Http\Controllers\Wordpress\CoreData\HighLightController;
 use App\Http\Controllers\Wordpress\Acl\UserController;
 use App\Http\Controllers\Wordpress\Property\PropertyController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,13 +21,14 @@ use App\Http\Controllers\Wordpress\Property\PropertyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('data/{return}', [WordpressController::class, 'index'])->name('wordpress.data.index');
-Route::get('package/{return}', [PackageController::class, 'index'])->name('wordpress.package.index');
-Route::get('amenity/{return}', [AmenityController::class, 'index'])->name('wordpress.amenity.index');
-Route::get('category/{return}', [CategoryController::class, 'index'])->name('wordpress.category.index');
-Route::get('type/{return}', [TypeController::class, 'index'])->name('wordpress.type.index');
-Route::get('city/{return}', [CityController::class, 'index'])->name('wordpress.city.index');
-Route::get('high_light/{return}', [HighLightController::class, 'index'])->name('wordpress.high_light.index');
-Route::get('user/{return}', [UserController::class, 'index'])->name('wordpress.user.index');
-Route::get('property/{return}', [PropertyController::class, 'index'])->name('wordpress.user.index');
+Route::name('wordpress.')->group(function () {
+    Route::get('data/{return}', [WordpressController::class, 'index'])->name('data.index');
+    Route::get('package/{return}', [PackageController::class, 'index'])->name('package.index');
+    Route::get('amenity/{return}', [AmenityController::class, 'index'])->name('amenity.index');
+    Route::get('category/{return}', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('type/{return}', [TypeController::class, 'index'])->name('type.index');
+    Route::get('city/{return}', [CityController::class, 'index'])->name('city.index');
+    Route::get('high_light/{return}', [HighLightController::class, 'index'])->name('high_light.index');
+    Route::get('user/{return}', [UserController::class, 'index'])->name('user.index');
+    Route::get('property/{return}', [PropertyController::class, 'index'])->name('user.index');
+});

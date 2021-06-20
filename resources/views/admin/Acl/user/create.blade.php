@@ -186,7 +186,7 @@
    <script>
         //Date range picker
         $('#reservationdate').datetimepicker({
-            format: 'DD/MM/YYYY'
+            format: 'YYYY/MM/DD'
         });
     </script>
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Acl\User\CreateRequest','#create') !!}

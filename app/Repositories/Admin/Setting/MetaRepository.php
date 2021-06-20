@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\Setting;
 
-use App\Http\Resources\Admin\Setting\Meta\MetaListResource;
-use App\Http\Resources\Admin\Setting\Meta\MetaResource;
+use App\Http\Resources\Setting\Meta\MetaListResource;
+use App\Http\Resources\Setting\Meta\MetaResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\Setting\Meta;
 use App\Traits\ServiceDataTrait;

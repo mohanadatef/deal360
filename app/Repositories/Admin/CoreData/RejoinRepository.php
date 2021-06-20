@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Rejoin\RejoinListResource;
-use App\Http\Resources\Admin\CoreData\Rejoin\RejoinResource;
+use App\Http\Resources\CoreData\Rejoin\RejoinListResource;
+use App\Http\Resources\CoreData\Rejoin\RejoinResource;
 use App\Interfaces\Admin\CoreData\RejoinInterface;
 use App\Models\CoreData\Rejoin;
 use App\Traits\ServiceDataTrait;

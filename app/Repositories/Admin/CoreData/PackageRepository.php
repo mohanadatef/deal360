@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Package\PackageListResource;
-use App\Http\Resources\Admin\CoreData\Package\PackageResource;
+use App\Http\Resources\CoreData\Package\PackageListResource;
+use App\Http\Resources\CoreData\Package\PackageResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Package;
 use App\Traits\ServiceDataTrait;

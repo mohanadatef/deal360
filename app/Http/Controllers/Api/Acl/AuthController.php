@@ -21,7 +21,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
+        //if login by google or facebook or apple
         if (isset($request->type) && !empty($request->type)) {
             if ($request->type == "google") {
                 $user = $this->user->where($request->type . '_id', $request->id)->first();
@@ -31,24 +31,31 @@ class AuthController extends Controller
                 $user = $this->user->where($request->type . '_id', $request->id)->first();
             }
         } else {
+            //if email or user name with password
             $user = $this->user->with('image', 'country.title', 'role.title', 'role.permission.title')
                 ->whereNotBetween('role_id', [1, 2])
                 ->where('email', $request->email)
                 ->orwhereNotBetween('role_id', [1, 2])
                 ->where('username', $request->email)->first();
+            //check password
             $user = $user ? (Hash::check($request->password, $user->password) ? $user : null) : null;
         }
         if ($user) {
+            //check status
             if ($user->status == 1) {
+                //login
                 Auth::loginUsingId($user->id);
-                $token = Auth::user()->createToken('passport');
+                //create token
+                $token = Auth::user()->createToken(['passport']);
+                //update user token
                 $user->update(['token' => $token->accessToken]);
                 return response(['status' => 1, 'data' => ['user' => new UserResource($user)], 'message' => trans('auth.login')]);
             }
+            //if status not 1
             return response(['status' => 0, 'data' => array(), 'message' => trans('auth.support')], 200);
         } else {
+            //if user not found
             return response(['status' => 0, 'data' => array(), 'message' => trans('auth.failed')], 200);
         }
-
     }
 }

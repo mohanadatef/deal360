@@ -49,7 +49,7 @@ class UserController extends Controller
 	public function store(CreateRequest $request)
 	{
 		$this->userRepository->storeData($request);
-		return redirect(route('user.index'))->with(trans('Done'));
+		return redirect(route('user.index'))->with(trans('lang.Done'));
 	}
 
 	public function edit($id)
@@ -63,7 +63,7 @@ class UserController extends Controller
 	public function update(EditRequest $request,$id)
 	{
 		$this->userRepository->updateData($request,$id);
-		return redirect(route('user.index'))->with(trans('Done'));
+		return redirect(route('user.index'))->with(trans('lang.Done'));
 	}
 
 	public function changeStatus($id)

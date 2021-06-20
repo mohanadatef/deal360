@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Admin\Acl;
 
-use App\Http\Resources\Admin\Acl\Agent\AgentListResource;
+use App\Http\Resources\Acl\Agent\AgentListResource;
 use App\Interfaces\Admin\Acl\UserInterface;
 use App\Models\Acl\Agent;
 use App\Traits\ImageTrait;
@@ -12,20 +12,20 @@ use Illuminate\Support\Facades\DB;
 class AgentRepository implements UserInterface
 {
 	use ServiceDataTrait,ImageTrait;
-	
+
 	protected $data,$userRepository;
-	
+
 	public function __construct(Agent $Agent,UserRepository $UserRepository)
 	{
 		$this->data=$Agent;
 		$this->userRepository=$UserRepository;
 	}
-	
+
 	public function getData()
 	{
 		return $this->data->with('user','company')->paginate(25);
 	}
-	
+
 	public function storeData($request)
 	{
 		return DB::transaction(function() use ($request)
@@ -56,12 +56,12 @@ class AgentRepository implements UserInterface
 			}
 		});
 	}
-	
+
 	public function showData($id)
 	{
 		return $this->data->with('user','about_me','address','company')->findorFail($id);
 	}
-	
+
 	public function updateData($request,$id)
 	{
 		return DB::transaction(function() use ($request,$id)
@@ -107,38 +107,38 @@ class AgentRepository implements UserInterface
 			}
 		});
 	}
-	
+
 	public function updateStatusData($id)
 	{
 		$this->userRepository->updateStatusData($id);
 	}
-	
+
 	public function updateApproveData($id)
 	{
 		$this->changeApprove($this->userRepository->showData($id));
 	}
-	
+
 	public function deleteData($id)
 	{
 		$this->showData($id)->delete();
 	}
-	
+
 	public function getDataDelete()
 	{
 		return $this->data->onlyTrashed()->with('user','company')->paginate(25);
 	}
-	
+
 	public function restoreData($id)
 	{
 		$this->data->withTrashed()->find($id)->restore();
 	}
-	
+
 	public function removeData($id)
 	{
 		$data=$this->data->withTrashed()->find($id);
 		$data->forceDelete();
 	}
-	
+
 	public function listData()
 	{
 		return AgentListResource::collection(DB::table('agents')->join('users','users.id','=','agents.user_id')

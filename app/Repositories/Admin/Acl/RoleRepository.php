@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\Acl;
 
-use App\Http\Resources\Admin\Acl\Role\RoleListResource;
-use App\Http\Resources\Admin\Acl\Role\RoleResource;
+use App\Http\Resources\Acl\Role\RoleListResource;
+use App\Http\Resources\Acl\Role\RoleResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\Acl\Role;
 use App\Traits\ServiceDataTrait;

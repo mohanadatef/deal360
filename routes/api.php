@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Acl\AuthController;
+use App\Http\Controllers\Api\Acl\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,11 @@ use App\Http\Controllers\Api\Acl\AuthController;
 |
 */
 
-Route::group(['middleware'=> 'language_api'],function() {
-    Route::prefix('/auth')->name('auth.')->group(function()
-    {
-        Route::post('/login',[AuthController::class,'login'])->name('login');
+Route::group(['middleware' => 'api','language_api'], function () {
+    Route::name('api.')->group(function () {
+        Route::prefix('/auth')->name('auth.')->group(function () {
+            Route::post('/login', [AuthController::class, 'login'])->name('login');
+            Route::post('/register', [UserController::class, 'register'])->name('register');
+        });
     });
 });

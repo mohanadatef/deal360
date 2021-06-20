@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\HighLight\HighLightListResource;
-use App\Http\Resources\Admin\CoreData\HighLight\HighLightResource;
+use App\Http\Resources\CoreData\HighLight\HighLightListResource;
+use App\Http\Resources\CoreData\HighLight\HighLightResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\HighLight;
 use App\Traits\ServiceDataTrait;

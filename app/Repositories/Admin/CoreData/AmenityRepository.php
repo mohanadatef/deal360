@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Amenity\AmenityListResource;
-use App\Http\Resources\Admin\CoreData\Amenity\AmenityResource;
+use App\Http\Resources\CoreData\Amenity\AmenityListResource;
+use App\Http\Resources\CoreData\Amenity\AmenityResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Amenity;
 use App\Traits\ImageTrait;

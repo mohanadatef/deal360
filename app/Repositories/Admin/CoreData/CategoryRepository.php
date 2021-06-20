@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Category\CategoryListResource;
-use App\Http\Resources\Admin\CoreData\Category\CategoryResource;
+use App\Http\Resources\CoreData\Category\CategoryListResource;
+use App\Http\Resources\CoreData\Category\CategoryResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Category;
 use App\Traits\ImageTrait;

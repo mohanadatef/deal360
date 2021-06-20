@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Admin\Acl;
 
-use App\Http\Resources\Admin\Acl\Company\CompanyListResource;
+use App\Http\Resources\Acl\Company\CompanyListResource;
 use App\Interfaces\Admin\Acl\CompanyInterface;
 use Illuminate\Support\Facades\DB;
 

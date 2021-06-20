@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Acl\User;
+namespace App\Http\Requests\Api\Acl\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class CreateRequest extends FormRequest
 {
@@ -28,18 +30,12 @@ class CreateRequest extends FormRequest
             'fullname' => 'required|string|unique:users',
             'username' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
-            'phone' => 'required|numeric|unique:users',
-            'gender' => 'required',
-            'facebook' => 'string|nullable',
-            'instagram' => 'string|nullable',
-            'youtube' => 'string|nullable',
-            'twitter' => 'string|nullable',
-            'website' => 'string|nullable',
-            'dob' => 'required',
-            'role_id' => 'required|exists:roles,id',
-            'country_id' => 'required|exists:countries,id',
             'password' => 'required|string|min:6|confirmed',
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response(['status' => 0, 'data' => [], 'message' => $validator->errors()]));
     }
 }

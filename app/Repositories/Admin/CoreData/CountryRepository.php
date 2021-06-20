@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\CoreData;
 
-use App\Http\Resources\Admin\CoreData\Country\CountryListResource;
-use App\Http\Resources\Admin\CoreData\Country\CountryResource;
+use App\Http\Resources\CoreData\Country\CountryListResource;
+use App\Http\Resources\CoreData\Country\CountryResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Country;
 use App\Traits\ImageTrait;

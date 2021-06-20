@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Admin\Acl;
 
-use App\Http\Resources\Admin\Acl\Permission\PermissionListResource;
-use App\Http\Resources\Admin\Acl\Permission\PermissionResource;
+use App\Http\Resources\Acl\Permission\PermissionListResource;
+use App\Http\Resources\Acl\Permission\PermissionResource;
 use App\Interfaces\Admin\Acl\PermissionInterface;
 use App\Models\Acl\Permission;
 use App\Traits\ServiceDataTrait;
