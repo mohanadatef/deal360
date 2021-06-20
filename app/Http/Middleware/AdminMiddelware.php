@@ -24,7 +24,7 @@ class AdminMiddelware
         else
         {
             Auth::logout();
-            return redirect('/login')->with('message_fales', trans('lang.Message_Support') );
+            return redirect('/login')->with('message_fales', trans('auth.support') );
         }
     }
 }

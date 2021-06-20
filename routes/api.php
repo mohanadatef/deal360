@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Acl\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::group(['middleware'=> 'language_api'],function() {
+    Route::prefix('/auth')->name('auth.')->group(function()
+    {
+        Route::post('/login',[AuthController::class,'login'])->name('login');
+    });
+});
