@@ -149,7 +149,10 @@ $rules= [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'role_id'=>'role',
+        'country_id'=>'country',
+    ],
 
 ];
 foreach (language() as $lang) {

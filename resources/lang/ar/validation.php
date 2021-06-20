@@ -161,6 +161,8 @@ $rules = [
         'dob'=>'تاريخ الميلاد',
         'password' => 'كلمه السر',
         'password_confirmation' => 'تاكيد كلمه السر',
+        'role_id'=>'صلاحيه',
+        'country_id'=>'بلد',
     ],
 
 ];

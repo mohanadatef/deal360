@@ -77,4 +77,5 @@ return [
     'Male'=>'Male',
     'Famel'=>'Famel',
     'DOB'=>'Birth Day',
+    'Agecny'=>'agecny',
 ];
