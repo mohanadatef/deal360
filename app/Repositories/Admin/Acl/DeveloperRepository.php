@@ -21,7 +21,7 @@ class DeveloperRepository implements UserInterface
 		$this->userRepository=$UserRepository;
 	}
 
-	public function getData()
+	public function getData($request)
 	{
 		return $this->data->with('user')->paginate(25);
 	}

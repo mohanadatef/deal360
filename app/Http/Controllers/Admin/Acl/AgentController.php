@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Acl\Agent\EditRequest;
 use App\Repositories\Admin\Acl\AgentRepository;
 use App\Repositories\Admin\Acl\CompanyRepository;
 use App\Repositories\Admin\CoreData\CountryRepository;
+use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
@@ -32,9 +33,9 @@ class AgentController extends Controller
         $this->middleware('permission:agent-remove')->only('remove');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $datas = $this->agentRepository->getData();
+        $datas = $this->agentRepository->getData($request);
         $paginator = ['total_pages' => ceil($datas->Total() / $datas->PerPage()),
             'current_page' => $datas->CurrentPage(),
             'url_page' => url('admin/agent?page=')];
@@ -72,7 +73,7 @@ class AgentController extends Controller
     {
         $this->agentRepository->updateStatusData($id);
     }
-    
+
 	public function changeApprove($id)
 	{
 		$this->agentRepository->updateApproveData($id);
@@ -102,7 +103,7 @@ class AgentController extends Controller
     {
         $this->agentRepository->restoreData($id);
     }
-	
+
 	public function listIndex()
 	{
 		return $this->agentRepository->listData();

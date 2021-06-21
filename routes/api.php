@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Acl\AuthController;
 use App\Http\Controllers\Api\Acl\UserController;
+use App\Http\Controllers\Api\Acl\AgencyController;
 use App\Http\Controllers\Api\CoreData\LanguageController;
 use App\Http\Controllers\Api\CoreData\StatusController;
 use App\Http\Controllers\Api\CoreData\TypeController;
@@ -82,6 +83,13 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             Route::prefix('/highlight')->group(function () {
                 Route::get('/list', [HighLightController::class, 'listIndex'])->name('highlight.list');
             });
+        });
+        //agency
+        Route::prefix('/agency')->name('agency.')->group(function () {
+            //login
+            Route::get('/index', [AgencyController::class, 'index'])->name('index');
+            //register
+            Route::get('/profile', [AgencyController::class, 'show'])->name('show');
         });
     });
 });

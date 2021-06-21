@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Acl\Agency;
 
+use App\Http\Resources\Acl\Agent\AgentCardResource;
 use App\Http\Resources\Acl\Role\RoleListResource;
 use App\Http\Resources\CoreData\Country\CountryListResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,6 +25,7 @@ class AgencyResource extends JsonResource
             'image' => getImag($this->user->image,'user'),
             'about_me'=>$this->about_me->value,
             'address'=>$this->address->value,
+            'agent'=>AgentCardResource::collection($this->agent),
         ];
     }
 }

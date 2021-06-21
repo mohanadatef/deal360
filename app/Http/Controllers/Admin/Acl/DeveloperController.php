@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Acl\Developer\CreateRequest;
 use App\Http\Requests\Admin\Acl\Developer\EditRequest;
 use App\Repositories\Admin\Acl\DeveloperRepository;
 use App\Repositories\Admin\CoreData\CountryRepository;
+use Illuminate\Http\Request;
 
 class DeveloperController extends Controller
 {
@@ -28,9 +29,9 @@ class DeveloperController extends Controller
         $this->middleware('permission:developer-remove')->only('remove');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $datas = $this->developerRepository->getData();
+        $datas = $this->developerRepository->getData($request);
         $paginator = ['total_pages' => ceil($datas->Total() / $datas->PerPage()),
             'current_page' => $datas->CurrentPage(),
             'url_page' => url('admin/developer?page=')];
@@ -66,7 +67,7 @@ class DeveloperController extends Controller
     {
         $this->developerRepository->updateStatusData($id);
     }
-	
+
 	public function changeApprove($id)
 	{
 		$this->developerRepository->updateApproveData($id);
@@ -96,7 +97,7 @@ class DeveloperController extends Controller
     {
         $this->developerRepository->restoreData($id);
     }
-	
+
 	public function listIndex()
 	{
 		return $this->developerRepository->listData();
