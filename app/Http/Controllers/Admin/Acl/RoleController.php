@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Acl\Role\CreateRequest;
 use App\Http\Requests\Admin\Acl\Role\EditRequest;
-use App\Repositories\Admin\Acl\PermissionRepository;
-use App\Repositories\Admin\Acl\RoleRepository;
+use App\Repositories\Acl\PermissionRepository;
+use App\Repositories\Acl\RoleRepository;
 
 class RoleController extends Controller
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Acl;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Acl\ForgotPassword\ChangeRequest;
-use App\Repositories\Admin\Acl\ForgotPasswordRepository;
+use App\Repositories\Acl\ForgotPasswordRepository;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,6 +19,6 @@ class ForgotPasswordController extends Controller
 
     public function update(ChangeRequest $request,$id)
     {
-        return $this->forgotPasswordRepository->updateData($request,$id);
+        $this->forgotPasswordRepository->updateData($request,$id);
     }
 }

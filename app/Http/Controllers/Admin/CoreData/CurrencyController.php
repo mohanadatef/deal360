@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Currency\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Currency\EditRequest;
-use App\Repositories\Admin\CoreData\CountryRepository;
-use App\Repositories\Admin\CoreData\CurrencyRepository;
+use App\Repositories\CoreData\CountryRepository;
+use App\Repositories\CoreData\CurrencyRepository;
 
 class CurrencyController extends Controller
 {

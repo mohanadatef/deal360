@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Category\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Category\EditRequest;
-use App\Repositories\Admin\CoreData\CategoryRepository;
+use App\Repositories\CoreData\CategoryRepository;
 
 class CategoryController extends Controller
 {

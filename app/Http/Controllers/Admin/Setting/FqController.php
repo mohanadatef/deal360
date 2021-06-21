@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Setting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Setting\FQ\CreateRequest;
 use App\Http\Requests\Admin\Setting\FQ\EditRequest;
-use App\Repositories\Admin\Setting\FQRepository;
+use App\Repositories\Setting\FQRepository;
 
 class FQController extends Controller
 {

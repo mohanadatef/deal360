@@ -5,8 +5,8 @@
     use App\Http\Controllers\Controller;
     use App\Http\Requests\Admin\Acl\Agency\CreateRequest;
     use App\Http\Requests\Admin\Acl\Agency\EditRequest;
-    use App\Repositories\Admin\Acl\AgencyRepository;
-    use App\Repositories\Admin\CoreData\CountryRepository;
+    use App\Repositories\Acl\AgencyRepository;
+    use App\Repositories\CoreData\CountryRepository;
     use Illuminate\Http\Request;
 
     class AgencyController extends Controller

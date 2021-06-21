@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Rejoin\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Rejoin\EditRequest;
-use App\Repositories\Admin\CoreData\RejoinRepository;
-use App\Repositories\Admin\CoreData\CountryRepository;
+use App\Repositories\CoreData\RejoinRepository;
+use App\Repositories\CoreData\CountryRepository;
 
 class RejoinController extends Controller
 {

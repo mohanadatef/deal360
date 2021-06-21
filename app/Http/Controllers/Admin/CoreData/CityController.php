@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\City\CreateRequest;
 use App\Http\Requests\Admin\CoreData\City\EditRequest;
-use App\Repositories\Admin\CoreData\CityRepository;
-use App\Repositories\Admin\CoreData\CountryRepository;
+use App\Repositories\CoreData\CityRepository;
+use App\Repositories\CoreData\CountryRepository;
 
 class CityController extends Controller
 {

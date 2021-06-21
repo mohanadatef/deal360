@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Country\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Country\EditRequest;
-use App\Repositories\Admin\CoreData\CountryRepository;
+use App\Repositories\CoreData\CountryRepository;
 
 class CountryController extends Controller
 {

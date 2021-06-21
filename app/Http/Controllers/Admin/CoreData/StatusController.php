@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Status\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Status\EditRequest;
-use App\Repositories\Admin\CoreData\StatusRepository;
+use App\Repositories\CoreData\StatusRepository;
 
 class StatusController extends Controller
 {

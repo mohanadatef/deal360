@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Language\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Language\EditRequest;
-use App\Repositories\Admin\CoreData\LanguageRepository;
+use App\Repositories\CoreData\LanguageRepository;
 use Illuminate\Http\Request;
 
 class LanguageController extends Controller

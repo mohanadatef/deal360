@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Package\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Package\EditRequest;
-use App\Repositories\Admin\Acl\RoleRepository;
-use App\Repositories\Admin\CoreData\CurrencyRepository;
-use App\Repositories\Admin\CoreData\PackageRepository;
+use App\Repositories\Acl\RoleRepository;
+use App\Repositories\CoreData\CurrencyRepository;
+use App\Repositories\CoreData\PackageRepository;
 
 class PackageController extends Controller
 {

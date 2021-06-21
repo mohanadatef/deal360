@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\Amenity\CreateRequest;
 use App\Http\Requests\Admin\CoreData\Amenity\EditRequest;
-use App\Repositories\Admin\CoreData\AmenityRepository;
+use App\Repositories\CoreData\AmenityRepository;
 
 class AmenityController extends Controller
 {

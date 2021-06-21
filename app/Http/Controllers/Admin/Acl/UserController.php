@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Acl\User\CreateRequest;
 use App\Http\Requests\Admin\Acl\User\EditRequest;
-use App\Repositories\Admin\Acl\RoleRepository;
-use App\Repositories\Admin\Acl\UserRepository;
-use App\Repositories\Admin\CoreData\CountryRepository;
+use App\Repositories\Acl\RoleRepository;
+use App\Repositories\Acl\UserRepository;
+use App\Repositories\CoreData\CountryRepository;
 
 class UserController extends Controller
 {

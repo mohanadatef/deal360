@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Acl\Permission\CreateRequest;
 use App\Http\Requests\Admin\Acl\Permission\EditRequest;
-use App\Repositories\Admin\Acl\PermissionRepository;
+use App\Repositories\Acl\PermissionRepository;
 
 class PermissionController extends Controller
 {

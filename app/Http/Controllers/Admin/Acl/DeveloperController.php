@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Acl\Developer\CreateRequest;
 use App\Http\Requests\Admin\Acl\Developer\EditRequest;
-use App\Repositories\Admin\Acl\DeveloperRepository;
-use App\Repositories\Admin\CoreData\CountryRepository;
+use App\Repositories\Acl\DeveloperRepository;
+use App\Repositories\CoreData\CountryRepository;
 use Illuminate\Http\Request;
 
 class DeveloperController extends Controller

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\CoreData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CoreData\HighLight\CreateRequest;
 use App\Http\Requests\Admin\CoreData\HighLight\EditRequest;
-use App\Repositories\Admin\CoreData\HighLightRepository;
+use App\Repositories\CoreData\HighLightRepository;
 
 class HighLightController extends Controller
 {

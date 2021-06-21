@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Setting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Setting\Meta\CreateRequest;
 use App\Http\Requests\Admin\Setting\Meta\EditRequest;
-use App\Repositories\Admin\Setting\MetaRepository;
+use App\Repositories\Setting\MetaRepository;
 
 class MetaController extends Controller
 {
