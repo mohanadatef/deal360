@@ -7,6 +7,7 @@ use App\Http\Resources\CoreData\Package\PackageResource;
 use App\Interfaces\Admin\MeanInterface;
 use App\Models\CoreData\Package;
 use App\Traits\ServiceDataTrait;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PackageRepository implements MeanInterface
