@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Acl\User\UserResource;
 use App\Models\Acl\User;
+use App\Repositories\Admin\Acl\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,11 +13,12 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     private $user;
-
-    public function __construct(User $User)
+    private $userRepository;
+    public function __construct(User $User,UserRepository $UserRepository)
     {
         $this->middleware('auth:api', ['except' => ['login']]);
         $this->user = $User;
+        $this->userRepository = $UserRepository;
     }
 
     public function login(Request $request)
@@ -24,11 +26,14 @@ class AuthController extends Controller
         //if login by google or facebook or apple
         if (isset($request->type) && !empty($request->type)) {
             if ($request->type == "google") {
-                $user = $this->user->where($request->type . '_id', $request->id)->first();
+                $user = $this->userRepository->socialMediaSearch('google_id', $request->id);
+
             } elseif ($request->type == "facebook") {
-                $user = $this->user->where($request->type . '_id', $request->id)->first();
+                $user = $this->userRepository->socialMediaSearch('facebook_id', $request->id);
+
             } elseif ($request->type == "apple") {
-                $user = $this->user->where($request->type . '_id', $request->id)->first();
+                $user = $this->userRepository->socialMediaSearch('apple_id', $request->id);
+
             }
         } else {
             //if email or user name with password

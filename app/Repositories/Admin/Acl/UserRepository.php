@@ -110,4 +110,9 @@ class UserRepository implements AdminInterface
 		$this->deleteImage($data->image,'user');
 		$data->forceDelete();
 	}
+
+	public function socialMediaSearch($type,$id)
+    {
+        return $this->data->where($type,$id)->first();
+    }
 }

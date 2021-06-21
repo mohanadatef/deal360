@@ -26,12 +26,17 @@ class CreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'fullname' => 'required|string|unique:users',
             'username' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
         ];
+        if (!isset($request->type)) {
+            $rules = [
+                'password' => 'required|string|min:6|confirmed',
+            ];
+        }
+        return $rules;
     }
 
     protected function failedValidation(Validator $validator)
