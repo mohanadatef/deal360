@@ -21,10 +21,20 @@ class DeveloperRepository implements UserInterface
 		$this->userRepository=$UserRepository;
 	}
 
-	public function getData($request)
-	{
-		return $this->data->with('user')->paginate(25);
-	}
+    public function getData($request)
+    {
+        $data = $this->data->with('user');
+        if (isset($request->status)) {
+            $data->join('users','developers.user_id','users.id')
+                ->where('users.status',1)->where('users.approve',1);
+        }
+        if (isset($request->paginate)) {
+            $data->paginate($request->paginate);
+        } else {
+            $data->paginate(25);
+        }
+        return $data;
+    }
 
 	public function storeData($request)
 	{

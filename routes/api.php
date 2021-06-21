@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Acl\AuthController;
 use App\Http\Controllers\Api\Acl\UserController;
 use App\Http\Controllers\Api\Acl\AgencyController;
+use App\Http\Controllers\Api\Acl\DeveloperController;
 use App\Http\Controllers\Api\CoreData\LanguageController;
 use App\Http\Controllers\Api\CoreData\StatusController;
 use App\Http\Controllers\Api\CoreData\TypeController;
@@ -86,10 +87,17 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
         });
         //agency
         Route::prefix('/agency')->name('agency.')->group(function () {
-            //login
+            //index
             Route::get('/index', [AgencyController::class, 'index'])->name('index');
-            //register
+            //profile
             Route::get('/profile', [AgencyController::class, 'show'])->name('show');
+        });
+        //Developer
+        Route::prefix('/developer')->name('developer.')->group(function () {
+            //index
+            Route::get('/index', [DeveloperController::class, 'index'])->name('index');
+            //profile
+            Route::get('/profile', [DeveloperController::class, 'show'])->name('show');
         });
     });
 });
