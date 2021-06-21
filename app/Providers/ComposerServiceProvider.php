@@ -18,11 +18,13 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $nameDay = nameDay();
         $language = language();
         $languageActive = languageActive();
-        view()->composer(['*'], function ($view) use ($language,$languageActive){
+        view()->composer(['*'], function ($view) use ($language,$languageActive,$nameDay){
             $view->with('language', $language);
             $view->with('languageActive', $languageActive);
+            $view->with('nameDay', $nameDay);
         });
     }
 }
