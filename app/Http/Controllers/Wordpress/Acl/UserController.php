@@ -1,7 +1,7 @@
 <?php
-    
+
     namespace App\Http\Controllers\Wordpress\Acl;
-    
+
     use App\Http\Controllers\Controller;
     use App\Models\Acl\Agent;
     use App\Models\Acl\User;
@@ -9,11 +9,11 @@
     use Carbon\Carbon;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Http;
-    
+
     class UserController extends Controller
     {
         use ImageTrait;
-        
+
         public function index($return)
         {
             $response=Http::get('https://crm.deal360.ae/backend/api/fillUsers')->json();
@@ -23,7 +23,7 @@
                 return redirect(route('admin.dashboard'));
             }
         }
-        
+
         public function store($response)
         {
             $count_user=User::latest('id')->first();
@@ -131,6 +131,7 @@
             executionTime();
             DB::transaction(function() use ($data_user,$data_user_package,$agency,$agent,$developer,$agent_translation,$image)
             {
+                $user_image=array();
                 DB::table('users')->insert($data_user);
                 executionTime();
                 DB::table('user_packages')->insert($data_user_package);

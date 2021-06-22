@@ -28,15 +28,10 @@ class Property extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    
+
     public function translation()
     {
         return $this->morphMany(Translation::class, 'category')->withTrashed();
-    }
-
-    public function image()
-    {
-        return $this->morphOne(Image::class, 'category')->withTrashed();
     }
 
     public function images()
@@ -47,6 +42,16 @@ class Property extends Model
     public function scopeOrder($query,$order)
     {
         return $query->orderby('order',$order);
+    }
+
+    public function scopeStatus($query,$status)
+    {
+        return $query->whereStatus($status);
+    }
+
+    public function scopeStatusId($query,$status_id)
+    {
+        return $query->where('status_id',$status_id);
     }
 
     public function user()

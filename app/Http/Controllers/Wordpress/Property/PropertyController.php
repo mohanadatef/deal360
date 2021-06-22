@@ -1,7 +1,7 @@
 <?php
-    
+
     namespace App\Http\Controllers\Wordpress\Property;
-    
+
     use App\Http\Controllers\Controller;
     use App\Models\CoreData\Amenity;
     use App\Models\CoreData\Category;
@@ -17,11 +17,11 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Http;
-    
+
     class PropertyController extends Controller
     {
         use ImageTrait;
-        
+
         public function index($return)
         {
             $link='http://crm.deal360.ae/backend/api/fillProperty?num=50&page=1';
@@ -32,7 +32,7 @@
                 return redirect(route('admin.dashboard'));
             }
         }
-        
+
         public function store($response)
         {
             $count_property=Property::latest('id')->first();
@@ -164,7 +164,7 @@
                                                               'key'          =>'address',
                                                               'value'        =>!empty($property['address'])?$property['address']:" ",
                                                               'language_id'  =>$language_id);
-                                
+
                                 executionTime();
                                 if(!empty($property['image']))
                                 {
@@ -301,7 +301,6 @@
                 executionTime();
                 DB::table('images')->insert($property_image_plan);
                 executionTime();
-                
             });
         }
     }
