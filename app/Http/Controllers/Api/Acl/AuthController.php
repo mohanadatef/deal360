@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Acl\User\UserResource;
 use App\Models\Acl\User;
-use App\Repositories\Admin\Acl\UserRepository;
+use App\Repositories\Acl\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

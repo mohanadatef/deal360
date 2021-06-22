@@ -15,7 +15,7 @@ class DeveloperCardResource extends JsonResource
             'phone' => $this->user->phone,
             'country' => new CountryListResource($this->user->country),
             'image' => getImag($this->user->image,'user'),
-            'address'=>$this->address->value,
+            'address'=>$this->address?$this->address->value:"",
             'website'=>$this->user->website,
         ];
     }

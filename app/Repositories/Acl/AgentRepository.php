@@ -23,7 +23,13 @@ class AgentRepository implements UserInterface
 
 	public function getData($request)
 	{
-		return $this->data->with('user','company')->paginate(25);
+        $data = $this->data->with('user','company');
+        if (isset($request->status)) {
+            $data = $data->join('users', 'agents.user_id', 'users.id')
+                ->where('users.status', 1)->where('users.approve', 1)->select('agents.*');
+        }
+        $data = isset($request->paginate)&&!empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
+        return $data;
 	}
 
 	public function storeData($request)

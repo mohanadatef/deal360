@@ -5,7 +5,7 @@
     use App\Http\Controllers\Controller;
     use App\Http\Resources\Acl\Agency\AgencyCardResource;
     use App\Http\Resources\Acl\Agency\AgencyResource;
-    use App\Repositories\Admin\Acl\AgencyRepository;
+    use App\Repositories\Acl\AgencyRepository;
     use Illuminate\Http\Request;
 
     class AgencyController extends Controller

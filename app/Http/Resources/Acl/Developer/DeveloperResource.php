@@ -22,8 +22,8 @@ class DeveloperResource extends JsonResource
             'role' => new RoleListResource($this->user->role),
             'country' => new CountryListResource($this->user->country),
             'image' => getImag($this->user->image,'user'),
-            'about_me'=>$this->about_me->value,
-            'address'=>$this->address->value,
+            'about_me'=>$this->about_me?$this->about_me->value:"",
+            'address'=>$this->address?$this->address->value:"",
         ];
     }
 }

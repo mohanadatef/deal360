@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Acl\Developer\DeveloperCardResource;
 use App\Http\Resources\Acl\Developer\DeveloperResource;
-use App\Repositories\Admin\Acl\DeveloperRepository;
+use App\Repositories\Acl\DeveloperRepository;
 use Illuminate\Http\Request;
 
 class DeveloperController extends Controller

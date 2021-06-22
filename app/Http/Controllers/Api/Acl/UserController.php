@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Acl;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Acl\User\CreateRequest;
 use App\Http\Resources\Acl\User\UserResource;
-use App\Repositories\Admin\Acl\UserRepository;
+use App\Repositories\Acl\UserRepository;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller

@@ -25,14 +25,10 @@ class AgencyRepository implements UserInterface
     {
         $data = $this->data->with('user');
         if (isset($request->status)) {
-            $data->join('users','agencies.user_id','users.id')
-            ->where('users.status',1)->where('users.approve',1);
+            $data = $data->join('users', 'agencies.user_id', 'users.id')
+                ->where('users.status', 1)->where('users.approve', 1);
         }
-        if (isset($request->paginate)) {
-            $data->paginate($request->paginate);
-        } else {
-            $data->paginate(25);
-        }
+        $data = isset($request->paginate)&&!empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
         return $data;
     }
 
