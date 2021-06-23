@@ -4,6 +4,7 @@ namespace App\Models\Property;
 
 use App\Models\Acl\User;
 use App\Models\CoreData\Amenity;
+use App\Models\CoreData\Currency;
 use App\Models\CoreData\Rejoin;
 use App\Models\CoreData\Category;
 use App\Models\CoreData\City;
@@ -20,7 +21,7 @@ class Property extends Model
 {
     protected $fillable = [
         'status','order','user_id','country_id','city_id','rejoin_id','status_id','type_id','category_id','virtual_tour','available_from',
-        'price','size','lot_size','room','bedroom','bathroom','garage','bathroom','latitude','longitude','order','high_light_id','youtube_id'
+        'price','size','lot_size','room','bedroom','bathroom','garage','bathroom','latitude','longitude','order','high_light_id','youtube_id','currency_id'
     ];
     protected $table = 'properties';
     public $timestamps = true;
@@ -34,9 +35,16 @@ class Property extends Model
         return $this->morphMany(Translation::class, 'category')->withTrashed();
     }
 
-    public function images()
+    public function title()
     {
-        return $this->morphToMany(Image::class, 'category')->withTrashed();
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'title')
+            ->where('language_id' ,languageId())->withTrashed();
+    }
+
+    public function image()
+    {
+        return $this->morphMany(Image::class, 'category')->withTrashed();
     }
 
     public function scopeOrder($query,$order)
@@ -46,7 +54,9 @@ class Property extends Model
 
     public function scopeStatus($query,$status)
     {
-        return $query->whereStatus($status);
+        return $query->join('translations', 'properties.status_id', 'translations.category_id')
+            ->where('translations.category_type', Status::class)->where('translations.key', 'title')
+            ->where('translations.value', $status);
     }
 
     public function scopeStatusId($query,$status_id)
@@ -94,6 +104,11 @@ class Property extends Model
         return $this->belongsTo(Category::Class,'category_id');
     }
 
+    public function currency()
+    {
+        return $this->belongsTo(Currency::Class,'currency_id');
+    }
+
     public function status()
     {
         return $this->belongsTo(Status::Class,'status_id');
@@ -107,5 +122,10 @@ class Property extends Model
     public function highlight()
     {
         return $this->belongsTo(HighLight::Class,'high_light_id');
+    }
+
+    public function floor_plan()
+    {
+        return $this->hasMany(PropertyFloorPlan::Class);
     }
 }

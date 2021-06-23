@@ -16,7 +16,7 @@ class RoleResource extends JsonResource
             'type_access' => $this->type_access,
             'order' => $this->order,
             'status' => $this->status,
-            'permission' =>PermissionListResource::collection($this->permission),
+            /*'permission' =>PermissionListResource::collection($this->permission),*/
         ];
     }
 }

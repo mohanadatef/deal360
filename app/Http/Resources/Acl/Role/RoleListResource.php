@@ -13,7 +13,7 @@ class RoleListResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title ? $this->title->value : "",
             'code' => $this->code,
-            'permission' =>PermissionListResource::collection($this->permission),
+            /*'permission' =>PermissionListResource::collection($this->permission),*/
         ];
     }
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\CoreData\CurrencyController;
 use App\Http\Controllers\Api\CoreData\HighLightController;
 use App\Http\Controllers\Api\Setting\MetaController;
 use App\Http\Controllers\Api\Setting\FQController;
+use App\Http\Controllers\Api\Property\PropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +121,13 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             Route::get('/index', [AgentController::class, 'index'])->name('index');
             //profile
             Route::get('/profile', [AgentController::class, 'show'])->name('show');
+        });
+        //property
+        Route::prefix('/property')->name('property.')->group(function () {
+            //index
+            Route::get('/index', [PropertyController::class, 'index'])->name('index');
+            //profile
+            Route::get('/profile', [PropertyController::class, 'show'])->name('show');
         });
     });
 });

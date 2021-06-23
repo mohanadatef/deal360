@@ -27,14 +27,19 @@ class PropertyFloorPlan extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    
+
     public function property()
     {
         return $this->belongsTo(Property::Class,'property_id');
     }
-    
+
     public function translation()
     {
         return $this->morphMany(Translation::class, 'category')->withTrashed();
+    }
+
+    public function image()
+    {
+        return $this->morphMany(Image::class, 'category')->withTrashed();
     }
 }
