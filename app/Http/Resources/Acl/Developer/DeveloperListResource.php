@@ -11,7 +11,7 @@ class DeveloperListResource extends JsonResource
         return [
 	        'id' => $this->id,
 	        'user_id' => $this->user_id,
-	        'fullname' => $this->user->fullname,
+	        'fullname' => $this->fullname,
         ];
     }
 }

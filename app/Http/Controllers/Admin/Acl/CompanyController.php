@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Acl;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Acl\CompanyRepository;
+use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
@@ -14,8 +15,8 @@ class CompanyController extends Controller
         $this->companyRepository = $CompanyRepository;
     }
 
-	public function listIndex()
+	public function listIndex(Request $request)
 	{
-		return $this->companyRepository->listData();
+		return $this->companyRepository->listData($request);
 	}
 }

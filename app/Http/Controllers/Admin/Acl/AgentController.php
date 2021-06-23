@@ -42,10 +42,10 @@ class AgentController extends Controller
         return view(checkView('admin.acl.agent.index'), compact('datas', 'paginator'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $country = $this->countryRepository->listData();
-        $company = $this->companyRepository->listData();
+        $company = $this->companyRepository->listData($request);
         return view(checkView('admin.acl.agent.create'), compact( 'country','company'));
     }
 
@@ -55,11 +55,11 @@ class AgentController extends Controller
         return redirect(route('agent.index'))->with(trans('Done'));
     }
 
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         $data = $this->agentRepository->showData($id);
 	    $country = $this->countryRepository->listData();
-	    $company = $this->companyRepository->listData();
+	    $company = $this->companyRepository->listData($request);
 	    return view(checkView('admin.acl.agent.edit'), compact('data',  'country','company'));
     }
 

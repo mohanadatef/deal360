@@ -28,8 +28,7 @@ class AgencyRepository implements UserInterface
             $data = $data->join('users', 'agencies.user_id', 'users.id')
                 ->where('users.status', 1)->where('users.approve', 1);
         }
-        $data = isset($request->paginate)&&!empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
-        return $data;
+        return isset($request->paginate)&&!empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
     }
 
     public function storeData($request)
