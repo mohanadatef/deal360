@@ -18,6 +18,8 @@ use App\Http\Controllers\Api\CoreData\AmenityController;
 use App\Http\Controllers\Api\CoreData\PackageController;
 use App\Http\Controllers\Api\CoreData\CurrencyController;
 use App\Http\Controllers\Api\CoreData\HighLightController;
+use App\Http\Controllers\Api\Setting\MetaController;
+use App\Http\Controllers\Api\Setting\FQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,46 +57,56 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
                 Route::get('/list', [LanguageController::class, 'listIndex'])->name('language.list');
             });
             //status
-            Route::prefix('/status')->group(function () {
-                Route::get('/list', [StatusController::class, 'listIndex'])->name('status.list');
+            Route::prefix('/status')->name('status.')->group(function () {
+                Route::get('/list', [StatusController::class, 'listIndex'])->name('list');
             });
             //type
-            Route::prefix('/type')->group(function () {
-                Route::get('/list', [TypeController::class, 'listIndex'])->name('type.list');
+            Route::prefix('/type')->name('type.')->group(function () {
+                Route::get('/list', [TypeController::class, 'listIndex'])->name('list');
             });
             //category
-            Route::prefix('/category')->group(function () {
-                Route::get('/list', [CategoryController::class, 'listIndex'])->name('category.list');
+            Route::prefix('/category')->name('category.')->group(function () {
+                Route::get('/list', [CategoryController::class, 'listIndex'])->name('list');
             });
             //country
-            Route::prefix('/country')->group(function () {
-                Route::get('/list', [CountryController::class, 'listIndex'])->name('country.list');
+            Route::prefix('/country')->name('country.')->group(function () {
+                Route::get('/list', [CountryController::class, 'listIndex'])->name('list');
             });
             //city
-            Route::prefix('/city')->group(function () {
-                Route::get('/list', [CityController::class, 'listIndex'])->name('city.list');
+            Route::prefix('/city')->name('city.')->group(function () {
+                Route::get('/list', [CityController::class, 'listIndex'])->name('list');
             });
             //area
-            Route::prefix('/rejoin')->group(function () {
-                Route::get('/list', [RejoinController::class, 'listIndex'])->name('area.list');
+            Route::prefix('/rejoin')->name('rejoin.')->group(function () {
+                Route::get('/list', [RejoinController::class, 'listIndex'])->name('list');
             });
             //amenity
-            Route::prefix('/amenity')->group(function () {
-                Route::get('/list', [AmenityController::class, 'listIndex'])->name('amenity.list');
+            Route::prefix('/amenity')->name('amenity.')->group(function () {
+                Route::get('/list', [AmenityController::class, 'listIndex'])->name('list');
             });
             //package
-            Route::prefix('/package')->group(function () {
-                Route::get('/list', [PackageController::class, 'listIndex'])->name('package.list');
+            Route::prefix('/package')->name('package.')->group(function () {
+                Route::get('/list', [PackageController::class, 'listIndex'])->name('list');
             });
             //currency
-            Route::prefix('/currency')->group(function () {
-                Route::get('/list', [CurrencyController::class, 'listIndex'])->name('currency.list');
+            Route::prefix('/currency')->name('currency.')->group(function () {
+                Route::get('/list', [CurrencyController::class, 'listIndex'])->name('list');
             });
             //high light
-            Route::prefix('/highlight')->group(function () {
-                Route::get('/list', [HighLightController::class, 'listIndex'])->name('highlight.list');
+            Route::prefix('/highlight')->name('highlight.')->group(function () {
+                Route::get('/list', [HighLightController::class, 'listIndex'])->name('list');
             });
         });
+        Route::prefix('/setting')->name('setting.')->group(function () {
+            //meta
+            Route::prefix('/meta')->name('meta.')->group(function () {
+                Route::get('/list', [MetaController::class, 'listIndex'])->name('list');
+            });
+            //fq
+            Route::prefix('/fq')->name('fq.')->group(function () {
+                Route::get('/list', [FQController::class, 'listIndex'])->name('list');
+            });
+            });
         //company
         Route::prefix('/company')->name('company.')->group(function () {
             //index

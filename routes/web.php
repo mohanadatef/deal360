@@ -68,7 +68,7 @@ Route::prefix('/city')->group(function () {
 //area
 Route::prefix('/rejoin')->group(function () {
     Route::get('/list/{country}/{city}', [RejoinController::class, 'listIndex'])
-        ->name('area.list');
+        ->name('rejoin.list');
 });
 //amenity
 Route::prefix('/amenity')->group(function () {
