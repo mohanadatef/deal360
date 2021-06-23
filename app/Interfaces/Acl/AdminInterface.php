@@ -14,4 +14,5 @@ interface AdminInterface
     public function restoreData($id);
     public function removeData($id);
     public function socialMediaSearch($type,$id);
+    public function searchData($email);
 }

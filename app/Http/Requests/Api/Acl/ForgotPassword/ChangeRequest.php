@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Admin\Acl\ForgotPassword;
+namespace App\Http\Requests\Api\Acl\ForgotPassword;
 
 use App\Models\Acl\User;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
 class ChangeRequest extends FormRequest
@@ -31,10 +29,5 @@ class ChangeRequest extends FormRequest
         return [
             'password' => 'required|string|min:6|confirmed',
         ];
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response(['status' => 0, 'data' => [], 'message' => $validator->errors()]));
     }
 }

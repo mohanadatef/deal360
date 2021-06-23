@@ -19,4 +19,5 @@ return [
     'login'=>'login success',
     'support'=>'call support',
     'register_before' => 'register before',
+    'code_wrong'=>'code wrong',
 ];

@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'gender' => $this->gender,
             'dob' => $this->dob,
+            'approve'=>$this->approve,
             'role' => new RoleListResource($this->role),
             'country' => new CountryListResource($this->country),
             'image' => getImag($this->image,'user'),

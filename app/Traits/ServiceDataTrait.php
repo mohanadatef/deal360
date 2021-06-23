@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Traits;
-use App\Events\EmailVerifiedEvent;
+use App\Events\Admin\Acl\EmailVerifiedEvent;
 
 trait ServiceDataTrait
 {
@@ -15,7 +15,7 @@ trait ServiceDataTrait
         }
         $data->update();
     }
-    
+
     public function changeApprove($data)
     {
         if ($data->approve) {
@@ -25,7 +25,7 @@ trait ServiceDataTrait
 	       event(new EmailVerifiedEvent($data,$this->approveEmail()));
         }
         $data->update();
-        
+
     }
 
     public function storeCheckLanguage($data,$request)

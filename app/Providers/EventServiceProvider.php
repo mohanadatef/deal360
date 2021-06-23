@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\Admin\Acl\EmailVerifiedEvent;
+use App\Events\Api\Acl\EmailForgotPasswordEvent;
+use App\Listeners\Api\Acl\EmailForgotPasswordListener;
 use App\Listeners\Admin\Acl\EmailVerifiedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -23,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         //event send email when approve user
         EmailVerifiedEvent::class => [
             EmailVerifiedListener::class,
+        ],
+        EmailForgotPasswordEvent::class => [
+            EmailForgotPasswordListener::class,
         ],
     ];
 

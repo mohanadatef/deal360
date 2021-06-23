@@ -115,4 +115,10 @@ class UserRepository implements AdminInterface
     {
         return $this->data->where($type,$id)->first();
     }
+
+    public function searchData($email)
+    {
+        return $this->data->status(1)->approve(1)->where('username',$email)
+            ->orwhere('email',$email)->status(1)->approve(1)->first();
+    }
 }

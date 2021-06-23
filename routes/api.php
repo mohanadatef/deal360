@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Acl\AuthController;
 use App\Http\Controllers\Api\Acl\UserController;
 use App\Http\Controllers\Api\Acl\AgencyController;
+use App\Http\Controllers\Api\Acl\ForgotPasswordController;
 use App\Http\Controllers\Api\Acl\AgentController;
 use App\Http\Controllers\Api\Acl\DeveloperController;
 use App\Http\Controllers\Api\CoreData\LanguageController;
@@ -38,6 +39,15 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             Route::post('/login', [AuthController::class, 'login'])->name('login');
             //register
             Route::post('/register', [UserController::class, 'register'])->name('register');
+            //forgot password
+            Route::prefix('/forgotpassword')->name('forgotpassword.')->group(function () {
+                //search
+                Route::get('/search', [ForgotPasswordController::class, 'search'])->name('search');
+                //check
+                Route::get('/check', [ForgotPasswordController::class, 'check'])->name('check');
+                //change
+                Route::post('/change', [ForgotPasswordController::class, 'changePassowrd'])->name('change');
+            });
         });
         //core data
         Route::prefix('/core_data')->name('core_data.')->group(function () {

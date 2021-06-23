@@ -19,6 +19,6 @@ class ForgotPasswordController extends Controller
 
     public function update(ChangeRequest $request,$id)
     {
-        $this->forgotPasswordRepository->updateData($request,$id);
+        $this->forgotPasswordRepository->changePassword($request,$id);
     }
 }

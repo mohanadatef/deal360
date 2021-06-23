@@ -20,6 +20,7 @@ class AgentResource extends JsonResource
             'phone' => $this->user->phone,
             'gender' => $this->user->gender,
             'dob' => $this->user->dob,
+            'approve'=>$this->user->approve,
             'role' => new RoleListResource($this->user->role),
             'country' => new CountryListResource($this->user->country),
             'image' => getImag($this->user->image,'user'),
