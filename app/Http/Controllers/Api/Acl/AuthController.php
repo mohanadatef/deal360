@@ -37,7 +37,7 @@ class AuthController extends Controller
             }
         } else {
             //if email or user name with password
-            $user = $this->user->with('image', 'country', 'role');
+            $user = $this->user->with('image', 'country', 'role')->whereNotBetween('role_id', [1, 2]);
                 $user=$user->where('email', $request->email)
                 ->orwhere('username', $request->email)->first();
             //check password
@@ -49,9 +49,9 @@ class AuthController extends Controller
                 //login
                 Auth::loginUsingId($user->id);
                 //create token
-                $token = Auth::user()->createToken('passport')->accessToken;
+                $token = Auth::user()->createToken(['passport']);
                 //update user token
-                $user->update(['token' => $token]);
+                $user->update(['token' => $token->accessToken]);
                 return response(['status' => 1, 'data' => ['user' => new UserResource($user)], 'message' => trans('auth.login')]);
             }
             //if status not 1
