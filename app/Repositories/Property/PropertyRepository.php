@@ -17,7 +17,7 @@ class PropertyRepository implements PropertyInterface
 
     public function getData($request)
     {
-        $data = $this->data->with('user.role', 'city', 'country', 'currency', 'title');
+        $data = $this->data->with('user.role', 'city', 'country', 'currency', 'title','image');
         if (isset($request->status_id) && !empty($request->status_id)) {
             $data = $data->statusid($request->status_id);
         } elseif (isset($request->status_name) && !empty($request->status_name)) {

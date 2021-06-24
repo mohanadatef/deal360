@@ -112,12 +112,6 @@ class CreateForeignKeys extends Migration
 			$table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade')
 				->onUpdate('restrict');
 		});
-		Schema::table('reviews',function(Blueprint $table)
-		{
-			$table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade')
-				->onUpdate('restrict');
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
-		});
 		Schema::table('properties',function(Blueprint $table)
 		{
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
@@ -134,7 +128,7 @@ class CreateForeignKeys extends Migration
 			$table->foreign('status_id')->references('id')->on('status')->onDelete('cascade')->onUpdate('restrict');
 		});
 	}
-	
+
 	public function down()
 	{
 		Schema::table('translations',function(Blueprint $table)
@@ -228,11 +222,6 @@ class CreateForeignKeys extends Migration
 		{
 			$table->dropForeign('property_photographic_informations_property_id_foreign');
 			$table->dropForeign('property_photographic_informations_user_id_foreign');
-		});
-		Schema::table('reviews',function(Blueprint $table)
-		{
-			$table->dropForeign('reviews_property_id_foreign');
-			$table->dropForeign('reviews_user_id_foreign');
 		});
 		Schema::table('properties',function(Blueprint $table)
 		{

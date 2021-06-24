@@ -17,7 +17,7 @@ class Image extends Model
 
     protected $dates = ['deleted_at'];
 
-    public function category()
+    public function image()
     {
         return $this->morphTo();
     }
