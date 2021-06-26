@@ -4,12 +4,12 @@ namespace App\Http\Resources\Property\Property;
 
 use App\Http\Resources\Acl\Company\CompanyResource;
 use App\Http\Resources\Acl\User\UserResource;
+use App\Http\Resources\CoreData\Amenity\AmenityListResource;
 use App\Http\Resources\CoreData\Category\CategoryResource;
 use App\Http\Resources\CoreData\City\CityResource;
 use App\Http\Resources\CoreData\Country\CountryResource;
 use App\Http\Resources\CoreData\Currency\CurrencyResource;
 use App\Http\Resources\CoreData\HighLight\HighLightResource;
-use App\Http\Resources\CoreData\Amenity\AmenityResource;
 use App\Http\Resources\CoreData\Rejoin\RejoinResource;
 use App\Http\Resources\CoreData\Status\StatusResource;
 use App\Http\Resources\CoreData\Type\TypeResource;
@@ -32,7 +32,7 @@ class PropertyResource extends JsonResource
             'category'=>new CategoryResource($this->category),
             'currency'=>new CurrencyResource($this->currency),
             'high_light'=>new HighLightResource($this->high_light),
-            'amenity'=> AmenityResource::collection($this->amenity),
+            'amenity'=> AmenityListResource::collection($this->amenity),
             'bathroom'=>$this->bathroom?$this->bathroom:0,
             'bedroom'=>$this->bedroom?$this->bedroom:0,
             'area'=>$this->area?$this->area:0,

@@ -4,9 +4,11 @@ namespace App\Http\Resources\Property\Property;
 
 use App\Http\Resources\Acl\Company\CompanyResource;
 use App\Http\Resources\Acl\User\UserResource;
+use App\Http\Resources\CoreData\Category\CategoryListResource;
 use App\Http\Resources\CoreData\City\CityResource;
 use App\Http\Resources\CoreData\Country\CountryResource;
 use App\Http\Resources\CoreData\Currency\CurrencyResource;
+use App\Http\Resources\CoreData\Type\TypeListResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PropertyCardResource extends JsonResource
@@ -24,6 +26,8 @@ class PropertyCardResource extends JsonResource
             'area'=>$this->area?$this->area:0,
             'price'=>$this->price?$this->price:0,
             'currency'=>new CurrencyResource($this->currency),
+            'type'=>new TypeListResource($this->type),
+            'category'=>new CategoryListResource($this->category),
             'image'=>null,
         ];
     }
