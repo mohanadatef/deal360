@@ -25,12 +25,13 @@ class PropertyRepository implements PropertyInterface
     public function getData($request)
     {
         $data = $this->data->with('user.role', 'city', 'country', 'currency', 'title', 'image', 'category', 'type');
+        if (isset($request->web_compare)) {
+            $data = $data->whereKey($request->property);
+        }
         if (isset($request->status_id) && !empty($request->status_id)) {
             $data = $data->statusid($request->status_id);
         } elseif (isset($request->status_name) && !empty($request->status_name)) {
             $data = $data->status($request->status_name);
-        } else {
-            $data = $data->status('publish');
         }
         if (isset($request->country_id) && !empty($request->country_id)) {
             $data = $data->where('country_id', $request->country_id);
@@ -98,10 +99,12 @@ class PropertyRepository implements PropertyInterface
                 ->wherein('amenity_id', $tanslation->toarray());
         }
         if (isset($request->web)) {
+            $data = $data->status('publish');
             $data = $data->join('users', 'properties.user_id', 'users.id')->where('users.status', 1)->where('users.approve', 1);
             $data = $data->inRandomOrder();
         }
-        return isset($request->paginate) && !empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
+
+           return isset($request->paginate) && !empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
     }
 
     public function showData($id)

@@ -32,4 +32,11 @@ class PropertyController extends Controller
         $property= new PropertyResource($this->propertyRepository->showData($request->id));//return one
         return response(['status' => 1, 'data' => $property, 'message' => trans('lang.Done')], 200);
     }
+
+    public function compare(Request $request)
+    {
+        $request->request->add(['web_compare' => 1]);
+        $property=$this->propertyRepository->getData($request);
+        return response(['status' => 1, 'data' => PropertyCardResource::collection($property), 'message' => trans('lang.Done')], 200);
+    }
 }

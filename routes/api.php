@@ -128,6 +128,8 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             Route::get('/index', [PropertyController::class, 'index'])->name('index');
             //profile
             Route::get('/profile', [PropertyController::class, 'show'])->name('show');
+            //compare
+            Route::get('/compare', [PropertyController::class, 'compare'])->name('compare');
         });
     });
 });
