@@ -20,8 +20,7 @@
         //get all company available
         public function index(Request $request)
         {
-            $paginate=[];
-            $request->request->add(['status' => 1]);
+            $request->request->add(['web' => 1]);
             $company=$this->companyRepository->getData($request);
             $paginate=['total_pages'=>ceil($company->Total()/$company->PerPage()),'current_page'=>$company->CurrentPage(),'url_page'=>url('admin/company?page=')];
             $company= CompanyCardResource::collection($company);

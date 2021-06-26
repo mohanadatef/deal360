@@ -19,6 +19,9 @@ class CompanyResource extends JsonResource
             'address'=>$this->address?$this->address->value:"",
             'website'=>$this->user->website,
             'agent'=>AgentCardResource::collection($this->agent),
+            'buy_count'=>$this->buy_count ?$this->buy_count:0,
+            'rent_count'=>$this->rent_count ?$this->rent_count:0,
+            'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
         ];
     }
 }

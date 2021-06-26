@@ -20,7 +20,7 @@ class AgentController extends Controller
     //get all agent available
     public function index(Request $request)
     {
-        $request->request->add(['status' => 1]);
+        $request->request->add(['web' => 1]);
         $agent=$this->agentRepository->getData($request);
         $paginate=['total_pages'=>ceil($agent->Total()/$agent->PerPage()),'current_page'=>$agent->CurrentPage(),'url_page'=>url('admin/agent?page=')];
         $agent= AgentCardResource::collection($agent);
