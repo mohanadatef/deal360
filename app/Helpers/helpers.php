@@ -40,9 +40,11 @@ if (!function_exists('permissionShow')) {
     //$name => permission name we want check it
     function permissionShow($name)
     {
-        return DB::table('permissions')
-            ->join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
-            ->where('role_permissions.role_id', Auth::user()->role_id)->where('permissions.name', $name)->count();
+        return cache()->remember('permission_show', 60 * 60 * 60, function () use ($name) {
+            return DB::table('permissions')
+                ->join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
+                ->where('role_permissions.role_id', Auth::user()->role_id)->where('permissions.name', $name)->count();
+        });
     }
 }
 //change locale language in app function
@@ -107,6 +109,6 @@ if (!function_exists('executionTime')) {
 if (!function_exists('nameDay')) {
     function nameDay()
     {
-        return array('saturday','sunday','monday','tuesday','wednesday','thursday','friday');
+        return array('saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday');
     }
 }

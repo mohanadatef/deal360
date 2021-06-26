@@ -807,6 +807,7 @@ class ComposerStaticInit4503985e1c43f7660b10fb70f2dec819
         'App\\Models\\Property\\PropertyPhotographic' => __DIR__ . '/../..' . '/app/Models/Property/PropertyPhotographic.php',
         'App\\Models\\Property\\Review' => __DIR__ . '/../..' . '/app/Models/Property/Review.php',
         'App\\Models\\Property\\UserPackageProperty' => __DIR__ . '/../..' . '/app/Models/Property/UserPackageProperty.php',
+        'App\\Models\\Review' => __DIR__ . '/../..' . '/app/Models/Review.php',
         'App\\Models\\Setting\\CallUs' => __DIR__ . '/../..' . '/app/Models/Setting/CallUs.php',
         'App\\Models\\Setting\\FQ' => __DIR__ . '/../..' . '/app/Models/Setting/FQ.php',
         'App\\Models\\Setting\\Meta' => __DIR__ . '/../..' . '/app/Models/Setting/Meta.php',

@@ -205,6 +205,7 @@ return array(
     'App\\Models\\Property\\PropertyPhotographic' => $baseDir . '/app/Models/Property/PropertyPhotographic.php',
     'App\\Models\\Property\\Review' => $baseDir . '/app/Models/Property/Review.php',
     'App\\Models\\Property\\UserPackageProperty' => $baseDir . '/app/Models/Property/UserPackageProperty.php',
+    'App\\Models\\Review' => $baseDir . '/app/Models/Review.php',
     'App\\Models\\Setting\\CallUs' => $baseDir . '/app/Models/Setting/CallUs.php',
     'App\\Models\\Setting\\FQ' => $baseDir . '/app/Models/Setting/FQ.php',
     'App\\Models\\Setting\\Meta' => $baseDir . '/app/Models/Setting/Meta.php',
