@@ -15,11 +15,13 @@ use App\Http\Resources\CoreData\Status\StatusResource;
 use App\Http\Resources\CoreData\Type\TypeResource;
 use App\Http\Resources\Property\FloorPlanResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class PropertyResource extends JsonResource
 {
     public function toArray($request)
     {
+        $favourite = DB::table('favourites')->where('user_id',$request->user_auth)->where('property_id',$this->id)->count();
         return [
             'id' => $this->id,
             'user' => $this->user->agency ? new CompanyResource($this->user->agency) : ($this->user->developer ? new CompanyResource($this->user->developer) : new UserResource($this->user)),
@@ -51,6 +53,7 @@ class PropertyResource extends JsonResource
             'type_date'=>$this->type_date?$this->type_date:0,
             'count_date'=>$this->count_date?$this->count_date:0,
             'order'=>$this->order ?$this->order :0,
+            'favourite'=>$favourite,
             'image'=>null,
             'floor_plan'=>FloorPlanResource::collection($this->floor_plan),
         ];

@@ -10,11 +10,13 @@ use App\Http\Resources\CoreData\Country\CountryResource;
 use App\Http\Resources\CoreData\Currency\CurrencyResource;
 use App\Http\Resources\CoreData\Type\TypeListResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class PropertyCardResource extends JsonResource
 {
     public function toArray($request)
     {
+        $favourite = DB::table('favourites')->where('user_id',$request->user_auth)->where('property_id',$this->id)->count();
         return [
             'id' => $this->id,
             'user' => $this->user->agency ? new CompanyResource($this->user->agency) : ($this->user->developer ? new CompanyResource($this->user->developer) : new UserResource($this->user)),
@@ -28,6 +30,7 @@ class PropertyCardResource extends JsonResource
             'currency'=>new CurrencyResource($this->currency),
             'type'=>new TypeListResource($this->type),
             'category'=>new CategoryListResource($this->category),
+            'favourite'=>$favourite,
             'image'=>null,
         ];
     }
