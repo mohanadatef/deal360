@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->date('dob')->default(\Carbon\Carbon::now())->nullable();
             $table->integer('role_id')->unsigned()->index();
             $table->integer('country_id')->unsigned()->index();
-            $table->text('password');
+            $table->text('password')->nullable();
             $table->text('google_id')->nullable();
             $table->text('facebook_id')->nullable();
             $table->text('apple_id')->nullable();
