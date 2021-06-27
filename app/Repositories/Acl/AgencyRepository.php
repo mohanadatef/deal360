@@ -21,6 +21,7 @@ class AgencyRepository implements UserInterface
         $this->userRepository = $UserRepository;
     }
 
+
     public function getData($request)
     {
         $data = $this->data->with('user');

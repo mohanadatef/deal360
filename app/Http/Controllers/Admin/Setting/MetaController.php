@@ -25,7 +25,7 @@ class MetaController extends Controller
         $this->middleware('permission:meta-remove')->only('remove');
     }
 
-    public function index()
+    ()
     {
         $datas = $this->metaRepository->getData();
         return view(checkView('admin.setting.meta.index'), compact('datas'));

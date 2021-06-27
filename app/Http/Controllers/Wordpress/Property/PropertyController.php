@@ -39,6 +39,10 @@
             $count_property=empty($count_property)?0:$count_property->id;
             $data_property=array();
             $data_translation=array();
+            $data_translation1=array();
+            $data_translation2=array();
+            $data_translation3=array();
+            $data_translation4=array();
             $property_image=array();
             $property_image_plan=array();
             $language=language();
@@ -47,6 +51,7 @@
             $image=array();
             $id_plans=array();
             $id=0;
+            $x=0;
             $ids=array();
             $photographer=array();
             $floor_plan=array();
@@ -88,7 +93,7 @@
                             if(!in_array($property['wp_id'],$ids))
                             {
                                 $ids[]=$property['wp_id'];
-                                $id=$property['wp_id']+$count_property;
+                                $id=$property['wp_id']+$count_property+$x;
                                 if(empty($property['area']) or $property['area']=="Not Available")
                                 {
                                     $area=0;
@@ -148,6 +153,7 @@
                                                        'city_id'       =>in_array(strtolower($property["city"]),$city_name)?array_search(strtolower($property["city"]),$city_name):1,
                                                        'type_id'       =>in_array(strtolower($property["type"]),$type_name)?array_search(strtolower($property["type"]),$type_name):1,);
                                 executionTime();
+                                $x=$x+1;
                                 foreach($language as $lang)
                                 {
                                     executionTime();
@@ -155,12 +161,12 @@
                                                               'key'          =>'title',
                                                               'value'        =>!empty($property['title'][$lang->code])?$property['title'][$lang->code]:" ",
                                                               'language_id'  =>$lang->id);
-                                    $data_translation[]=array('category_type'=>Property::class,'category_id'=>$id,
+                                    $data_translation1[]=array('category_type'=>Property::class,'category_id'=>$id,
                                                               'key'          =>'description',
                                                               'value'        =>!empty($property['description'][$lang->code])?$property['description'][$lang->code]:" ",
                                                               'language_id'  =>$lang->id);
                                 }
-                                    $data_translation[]=array('category_type'=>Property::class,'category_id'=>$id,
+                                    $data_translation2[]=array('category_type'=>Property::class,'category_id'=>$id,
                                                               'key'          =>'address',
                                                               'value'        =>!empty($property['address'])?$property['address']:" ",
                                                               'language_id'  =>$language_id);
@@ -246,11 +252,11 @@
                                         foreach($language as $lang)
                                         {
                                             executionTime();
-                                            $data_translation[]=array('category_type'=>PropertyFloorPlan::class,
+                                            $data_translation3[]=array('category_type'=>PropertyFloorPlan::class,
                                                                       'category_id'  =>$id_plan,'key'=>'title',
                                                                       'value'        =>!empty($property['title'][$lang->code])?$property['title'][$lang->code]:" ",
                                                                       'language_id'  =>$lang->id);
-                                            $data_translation[]=array('category_type'=>PropertyFloorPlan::class,
+                                            $data_translation4[]=array('category_type'=>PropertyFloorPlan::class,
                                                                       'category_id'  =>$id_plan,'key'=>'description',
                                                                       'value'        =>!empty($property['description'][$lang->code])?$property['description'][$lang->code]:" ",
                                                                       'language_id'  =>$lang->id);
@@ -258,49 +264,62 @@
                                     }
                                 }
                             }
+                            $x=$x+1;
                         }
+                        executionTime();
+                        $x=$x+1;
+                    }
+                    executionTime();
+                    $x=$x+rand(0,1000);
+                }
+                $x=$x+rand(0,10000);
+                executionTime();
+                DB::transaction(function() use ($data_property,$data_translation,$image,$photographer,$amenity_property,$floor_plan,$image_plan,$property_image,$property_image_plan,$data_translation1,$data_translation2,$data_translation3,$data_translation4)
+                {
+                    DB::table('properties')->insert($data_property);
+                    executionTime();
+                    DB::table('property_photographic_informations')->insert($photographer);
+                    executionTime();
+                    DB::table('property_floor_plans')->insert($floor_plan);
+                    executionTime();
+                    DB::table('property_amenities')->insert($amenity_property);
+                    executionTime();
+                    DB::table('translations')->insert($data_translation);
+                    executionTime();
+                    DB::table('translations')->insert($data_translation1);
+                    executionTime();
+                    DB::table('translations')->insert($data_translation2);
+                    executionTime();
+                    DB::table('translations')->insert($data_translation3);
+                    executionTime();
+                    DB::table('translations')->insert($data_translation4);
+                    executionTime();
+                    foreach($image as $im)
+                    {
+                        executionTime();
+                        $name=$this->uploadImageWordpress($im['image_url'],'property');
+                        executionTime();
+                        $property_image[]=array('category_type'=>Property::class,'category_id'=>$im['id'],'image'=>$name);
                         executionTime();
                     }
                     executionTime();
-                }
-                executionTime();
+                    DB::table('images')->insert($property_image);
+                    executionTime();
+                    foreach($image_plan as $im)
+                    {
+                        executionTime();
+                        $name=$this->uploadImageWordpress($im['image_url'],'property_plan');
+                        executionTime();
+                        $property_image_plan[]=array('category_type'=>PropertyFloorPlan::class,'category_id'=>$im['id'],
+                            'image'        =>$name);
+                        executionTime();
+                    }
+                    executionTime();
+                    DB::table('images')->insert($property_image_plan);
+                    executionTime();
+                    executionTime();
+                });
             }
             executionTime();
-            DB::transaction(function() use ($data_property,$data_translation,$image,$photographer,$amenity_property,$floor_plan,$image_plan,$property_image,$property_image_plan)
-            {
-                DB::table('properties')->insert($data_property);
-                executionTime();
-                DB::table('property_photographic_informations')->insert($photographer);
-                executionTime();
-                DB::table('property_floor_plans')->insert($floor_plan);
-                executionTime();
-                DB::table('property_amenities')->insert($amenity_property);
-                executionTime();
-                DB::table('translations')->insert($data_translation);
-                executionTime();
-                foreach($image as $im)
-                {
-                    executionTime();
-                    $name=$this->uploadImageWordpress($im['image_url'],'property');
-                    executionTime();
-                    $property_image[]=array('category_type'=>Property::class,'category_id'=>$im['id'],'image'=>$name);
-                    executionTime();
-                }
-                executionTime();
-                DB::table('images')->insert($property_image);
-                executionTime();
-                foreach($image_plan as $im)
-                {
-                    executionTime();
-                    $name=$this->uploadImageWordpress($im['image_url'],'property_plan');
-                    executionTime();
-                    $property_image_plan[]=array('category_type'=>PropertyFloorPlan::class,'category_id'=>$im['id'],
-                                                 'image'        =>$name);
-                    executionTime();
-                }
-                executionTime();
-                DB::table('images')->insert($property_image_plan);
-                executionTime();
-            });
         }
     }

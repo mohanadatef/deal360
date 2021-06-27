@@ -39,7 +39,7 @@ if (!function_exists('languageActive')) {
 if (!function_exists('permissionShow')) {
     //$name => permission name we want check it
     function permissionShow($name)
-    {
+    { //cache query for small time cache will stay one day
         return cache()->remember('permission_show', 60 * 60 * 60, function () use ($name) {
             return DB::table('permissions')
                 ->join('role_permissions', 'role_permissions.permission_id', '=', 'permissions.id')
