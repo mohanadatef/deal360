@@ -52,7 +52,7 @@ class Property extends Model
         return $query->orderby('order',$order);
     }
 
-    public function scopeStatus($query,$status)
+    public function scopeStatusName($query,$status)
     {
         return $query->join('translations', 'properties.status_id', 'translations.category_id')
             ->where('translations.category_type', Status::class)->where('translations.key', 'title')

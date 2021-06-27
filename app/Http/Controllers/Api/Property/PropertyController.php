@@ -35,8 +35,6 @@ class PropertyController extends Controller
 
     public function compare(Request $request)
     {
-        $request->request->add(['web_compare' => 1]);
-        $property=$this->propertyRepository->getData($request);
-        return response(['status' => 1, 'data' => PropertyCardResource::collection($property), 'message' => trans('lang.Done')], 200);
+        return response(['status' => 1, 'data' => PropertyCardResource::collection($this->propertyRepository->showData($request->property)), 'message' => trans('lang.Done')], 200);
     }
 }
