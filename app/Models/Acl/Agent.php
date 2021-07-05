@@ -2,6 +2,7 @@
 
 namespace App\Models\Acl;
 
+use App\Models\Review;
 use App\Models\Translation;
 use App\Models\WorkTime;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,11 @@ class Agent extends Model
 			->where('key' ,'about_me')
 			->where('language_id' ,languageId())->withTrashed();
 	}
+
+    public function review()
+    {
+        return $this->morphMany(Review::class, 'category')->where('status',1)->with(['user'])->withTrashed();
+    }
 
 	public function address()
 	{

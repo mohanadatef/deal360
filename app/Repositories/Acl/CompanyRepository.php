@@ -26,7 +26,7 @@ class CompanyRepository implements CompanyInterface
     {
         $data = $this->data->with('developer.agent', 'agency.agent')->wherein('role_id', [4, 6])->status(1)->approve(1);
         $data = isset($request->paginate) && !empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
-        if (isset($request->status)) {
+        if (isset($request->web)) {
             foreach ($data as $datas) {
                 $type = DB::table('translations')->where('category_type', Type::class)
                     ->where('key', 'title');

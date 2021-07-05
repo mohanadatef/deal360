@@ -18,7 +18,6 @@ class CreateReviewsTable extends Migration {
             $table->text('description');
             $table->integer('status')->default('0');
             $table->integer('rating')->default('0');
-            $table->integer('order')->default('0');
             $table->integer('user_id')->unsigned()->index();
 			$table->timestamps();
 			$table->softDeletes();

@@ -2,6 +2,7 @@
 
 namespace App\Models\Acl;
 
+use App\Models\Review;
 use App\Models\Translation;
 use App\Models\WorkTime;
 use Illuminate\Database\Eloquent\Model;
@@ -41,6 +42,11 @@ class Agency extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id')->withTrashed();
+    }
+
+    public function review()
+    {
+        return $this->morphMany(Review::class, 'category')->where('status',1)->with(['user'])->withTrashed();
     }
 
     public function agent()

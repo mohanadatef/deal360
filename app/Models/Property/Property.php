@@ -13,6 +13,7 @@ use App\Models\CoreData\HighLight;
 use App\Models\CoreData\Status;
 use App\Models\CoreData\Type;
 use App\Models\Image;
+use App\Models\Review;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,6 +34,11 @@ class Property extends Model
     public function translation()
     {
         return $this->morphMany(Translation::class, 'category')->withTrashed();
+    }
+
+    public function review()
+    {
+        return $this->morphMany(Review::class, 'category')->where('status',1)->with(['user'])->withTrashed();
     }
 
     public function title()

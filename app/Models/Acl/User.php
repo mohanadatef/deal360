@@ -6,7 +6,6 @@ use App\Models\CoreData\Country;
 use App\Models\CoreData\Package;
 use App\Models\Image;
 use App\Models\Property\Property;
-use App\Models\Property\Review;
 use App\Models\View;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -55,7 +54,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::Class, 'role_id')->with('title')->withTrashed();
+        return $this->belongsTo(Role::Class, 'role_id')->with(['title'])->withTrashed();
     }
 
     public function agency()
@@ -85,12 +84,7 @@ class User extends Authenticatable
 
     public function property()
     {
-        return $this->hasmany(Property::Class)->with('user', 'city', 'country', 'rejoin', 'currency', 'category', 'status', 'type', 'highlight', 'amenity', 'floor_plan', 'title', 'image');
-    }
-
-    public function review()
-    {
-        return $this->hasmany(Review::Class);
+        return $this->hasmany(Property::Class)->with(['user', 'city', 'country', 'rejoin', 'currency', 'category', 'status', 'type', 'highlight', 'amenity', 'floor_plan', 'title', 'image']);
     }
 
     public function view()

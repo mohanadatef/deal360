@@ -2,6 +2,7 @@
 
 namespace App\Models\Acl;
 
+use App\Models\Review;
 use App\Models\Translation;
 use App\Models\WorkTime;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,11 @@ class Developer extends Model
 	{
 		return $this->morphMany(Translation::class, 'category')->withTrashed();
 	}
+
+    public function review()
+    {
+        return $this->morphMany(Review::class, 'category')->where('status',1)->with(['user'])->withTrashed();
+    }
 
 	public function about_me()
 	{

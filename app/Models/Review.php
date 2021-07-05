@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Review extends Model
 {
     protected $fillable = [
-        'title','description','status','rating','order','user_id'
+        'title','description','status','rating','user_id','category_type','category_id'
     ];
     protected $table = 'reviews';
     public $timestamps = true;
@@ -23,8 +23,13 @@ class Review extends Model
         return $this->morphTo();
     }
 
+    public function scopeStatus($query, $status)
+    {
+        return $query->whereStatus($status);
+    }
+
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id')->withTrashed();
+        return $this->belongsTo(User::class,'user_id')->with(['role','country'])->withTrashed();
     }
 }
