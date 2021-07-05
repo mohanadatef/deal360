@@ -22,9 +22,9 @@
         {
             $request->request->add(['web' => 1]);
             $company=$this->companyRepository->getData($request);
-            $paginate=['total_pages'=>ceil($company->Total()/$company->PerPage()),'current_page'=>$company->CurrentPage(),'url_page'=>url('admin/company?page=')];
+            //$paginate=['total_pages'=>ceil($company->Total()/$company->PerPage()),'current_page'=>$company->CurrentPage(),'url_page'=>url('admin/company?page=')];
             $company= CompanyCardResource::collection($company);
-            return response(['status' => 1, 'data' => ['company'=>$company,'paginate'=>$paginate], 'message' => trans('lang.Done')], 200);
+            return response(['status' => 1, 'data' => ['company'=>$company], 'message' => trans('lang.Done')], 200);
         }
 
         //get one for company by id
