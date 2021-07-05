@@ -36,7 +36,6 @@ class CompanyResource extends JsonResource
                 'count_review_1'=>$this->review->where('rating',1)->count(),
                 'avg_review'=>round($this->review->avg('rating'),1),
                 'all_review' => ReviewResource::collection($this->review),
-            ],
-            ];
+            ],];
     }
 }
