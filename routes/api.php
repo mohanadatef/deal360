@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\CoreData\CurrencyController;
 use App\Http\Controllers\Api\CoreData\HighLightController;
 use App\Http\Controllers\Api\Setting\MetaController;
 use App\Http\Controllers\Api\Setting\FQController;
+use App\Http\Controllers\Api\Setting\LabelController;
 use App\Http\Controllers\Api\Property\PropertyController;
 
 /*
@@ -107,7 +108,12 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             Route::prefix('/fq')->name('fq.')->group(function () {
                 Route::get('/list', [FQController::class, 'listIndex'])->name('list');
             });
+            //label
+            Route::apiresource('label', LabelController::class, ['except' => ['show', 'update']])->parameters(['label' => 'id']);
+            Route::prefix('/label')->name('label.')->group(function () {
+                Route::post('', [LabelController::class, 'update'])->name('update');
             });
+        });
         //company
         Route::prefix('/company')->name('company.')->group(function () {
             //index

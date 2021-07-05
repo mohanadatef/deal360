@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\CoreData;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\CoreData\TypeRepository;
+use App\Repositories\CoreData\TypeRepository;
 
 class TypeController extends Controller
 {

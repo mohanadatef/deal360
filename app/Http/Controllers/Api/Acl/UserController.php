@@ -32,20 +32,18 @@ class UserController extends Controller
                 $user = $this->userRepository->socialMediaSearch('apple_id', $request->id);
                 $request->request->add(['apple_id' => $request->id]); //add apple
             }
+            if (isset($user)) {
+                return response(['status' => 0, 'data' => [], 'message' => trans('auth.register_before')]);
+            }
         }
-        if (!$user) {
-            $request->request->add(['role_id' => 3]); //add role
-            $request->request->add(['country_id' => 1]); //add country
-            $request->request->add(['base64' => 1]); //check image
-            $request->request->add(['approve' => 0]); //add approve
-            $user = $this->userRepository->storeData($request); //create user
-            Auth::loginUsingId($user->id); //login
-            $token = Auth::user()->createToken(['passport']); //create token
-            $user->update(['token' => $token->accessToken]); //update token user
-            return response(['status' => 1, 'data' => ['user' => new UserResource($user)], 'message' => trans('lang.Done')]);
-        }else{
-            return response(['status' => 0, 'data' => [], 'message' => trans('auth.register_before')]);
-        }
-
+        $request->request->add(['role_id' => 3]); //add role
+        $request->request->add(['country_id' => 1]); //add country
+        $request->request->add(['base64' => 1]); //check image
+        $request->request->add(['approve' => 0]); //add approve
+        $user = $this->userRepository->storeData($request); //create user
+        Auth::loginUsingId($user->id); //login
+        $token = Auth::user()->createToken(['passport']); //create token
+        $user->update(['token' => $token->accessToken]); //update token user
+        return response(['status' => 1, 'data' => ['user' => new UserResource($user)], 'message' => trans('lang.Done')]);
     }
 }

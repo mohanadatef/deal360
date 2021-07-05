@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admin\Acl\Agent;
 
 use App\Models\Acl\Agent;
-use App\Repositories\Admin\Acl\AgentRepository;
+use App\Repositories\Acl\AgentRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -23,7 +23,7 @@ class EditRequest extends FormRequest
 	{
 		return true;
 	}
-	
+
 	/**
 	 * Get the validation rules that apply to the request.
 	 * @return array

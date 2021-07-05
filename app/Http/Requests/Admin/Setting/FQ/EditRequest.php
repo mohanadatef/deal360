@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\setting\FQ;
+namespace App\Http\Requests\Admin\Setting\FQ;
 
 use App\Models\setting\FQ;
 use Illuminate\Foundation\Http\FormRequest;

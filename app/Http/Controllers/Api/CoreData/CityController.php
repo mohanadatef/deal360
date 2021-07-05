@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\CoreData;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\CoreData\CityRepository;
+use App\Repositories\CoreData\CityRepository;
 use Illuminate\Http\Request;
 
 class CityController extends Controller

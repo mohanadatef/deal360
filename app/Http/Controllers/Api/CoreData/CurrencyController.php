@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\CoreData;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\CoreData\CurrencyRepository;
+use App\Repositories\CoreData\CurrencyRepository;
 
 class CurrencyController extends Controller
 {

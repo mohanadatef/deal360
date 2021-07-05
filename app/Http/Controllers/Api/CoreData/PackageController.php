@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\CoreData;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\CoreData\PackageRepository;
+use App\Repositories\CoreData\PackageRepository;
 
 class PackageController extends Controller
 {

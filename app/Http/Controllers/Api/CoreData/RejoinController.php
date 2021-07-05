@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\CoreData;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\CoreData\RejoinRepository;
+use App\Repositories\CoreData\RejoinRepository;
 use Illuminate\Http\Request;
 
 class RejoinController extends Controller

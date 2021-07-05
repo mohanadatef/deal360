@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Requests\Api\Acl\User;
+namespace App\Http\Requests\Api\Setting\Label;
 
+use App\Models\Setting\Label;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 
 class CreateRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,12 +27,18 @@ class CreateRequest extends FormRequest
      */
     public function rules()
     {
-        return[
-            'fullname' => 'required|string|unique:users,fullname',
-            'username' => 'required|string|unique:users,username',
-            'email' => 'required|email|unique:users,email',
-            'password' => !isset($this->type)?'required|string|min:6|confirmed':'nullable',
+        $rules = [
+            'key' => 'required|string|unique:labels,key',
         ];
+        foreach (language() as $lang) {
+                $rules['title.' . $lang->code] = ['required', 'string',
+                    Rule::unique('translations', 'value')
+                        ->where('category_type', Label::class)
+                        ->where('key', 'title')
+                        ->where('language_id', $lang->id)
+                ];
+        }
+        return $rules;
     }
 
     protected function failedValidation(Validator $validator)

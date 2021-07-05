@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\CoreData;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Admin\CoreData\StatusRepository;
+use App\Repositories\CoreData\StatusRepository;
 
 class StatusController extends Controller
 {

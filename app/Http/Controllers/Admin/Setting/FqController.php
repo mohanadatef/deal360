@@ -25,7 +25,7 @@ class FQController extends Controller
         $this->middleware('permission:fq-remove')->only('remove');
     }
 
-    ()
+    public function index()
     {
         $datas = $this->fqRepository->getData();
         return view(checkView('admin.setting.fq.index'), compact('datas'));

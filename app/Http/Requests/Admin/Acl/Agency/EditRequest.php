@@ -3,20 +3,20 @@
 namespace App\Http\Requests\Admin\Acl\Agency;
 
 use App\Models\Acl\Agency;
-use App\Repositories\Admin\Acl\AgencyRepository;
+use App\Repositories\Acl\AgencyRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class EditRequest extends FormRequest
 {
 	private $agencyRepository;
-	
+
 	public function __construct(AgencyRepository $AgencyRepository)
 	{
 		parent::__construct();
 		$this->agencyRepository=$AgencyRepository;
 	}
-	
+
 	/**
 	 * Determine if the user is authorized to make this request.
 	 * @return bool
@@ -25,7 +25,7 @@ class EditRequest extends FormRequest
 	{
 		return true;
 	}
-	
+
 	/**
 	 * Get the validation rules that apply to the request.
 	 * @return array
