@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Property\Property;
 
-use App\Http\Resources\Acl\Company\CompanyResource;
+use App\Http\Resources\Acl\Company\CompanyCardResource;
 use App\Http\Resources\Acl\User\UserResource;
 use App\Http\Resources\CoreData\Amenity\AmenityListResource;
 use App\Http\Resources\CoreData\Category\CategoryResource;
@@ -24,7 +24,7 @@ class PropertyResource extends JsonResource
         $favourite = DB::table('favourites')->where('user_id',$request->user_auth)->where('property_id',$this->id)->count();
         return [
             'id' => $this->id,
-            'user' => $this->user->agency ? new CompanyResource($this->user->agency) : ($this->user->developer ? new CompanyResource($this->user->developer) : new UserResource($this->user)),
+            'user' => $this->user->agency ? new CompanyCardResource($this->user->agency) : ($this->user->developer ? new CompanyCardResource($this->user->developer) : new UserResource($this->user)),
             'title' => $this->title ? $this->title->value : "",
             'country'=>new CountryResource($this->country),
             'city'=>new CityResource($this->city),
@@ -56,6 +56,7 @@ class PropertyResource extends JsonResource
             'favourite'=>$favourite,
             'image'=>null,
             'floor_plan'=>FloorPlanResource::collection($this->floor_plan),
+            'same_property'=>PropertyCardResource::collection($this->same_property),
         ];
     }
 }

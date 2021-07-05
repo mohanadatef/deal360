@@ -5,6 +5,7 @@ namespace App\Http\Resources\Acl\Agent;
 use App\Http\Resources\Acl\Company\CompanyCardResource;
 use App\Http\Resources\Acl\Role\RoleListResource;
 use App\Http\Resources\CoreData\Country\CountryListResource;
+use App\Http\Resources\Property\Property\PropertyCardResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AgentResource extends JsonResource
@@ -30,6 +31,7 @@ class AgentResource extends JsonResource
             'buy_count'=>$this->buy_count ?$this->buy_count:0,
             'rent_count'=>$this->rent_count ?$this->rent_count:0,
             'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
+            'property'=> PropertyCardResource::collection($this->user->property),
         ];
     }
 }

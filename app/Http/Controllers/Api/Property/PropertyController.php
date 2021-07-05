@@ -29,7 +29,9 @@ class PropertyController extends Controller
 
     public function show(Request $request)
     {
-        $property= new PropertyResource($this->propertyRepository->showData($request->id));//return one
+        $property= $this->propertyRepository->showData($request->id);
+        $property->same_property=$this->propertyRepository->sameData($property);
+        $property= new PropertyResource($property);//return one
         return response(['status' => 1, 'data' => $property, 'message' => trans('lang.Done')], 200);
     }
 

@@ -16,11 +16,11 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,HasFactory, Notifiable,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
-        'username','email','password','token','phone','status','approve','gender','dob',
-        'email_verified_at','role_id','country_id','fullname'
+        'username', 'email', 'password', 'token', 'phone', 'status', 'approve', 'gender', 'dob',
+        'email_verified_at', 'role_id', 'country_id', 'fullname'
     ];
 
     protected $hidden = [
@@ -38,24 +38,24 @@ class User extends Authenticatable
         return $this->morphOne(Image::class, 'category')->withTrashed();
     }
 
-   public function scopeStatus($query,$status)
+    public function scopeStatus($query, $status)
     {
         return $query->whereStatus($status);
     }
-    
-	public function scopeOrder($query,$order)
-	{
-		return $query->orderby('fullname',$order);
-	}
-    
-    public function scopeApprove($query,$approve)
+
+    public function scopeOrder($query, $order)
+    {
+        return $query->orderby('fullname', $order);
+    }
+
+    public function scopeApprove($query, $approve)
     {
         return $query->whereApprove($approve);
     }
 
     public function role()
     {
-        return $this->belongsTo(Role::Class,'role_id')->withTrashed();
+        return $this->belongsTo(Role::Class, 'role_id')->with('title')->withTrashed();
     }
 
     public function agency()
@@ -83,6 +83,11 @@ class User extends Authenticatable
         return $this->hasmany(SaveSearch::Class);
     }
 
+    public function property()
+    {
+        return $this->hasmany(Property::Class)->with('user', 'city', 'country', 'rejoin', 'currency', 'category', 'status', 'type', 'highlight', 'amenity', 'floor_plan', 'title', 'image');
+    }
+
     public function review()
     {
         return $this->hasmany(Review::Class);
@@ -95,7 +100,7 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->belongsTo(Country::Class, 'country_id')->withTrashed();
+        return $this->belongsTo(Country::Class, 'country_id')->with('title')->withTrashed();
     }
 
     public function favourite()
@@ -108,27 +113,28 @@ class User extends Authenticatable
         return $this->belongsToMany(Package::Class, 'user_packages');
     }
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
-        static::deleting(function($user) {
+        static::deleting(function ($user) {
             $user->image()->delete();
-	        $user->agency()->delete();
-	        $user->developer()->delete();
-	        $user->agent()->delete();
+            $user->agency()->delete();
+            $user->developer()->delete();
+            $user->agent()->delete();
         });
 
-        static::restoring(function($user) {
+        static::restoring(function ($user) {
             $user->image()->withTrashed()->restore();
-	        $user->agency()->withTrashed()->restore();
-	        $user->developer()->withTrashed()->restore();
-	        $user->agent()->withTrashed()->restore();
+            $user->agency()->withTrashed()->restore();
+            $user->developer()->withTrashed()->restore();
+            $user->agent()->withTrashed()->restore();
         });
 
-        static::forceDeleted(function($user) {
+        static::forceDeleted(function ($user) {
             $user->image()->forceDelete();
-	        $user->agency()->forceDelete();
-	        $user->developer()->forceDelete();
-	        $user->agent()->forceDelete();
+            $user->agency()->forceDelete();
+            $user->developer()->forceDelete();
+            $user->agent()->forceDelete();
         });
     }
 }

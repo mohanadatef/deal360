@@ -7,17 +7,19 @@ use App\Interfaces\Acl\CompanyInterface;
 use App\Models\Acl\User;
 use App\Models\CoreData\Status;
 use App\Models\CoreData\Type;
+use App\Repositories\Property\PropertyRepository;
 use Illuminate\Support\Facades\DB;
 
 class CompanyRepository implements CompanyInterface
 {
-    protected $data, $agencyrepository, $developerrepository;
+    protected $data, $agencyrepository, $developerrepository,$propertyRepository;
 
-    public function __construct(User $User, AgencyRepository $AgencyRepository, DeveloperRepository $DeveloperRepository)
+    public function __construct(User $User, AgencyRepository $AgencyRepository, DeveloperRepository $DeveloperRepository,PropertyRepository $PropertyRepository)
     {
         $this->data = $User;
         $this->agencyrepository = $AgencyRepository;
         $this->developerrepository = $DeveloperRepository;
+        $this->propertyRepository = $PropertyRepository;
     }
 
     public function getData($request)
@@ -55,25 +57,24 @@ class CompanyRepository implements CompanyInterface
         } elseif ($role_id == 6) {
             $data = $this->developerrepository->showData($id);
         }
-        if (isset($request->web)) {
-            $type = DB::table('translations')->where('category_type', Type::class)
-                ->where('key', 'title');
-            $type_buy = $type->wherein('value', ['buy', 'Buy'])->pluck('category_id');
-            $type_rent = $type->wherein('value', ['rent', 'Rent'])->pluck('category_id');
-            $type_commercial = $type->where('value', 'like', 'Commercial')
-                ->orwhere('value', 'like', 'commercial')->pluck('category_id');
-            $user_id[] = $data->id;
-            $agents = $data->agent;
-            foreach ($agents as $agent) {
-                $user_id[] = $agent->id;
-            }
-            $property = DB::table('properties')->wherein('user_id', $user_id)->join('translations', 'properties.status_id', 'translations.category_id')
-                ->where('translations.category_type', Status::class)->where('translations.key', 'title')
-                ->where('translations.value', 'publish');
-            $data->buy_count = $property->wherein('type_id', $type_buy)->count();
-            $data->rent_count = $property->wherein('type_id', $type_rent)->count();
-            $data->commercial_count = $property->wherein('type_id', $type_commercial)->count();
+        $type = DB::table('translations')->where('category_type', Type::class)
+            ->where('key', 'title');
+        $type_buy = $type->wherein('value', ['buy', 'Buy'])->pluck('category_id');
+        $type_rent = $type->wherein('value', ['rent', 'Rent'])->pluck('category_id');
+        $type_commercial = $type->where('value', 'like', 'Commercial')
+            ->orwhere('value', 'like', 'commercial')->pluck('category_id');
+        $user_id[] = $data->id;
+        foreach ($data->agent as $agent) {
+            $user_id[] = $agent->id;
         }
+        $property = DB::table('properties')->wherein('user_id', $user_id)->join('translations', 'properties.status_id', 'translations.category_id')
+            ->where('translations.category_type', Status::class)->where('translations.key', 'title')
+            ->where('translations.value', '!=','publish');
+        $property_id=$property->pluck('properties.id');
+        $data->property = $this->propertyRepository->showData($property_id);
+        $data->buy_count = $property->wherein('type_id', $type_buy)->count();
+        $data->rent_count = $property->wherein('type_id', $type_rent)->count();
+        $data->commercial_count = $property->wherein('type_id', $type_commercial)->count();
         return $data;
     }
 

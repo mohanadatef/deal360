@@ -107,4 +107,9 @@ class PropertyRepository implements PropertyInterface
     {
         return $this->data->with('user.role', 'city', 'country', 'rejoin', 'currency', 'category', 'status', 'type', 'highlight', 'amenity', 'floor_plan', 'title', 'image')->findorFail($id);
     }
+
+    public function sameData($data)
+    {
+        return $data->with('user.role', 'city', 'country', 'currency', 'title', 'image', 'category', 'type')->where('type_id',$data->type_id)->where('category_id',$data->category_id)->where('status_id',$data->status_id)->get()->random(10);
+    }
 }
