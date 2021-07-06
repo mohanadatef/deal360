@@ -20,10 +20,13 @@ class CompanyCardResource extends JsonResource
             'image' => getImag($this->image,'user'),
             'address'=>$this->developer ? ($this->developer->address?$this->developer->address->value:""): ($this->agency?($this->agency->address?$this->agency->address->value:($this->address?$this->address->value:"")):""),
             'website'=>$this->website,
+            'count_agent'=>$this->developer?$this->developer->agent->count():($this->agency?$this->agency->agent->count():$this->agent->count()),
             'agent'=>AgentCardResource::collection($this->developer?$this->developer->agent:($this->agency?$this->agency->agent:$this->agent)),
             'buy_count'=>$this->buy_count ?$this->buy_count:0,
             'rent_count'=>$this->rent_count ?$this->rent_count:0,
             'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
+            'count_property'=>$this->property->count(),
+            'avg_rating'=>round($this->developer ? $this->developer->review->avg('rating'): ($this->agency?$this->agency->review->avg('rating'):$this->review->avg('rating')),1),
         ];
     }
 }

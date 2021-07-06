@@ -22,6 +22,7 @@ class AgentCardResource extends JsonResource
             'buy_count'=>$this->buy_count ?$this->buy_count:0,
             'rent_count'=>$this->rent_count ?$this->rent_count:0,
             'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
+            'avg_rating'=>round($this->review->avg('rating'),1),
         ];
     }
 }
