@@ -30,6 +30,22 @@ class AgentRepository implements UserInterface
             $data = $data->join('users', 'agents.user_id', 'users.id')
                 ->where('users.status', 1)->where('users.approve', 1)->select('agents.*');
         }
+        if (isset($request->web)) {
+            if (isset($request->filter_rating)) {
+                if ($request->filter_rating == 1) {
+                    $data = $data->orderby('users.avg_rating', 'asc');
+                } elseif ($request->filter_rating == 0) {
+                    $data = $data->orderby('users.avg_rating', 'desc');
+                }
+            }
+            if (isset($request->filter_new)) {
+                if ($request->filter_new == 1) {
+                    $data = $data->orderBy('users.created_at', 'asc');
+                } elseif ($request->filter_new == 0) {
+                    $data = $data->orderBy('users.created_at', 'desc');
+                }
+            }
+        }
         $data = isset($request->paginate) && !empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
         foreach ($data as $datas) {
             $type = DB::table('translations')->where('category_type', Type::class)

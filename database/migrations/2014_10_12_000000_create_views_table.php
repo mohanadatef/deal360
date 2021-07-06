@@ -19,7 +19,7 @@ class CreateViewsTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->increments('id');
             $table->morphs('category');
-            $table->text('ip_address');
+            $table->text('ip_address')->nullable();
             $table->text('user_id')->default('0')->nullable();
             $table->timestamps();
             $table->softDeletes();

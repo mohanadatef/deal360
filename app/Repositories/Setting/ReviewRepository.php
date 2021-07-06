@@ -3,6 +3,7 @@
 namespace App\Repositories\Setting;
 
 
+use App\Events\Api\Setting\RatingEvent;
 use App\Interfaces\Setting\ReviewInterface;
 use App\Models\Acl\Agency;
 use App\Models\Acl\Agent;
@@ -41,7 +42,6 @@ class ReviewRepository implements ReviewInterface
             } elseif ($request->type == 'property') {
                 $data['category_type'] = Property::class;
             }
-
             $this->data->create(array_merge($request->all(),$data));
         });
     }
@@ -53,7 +53,9 @@ class ReviewRepository implements ReviewInterface
 
     public function updateStatusData($id)
     {
-        $this->changeStatus($this->showData($id));
+        $data=$this->showData($id);
+        $this->changeStatus($data);
+        event(new RatingEvent($id,$data->category_type));
     }
 
     public function deleteData($id)
@@ -74,5 +76,10 @@ class ReviewRepository implements ReviewInterface
     public function removeData($id)
     {
         $this->data->withTrashed()->find($id)->forceDelete();
+    }
+
+    public function avgRating($id,$type)
+    {
+        return round($this->data->where('category_id',$id)->where('category_type',$type)->avg('rating'),1);
     }
 }

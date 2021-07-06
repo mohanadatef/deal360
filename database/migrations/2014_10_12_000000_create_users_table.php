@@ -37,6 +37,8 @@ class CreateUsersTable extends Migration
             $table->string('youtube',255)->nullable();
             $table->string('twitter',255)->nullable();
             $table->string('instagram',255)->nullable();
+            $table->integer('count_view')->default('0');
+            $table->double('avg_rating')->default('0');
             $table->integer('wp_user_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->text('token')->nullable();

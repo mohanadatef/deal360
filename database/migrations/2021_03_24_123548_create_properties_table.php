@@ -40,6 +40,8 @@ class CreatePropertiesTable extends Migration {
             $table->string('type_date',255)->default('year')->nullable();
             $table->float('count_date')->default('1')->nullable();
             $table->integer('order')->unique();
+            $table->integer('count_view')->default('0');
+            $table->double('avg_rating')->default('0');
             $table->integer('wp_property_id')->nullable();
             $table->timestamps();
 			$table->softDeletes();

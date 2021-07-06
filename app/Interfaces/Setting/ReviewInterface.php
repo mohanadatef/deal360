@@ -12,4 +12,5 @@ interface ReviewInterface
     public function getDataDelete();
     public function restoreData($id);
     public function removeData($id);
+    public function avgRating($id,$type);
 }

@@ -25,6 +25,22 @@ class PropertyRepository implements PropertyInterface
     {
         return cache()->remember('property_get_all', 60 * 60 * 60, function () use($request){
             $data = $this->data->with('user.role', 'city', 'country', 'currency', 'title', 'image', 'category', 'type');
+            if (isset($request->web)) {
+                if (isset($request->filter_rating)) {
+                    if ($request->filter_rating == 1) {
+                        $data = $data->orderby('properties.avg_rating', 'asc');
+                    } elseif ($request->filter_rating == 0) {
+                        $data = $data->orderby('properties.avg_rating', 'desc');
+                    }
+                }
+                if (isset($request->filter_new)) {
+                    if ($request->filter_new == 1) {
+                        $data = $data->orderBy('properties.created_at', 'asc');
+                    } elseif ($request->filter_new == 0) {
+                        $data = $data->orderBy('properties.created_at', 'desc');
+                    }
+                }
+            }
             if (isset($request->status_id) && !empty($request->status_id)) {
                 $data = $data->statusId($request->status_id);
             } elseif (isset($request->status_name) && !empty($request->status_name)) {

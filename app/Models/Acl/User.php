@@ -59,17 +59,17 @@ class User extends Authenticatable
 
     public function agency()
     {
-        return $this->hasOne(Agency::Class)->withTrashed();
+        return $this->hasOne(Agency::Class)->with(['agent','review'])->withTrashed();
     }
 
     public function developer()
     {
-        return $this->hasOne(Developer::Class)->withTrashed();
+        return $this->hasOne(Developer::Class)->with(['agent','review'])->withTrashed();
     }
 
     public function agent()
     {
-        return $this->hasOne(Agent::Class)->withTrashed();
+        return $this->hasOne(Agent::Class)->with(['review'])->withTrashed();
     }
 
     public function forgotpassword()

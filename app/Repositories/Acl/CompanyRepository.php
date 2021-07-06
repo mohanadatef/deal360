@@ -25,31 +25,15 @@ class CompanyRepository implements CompanyInterface
     public function getData($request)
     {
         return cache()->remember('company_get_all', 60 * 60 * 60, function () use ($request){
-            $data = $this->data->with('developer.agent', 'agency.agent')->wherein('role_id', [4, 6])->status(1)->approve(1);
+            $data = $this->data->with('developer', 'agency')->wherein('users.role_id', [4, 6]);
             if (isset($request->web)) {
-               /* if (isset($request->filter_rating)) {
+                if (isset($request->filter_rating)) {
                     if ($request->filter_rating == 1) {
-                        if ($data->developer->exists()) {
-                            $data = $data->join('reviews', 'reviews.category_id', 'developers.id')
-                                ->where('reviews.status', 1)
-                                ->orderby('reviews.rating', 'asc');
-                        } else {
-                            $data = $data->join('reviews', 'reviews.category_id', 'agencies.id')
-                                ->where('reviews.status', 1)
-                                ->orderby('reviews.rating', 'asc');
-                        }
+                            $data = $data->orderby('avg_rating', 'asc');
                     } elseif ($request->filter_rating == 0) {
-                        if ($data->developer) {
-                            $data = $data->join('reviews', 'reviews.category_id', 'developers.id')
-                                ->where('reviews.status', 1)
-                                ->orderby('reviews.rating', 'desc');
-                        } else {
-                            $data = $data->join('reviews', 'reviews.category_id', 'agencies.id')
-                                ->where('reviews.status', 1)
-                                ->orderby('reviews.rating', 'desc');
-                        }
+                            $data = $data->orderby('avg_rating', 'desc');
                     }
-                }*/
+                }
                 if (isset($request->filter_new)) {
                     if ($request->filter_new == 1) {
                         $data = $data->orderBy('created_at', 'asc');
