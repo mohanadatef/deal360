@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Acl\AuthController;
 use App\Http\Controllers\Api\Acl\UserController;
 use App\Http\Controllers\Api\Acl\ForgotPasswordController;
 use App\Http\Controllers\Api\Acl\AgentController;
+use App\Http\Controllers\Api\Acl\FavouriteController;
 use App\Http\Controllers\Api\Acl\CompanyController;
 use App\Http\Controllers\Api\CoreData\LanguageController;
 use App\Http\Controllers\Api\CoreData\StatusController;
@@ -142,5 +143,15 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             //compare
             Route::get('/compare', [PropertyController::class, 'compare'])->name('compare');
         });
+        //favourite
+        Route::prefix('/favourite')->name('favourite.')->group(function () {
+            //index
+            Route::get('/index', [FavouriteController::class, 'index'])->name('index');
+            //store
+            Route::post('/store', [FavouriteController::class, 'store'])->name('store');
+            //delete
+            Route::get('/delete', [FavouriteController::class, 'delete'])->name('delete');
+        });
+
     });
 });

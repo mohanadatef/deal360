@@ -14,6 +14,7 @@ class AgentCardResource extends JsonResource
 	        'id' => $this->id,
 	        'fullname' => $this->user->fullname,
             'phone' => $this->user->phone,
+            'email' => $this->user->email,
             'country' => new CountryListResource($this->user->country),
             'image' => getImag($this->user->image,'user'),
             'address'=>$this->address?$this->address->value:"",

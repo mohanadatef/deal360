@@ -45,6 +45,7 @@ return [
     'Enter_Listing'=>'Enter Listing',
     'Enter_Count_Date'=>'Enter Count',
     'Create_Done'=>'Create Done',
+    'Done'=>'Done',
     'Edit_Done'=>'Edit Done',
     'Delete_Done'=>'Delete Done',
     'Restore_Done'=>'Restore Done',

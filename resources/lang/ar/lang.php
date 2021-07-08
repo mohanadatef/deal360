@@ -54,6 +54,7 @@ return [
     'Setting'=>'الاعدادات',
     'Role'=>'صلحيات',
     'Acl'=>'الامان',
+    'Done'=>'نجاح',
     'Permission'=>'الاذن',
     'Name'=>'الاسم',
     'Type_access'=>'نوع السماح',

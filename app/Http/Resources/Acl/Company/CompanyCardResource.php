@@ -4,10 +4,12 @@ namespace App\Http\Resources\Acl\Company;
 
 use App\Http\Resources\Acl\Agent\AgentCardResource;
 use App\Http\Resources\CoreData\Country\CountryListResource;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CompanyCardResource extends JsonResource
 {
+    use ServiceDataTrait;
     public function toArray($request)
     {
 
@@ -25,7 +27,7 @@ class CompanyCardResource extends JsonResource
             'buy_count'=>$this->buy_count ?$this->buy_count:0,
             'rent_count'=>$this->rent_count ?$this->rent_count:0,
             'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
-            'count_property'=>$this->property->count(),
+            'count_property'=>$this->getPropertyCompany($this)->count(),
             'avg_rating'=>round($this->developer ? $this->developer->review->avg('rating'): ($this->agency?$this->agency->review->avg('rating'):$this->review->avg('rating')),1),
         ];
     }

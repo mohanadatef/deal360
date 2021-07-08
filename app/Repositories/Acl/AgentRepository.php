@@ -25,12 +25,10 @@ class AgentRepository implements UserInterface
 
     public function getData($request)
     {
-        $data = $this->data->with('user', 'company');
+        $data = $this->data->with('user', 'company','review');
         if (isset($request->web)) {
             $data = $data->join('users', 'agents.user_id', 'users.id')
                 ->where('users.status', 1)->where('users.approve', 1)->select('agents.*');
-        }
-        if (isset($request->web)) {
             if (isset($request->filter_rating)) {
                 if ($request->filter_rating == 1) {
                     $data = $data->orderby('users.avg_rating', 'asc');

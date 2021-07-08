@@ -22,7 +22,9 @@ class PropertyResource extends JsonResource
 {
     public function toArray($request)
     {
-        $favourite = DB::table('favourites')->where('user_id', $request->user_auth)->where('property_id', $this->id)->count();
+        if (isset($request->auth_id) && !empty($request->auth_id)) {
+            $favourite = DB::table('favourites')->where('user_id', $request->auth_id)->where('property_id', $this->id)->count();
+        }
         return [
             'id' => $this->id,
             'user' => $this->user->agency ? new CompanyCardResource($this->user->agency) : ($this->user->developer ? new CompanyCardResource($this->user->developer) : new UserResource($this->user)),
@@ -54,20 +56,20 @@ class PropertyResource extends JsonResource
             'type_date' => $this->type_date ? $this->type_date : 0,
             'count_date' => $this->count_date ? $this->count_date : 0,
             'order' => $this->order ? $this->order : 0,
-            'favourite' => $favourite,
+            'favourite' => isset($favourite)?$favourite:0,
             'image' => null,
             'floor_plan' => FloorPlanResource::collection($this->floor_plan),
             'same_property' => PropertyCardResource::collection($this->same_property),
             'review' => [
-                'count_review'=>$this->review->count(),
-                'count_review_5'=>$this->review->where('rating',5)->count(),
-                'count_review_4'=>$this->review->where('rating',4)->count(),
-                'count_review_3'=>$this->review->where('rating',3)->count(),
-                'count_review_2'=>$this->review->where('rating',2)->count(),
-                'count_review_1'=>$this->review->where('rating',1)->count(),
-                'avg_review'=>round($this->review->avg('rating'),1),
+                'count_review' => $this->review->count(),
+                'count_review_5' => $this->review->where('rating', 5)->count(),
+                'count_review_4' => $this->review->where('rating', 4)->count(),
+                'count_review_3' => $this->review->where('rating', 3)->count(),
+                'count_review_2' => $this->review->where('rating', 2)->count(),
+                'count_review_1' => $this->review->where('rating', 1)->count(),
+                'avg_review' => round($this->review->avg('rating'), 1),
                 'all_review' => ReviewResource::collection($this->review),
-                ],
+            ],
         ];
     }
 }

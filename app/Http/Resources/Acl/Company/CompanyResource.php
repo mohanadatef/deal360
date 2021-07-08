@@ -21,11 +21,14 @@ class CompanyResource extends JsonResource
             'country' => new CountryListResource($this->user->country),
             'image' => getImag($this->user->image,'user'),
             'address'=>$this->address?$this->address->value:"",
+            'about_me'=>$this->about_me?$this->about_me->value:"",
             'website'=>$this->user->website,
+            'count_agent'=>$this->agent->count(),
             'agent'=>AgentCardResource::collection($this->agent),
             'buy_count'=>$this->buy_count ?$this->buy_count:0,
             'rent_count'=>$this->rent_count ?$this->rent_count:0,
             'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
+            'count_property'=>$this->property->count(),
             'property'=> PropertyCardResource::collection($this->property),
             'review' => [
                 'count_review'=>$this->review->count(),
@@ -36,6 +39,7 @@ class CompanyResource extends JsonResource
                 'count_review_1'=>$this->review->where('rating',1)->count(),
                 'avg_review'=>round($this->review->avg('rating'),1),
                 'all_review' => ReviewResource::collection($this->review),
-            ],];
+            ],
+            ];
     }
 }

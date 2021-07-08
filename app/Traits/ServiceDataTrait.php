@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 use App\Events\Admin\Acl\EmailVerifiedEvent;
+use App\Models\CoreData\Status;
+use Illuminate\Support\Facades\DB;
 
 trait ServiceDataTrait
 {
@@ -57,5 +59,20 @@ trait ServiceDataTrait
                 }
             }
         }
+    }
+
+    public function getPropertyCompany($data)
+    {
+        $user_id[] = $data->id;
+        $agents = $data->agent;
+        if($agents)
+        {
+        foreach ($agents as $agent) {
+            $user_id[] = $agent->id;
+        }
+        }
+        return DB::table('properties')->wherein('user_id', $user_id)->join('translations', 'properties.status_id', 'translations.category_id')
+            ->where('translations.category_type', Status::class)->where('translations.key', 'title')
+            ->where('translations.value', 'publish');
     }
 }

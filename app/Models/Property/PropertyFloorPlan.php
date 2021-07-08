@@ -40,6 +40,6 @@ class PropertyFloorPlan extends Model
 
     public function image()
     {
-        return $this->morphMany(Image::class, 'category')->withTrashed();
+        return $this->morphOne(Image::class, 'category')->withTrashed();
     }
 }

@@ -317,7 +317,6 @@
                     executionTime();
                     DB::table('images')->insert($property_image_plan);
                     executionTime();
-                    executionTime();
                 });
             }
             executionTime();

@@ -15,7 +15,7 @@ class FloorPlanResource extends JsonResource
             'bedroom'=>$this->bedroom?$this->bedroom:0,
             'bathroom'=>$this->bathroom?$this->bathroom:0,
             'price'=>$this->price?$this->price:0,
-            'image'=>null,
+            'image'=>getImag($this->image,'property_plan'),
         ];
     }
 }

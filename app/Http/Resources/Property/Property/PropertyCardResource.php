@@ -16,7 +16,9 @@ class PropertyCardResource extends JsonResource
 {
     public function toArray($request)
     {
-        $favourite = DB::table('favourites')->where('user_id',$request->user_auth)->where('property_id',$this->id)->count();
+        if (isset($request->auth_id) && !empty($request->auth_id)) {
+            $favourite = DB::table('favourites')->where('user_id', $request->auth_id)->where('property_id', $this->id)->count();
+        }
         return [
             'id' => $this->id,
             'user' => $this->user->agency ? new CompanyCardResource($this->user->agency) : ($this->user->developer ? new CompanyCardResource($this->user->developer) : new UserResource($this->user)),
@@ -30,7 +32,7 @@ class PropertyCardResource extends JsonResource
             'currency'=>new CurrencyResource($this->currency),
             'type'=>new TypeListResource($this->type),
             'category'=>new CategoryListResource($this->category),
-            'favourite'=>$favourite,
+            'favourite'=>isset($favourite)?$favourite:0,
             'image'=>null,
         ];
     }

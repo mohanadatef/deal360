@@ -8,10 +8,12 @@ use App\Models\Acl\User;
 use App\Models\CoreData\Status;
 use App\Models\CoreData\Type;
 use App\Repositories\Property\PropertyRepository;
+use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
 
 class CompanyRepository implements CompanyInterface
 {
+    use ServiceDataTrait;
     protected $data, $agencyrepository, $developerrepository, $propertyRepository;
 
     public function __construct(User $User, AgencyRepository $AgencyRepository, DeveloperRepository $DeveloperRepository, PropertyRepository $PropertyRepository)
@@ -51,14 +53,7 @@ class CompanyRepository implements CompanyInterface
                     $type_rent = $type->wherein('value', ['rent', 'Rent'])->pluck('category_id');
                     $type_commercial = $type->where('value', 'like', 'Commercial')
                         ->orwhere('value', 'like', 'commercial')->pluck('category_id');
-                    $user_id[] = $datas->developer ? $datas->developer->id : $datas->agency->id;
-                    $agents = $datas->developer ? $datas->developer->agent : $datas->agency->agent;
-                    foreach ($agents as $agent) {
-                        $user_id[] = $agent->id;
-                    }
-                    $property = DB::table('properties')->wherein('user_id', $user_id)->join('translations', 'properties.status_id', 'translations.category_id')
-                        ->where('translations.category_type', Status::class)->where('translations.key', 'title')
-                        ->where('translations.value', 'publish');
+                    $property=$this->getPropertyCompany($datas);
                     $datas->buy_count = $property->wherein('type_id', $type_buy)->count();
                     $datas->rent_count = $property->wherein('type_id', $type_rent)->count();
                     $datas->commercial_count = $property->wherein('type_id', $type_commercial)->count();

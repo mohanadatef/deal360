@@ -21,7 +21,6 @@ class CreateFavouritesTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('property_id')->unsigned()->index();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
