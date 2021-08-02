@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Events\Admin\Acl\EmailVerifiedEvent;
 use App\Events\Api\Acl\EmailForgotPasswordEvent;
 use App\Events\Api\Setting\RatingEvent;
+use App\Events\Api\Setting\ViewEvent;
 use App\Listeners\Api\Acl\EmailForgotPasswordListener;
 use App\Listeners\Admin\Acl\EmailVerifiedListener;
 use App\Listeners\Api\Setting\RatingListener;
+use App\Listeners\Api\Setting\ViewListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -33,6 +35,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         RatingEvent::class => [
             RatingListener::class,
+        ],
+        ViewEvent::class => [
+            ViewListener::class,
         ],
     ];
 

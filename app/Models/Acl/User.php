@@ -6,6 +6,7 @@ use App\Models\CoreData\Country;
 use App\Models\CoreData\Package;
 use App\Models\Image;
 use App\Models\Property\Property;
+use App\Models\Setting\Advertising;
 use App\Models\View;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -75,6 +76,10 @@ class User extends Authenticatable
     public function forgotpassword()
     {
         return $this->hasmany(ForgotPassword::Class);
+    }
+    public function advertising()
+    {
+        return $this->hasmany(Advertising::Class);
     }
 
     public function savesearch()

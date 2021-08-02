@@ -2,9 +2,12 @@
 
     namespace App\Http\Controllers\Api\Acl;
 
+    use App\Events\Api\Setting\ViewEvent;
     use App\Http\Controllers\Controller;
     use App\Http\Resources\Acl\Company\CompanyCardResource;
     use App\Http\Resources\Acl\Company\CompanyResource;
+    use App\Http\Resources\Acl\Company\CompanyPropertyResource;
+    use App\Models\Acl\User;
     use App\Repositories\Acl\CompanyRepository;
     use Illuminate\Http\Request;
 
@@ -30,7 +33,14 @@
         //get one for company by id
         public function show(Request $request)
         {
-            $company= new CompanyResource($this->companyRepository->showData($request->id,$request->role_id));//return one
+            if ($request->property==1){
+                $company= new CompanyPropertyResource($this->companyRepository->propertyData($request->id,$request->role_id));//return one
+            }else{
+                $company= new CompanyResource($this->companyRepository->showData($request->id,$request->role_id));//return one
+            }
+            if (isset($request->auth_id) && !empty($request->auth_id)) {
+                event(new ViewEvent($company->user->id, User::class, $request->ip(), $request->auth_id));
+            }
             return response(['status' => 1, 'data' => $company, 'message' => trans('lang.Done')], 200);
         }
     }

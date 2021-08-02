@@ -17,7 +17,6 @@ class AgentCardResource extends JsonResource
             'email' => $this->user->email,
             'country' => new CountryListResource($this->user->country),
             'image' => getImag($this->user->image,'user'),
-            'address'=>$this->address?$this->address->value:"",
             'website'=>$this->user->website,
             'company'=> $this->company ? new CompanyCardResource($this->company) : trans('lang.Alone'),
             'buy_count'=>$this->buy_count ?$this->buy_count:0,

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Acl\Role;
 
-use App\Http\Resources\Acl\Permission\PermissionListResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RoleResource extends JsonResource
@@ -16,7 +15,6 @@ class RoleResource extends JsonResource
             'type_access' => $this->type_access,
             'order' => $this->order,
             'status' => $this->status,
-            /*'permission' =>PermissionListResource::collection($this->permission),*/
         ];
     }
 }

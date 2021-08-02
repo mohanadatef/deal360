@@ -16,24 +16,20 @@ class AgentResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'fullname' => $this->user->fullname,
             'username' => $this->user->username,
             'email' => $this->user->email,
             'phone' => $this->user->phone,
+            'website'=>$this->user->website,
             'gender' => $this->user->gender,
             'dob' => $this->user->dob,
             'approve'=>$this->user->approve,
             'role' => new RoleListResource($this->user->role),
-            'country' => new CountryListResource($this->user->country),
-            'image' => getImag($this->user->image,'user'),
             'about_me'=>$this->about_me?$this->about_me->value:"",
             'address'=>$this->address?$this->address->value:"",
             'company'=> $this->company?new CompanyCardResource($this->company):trans('lang.Alone'),
-            'buy_count'=>$this->buy_count ?$this->buy_count:0,
-            'rent_count'=>$this->rent_count ?$this->rent_count:0,
-            'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
-            'property'=> PropertyCardResource::collection($this->user->property),
-            'review' => [
+            'worktime'=>$this->worktime,
+            'count_view'=>$this->user->count_view,
+            'reviews' => [
                 'count_review'=>$this->review->count(),
                 'count_review_5'=>$this->review->where('rating',5)->count(),
                 'count_review_4'=>$this->review->where('rating',4)->count(),
@@ -43,6 +39,17 @@ class AgentResource extends JsonResource
                 'avg_review'=>round($this->review->avg('rating'),1),
                 'all_review' => ReviewResource::collection($this->review),
             ],
+            'profile_card'=>[
+                'image' => getImag($this->user->image,'user'),
+                'country' => new CountryListResource($this->user->country),
+                'avg_review'=>round($this->review->avg('rating'),1),
+                'fullname' => $this->user->fullname,
+            ],
+            'contact_card'=>[
+                'email' => $this->user->email,
+                'phone' => $this->user->phone,
+                'website'=>$this->user->website,
+            ]
         ];
     }
 }

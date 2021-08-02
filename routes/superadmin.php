@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware'=> 'log'],function()
+{
 Route::name('superadmin.')->group(function () {
     /* cache list */
     Route::get('/clear-cache', function () {
@@ -44,5 +46,6 @@ Route::name('superadmin.')->group(function () {
         Artisan::call($artisan);
         return redirect('admin');
     })->name('artisan');
+});
 });
 

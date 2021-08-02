@@ -29,17 +29,11 @@ class FavouriteRepository implements FavouriteInterface
 	public function storeData($request)
 	{
         $data=$this->showData($request->user_id,$request->property_id);
-		!$data?$this->data->create($request->all()):true;
+		!$data?$this->data->create($request->all()):$data->delete();
 	}
 
 	public function showData($user,$property)
 	{
         return $this->data->where('property_id',$property)->where('user_id',$user)->first();
-	}
-
-	public function deleteData($user,$property)
-	{
-        $data=$this->showData($user,$property);
-        $data?$data->delete():true;
 	}
 }

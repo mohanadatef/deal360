@@ -7,6 +7,7 @@ use App\Interfaces\Acl\UserInterface;
 use App\Models\Acl\Agent;
 use App\Models\CoreData\Status;
 use App\Models\CoreData\Type;
+use App\Repositories\Property\PropertyRepository;
 use App\Traits\ImageTrait;
 use App\Traits\ServiceDataTrait;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +16,13 @@ class AgentRepository implements UserInterface
 {
     use ServiceDataTrait, ImageTrait;
 
-    protected $data, $userRepository;
+    protected $data, $userRepository,$propertyRepository;
 
-    public function __construct(Agent $Agent, UserRepository $UserRepository)
+    public function __construct(Agent $Agent, UserRepository $UserRepository, PropertyRepository $PropertyRepository)
     {
         $this->data = $Agent;
         $this->userRepository = $UserRepository;
+        $this->propertyRepository = $PropertyRepository;
     }
 
     public function getData($request)
@@ -89,7 +91,27 @@ class AgentRepository implements UserInterface
 
     public function showData($id)
     {
-        return $this->data->with('user', 'about_me', 'address', 'company')->findorFail($id);
+        $data= $this->data->with('user', 'about_me', 'address', 'company','worktime')->findorFail($id);
+        return $data;
+    }
+
+    public function propertyData($id){
+        $data= $this->data->with('user', 'about_me', 'address', 'company','worktime')->findorFail($id);
+        $type = DB::table('translations')->where('category_type', Type::class)
+            ->where('key', 'title');
+        $type_buy = $type->wherein('value', ['buy', 'Buy'])->pluck('category_id');
+        $type_rent = $type->wherein('value', ['rent', 'Rent'])->pluck('category_id');
+        $type_commercial = $type->where('value', 'like', 'Commercial')
+            ->orwhere('value', 'like', 'commercial')->pluck('category_id');
+        $property = DB::table('properties')->where('user_id',$data->user_id)->join('translations', 'properties.status_id', 'translations.category_id')
+            ->where('translations.category_type', Status::class)->where('translations.key', 'title')
+            ->where('translations.value', 'publish');
+        $property_id = $property->pluck('properties.id');
+        $data->property = $this->propertyRepository->paginateData($property_id);
+        $data->buy_count = $property->wherein('type_id', $type_buy)->count();
+        $data->rent_count = $property->wherein('type_id', $type_rent)->count();
+        $data->commercial_count = $property->wherein('type_id', $type_commercial)->count();
+        return $data;
     }
 
     public function updateData($request, $id)

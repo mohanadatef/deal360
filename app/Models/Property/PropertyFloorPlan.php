@@ -32,7 +32,19 @@ class PropertyFloorPlan extends Model
     {
         return $this->belongsTo(Property::Class,'property_id');
     }
+    public function title()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'title')
+            ->where('language_id' ,languageId())->withTrashed();
+    }
 
+    public function description()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'description')
+            ->where('language_id' ,languageId())->withTrashed();
+    }
     public function translation()
     {
         return $this->morphMany(Translation::class, 'category')->withTrashed();

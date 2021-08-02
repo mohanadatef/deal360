@@ -48,6 +48,20 @@ class Property extends Model
             ->where('language_id' ,languageId())->withTrashed();
     }
 
+    public function description()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'description')
+            ->where('language_id' ,languageId())->withTrashed();
+    }
+
+    public function address()
+    {
+        return $this->morphone(Translation::class, 'category')
+            ->where('key' ,'address')
+            ->where('language_id' ,languageId())->withTrashed();
+    }
+
     public function image()
     {
         return $this->morphMany(Image::class, 'category')->withTrashed();

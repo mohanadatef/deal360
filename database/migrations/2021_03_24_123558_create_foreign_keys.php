@@ -31,6 +31,14 @@ class CreateForeignKeys extends Migration
 		{
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
 		});
+        Schema::table('reviews',function(Blueprint $table)
+        {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
+        });
+        Schema::table('advertisinies',function(Blueprint $table)
+        {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
+        });
 		Schema::table('developers',function(Blueprint $table)
 		{
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('restrict');
@@ -152,6 +160,14 @@ class CreateForeignKeys extends Migration
 		Schema::table('agents',function(Blueprint $table)
 		{
 			$table->dropForeign('agents_user_id_foreign');
+		});
+		Schema::table('advertisinies',function(Blueprint $table)
+		{
+			$table->dropForeign('advertisinies_user_id_foreign');
+		});
+		Schema::table('reviews',function(Blueprint $table)
+		{
+			$table->dropForeign('reviews_user_id_foreign');
 		});
 		Schema::table('developers',function(Blueprint $table)
 		{

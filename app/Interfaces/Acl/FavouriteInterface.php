@@ -8,5 +8,4 @@ interface FavouriteInterface
     public function getUser($property);
     public function showData($user,$property);
     public function StoreData($request);
-    public function DeleteData($user,$property);
 }

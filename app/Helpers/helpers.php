@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 use App\Models\CoreData\Language;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Collection;
 
 //get locale from app file
 if (!function_exists('languageLocale')) {
@@ -84,6 +85,25 @@ if (!function_exists('getImag')) {
     //$file_name => name file we will found image it
     function getImag($image, $file_name)
     {
+        if ($image instanceof Collection)
+        {
+            $imagess=array();
+           foreach ($image as $im)
+           {
+               if ($im) {
+                   $images = isset($im) ? public_path('images/' . $file_name . '/' . $im->image) : public_path('images/test.png');
+                   if (file_exists($images) == false) {
+                       $imagess[]= asset('public/images/test.png');//image default
+                   } else {
+                       $imagess[]= asset('public/images/' . $file_name . '/' . $im->image);//image we want get it
+                   }
+               } else {
+                   $imagess[]=  asset('public/images/test.png'); //image default
+               }
+           }
+            return $imagess;
+        }
+        else{
         if ($image) {
             $images = isset($image) ? public_path('images/' . $file_name . '/' . $image->image) : public_path('images/test.png');
             if (file_exists($images) == false) {
@@ -94,6 +114,8 @@ if (!function_exists('getImag')) {
         } else {
             return asset('public/images/test.png'); //image default
         }
+        }
+
     }
 }
 //execution time to start again

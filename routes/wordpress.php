@@ -21,6 +21,8 @@ use App\Http\Controllers\Wordpress\Property\PropertyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware'=> 'log'],function()
+{
 Route::name('wordpress.')->group(function () {
     Route::get('data/{return}', [WordpressController::class, 'index'])->name('data.index');
     Route::get('package/{return}', [PackageController::class, 'index'])->name('package.index');
@@ -31,4 +33,5 @@ Route::name('wordpress.')->group(function () {
     Route::get('high_light/{return}', [HighLightController::class, 'index'])->name('high_light.index');
     Route::get('user/{return}', [UserController::class, 'index'])->name('user.index');
     Route::get('property/{return}', [PropertyController::class, 'index'])->name('user.index');
+});
 });

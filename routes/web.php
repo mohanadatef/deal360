@@ -132,3 +132,10 @@ Route::prefix('/company')->group(function () {
 	Route::get('/list', [CompanyController::class, 'listIndex'])
 		->name('company.list');
 });
+Route::get('install_passport', function () {
+
+    \Artisan::call('artisan passport:install');
+
+    dd("passport is installed");
+
+});

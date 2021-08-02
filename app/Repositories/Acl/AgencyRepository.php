@@ -29,7 +29,7 @@ class AgencyRepository implements UserInterface
             $data = $data->join('users', 'agencies.user_id', 'users.id')
                 ->where('users.status', 1)->where('users.approve', 1);
         }
-        return isset($request->paginate)&&!empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
+        return isset($request->paginate) && !empty($request->paginate) ? $data->paginate($request->paginate) : $data->paginate(25);
     }
 
     public function storeData($request)
@@ -105,7 +105,22 @@ class AgencyRepository implements UserInterface
 
     public function updateApproveData($id)
     {
-        $this->changeApprove($this->userRepository->showData($id));
+        $data = $this->userRepository->showData($id);
+        $this->changeApprove($data);
+        if (count($data->agent())) {
+            foreach ($data->agent as $agent) {
+                if ($data->status == 1) {
+                    if ($agent->status == 1) {
+                        $this->changeApprove($agent);
+                    }
+                }
+                else{
+                    if ($agent->status == 0) {
+                        $this->changeApprove($agent);
+                    }
+                }
+            }
+        }
     }
 
     public function deleteData($id)

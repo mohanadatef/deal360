@@ -23,6 +23,7 @@ use App\Http\Controllers\Api\Setting\MetaController;
 use App\Http\Controllers\Api\Setting\FQController;
 use App\Http\Controllers\Api\Setting\LabelController;
 use App\Http\Controllers\Api\Setting\ReviewController;
+use App\Http\Controllers\Api\Setting\AdvertisingController;
 use App\Http\Controllers\Api\Property\PropertyController;
 
 /*
@@ -35,8 +36,7 @@ use App\Http\Controllers\Api\Property\PropertyController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::group(['middleware' => 'api', 'language_api'], function () {
+Route::group(['middleware' => 'api', 'language_api','log_api'], function () {
     Route::name('api.')->group(function () {
         //auth
         Route::prefix('/auth')->name('auth.')->group(function () {
@@ -119,6 +119,10 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             Route::prefix('/review')->name('review.')->group(function () {
                 Route::post('/store', [ReviewController::class, 'store'])->name('store');
             });
+            //advertising
+            Route::prefix('/advertising')->name('advertising.')->group(function () {
+                Route::get('', [AdvertisingController::class, 'Index'])->name('index');
+            });
         });
         //company
         Route::prefix('/company')->name('company.')->group(function () {
@@ -149,8 +153,6 @@ Route::group(['middleware' => 'api', 'language_api'], function () {
             Route::get('/index', [FavouriteController::class, 'index'])->name('index');
             //store
             Route::post('/store', [FavouriteController::class, 'store'])->name('store');
-            //delete
-            Route::get('/delete', [FavouriteController::class, 'delete'])->name('delete');
         });
 
     });

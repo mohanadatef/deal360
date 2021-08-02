@@ -28,10 +28,4 @@ class FavouriteController extends Controller
         $this->favouriteRepository->storeData($request);
         return response(['status' => 1, 'data' => [], 'message' => trans('lang.Done')]);
     }
-
-    public function delete(Request $request)
-    {
-        $this->favouriteRepository->deleteData($request->user_id, $request->property_id);
-        return response(['status' => 1, 'data' => [], 'message' => trans('lang.Done')]);
-    }
 }

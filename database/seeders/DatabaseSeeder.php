@@ -45,7 +45,5 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusTableSeeder::class);
         $this->call(UserTableSeeder::class);
         executionTime();
-        $this->wordpress->index(0);
-        executionTime();
     }
 }

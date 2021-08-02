@@ -2,7 +2,8 @@
 
 namespace App\Listeners\Admin\Acl;
 
-use App\Mail\EmailVerifiedMail;
+
+use App\Mail\Admin\Acl\EmailVerifiedMail;
 use Illuminate\Support\Facades\Mail;
 
 class EmailVerifiedListener

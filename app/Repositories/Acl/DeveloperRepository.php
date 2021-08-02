@@ -120,7 +120,22 @@ class DeveloperRepository implements UserInterface
 
 	public function updateApproveData($id)
 	{
-		$this->changeApprove($this->userRepository->showData($id));
+        $data = $this->userRepository->showData($id);
+        $this->changeApprove($data);
+        if (count($data->agent())) {
+            foreach ($data->agent as $agent) {
+                if ($data->status == 1) {
+                    if ($agent->status == 1) {
+                        $this->changeApprove($agent);
+                    }
+                }
+                else{
+                    if ($agent->status == 0) {
+                        $this->changeApprove($agent);
+                    }
+                }
+            }
+        }
 	}
 
 	public function deleteData($id)

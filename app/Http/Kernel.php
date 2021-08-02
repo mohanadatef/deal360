@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LangMiddelware::class,
+            \App\Http\Middleware\LogMiddelware::class,
 
         ],
 
@@ -45,6 +46,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LangApiMiddelware::class,
+            \App\Http\Middleware\LogApiMiddelware::class,
         ],
     ];
 
@@ -67,7 +69,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdminMiddelware::class,
         'language' => \App\Http\Middleware\LangMiddelware::class,
+        'log' => \App\Http\Middleware\LogMiddelware::class,
         'language_api' => \App\Http\Middleware\LangApiMiddelware::class,
+        'log_api' => \App\Http\Middleware\LogApiMiddelware::class,
         'permission' => \App\Http\Middleware\PermissionMiddelware::class,
     ];
 }

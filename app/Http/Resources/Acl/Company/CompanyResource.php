@@ -5,7 +5,6 @@ namespace App\Http\Resources\Acl\Company;
 use App\Http\Resources\Acl\Agent\AgentCardResource;
 use App\Http\Resources\Acl\Role\RoleListResource;
 use App\Http\Resources\CoreData\Country\CountryListResource;
-use App\Http\Resources\Property\Property\PropertyCardResource;
 use App\Http\Resources\Setting\ReviewResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,14 +22,9 @@ class CompanyResource extends JsonResource
             'address'=>$this->address?$this->address->value:"",
             'about_me'=>$this->about_me?$this->about_me->value:"",
             'website'=>$this->user->website,
-            'count_agent'=>$this->agent->count(),
-            'agent'=>AgentCardResource::collection($this->agent),
-            'buy_count'=>$this->buy_count ?$this->buy_count:0,
-            'rent_count'=>$this->rent_count ?$this->rent_count:0,
-            'commercial_count'=>$this->commercial_count ?$this->commercial_count:0,
-            'count_property'=>$this->property->count(),
-            'property'=> PropertyCardResource::collection($this->property),
-            'review' => [
+            'count_agents'=>$this->agent->count(),
+            'agents'=>AgentCardResource::collection($this->agent),
+            'reviews' => [
                 'count_review'=>$this->review->count(),
                 'count_review_5'=>$this->review->where('rating',5)->count(),
                 'count_review_4'=>$this->review->where('rating',4)->count(),
@@ -40,6 +34,17 @@ class CompanyResource extends JsonResource
                 'avg_review'=>round($this->review->avg('rating'),1),
                 'all_review' => ReviewResource::collection($this->review),
             ],
-            ];
+            'profile_card'=>[
+                'image' => getImag($this->user->image,'user'),
+                'country' => new CountryListResource($this->user->country),
+                'avg_review'=>round($this->review->avg('rating'),1),
+                'fullname' => $this->user->fullname,
+            ],
+            'contact_card'=>[
+                'email' => $this->user->email,
+                'phone' => $this->user->phone,
+                'website'=>$this->user->website,
+            ]
+        ];
     }
 }

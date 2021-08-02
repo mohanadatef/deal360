@@ -70,6 +70,15 @@ class CompanyRepository implements CompanyInterface
         } elseif ($role_id == 6) {
             $data = $this->developerrepository->showData($id);
         }
+        return $data;
+    }
+
+    public function propertyData($id, $role_id){
+        if ($role_id == 4) {
+            $data = $this->agencyrepository->showData($id);
+        } elseif ($role_id == 6) {
+            $data = $this->developerrepository->showData($id);
+        }
         $type = DB::table('translations')->where('category_type', Type::class)
             ->where('key', 'title');
         $type_buy = $type->wherein('value', ['buy', 'Buy'])->pluck('category_id');
@@ -82,9 +91,9 @@ class CompanyRepository implements CompanyInterface
         }
         $property = DB::table('properties')->wherein('user_id', $user_id)->join('translations', 'properties.status_id', 'translations.category_id')
             ->where('translations.category_type', Status::class)->where('translations.key', 'title')
-            ->where('translations.value', '!=', 'publish');
+            ->where('translations.value','publish');
         $property_id = $property->pluck('properties.id');
-        $data->property = $this->propertyRepository->showData($property_id);
+        $data->property = $this->propertyRepository->paginateData($property_id);
         $data->buy_count = $property->wherein('type_id', $type_buy)->count();
         $data->rent_count = $property->wherein('type_id', $type_rent)->count();
         $data->commercial_count = $property->wherein('type_id', $type_commercial)->count();
